@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.ericmschmidt.latinreader.datamodel.Library;
 import com.ericmschmidt.latinreader.datamodel.ReadingViewModel;
-import com.ericmschmidt.latinreader.R;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
+import com.ericmschmidt.latinreader.R;
 
 public class ReadingFragment extends Fragment {
 
@@ -31,7 +31,6 @@ public class ReadingFragment extends Fragment {
     private boolean translationFlag;
     private OnReadingViewSwitch mListener;
     private ReadingViewModel viewModel;
-    private int numLines;
 
     public ReadingFragment() {
         // Required empty public constructor
@@ -74,7 +73,7 @@ public class ReadingFragment extends Fragment {
 
         Library library = new Library();
         WorkInfo work = library.getWorkInfoByID(workToGetId);
-        viewModel = new ReadingViewModel(work, translationFlag);
+        int numLines = 1;
 
         TextView readingPane = (TextView)getActivity().findViewById(R.id.reading_surface);
 
@@ -92,11 +91,10 @@ public class ReadingFragment extends Fragment {
         if (work.getWorkType() == WorkInfo.WorkType.poem) {
             String linesPerPage = sharedPreferences.getString(SettingsFragment.POEM_LINES, SettingsFragment.POEM_LINES_DEFAULT);
             numLines = Integer.parseInt(linesPerPage);
-        } else {
-            numLines = 1;
         }
 
-        updateReadingSurface(0);
+        viewModel = new ReadingViewModel(work, translationFlag, numLines);
+        updateReadingSurface();
 
         /*
             Set touch responses:
@@ -113,14 +111,17 @@ public class ReadingFragment extends Fragment {
                     float eventX = event.getX();
                     int hitArea = viewWidth / HIT_AREA_RATIO;
 
-                    // the user has touched an edge; change the page.
+                    // the user has touched an edge; flip the page.
                     if ((eventX < hitArea) ||
                             (eventX > viewWidth - hitArea)) {
 
-                        int pageDelta = (eventX > viewWidth/2) ?
-                                1 : -1;
+                        if (eventX > viewWidth/2) {
+                            viewModel.goToPage(true);
+                        } else {
+                            viewModel.goToPage(false);
+                        }
 
-                        updateReadingSurface(pageDelta);
+                        updateReadingSurface();
                     } else { // The user touched the middle of the screen.
                         getActivity().openContextMenu(v);
                     }
@@ -133,14 +134,12 @@ public class ReadingFragment extends Fragment {
     }
 
     // Change the text on the page by advancing the reading position.
-    private void updateReadingSurface(int pageDelta) {
+    private void updateReadingSurface() {
 
         TextView readingPane = (TextView)getActivity().findViewById(R.id.reading_surface);
         TextView readingInfo = (TextView)getActivity().findViewById(R.id.reading_info);
 
-        viewModel.goToPage(pageDelta);
-
-        readingPane.setText(viewModel.getCurrentPage(numLines));
+        readingPane.setText(viewModel.getCurrentPage());
         readingInfo.setText(viewModel.getReadingInfo());
     }
 

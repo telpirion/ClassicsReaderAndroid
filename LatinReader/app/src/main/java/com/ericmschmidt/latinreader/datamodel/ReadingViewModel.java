@@ -19,8 +19,7 @@ public class ReadingViewModel {
     private Book _currentBook;
     private int _currentLineIndex;
     private int _currentBookIndex;
-    private String _currentPage;
-    private boolean _isTranslation;
+    private int _pageOffset;
     private String _author;
     private String _title;
 
@@ -29,16 +28,16 @@ public class ReadingViewModel {
      * @param work the work to open.
      * @param isTranslation determines whether to return the translation of this work.
      */
-    public ReadingViewModel(WorkInfo work, boolean isTranslation) {
-        this._isTranslation = isTranslation;
+    public ReadingViewModel(WorkInfo work, boolean isTranslation, int pageOffset) {
         this._currentWorkInfo = work;
+        this._pageOffset = (pageOffset > -1) ? pageOffset : 1;
 
         if (!loadLastReadingPosition()) { // This work hasn't been read yet.
             this._currentLineIndex = 0;
             this._currentBookIndex = 0;
         }
 
-        if (this._isTranslation) {
+        if (isTranslation) {
             this._currentWork = new Work(work.getEnglishLocation());
             this._author = work.getEnglishAuthor();
             this._title = work.getEnglishTitle();
@@ -56,8 +55,16 @@ public class ReadingViewModel {
      * Gets the text for the reader's current position in the work.
      * @return String the text to read.
      */
-    public String getCurrentPage(int lengthOfPassage) {
-        return this._currentPage;
+    public String getCurrentPage() {
+        String currentPage = "";
+
+        for (int i = 0; i < this._pageOffset; i++){
+            if ((this._currentLineIndex + i) < this._currentBook.getLineCount()) {
+                currentPage += this._currentBook.getLine(this._currentLineIndex + i) +"\n";
+            }
+        }
+
+        return currentPage;
     }
 
     /**
@@ -87,20 +94,25 @@ public class ReadingViewModel {
      */
     public void goToPage(int numberOfPages) {
 
-        int tempLineIndex = this._currentLineIndex + numberOfPages;
-        int totalLinesInBook = this._currentBook.getLineCount();
-
-        if (tempLineIndex >= totalLinesInBook) { // Going beyond this book.
-            advanceBook(tempLineIndex - totalLinesInBook);
-
-        } else if (tempLineIndex < 0) { // Going to the previous book.
-            decreaseBook(tempLineIndex);
-
-        } else { // Going to another position in this book.
-            this._currentLineIndex = tempLineIndex;
+        if (numberOfPages > 0){
+            advancePages(numberOfPages);
+        } else {
+            decreasePages(numberOfPages);
         }
 
         updatePage();
+    }
+
+    /**
+     * Flips the page forwards or backwards one page.
+     * @param isForward whether the user is flipping forwards or backwards.
+     */
+    public void goToPage(boolean isForward) {
+        if (isForward) {
+            goToPage(this._pageOffset);
+        } else {
+            goToPage(-1 * this._pageOffset);
+        }
     }
 
     /**
@@ -116,11 +128,55 @@ public class ReadingViewModel {
                  this._currentLineIndex + 1);
     }
 
+    // Increase the reading position.
+    private void advancePages(int offset) {
+        int count = 0;
+        int bookLineCount = this._currentBook.getLineCount();
+        int bookCount = this._currentWork.getBookCount() - 1;
+
+        while (count < offset) {
+            if (this._currentLineIndex < bookLineCount) {
+                this._currentLineIndex++;
+            } else if (this._currentBookIndex == bookCount){
+                this._currentLineIndex = this._currentBook.getLineCount() - 1;
+            }else {
+                this._currentBookIndex++;
+                this._currentBook = this._currentWork.getBook(this._currentBookIndex);
+                this._currentLineIndex = 0;
+            }
+            count++;
+        }
+    }
+
+    // Decrease the reading position.
+    private void decreasePages(int offset) {
+        int count = 0;
+
+        while (count > offset) {
+
+            // The page is still within this book, keep going.
+            if (this._currentLineIndex > 0){
+                this._currentLineIndex--;
+
+             // The user is on the first book; keep the book here.
+            } else if (this._currentBookIndex == 0) {
+                this._currentLineIndex = 0;
+
+            // The user flips to the previous book
+            } else {
+                this._currentBookIndex--;
+                this._currentBook = this._currentWork.getBook(this._currentBookIndex);
+                this._currentLineIndex = this._currentBook.getLineCount() - 1;
+            }
+
+            count--;
+        }
+    }
+
     // Gets the specified work from the Library.
 
     // Updates the current reading page.
     private void updatePage() {
-        this._currentPage = this._currentBook.getLine(this._currentLineIndex);
 
         // Store the current reading position in SharedPreferences.
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
