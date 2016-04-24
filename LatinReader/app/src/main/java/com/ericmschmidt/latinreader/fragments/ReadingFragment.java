@@ -19,8 +19,6 @@ import com.ericmschmidt.latinreader.datamodel.ReadingViewModel;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 import com.ericmschmidt.latinreader.R;
 
-import java.util.Locale;
-
 public class ReadingFragment extends Fragment {
 
     public static final String WORKTOGET = "workToGet";
