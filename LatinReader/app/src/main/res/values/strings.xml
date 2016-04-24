@@ -4,6 +4,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="nav_drawer_recent">Recent</string>
     <string name="nav_drawer_library">Library</string>
     <string name="nav_drawer_translations">Translations</string>
     <string name="nav_drawer_dictionary">Dictionary</string>
@@ -19,6 +20,8 @@
     <string name="pref_poem_lines">Poem Lines Per Page</string>
     <string name="pref_poem_lines_summary">Change the number of poem lines shown on the reading page.</string>
     <string name="pref_poem_lines_default">5</string>
+
+    <string name="reading_no_book_open">Go to the Library to open a book!</string>
 
     <string name="dictionary_query_hint">Enter word to look up</string>
     <string name="dictionary_query_hint_short">Lookup word</string>

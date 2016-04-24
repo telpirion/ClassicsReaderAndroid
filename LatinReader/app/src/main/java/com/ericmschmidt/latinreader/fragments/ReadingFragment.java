@@ -19,11 +19,14 @@ import com.ericmschmidt.latinreader.datamodel.ReadingViewModel;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 import com.ericmschmidt.latinreader.R;
 
+import java.util.Locale;
+
 public class ReadingFragment extends Fragment {
 
     public static final String WORKTOGET = "workToGet";
     public static final String TRANSLATION_FLAG = "translation";
     public static final int HIT_AREA_RATIO = 4;
+    public static final String RECENTLY_READ = "recently_read";
 
     private final int MENU_SWITCH_VIEW = 1;
 
@@ -71,30 +74,40 @@ public class ReadingFragment extends Fragment {
 
         super.onActivityCreated(onSavedInstanceState);
 
-        Library library = new Library();
-        WorkInfo work = library.getWorkInfoByID(workToGetId);
-        int numLines = 1;
+        TextView readingPane = (TextView) getActivity().findViewById(R.id.reading_surface);
 
-        TextView readingPane = (TextView)getActivity().findViewById(R.id.reading_surface);
+        if (workToGetId == null || workToGetId.equals("")) {
+            readingPane.setText(getResources().getString(R.string.reading_no_book_open));
 
-        // Register the context menu
-        registerForContextMenu(readingPane);
+        } else {
 
-        // Set text size.
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String textSize = sharedPreferences.getString(SettingsFragment.TEXT_SIZE, SettingsFragment.TEXT_SIZE_DEFAULT);
-        readingPane.setTextSize(TypedValue.COMPLEX_UNIT_DIP, Float.parseFloat(textSize));
+            Library library = new Library();
+            WorkInfo work = library.getWorkInfoByID(workToGetId);
+            int numLines = 1;
 
-        // After parsing the XML, the app presents poetry lines one at a time.
-        // The user can override the number of lines to show per page.
-        // This setting doesn't matter for prose, since one "line" equals one paragraph.
-        if (work.getWorkType() == WorkInfo.WorkType.poem) {
-            String linesPerPage = sharedPreferences.getString(SettingsFragment.POEM_LINES, SettingsFragment.POEM_LINES_DEFAULT);
-            numLines = Integer.parseInt(linesPerPage);
-        }
+            // Register the context menu
+            registerForContextMenu(readingPane);
 
-        viewModel = new ReadingViewModel(work, translationFlag, numLines);
-        updateReadingSurface();
+            // Set text size.
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String textSize = sharedPreferences.getString(SettingsFragment.TEXT_SIZE, SettingsFragment.TEXT_SIZE_DEFAULT);
+            readingPane.setTextSize(TypedValue.COMPLEX_UNIT_DIP, Float.parseFloat(textSize));
+
+            // Register this as the most recently read book.
+            sharedPreferences.edit()
+                .putString(RECENTLY_READ, String.format("%s;%s",workToGetId,Boolean.toString(translationFlag)))
+                .apply();
+
+            // After parsing the XML, the app presents poetry lines one at a time.
+            // The user can override the number of lines to show per page.
+            // This setting doesn't matter for prose, since one "line" equals one paragraph.
+            if (work.getWorkType() == WorkInfo.WorkType.poem) {
+                String linesPerPage = sharedPreferences.getString(SettingsFragment.POEM_LINES, SettingsFragment.POEM_LINES_DEFAULT);
+                numLines = Integer.parseInt(linesPerPage);
+            }
+
+            viewModel = new ReadingViewModel(work, translationFlag, numLines);
+            updateReadingSurface();
 
         /*
             Set touch responses:
@@ -102,35 +115,36 @@ public class ReadingFragment extends Fragment {
             - touch the right side of the reading area, go forward a page.
             - touch the middle of the reading area, either scroll or bring up context menu.
         */
-        readingPane.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            readingPane.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
 
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    int viewWidth = v.getWidth();
-                    float eventX = event.getX();
-                    int hitArea = viewWidth / HIT_AREA_RATIO;
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        int viewWidth = v.getWidth();
+                        float eventX = event.getX();
+                        int hitArea = viewWidth / HIT_AREA_RATIO;
 
-                    // the user has touched an edge; flip the page.
-                    if ((eventX < hitArea) ||
-                            (eventX > viewWidth - hitArea)) {
+                        // the user has touched an edge; flip the page.
+                        if ((eventX < hitArea) ||
+                                (eventX > viewWidth - hitArea)) {
 
-                        if (eventX > viewWidth/2) {
-                            viewModel.goToPage(true);
-                        } else {
-                            viewModel.goToPage(false);
+                            if (eventX > viewWidth / 2) {
+                                viewModel.goToPage(true);
+                            } else {
+                                viewModel.goToPage(false);
+                            }
+
+                            updateReadingSurface();
+                        } else { // The user touched the middle of the screen.
+                            getActivity().openContextMenu(v);
                         }
 
-                        updateReadingSurface();
-                    } else { // The user touched the middle of the screen.
-                        getActivity().openContextMenu(v);
+                        return true;
                     }
-
                     return true;
                 }
-                return true;
-            }
-        });
+            });
+        }
     }
 
     // Change the text on the page by advancing the reading position.

@@ -1,5 +1,6 @@
 package com.ericmschmidt.latinreader.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
@@ -129,7 +131,19 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
 
-        if (id == R.id.nav_library) {
+        if (id == R.id.nav_recent) {
+            // Remember to store recently read as workId;isTranslation.
+            String workId = getRecentlyRead();
+            if (!workId.equals("")) {
+                String[] workIdData = workId.split(";");
+                fragment = ReadingFragment.newInstance(workIdData[0], workIdData[1]);
+            }
+            else {
+                fragment = new ReadingFragment();
+            }
+        }
+
+        else if (id == R.id.nav_library) {
             fragment = new LibraryFragment();
 
         } else if (id == R.id.nav_translation) {
@@ -162,6 +176,11 @@ public class MainActivity extends AppCompatActivity
 
     public void onReadingViewSwitch(String workId, String isTranslation) {
         createReadingView(workId, isTranslation);
+    }
+
+    private String getRecentlyRead() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPrefs.getString(ReadingFragment.RECENTLY_READ, "");
     }
 
     private void createReadingView(String workId, String isTranslation) {

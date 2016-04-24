@@ -4,6 +4,10 @@
     <group android:id="@+id/nav_group_1"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_recent"
+            android:icon="@drawable/ic_bookmark_black_24dp"
+            android:title="@string/nav_drawer_recent"/>
+        <item
             android:id="@+id/nav_library"
             android:icon="@drawable/ic_book_black_24dp"
             android:title="@string/nav_drawer_library" />
