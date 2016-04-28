@@ -8,6 +8,8 @@ The built app can be downloaded from the Google Play Store or the Windows Store.
 Android: https://play.google.com/store/apps/details?id=com.ericmschmidt.latinreader
 Windows: http://apps.microsoft.com/windows/app/latin-reader/a2dfd50f-a94d-41ed-861a-2279f9beae93
 
+<b>Windows and Windows Phone users:</b> I've currently stopped all development on the Windows version of this app. Instead, I'm focusing my efforts on Android and iOS. If you use the Windows version and want to see an updated version, please let me know by logging an issue.
+
 ###Report bugs!
 
 The Latin Reader app is for Latinists by a Latinist. I not only build the app, but I use it myself to keep my Latim reading skills up to par. If you encounter a problem in the app, please file an issue here on the GitHub project home page.
