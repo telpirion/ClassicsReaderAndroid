@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>848efa14-427a-490d-ab8e-b6a7e2f77e14</SharedGUID>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)data\caes.bg_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\caes.bg_lat.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)data\cat.burton_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\cat.smithers_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\cat_lat.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\cic.off_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\cic.off_lat.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\lewis.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\lucretius_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\lucretius_lat.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\ovid.met_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\ovid.met_lat.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\petr_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\petr_lat.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\sallust.jugur_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\sallust.jugur_lat.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\sen.apoc_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\sen.apoc_lat.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\verg.a.w_eng.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)data\verg.a_lat.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)js\Concepts.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\default.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\Dictionary.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\Floatie.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\help-files.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\Library.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\navigator.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\Notes.js" />
+    <Content Include="$(MSBuildThisFileDirectory)js\verbs.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)strings\en-us\resources.resjson" />
+  </ItemGroup>
+</Project>

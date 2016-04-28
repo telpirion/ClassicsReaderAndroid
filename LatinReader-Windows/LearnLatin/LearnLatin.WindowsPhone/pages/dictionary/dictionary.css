@@ -1,0 +1,43 @@
+﻿.dictionary section {
+	margin: auto 120px;
+}
+
+.dictionary .page-section {
+	margin-top: auto;
+    margin-left: 24px;
+}
+
+.dictionary .header .titlearea {
+	-ms-grid-column: 1;
+	margin-left: 24px;
+	font-size: 60px;
+    font-weight: 400;
+    font-family: 'Segoe';
+	width: calc(100vw - 20px);
+}
+
+.dictionary {
+	-ms-grid-columns: 1fr;
+	-ms-grid-rows: 75px 1fr;
+	display: -ms-grid;
+	height: 100%;
+	width: 100%;
+}
+
+	.dictionary section[role=main] {
+		-ms-grid-row: 2;
+		height: 100%;
+        width: calc(100vw - 48px);
+	}
+
+.dictionary input[type=search] {
+    width: inherit;
+    margin-top: 40px;
+}
+
+.dictionary .output {
+    overflow-y: scroll;
+    height: 60vh;
+}
+
+

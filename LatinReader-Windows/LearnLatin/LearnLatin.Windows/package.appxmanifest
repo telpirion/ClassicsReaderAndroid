@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
+  <Identity Name="25342ErSchmid.LatinReader" Version="1.4.0.1" Publisher="CN=29C1DBCC-BFDE-4A70-A39C-78B117134E60" />
+  <Properties>
+    <DisplayName>Latin Reader</DisplayName>
+    <PublisherDisplayName>Eric Schmidt</PublisherDisplayName>
+    <Logo>images\storelogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.0</OSMinVersion>
+    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="default.html">
+      <m2:VisualElements DisplayName="Latin Reader" Description="Need to brush up on your Latin reading skills? Download this app and start practicing! Read original Latin texts from authors like Caesar, Catullus, Ovid, and Petronius. The reading view includes an integrated dictionary and English translation of the source material. You can also take notes in the margins to help you learn as you read." ForegroundText="light" BackgroundColor="#A347A4" Square150x150Logo="images\logo.scale.png" Square30x30Logo="images\smallLogo.png">
+        <m2:DefaultTile ShortName="Latin Reader" DefaultSize="square150x150Logo" Square70x70Logo="images\square.png">
+          <m2:ShowNameOnTiles>
+            <m2:ShowOn Tile="square150x150Logo" />
+          </m2:ShowNameOnTiles>
+        </m2:DefaultTile>
+        <m2:SplashScreen Image="images\splashscreen.png" />
+      </m2:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

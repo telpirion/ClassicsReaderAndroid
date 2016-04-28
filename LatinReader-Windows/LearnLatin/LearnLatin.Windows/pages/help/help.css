@@ -1,0 +1,26 @@
+﻿.helpSettingsFlyout, .win-content, .win-settings-section, .helpFilesList {
+    width: 100%
+}
+
+.help-link {
+    text-decoration: underline;
+    color: gray;
+    width: 300px;
+    height: 40px;
+}
+
+.helpFileView {
+    width: 300px;
+}
+
+.no-show {
+    display: none;
+}
+
+.return {
+    cursor: pointer
+}
+
+.win-header  {
+    color: white;
+}

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>homePage</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.2.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+
+    <link href="/css/default.css" rel="stylesheet" />
+    <link href="/pages/home/home.css" rel="stylesheet" />
+    <script src="/pages/home/home.js"></script>
+</head>
+<body>
+    <!-- The content that will be loaded and displayed. -->
+    <div class="fragment homepage">
+        <section aria-label="Main content" role="main">
+            <div id="mainHub" data-win-control="WinJS.UI.Hub">
+                <div class='hero hubSection' data-win-control="WinJS.UI.HubSection">
+                    <p>
+                        Latin, the language of the Ancient Romans and their empire, lives on 
+                        through the roots that it has passed into modern English, to the Latin legal
+                        terms that we still use today.
+                    </p>
+                    <p>
+                        You can use this app to read some of the most influential Latin works
+                        in their original language as well as to look up Latin words. 
+                    </p>
+                </div>
+                <div id="library"
+                     data-location="/pages/reading/reading.html"
+                     data-lang="lat"
+                     class="hubSection" data-win-control="WinJS.UI.HubSection"
+                     data-win-options="{
+                        header: 'Read Latin works'
+                     }">
+                </div>
+                <div class="englishLibrary hubSection"
+                     data-location="/pages/reading/reading.html"
+                     data-lang="eng"
+                     data-win-control="WinJS.UI.HubSection"
+                     data-win-options="{
+                        header: 'Read ancient works in English'
+                     }">
+                </div>
+                <div data-location="/pages/dictionary/dictionary.html"
+                     class="hubSection"
+                     data-win-control="WinJS.UI.HubSection"
+                     data-win-options="{
+                        header: 'Use dictionary'
+                     }">
+                    <div>
+                        Search for a Latin word in the integrated dictionary.<br/>
+                        <div id="searchDictionary"
+                             data-win-control="WinJS.UI.SearchBox"></div></div>
+                </div>
+                <div class="vocab hubSection"
+                     data-win-control="WinJS.UI.HubSection"
+                     data-win-options="{
+                        header: 'Word for the day',
+                        isHeaderStatic: true
+                     }">
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

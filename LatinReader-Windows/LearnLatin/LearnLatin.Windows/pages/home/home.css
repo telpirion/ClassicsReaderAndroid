@@ -1,0 +1,43 @@
+﻿.homepage img {
+    float: left;
+}
+
+.homepage .hero {
+    background-image: url(/images/Roman_amphitheatre_Arles_France_Sept__2008.jpg);
+    background-size: cover;
+    overflow-x: hidden;
+    color: white;
+    font-size: 1.5em;
+}
+
+    .homepage .hero .win-hub-section-header {
+        display: none;
+    }
+
+    .homepage .hero p {
+        background-color: rgba(103, 11, 104, 0.7);
+        padding: 10px;
+    }
+
+.homepage .hubSection {
+   width: 400px;
+   margin-top: 0px;
+}
+
+.hubSection .win-hub-section-header {
+    margin-top: 0px;
+}
+
+.homepage .hubSection .hubSectionItem {
+    display: inline-block;
+    width: 150px;
+    height: 100px;
+    padding: 5px;
+    background-color: #A347A4;
+    margin: 5px;
+}
+
+    .homepage .hubSection .hubSectionItem * {
+        background-color: #A347A4;
+        color: white;
+    }

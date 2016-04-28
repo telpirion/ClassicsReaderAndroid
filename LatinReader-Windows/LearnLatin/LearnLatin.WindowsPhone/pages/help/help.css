@@ -1,0 +1,49 @@
+﻿.help section {
+	margin: auto 120px;
+}
+
+.help .page-section {
+	margin: auto 24px;
+}
+
+.help .header .titlearea {
+	-ms-grid-column: 1;
+	margin-left: 24px;
+	font-size: 60px;
+    font-weight: 400;
+    font-family: 'Segoe';
+	width: calc(100vw - 20px);
+}
+
+.help {
+	-ms-grid-columns: 1fr;
+	-ms-grid-rows: 128px 1fr;
+	display: -ms-grid;
+	height: 100%;
+	width: 100%;
+}
+
+	.help section[role=main] {
+		-ms-grid-row: 2;
+		height: 100%;
+        width: 100%;
+        overflow: scroll;
+	}
+
+.help-link {
+    width: 300px;
+    height: 65px;
+}
+
+.helpFileView {
+    width: 300px;
+    font-weight: 400;
+}
+
+.no-show {
+    display: none;
+}
+
+.return {
+    cursor: pointer
+}

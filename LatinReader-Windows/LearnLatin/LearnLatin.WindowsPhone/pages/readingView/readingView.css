@@ -1,0 +1,47 @@
+﻿.readingView section {
+	margin: auto 120px;
+}
+
+.readingView .page-section {
+	margin: auto 24px;
+}
+
+
+.readingView {
+	-ms-grid-columns: 1fr;
+	-ms-grid-rows: 1fr 50px;
+	display: -ms-grid;
+	height: 100%;
+	width: 100%;
+}
+
+	.readingView section[role=main] {
+		-ms-grid-row: 1;
+		height: calc(100vh - 70px);
+        overflow: auto;
+	}
+
+.book {
+    margin-left: 24px;
+    -ms-grid-column: 1;
+    -ms-grid-row: 2;
+    display: -ms-grid;
+    -ms-grid-columns: 1fr 100px;
+}
+
+.bookText {
+    height: inherit;
+}
+
+.bookInfo {
+    -ms-grid-column: 1;
+}
+
+.page {
+    -ms-grid-column: 2;   
+    margin-right: 24px; 
+}
+
+quote, note, bibl, foreign, cit {
+    display:none;
+}

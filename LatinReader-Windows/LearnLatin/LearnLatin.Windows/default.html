@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>LearnLatin</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.2.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+
+    <!-- LearnLatin references -->
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/default.js"></script>
+    <script src="/js/navigator.js"></script>
+    <script src="js/testing.js"></script>
+    <script src="Scripts/jquery-2.1.1.js"></script>
+
+    <!-- Language-specific code -->
+    <script src="js/verbs.js"></script>
+    <script src="js/Dictionary.js"></script>
+    <script src="js/Library.js"></script>
+    <script src="js/Floatie.js"></script>
+    <script src="/js/Notes.js"></script>
+</head>
+<body>
+    <header class="page-header" aria-label="Header content" role="banner">
+        <h1 class="titlearea win-type-ellipsis">
+            <span class="pagetitle">Latin Reader</span>
+        </h1>
+    </header>
+    <div id="contenthost" data-win-control="Application.PageControlNavigator" 
+         data-win-options="{home: '/pages/home/home.html'}"></div>
+    <div id="nav" data-win-control="WinJS.UI.NavBar" >
+        <div data-win-control="WinJS.UI.NavBarContainer">
+            <div data-win-control="WinJS.UI.NavBarCommand" 
+                 data-win-options="{location:'/pages/home/home.html', 
+                 label:'Home', icon:'home'}"></div>
+            <div data-win-control="WinJS.UI.NavBarCommand"
+                 data-win-options="{location:'/pages/reading/reading.html',
+                 label:'Library (Latin)', icon:'library'
+                 }"></div>
+            <div data-win-control="WinJS.UI.NavBarCommand"
+                 data-win-options="{location:'/pages/reading/reading.html',
+                 label:'Library (English)', icon:'library',
+                 state: 'eng'
+                 }"></div>
+            <div data-win-control="WinJS.UI.NavBarCommand"
+                 data-win-options="{location: '/pages/dictionary/dictionary.html',
+                 label:'Dictionary', icon: 'find'                
+                 }"></div>
+        </div>
+    </div>
+</body>
+</html>
