@@ -5,7 +5,7 @@ import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 
 import java.util.ArrayList;
 
-public class GreekManifest extends Manifest {
+public class Manifest {
 
     /**
      * Gets the collection of works for this app.

@@ -34,7 +34,7 @@ android {
         greekreader {
             java.srcDirs = ['src/main/java', 'src/greekreader/java']
         }
-        main { java.srcDirs = ['src/main/java', 'src/latinreader/java'] }
+        main { java.srcDirs = ['src/main/java'] }
     }
 }
 

@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 
 import com.ericmschmidt.latinreader.MyApplication;
+import com.ericmschmidt.latinreader.utilities.ITextConverter;
+import com.ericmschmidt.latinreader.utilities.TextConverter;
 
 import java.util.Locale;
 
@@ -22,6 +24,7 @@ public class ReadingViewModel {
     private int _pageOffset;
     private String _author;
     private String _title;
+    private boolean _isTranslation;
 
     /**
      * Creates an instance of the ReadingViewModel class with a work open.
@@ -31,13 +34,14 @@ public class ReadingViewModel {
     public ReadingViewModel(WorkInfo work, boolean isTranslation, int pageOffset) {
         this._currentWorkInfo = work;
         this._pageOffset = (pageOffset > -1) ? pageOffset : 1;
+        this._isTranslation = isTranslation;
 
         if (!loadLastReadingPosition()) { // This work hasn't been read yet.
             this._currentLineIndex = 0;
             this._currentBookIndex = 0;
         }
 
-        if (isTranslation) {
+        if (this._isTranslation) {
             this._currentWork = new Work(work.getEnglishLocation());
             this._author = work.getEnglishAuthor();
             this._title = work.getEnglishTitle();
@@ -63,6 +67,10 @@ public class ReadingViewModel {
                 currentPage += this._currentBook.getLine(this._currentLineIndex + i) +"\n";
             }
         }
+
+        // Convert characters to source alphabet.
+        if (!this._isTranslation)
+            currentPage = convertCharacters(currentPage);
 
         return currentPage;
     }
@@ -128,6 +136,12 @@ public class ReadingViewModel {
                  this._currentLineIndex + 1);
     }
 
+    // Translate the current line from Latin characters to another character set.
+    private String convertCharacters(String latinSource) {
+        ITextConverter converter = new TextConverter();
+        return converter.convertSourceToTargetCharacters(latinSource);
+    }
+
     // Increase the reading position.
     private void advancePages(int offset) {
         int count = 0;
@@ -182,10 +196,10 @@ public class ReadingViewModel {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        String currentPosition = String.format("%d,%d", this._currentBookIndex, this._currentLineIndex);
+        String currentPosition = String.format(Locale.US, "%d,%d", this._currentBookIndex, this._currentLineIndex);
 
         editor.putString(_currentWorkInfo.getId(), currentPosition);
-        editor.commit();
+        editor.apply();
     }
 
     // Open up the next book.
