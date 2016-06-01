@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.ericmschmidt.latinreader"
+        applicationId "com.ericmschmidt.reader"
         minSdkVersion 18
         targetSdkVersion 23
         versionCode 2
@@ -16,6 +16,25 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
+        latinreader {
+            applicationId "com.ericmschmidt.latinreader"
+            versionName "1.0-latin"
+        }
+        greekreader {
+            applicationId "com.ericmschmidt.greekreader"
+            versionName "1.0-greek"
+        }
+    }
+    sourceSets {
+        latinreader {
+            java.srcDirs = ['src/main/java', 'src/latinreader/java/']
+        }
+        greekreader {
+            java.srcDirs = ['src/main/java', 'src/greekreader/java']
+        }
+        main { java.srcDirs = ['src/main/java', 'src/latinreader/java'] }
     }
 }
 
