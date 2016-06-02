@@ -12,8 +12,8 @@ import java.util.HashMap;
 /**
  * A Latin character to Greek polytonic converter.
  * Copyright 2015, Eric Schmidt. All rights reserved.
- * Version 1.0.
-
+ * Version 2.0.
+ *
  * http://www.unicode.org/charts/PDF/U1F00.pdf
  *
  * Revised: 2016-06-01
@@ -139,7 +139,7 @@ public class TextConverter implements ITextConverter {
         }
 
         if (!holdCapital.isEmpty() && (this._characterHash.containsKey(holdCapital))) {
-            convertedWord += this._characterHash.containsKey(holdCapital);
+            convertedWord += this._characterHash.get(holdCapital);
         } else if (!holdCapital.isEmpty()) {
             convertedWord += holdCapital;
         }
