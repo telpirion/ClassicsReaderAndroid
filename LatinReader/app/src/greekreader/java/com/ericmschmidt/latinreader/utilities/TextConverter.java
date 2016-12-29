@@ -4,6 +4,8 @@ import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.R;
 
 import android.util.JsonReader;
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -119,6 +121,8 @@ public class TextConverter implements ITextConverter {
         //if (String.valueOf(convertedWord.charAt(convertedWord.length() - 1)).equals("σ")) {
         //    convertedWord = convertedWord.substring(0, convertedWord.length() - 1) + "ς";
         //}
+
+        Log.d("T", convertedWord);
 
         return convertedWord;
     }
