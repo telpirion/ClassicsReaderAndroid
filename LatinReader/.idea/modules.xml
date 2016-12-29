@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LatinReader.iml" filepath="$PROJECT_DIR$/LatinReader.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/latinreader/latinreader.iml" filepath="$PROJECT_DIR$/latinreader/latinreader.iml" />
     </modules>
   </component>
 </project>
