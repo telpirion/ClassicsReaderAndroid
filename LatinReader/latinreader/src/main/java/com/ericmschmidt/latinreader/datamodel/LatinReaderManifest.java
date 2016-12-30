@@ -31,6 +31,15 @@ public class LatinReaderManifest extends Manifest {
                 R.raw.caes_bg_eng,
                 WorkInfo.WorkType.prose));
 
+        workInfos.add(new WorkInfo("Horace",
+                "Carmina",
+                "Q. Horatius Flaccus",
+                "The Odes and Carmen Saeculare of Horace",
+                "Horace",
+                R.raw.hor_carm_lat,
+                R.raw.hor_carm_eng,
+                WorkInfo.WorkType.poem));
+
         workInfos.add(new WorkInfo("Lucretius",
                 "De Rerum Natura",
                 "T. Lucretius Caro",

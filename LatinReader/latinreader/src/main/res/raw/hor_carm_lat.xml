@@ -1,0 +1,3173 @@
+<?xml version="1.0"?>
+<work>
+<header type="text" status="new">
+<fileDesc>
+<titleStmt>
+<title>Carmina</title>
+<title type="sub">Machine readable text</title>
+<author>Q. Horatius Flaccus (Horace)</author>
+<editor role="editor">Paul Shorey</editor>
+</titleStmt>
+<extent>about 132Kb</extent>
+<sourceDesc>
+<biblStruct>
+<monogr>
+<author>Horace</author>
+<title>Horace, Odes and Epodes</title>
+<editor role="editor">Paul Shorey and Gordon J. Laing</editor>
+<imprint>
+<pubPlace>Chicago</pubPlace>
+<publisher>Benj. H. Sanborn Co.</publisher>
+<date>1919</date>
+</imprint>
+</monogr>
+</biblStruct>
+</sourceDesc>
+</fileDesc>
+</header>
+
+<text><body>
+<div1 type="Book" n="1">
+<div2 type="Poem" n="1" met="First Asclepiadean">
+<p>Maecenas atavis edite regibus,</p>
+<p>o et praesidium et dulce decus meum:</p>
+<p>sunt quos curriculo pulverem Olympicum</p>
+<p>collegisse iuvat metaque fervidis</p>
+<p>evitata rotis palmaque nobilis.</p>
+<p>terrarum dominos evehit ad deos</p>
+<p>hunc, si mobilium turba Quiritium</p>
+<p>certat tergeminis tollere honoribus,</p>
+<p>illum, si proprio condidit horreo</p>
+<p>quidquid de Libycis verritur areis.</p>
+<p>gaudentem patrios findere sarculo</p>
+<p>agros Attalicis condicionibus</p>
+<p>numquam demoveas, ut trabe Cypria</p>
+<p>Myrtoum pavidus nauta secet mare.</p>
+<p>luctantem Icariis fluctibus Africum</p>
+<p>mercator metuens otium et oppidi</p>
+<p>laudat rura sui; mox reficit rates</p>
+<p>quassas indocilis pauperiem pati.</p>
+<p>est qui nec veteris pocula Massici</p>
+<p>nec partem solido demere de die</p>
+<p>spernit, nunc viridi membra sub arbuto</p>
+<p>stratus, nunc ad aquae lene caput sacrae.</p>
+<p>multos castra iuvant et lituo tubae</p>
+<p>permixtus sonitus bellaque matribus</p>
+<p>detestata. manet sub Iove frigido</p>
+<p>venator tenerae coniugis inmemor,</p>
+<p>seu visa est catulis cerva fidelibus</p>
+<p>seu rupit teretes Marsus aper plagas.</p>
+<p>me doctarum hederae praemia frontium</p>
+<p>dis miscent superis, me gelidum nemus</p>
+<p>Nympharumque leves cum Satyris chori</p>
+<p>secernunt populo, si neque tibias</p>
+<p>Euterpe cohibet nec Polyhymnia</p>
+<p>Lesboum refugit tendere barbiton.</p>
+<p>quodsi me lyricis vatibus inseres,</p>
+<p>sublimi feriam sidera vertice.</p></div2>
+<div2 type="Poem" n="2" met="Sapphic Strophe">
+<lg type="stanza"><p>Iam satis terris nivis atque dirae</p>
+<p>grandinis misit pater et rubente</p>
+<p>dextera sacras iaculatus arcis</p>
+<p>terruit urbem,</p></lg>
+<lg><p>terruit gentis, grave ne rediret</p>
+<p>saeculum Pyrrhae nova monstra questae,</p>
+<p>omne cum Proteus pecus egit altos</p>
+<p>visere montis,</p></lg>
+<lg><p>piscium et summa genus haesit ulmo,</p>
+<p>nota quae sedes fuerat columbis,</p>
+<p>et superiecto pavidae natarunt</p>
+<p>aequore dammae.</p></lg>
+<lg><p>vidimus flavum Tiberim retortis</p>
+<p>litore Etrusco violenter undis</p>
+<p>ire deiectum monumenta regis</p>
+<p>templaque Vestae,</p></lg>
+<lg><p>Iliae dum se nimium querenti</p>
+<p>iactat ultorem, vagus et sinistra</p>
+<p>labitur ripa Iove non probante u-</p>
+<p>xorius amnis.</p></lg>
+<lg><p>audiet civis acuisse ferrum,</p>
+<p>quo graves Persae melius perirent,</p>
+<p>audiet pugnas vitio parentum</p>
+<p>rara iuventus.</p></lg>
+<lg><p>quem vocet divum populus ruentis</p>
+<p>imperi rebus? prece qua fatigent</p>
+<p>virgines sanctae minus audientem</p>
+<p>carmina Vestam?</p></lg>
+<lg><p>cui dabit partis scelus expiandi</p>
+<p>Iuppiter? tandem venias precamur</p>
+<p>nube candentis umeros amictus</p>
+<p>augur Apollo;</p></lg>
+<lg><p>sive tu mavis, Erycina ridens,</p>
+<p>quam Iocus circum volat et Cupido;</p>
+<p>sive neglectum genus et nepotes</p>
+<p>respicis, auctor</p></lg>
+<lg><p>heu nimis longo satiate ludo,</p>
+<p>quem iuvat clamor galeaeque leves</p>
+<p>acer et Marsi peditis cruentum</p>
+<p>voltus in hostem;</p></lg>
+<lg><p>sive mutata iuvenem figura</p>
+<p>ales in terris imitaris almae</p>
+<p>filius Maiae, patiens vocari</p>
+<p>Caesaris ultor:</p></lg>
+<lg><p>serus in caelum redeas diuque</p>
+<p>laetus intersis populo Quirini</p>
+<p>neve te nostris vitiis iniquum</p>
+<p>ocior aura</p></lg>
+<lg><p>tollat; hic magnos potius triumphos,</p>
+<p>hic ames dici pater atque princeps</p>
+<p>neu sinas Medos equitare inultos</p>
+<p>te duce, Caesar.</p></lg></div2>
+<div2 type="Poem" n="3" met="Second Asclepiadean">
+<p>Sic te diva potens Cypri,</p>
+<p>sic fratres Helenae, lucida sidera,</p>
+<p>ventorumque regat pater</p>
+<p>obstrictis aliis praeter Iapyga,</p>
+<p>navis, quae tibi creditum</p>
+<p>debes Vergilium; finibus Atticis</p>
+<p>reddas incolumem precor</p>
+<p>et serves animae dimidium meae.</p>
+<p>illi robur et aes triplex</p>
+<p>circa pectus erat, qui fragilem truci</p>
+<p>conmisit pelago ratem</p>
+<p>primus: nec timuit praecipitem Africum</p>
+<p>decertantem Aquilonibus</p>
+<p>nec tristis Hyadas nec rabiem Noti,</p>
+<p>quo non arbiter Hadriae</p>
+<p>maior, tollere seu ponere volt freta;</p>
+<p>quem mortis timuit gradum</p>
+<p>qui siccis oculis monstra natantia,</p>
+<p>qui vidit mare turbidum et</p>
+<p>infamis scopulos Acroceraunia?</p>
+<p>nequiquam deus abscidit</p>
+<p>prudens oceano dissociabili</p>
+<p>terras, si tamen inpiae</p>
+<p>non tangenda rates transiliunt vada.</p>
+<p>audax omnia perpeti</p>
+<p>gens humana ruit per vetitum nefas:</p>
+<p>audax Iapeti genus</p>
+<p>ignem fraude mala gentibus intulit;</p>
+<p>post ignem aetheria domo</p>
+<p>subductum macies et nova febrium</p>
+<p>terris incubuit cohors</p>
+<p>semotique prius tarda necessitas</p>
+<p>Leti corripuit gradum;</p>
+<p>expertus vacuum Daedalus aera</p>
+<p>pennis non homini datis;</p>
+<p>perrupit Acheronta Herculeus labor.</p>
+<p>nil mortalibus ardui est:</p>
+<p>caelum ipsum petimus stultitia neque</p>
+<p>per nostrum patimur scelus</p>
+<p>iracunda Iovem ponere fulmina.</p></div2>
+<div2 type="Poem" n="4" met="Fourth Archilochian">
+<p>Solvitur acris hiems grata vice veris et Favoni</p>
+<p>trahuntque siccas machinae carinas</p>
+<p>ac neque iam stabulis gaudet pecus aut arator igni</p>
+<p>nec prata canis albicant pruinis.</p>
+<p>iam Cytherea choros ducit Venus imminente luna</p>
+<p>iunctaeque Nymphis Gratiae decentes</p>
+<p>alterno terram quatiunt pede, dum gravis Cyclopum</p>
+<p>Volcanus ardens visit officinas.</p>
+<p>nunc decet aut viridi nitidum caput impedire myrto</p>
+<p>aut flore, terrae quem ferunt solutae,</p>
+<p>nunc et in umbrosis Fauno decet immolare lucis,</p>
+<p>seu poscat agna sive malit haedo.</p>
+<p>pallida Mors aequo pulsat pede pauperum tabernas</p>
+<p>regumque turris. o beate Sesti,</p>
+<p>vitae summa brevis spem nos vetat inchoare longam;</p>
+<p>iam te premet nox fabulaeque Manes</p>
+<p>et domus exilis Plutonia; quo simul mearis,</p>
+<p>nec regna vini sortiere talis</p>
+<p>nec tenerum Lycidan mirabere, quo calet iuventus</p>
+<p>nunc omnis et mox virgines tepebunt.</p></div2>
+<div2 type="Poem" n="5" met="Fourth Asclepiadean">
+<lg><p>Quis multa gracilis te puer in rosa</p>
+<p>perfusus liquidis urget odoribus</p>
+<p>grato, Pyrrha, sub antro?</p>
+<p>cui flavam religas comam</p></lg>
+<lg><p>simplex munditiis? heu quotiens fidem</p>
+<p>mutatosque deos flebit et aspera</p>
+<p>nigris aequora ventis</p>
+<p>emirabitur insolens</p></lg>
+<lg><p>qui nunc te fruitur credulus aurea,</p>
+<p>qui semper vacuam, semper amabilem</p>
+<p>sperat, nescius aurae</p>
+<p>fallacis. miseri, quibus</p></lg>
+<lg><p>intemptata nites. me tabula sacer</p>
+<p>votiva paries indicat uvida</p>
+<p>suspendisse potenti</p>
+<p>vestimenta maris deo.</p></lg></div2>
+<div2 type="Poem" n="6" met="Third Asclepiadean">
+<lg><p>Scriberis Vario fortis et hostium</p>
+<p>victor Maeonii carminis alite,</p>
+<p>quam rem cumque ferox navibus aut equis</p>
+<p>miles te duce gesserit.</p></lg>
+<lg><p>nos, Agrippa, neque haec dicere nec gravem</p>
+<p>Pelidae stomachum cedere nescii</p>
+<p>nec cursus duplicis per mare Ulixei</p>
+<p>nec saevam Pelopis domum</p></lg>
+<lg><p>conamur, tenues grandia, dum pudor</p>
+<p>inbellisque lyrae Musa potens vetat</p>
+<p>laudes egregii Caesaris et tuas</p>
+<p>culpa deterere ingeni.</p></lg>
+<lg><p>quis Martem tunica tectum adamantina</p>
+<p>digne scripserit aut pulvere Troico</p>
+<p>nigrum Merionen aut ope Palladis</p>
+<p>Tydiden superis parem?</p></lg>
+<lg><p>nos convivia, nos proelia virginum</p>
+<p>sectis in iuvenes unguibus acrium</p>
+<p>cantamus, vacui sive quid urimur,</p>
+<p>non praeter solitum leves.</p></lg></div2>
+<div2 type="Poem" n="7" met="Alcmanian Strophe">
+<p>Laudabunt alii claram Rhodon aut Mytilenen</p>
+<p>aut Epheson bimarisve Corinthi</p>
+<p>moenia vel Baccho Thebas vel Apolline Delphos</p>
+<p>insignis aut Thessala Tempe;</p>
+<p>sunt quibus unum opus est intactae Palladis urbem</p>
+<p>carmine perpetuo celebrare et</p>
+<p>undique decerptam fronti praeponere olivam;</p>
+<p>plurimus in Iunonis honorem</p>
+<p>aptum dicet equis Argos ditisque Mycenas:</p>
+<p>me nec tam patiens Lacedaemon</p>
+<p>nec tam Larisae percussit campus opimae</p>
+<p>quam domus Albuneae resonantis</p>
+<p>et praeceps Anio ac Tiburni lucus et uda</p>
+<p>mobilibus pomaria rivis.</p>
+<p>albus ut obscuro deterget nubila caelo</p>
+<p>saepe Notus neque parturit imbris</p>
+<p>perpetuos, sic tu sapiens finire memento</p>
+<p>tristitiam vitaeque labores</p>
+<p>molli, Plance, mero, seu te fulgentia signis</p>
+<p>castra tenent seu densa tenebit</p>
+<p>Tiburis umbra tui. Teucer Salamina patremque</p>
+<p>cum fugeret, tamen uda Lyaeo</p>
+<p>tempora populea fertur vinxisse corona</p>
+<p>sic tristis adfatus amicos:</p>
+<p>"quo nos cumque feret melior fortuna parente,</p>
+<p>ibimus—o socii comitesque,</p>
+<p>nil desperandum Teucro duce et auspice Teucro:</p>
+<p>certus enim promisit Apollo</p>
+<p>ambiguam tellure nova Salamina futuram.</p>
+<p>o fortes peioraque passi</p>
+<p>mecum saepe viri, nunc vino pellite curas;</p>
+<p>cras ingens iterabimus aequor."</p></div2>
+<div2 type="Poem" n="8" met="(Greater) Sapphic Strophe">
+<p>Lydia, dic per omnis</p>
+<p>te deos oro, Sybarin cur properes amando</p>
+<p>perdere, cur apricum</p>
+<p>oderit campum patiens pulveris atque solis,</p>
+<p>cur neque militaris</p>
+<p>inter aequalis equitet, Gallica nec lupatis</p>
+<p>temperet ora frenis?</p>
+<p>cur timet flavum Tiberim tangere? cur olivum</p>
+<p>sanguine viperino</p>
+<p>cautius vitat neque iam livida gestat armis</p>
+<p>bracchia saepe disco,</p>
+<p>saepe trans finem iaculo nobilis expedito?</p>
+<p>quid latet, ut marinae</p>
+<p>filium dicunt Thetidis sub lacrimosa Troiae</p>
+<p>funera, ne virilis</p>
+<p>cultus in caedem et Lycias proriperet catervas?</p></div2>
+<div2 type="Poem" n="9" met="Alcaic Strophe">
+<lg><p>Vides ut alta stet nive candidum</p>
+<p>Soracte nec iam sustineant onus</p>
+<p>silvae laborantes geluque</p>
+<p>flumina constiterint acuto?</p></lg>
+<lg><p>dissolve frigus ligna super foco</p>
+<p>large reponens atque benignius</p>
+<p>deprome quadrimum Sabina,</p>
+<p>o Thaliarche, merum diota.</p></lg>
+<lg><p>permitte divis cetera, qui simul</p>
+<p>stravere ventos aequore fervido</p>
+<p>deproeliantis, nec cupressi</p>
+<p>nec veteres agitantur orni.</p></lg>
+<lg><p>quid sit futurum cras, fuge quaerere et</p>
+<p>quem Fors dierum cumque dabit, lucro</p>
+<p>adpone nec dulcis amores</p>
+<p>sperne puer neque tu choreas,</p></lg>
+<lg><p>donec virenti canities abest</p>
+<p>morosa. nunc et campus et areae</p>
+<p>lenesque sub noctem susurri</p>
+<p>conposita repetantur hora,</p></lg>
+<lg><p>nunc et latentis proditor intumo</p>
+<p>gratus puellae risus ab angulo</p>
+<p>pignusque dereptum lacertis</p>
+<p>aut digito male pertinaci.</p></lg></div2>
+<div2 type="Poem" n="10" met="Sapphic Strophe">
+<lg><p>Mercuri facunde nepos Atlantis,</p>
+<p>qui feros cultus hominum recentum</p>
+<p>voce formasti catus et decorae</p>
+<p>more palaestrae,</p></lg>
+<lg><p>te canam, magni Iovis et deorum</p>
+<p>nuntium curvaeque lyrae parentem,</p>
+<p>callidum, quidquid placuit, iocoso</p>
+<p>condere furto.</p></lg>
+<lg><p>te, boves olim nisi reddidisses</p>
+<p>per dolum amotas, puerum minaci</p>
+<p>voce dum terret, viduus pharetra</p>
+<p>risit Apollo.</p></lg>
+<lg><p>quin et Atridas duce te superbos</p>
+<p>Ilio dives Priamus relicto</p>
+<p>Thessalosque ignis et iniqua Troiae</p>
+<p>castra fefellit.</p></lg>
+<lg><p>tu pias laetis animas reponis</p>
+<p>sedibus virgaque levem coerces</p>
+<p>aurea turbam, superis deorum</p>
+<p>gratus et imis.</p></lg></div2>
+<div2 type="Poem" n="11" met="Fifth (Greater) Asclepiadean">
+<p>Tu ne quaesieris, scire nefas, quem mihi, quem tibi</p>
+<p>finem di dederint, Leuconoe, nec Babylonios</p>
+<p>temptaris numeros. ut melius, quidquid erit, pati.</p>
+<p>seu pluris hiemes seu tribuit Iuppiter ultimam,</p>
+<p>quae nunc oppositis debilitat pumicibus mare</p>
+<p>Tyrrhenum: sapias, vina liques et spatio brevi</p>
+<p>spem longam reseces. dum loquimur, fugerit invida</p>
+<p>aetas: carpe diem quam minimum credula postero.</p></div2>
+<div2 type="Poem" n="12" met="Sapphic Strophe">
+<lg><p>Quem virum aut heroa lyra vel acri</p>
+<p>tibia sumis celebrare, Clio?</p>
+<p>quem deum? cuius recinet iocosa</p>
+<p>nomen imago</p></lg>
+<lg><p>aut in umbrosis Heliconis oris</p>
+<p>aut super Pindo gelidove in Haemo?</p>
+<p>unde vocalem temere insecutae</p>
+<p>Orphea silvae,</p></lg>
+<lg><p>arte materna rapidos morantem</p>
+<p>fluminum lapsus celeresque ventos,</p>
+<p>blandum et auritas fidibus canoris</p>
+<p>ducere quercus.</p></lg>
+<lg><p>quid prius dicam solitis parentis</p>
+<p>laudibus, qui res hominum ac deorum,</p>
+<p>qui mare ac terras variisque mundum</p>
+<p>temperat horis?</p></lg>
+<lg><p>unde nil maius generatur ipso</p>
+<p>nec viget quidquam simile aut secundum.</p>
+<p>proximos illi tamen occupavit</p>
+<p>Pallas honores</p></lg>
+<lg><p>proeliis audax. neque te silebo,</p>
+<p>Liber et saevis inimica virgo</p>
+<p>beluis, nec te, metuende certa</p>
+<p>Phoebe sagitta.</p></lg>
+<lg><p>dicam et Alciden puerosque Ledae,</p>
+<p>hunc equis, illum superare pugnis</p>
+<p>nobilem; quorum simul alba nautis</p>
+<p>stella refulsit,</p></lg>
+<lg><p>defluit saxis agitatus umor,</p>
+<p>concidunt venti fugiuntque nubes</p>
+<p>et minax, quia sic voluere, ponto</p>
+<p>unda recumbit.</p></lg>
+<lg><p>Romulum post hos prius an quietum</p>
+<p>Pompili regnum memorem, an superbos</p>
+<p>Tarquini fascis, dubito, an Catonis</p>
+<p>nobile letum:</p></lg>
+<lg><p>Regulum et Scauros animaeque magnae</p>
+<p>prodigum Paulum superante Poeno</p>
+<p>gratus insigni referam camena</p>
+<p>Fabriciumque.</p></lg>
+<lg><p>hunc et incomptis Curium capillis</p>
+<p>utilem bello tulit et Camillum</p>
+<p>saeva paupertas et avitus apto</p>
+<p>cum lare fundus.</p></lg>
+<lg><p>crescit occulto velut arbor aevo</p>
+<p>fama Marcelli; micat inter omnis</p>
+<p>Iulium sidus velut inter ignis</p>
+<p>luna minores.</p></lg>
+<lg><p>gentis humanae pater atque custos,</p>
+<p>orte Saturno, tibi cura magni</p>
+<p>Caesaris fatis data: tu secundo</p>
+<p>Caesare regnes.</p></lg>
+<lg><p>ille seu Parthos Latio imminentis</p>
+<p>egerit iusto domitos triumpho</p>
+<p>sive subiectos Orientis orae</p>
+<p>Seras et Indos,</p></lg>
+<lg><p>te minor latum reget aequos orbem:</p>
+<p>tu gravi curru quaties Olympum,</p>
+<p>tu parum castis inimica mittes</p>
+<p>fulmina lucis.</p></lg></div2>
+<div2 type="Poem" n="13" met="Second Asclepiadean">
+<p>Cum tu, Lydia, Telephi</p>
+<p>cervicem roseam, cerea Telephi</p>
+<p>laudas bracchia, vae, meum</p>
+<p>fervens difficili bile tumet iecur.</p>
+<p>tum nec mens mihi nec color</p>
+<p>certa sede manet, umor et in genas</p>
+<p>furtim labitur arguens,</p>
+<p>quam lentis penitus macerer ignibus.</p>
+<p>uror, seu tibi candidos</p>
+<p>turparunt umeros inmodicae mero</p>
+<p>rixae sive puer furens</p>
+<p>inpressit memorem dente labris notam.</p>
+<p>non, si me satis audias,</p>
+<p>speres perpetuum dulcia barbare</p>
+<p>laedentem oscula, quae Venus</p>
+<p>quinta parte sui nectaris imbuit.</p>
+<p>felices ter et amplius</p>
+<p>quos inrupta tenet copula nec malis</p>
+<p>divolsus querimoniis</p>
+<p>suprema citius solvet amor die.</p></div2>
+<div2 type="Poem" n="14" met="Fourth Asclepiadean">
+<lg><p>O navis, referent in mare te novi</p>
+<p>fluctus. o quid agis? fortiter occupa</p>
+<p>portum. nonne vides, ut</p>
+<p>nudum remigio latus</p></lg>
+<lg><p>et malus celeri saucius Africo</p>
+<p>antemnaeque gemant ac sine funibus</p>
+<p>vix durare carinae</p>
+<p>possint imperiosius</p></lg>
+<lg><p>aequor? non tibi sunt integra lintea,</p>
+<p>non di, quos iterum pressa voces malo.</p>
+<p>quamvis Pontica pinus,</p>
+<p>silvae filia nobilis,</p></lg>
+<lg><p>iactes et genus et nomen inutile:</p>
+<p>nil pictis timidus navita puppibus</p>
+<p>fidit. tu, nisi ventis</p>
+<p>debes ludibrium, cave.</p></lg>
+<lg><p>nuper sollicitum quae mihi taedium,</p>
+<p>nunc desiderium curaque non levis,</p>
+<p>interfusa nitentis</p>
+<p>vites aequora Cycladas.</p></lg></div2>
+<div2 type="Poem" n="15" met="Third Asclepiadean">
+<lg><p>Pastor cum traheret per freta navibus</p>
+<p>Idaeis Helenen perfidus hospitam,</p>
+<p>ingrato celeres obruit otio</p>
+<p>ventos ut caneret fera</p></lg>
+<lg><p>Nereus fata. "mala ducis avi domum</p>
+<p>quam multo repetet Graecia milite</p>
+<p>coniurata tuas rumpere nuptias</p>
+<p>et regnum Priami vetus.</p></lg>
+<lg><p>heu heu, quantus equis, quantus adest viris</p>
+<p>sudor, quanta moves funera Dardanae</p>
+<p>genti. iam galeam Pallas et aegida</p>
+<p>currusque et rabiem parat.</p></lg>
+<lg><p>nequiquam Veneris praesidio ferox</p>
+<p>pectes caesariem grataque feminis</p>
+<p>inbelli cithara carmina divides;</p>
+<p>nequiquam thalamo gravis</p></lg>
+<lg><p>hastas et calami spicula Cnosii</p>
+<p>vitabis strepitumque et celerem sequi</p>
+<p>Aiacem: tamen, heu serus, adulteros</p>
+<p>crines pulvere collines.</p></lg>
+<lg><p>non Laertiaden, exitium tuae</p>
+<p>genti, non Pylium Nestora respicis?</p>
+<p>urgent inpavidi te Salaminius</p>
+<p>Teucer, te Sthenelus, sciens</p></lg>
+<lg><p>pugnae sive opus est imperitare equis,</p>
+<p>non auriga piger. Merionen quoque</p>
+<p>nosces. ecce furit, te reperire atrox,</p>
+<p>Tydides melior patre:</p></lg>
+<lg><p>quem tu, cervus uti vallis in altera</p>
+<p>visum parte lupum graminis inmemor,</p>
+<p>sublimi fugies mollis anhelitu,</p>
+<p>non hoc pollicitus tuae.</p></lg>
+<lg><p>iracunda diem proferet Ilio</p>
+<p>matronisque Phrygum classis Achillei;</p>
+<p>post certas hiemes uret Achaicus</p>
+<p>ignis Iliacas domos.</p></lg></div2>
+<div2 type="Poem" n="16" met="Alcaic Strophe">
+<lg><p>O matre pulcra filia pulchrior,</p>
+<p>quem criminosis cumque voles modum</p>
+<p>pones iambis, sive flamma</p>
+<p>sive mari libet Hadriano.</p></lg>
+<lg><p>non Dindymene, non adytis quatit</p>
+<p>mentem sacerdotum incola Pythius,</p>
+<p>non Liber aeque, non acuta</p>
+<p>sic geminant Corybantes aera,</p></lg>
+<lg><p>tristes ut irae, quas neque Noricus</p>
+<p>deterret ensis nec mare naufragum</p>
+<p>nec saevos ignis nec tremendo</p>
+<p>Iuppiter ipse ruens tumultu.</p></lg>
+<lg><p>fertur Prometheus addere principi</p>
+<p>limo coactus particulam undique</p>
+<p>desectam et insani leonis</p>
+<p>vim stomacho adposuisse nostro.</p></lg>
+<lg><p>irae Thyesten exitio gravi</p>
+<p>stravere et altis urbibus ultimae</p>
+<p>stetere causae, cur perirent</p>
+<p>funditus inprimeretque muris</p></lg>
+<lg><p>hostile aratrum exercitus insolens.</p>
+<p>conpesce mentem: me quoque pectoris</p>
+<p>temptavit in dulci iuventa</p>
+<p>fervor et in celeres iambos</p></lg>
+<lg><p>misit furentem. nunc ego mitibus</p>
+<p>mutare quaero tristia, dum mihi</p>
+<p>fias recantatis amica</p>
+<p>opprobriis animumque reddas.</p></lg></div2>
+<div2 type="Poem" n="17" met="Alcaic Strophe">
+<lg><p>Velox amoenum saepe Lucretilem</p>
+<p>mutat Lycaeo Faunus et igneam</p>
+<p>defendit aestatem capellis</p>
+<p>usque meis pluviosque ventos.</p></lg>
+<lg><p>inpune tutum per nemus arbutos</p>
+<p>quaerunt latentis et thyma deviae</p>
+<p>olentis uxores mariti</p>
+<p>nec viridis metuunt colubras</p></lg>
+<lg><p>nec Martialis haediliae lupos,</p>
+<p>utcumque dulci, Tyndari, fistula</p>
+<p>valles et Usticae cubantis</p>
+<p>levia personuere saxa.</p></lg>
+<lg><p>di me tuentur, dis pietas mea</p>
+<p>et musa cordi est. hic tibi copia</p>
+<p>manabit ad plenum benigno</p>
+<p>ruris honorum opulenta cornu.</p></lg>
+<lg><p>hic in reducta valle Caniculae</p>
+<p>vitabis aestus et fide Teia</p>
+<p>dices laborantis in uno</p>
+<p>Penelopen vitreamque Circen;</p></lg>
+<lg><p>hic innocentis pocula Lesbii</p>
+<p>duces sub umbra nec Semeleius</p>
+<p>cum Marte confundet Thyoneus</p>
+<p>proelia nec metues protervum</p></lg>
+<lg><p>suspecta Cyrum, ne male dispari</p>
+<p>incontinentis iniciat manus</p>
+<p>et scindat haerentem coronam</p>
+<p>crinibus inmeritamque vestem.</p></lg></div2>
+<div2 type="Poem" n="18" met="Fifth (Greater) Asclepiadean">
+<p>Nullam, Vare, sacra vite prius severis arborem</p>
+<p>circa mite solum Tiburis et moenia Catili;</p>
+<p>siccis omnia nam dura deus proposuit neque</p>
+<p>mordaces aliter diffugiunt sollicitudines.</p>
+<p>quis post vina gravem militiam aut pauperiem crepat?</p>
+<p>quis non te potius, Bacche pater, teque, decens Venus?</p>
+<p>ac ne quis modici transiliat munera Liberi,</p>
+<p>Centaurea monet cum Lapithis rixa super mero</p>
+<p>debellata, monet Sithoniis non levis Euhius,</p>
+<p>cum fas atque nefas exiguo fine libidinum</p>
+<p>discernunt avidi. non ego te, candide Bassareu,</p>
+<p>invitum quatiam nec variis obsita frondibus</p>
+<p>sub divum rapiam. saeva tene cum Berecyntio</p>
+<p>cornu tympana, quae subsequitur caecus amor sui</p>
+<p>et tollens vacuum plus nimio gloria verticem</p>
+<p>arcanique fides prodiga, perlucidior vitro.</p></div2>
+<div2 type="Poem" n="19" met="Second Asclepiadean">
+<p>Mater saeva Cupidinum</p>
+<p>Thebanaeque iubet me Semelae puer</p>
+<p>et lasciva Licentia</p>
+<p>finitis animum reddere amoribus.</p>
+<p>urit me Glycerae nitor</p>
+<p>splendentis Pario marmore purius,</p>
+<p>urit grata protervitas</p>
+<p>et voltus nimium lubricus adspici.</p>
+<p>in me tota ruens Venus</p>
+<p>Cyprum deseruit nec patitur Scythas</p>
+<p>et versis animosum equis</p>
+<p>Parthum dicere nec quae nihil attinent.</p>
+<p>hic vivum mihi caespitem, hic</p>
+<p>verbenas, pueri, ponite turaque</p>
+<p>bimi cum patera meri:</p>
+<p>mactata veniet lenior hostia.</p></div2>
+<div2 type="Poem" n="20" met="Sapphic Strophe">
+<lg><p>Vile potabis modicis Sabinum</p>
+<p>cantharis, Graeca quod ego ipse testa</p>
+<p>conditum levi, datus in theatro</p>
+<p>cum tibi plausus,</p></lg>
+<lg><p>clare Maecenas eques, ut paterni</p>
+<p>fluminis ripae simul et iocosa</p>
+<p>redderet laudes tibi Vaticani</p>
+<p>montis imago.</p></lg>
+<lg><p>Caecubum et prelo domitam Caleno</p>
+<p>tu bibes uvam: mea nec Falernae</p>
+<p>temperant vites neque Formiani</p>
+<p>pocula colles.</p></lg></div2>
+<div2 type="Poem" n="21" met="Fourth Asclepiadean">
+<lg><p>Dianam tenerae dicite virgines,</p>
+<p>intonsum pueri dicite Cynthium</p>
+<p>Latonamque supremo</p>
+<p>dilectam penitus Iovi.</p></lg>
+<lg><p>vos laetam fluviis et nemorum coma</p>
+<p>quaecumque aut gelido prominet Algido</p>
+<p>nigris aut Erymanthi</p>
+<p>silvis aut viridis Cragi;</p></lg>
+<lg><p>vos Tempe totidem tollite laudibus</p>
+<p>natalemque, mares, Delon Apollinis</p>
+<p>insignemque pharetra</p>
+<p>fraternaque umerum lyra.</p></lg>
+<lg><p>hic bellum lacrimosum, hic miseram famem</p>
+<p>pestemque a populo et principe Caesare in</p>
+<p>Persas atque Britannos</p>
+<p>vestra motus aget prece.</p></lg></div2>
+<div2 type="Poem" n="22" met="Sapphic Strophe">
+<lg><p>Integer vitae scelerisque purus</p>
+<p>non eget Mauris iaculis neque arcu</p>
+<p>nec venenatis gravida sagittis,</p>
+<p>Fusce, pharetra,</p></lg>
+<lg><p>sive per Syrtis iter aestuosas</p>
+<p>sive facturus per inhospitalem</p>
+<p>Caucasum vel quae loca fabulosus</p>
+<p>lambit Hydaspes.</p></lg>
+<lg><p>namque me silva lupus in Sabina,</p>
+<p>dum meam canto Lalagen et ultra</p>
+<p>terminum curis vagor expeditis,</p>
+<p>fugit inermem;</p></lg>
+<lg><p>quale portentum neque militaris</p>
+<p>Daunias latis alit aesculetis</p>
+<p>nec Iubae tellus generat, leonum</p>
+<p>arida nutrix.</p></lg>
+<lg><p>pone me pigris ubi nulla campis</p>
+<p>arbor aestiva recreatur aura,</p>
+<p>quod latus mundi nebulae malusque</p>
+<p>Iuppiter urget;</p></lg>
+<lg><p>pone sub curru nimium propinqui</p>
+<p>solis in terra domibus negata:</p>
+<p>dulce ridentem Lalagen amabo,</p>
+<p>dulce loquentem.</p></lg></div2>
+<div2 type="Poem" n="23" met="Fourth Asclepiadean">
+<lg><p>Vitas hinnuleo me similis, Chloe,</p>
+<p>quaerenti pavidam montibus aviis</p>
+<p>matrem non sine vano</p>
+<p>aurarum et siluae metu.</p></lg>
+<lg><p>nam seu mobilibus veris inhorruit</p>
+<p>adventus foliis seu virides rubum</p>
+<p>dimovere lacertae,</p>
+<p>et corde et genibus tremit.</p></lg>
+<lg><p>atqui non ego te tigris ut aspera</p>
+<p>Gaetulusve leo frangere persequor:</p>
+<p>tandem desine matrem</p>
+<p>tempestiva sequi viro.</p></lg></div2>
+<div2 type="Poem" n="24" met="Third Asclepiadean">
+<lg><p>Quis desiderio sit pudor aut modus</p>
+<p>tam cari capitis? praecipe lugubris</p>
+<p>cantus, Melpomene, cui liquidam pater</p>
+<p>vocem cum cithara dedit.</p></lg>
+<lg><p>ergo Quintilium perpetuus sopor</p>
+<p>urget? cui Pudor et Iustitiae soror</p>
+<p>incorrupta Fides nudaque Veritas</p>
+<p>quando ullum inveniet parem?</p></lg>
+<lg><p>multis ille bonis flebilis occidit,</p>
+<p>nulli flebilior quam tibi, Vergili.</p>
+<p>tu, frustra pius, heu non ita creditum</p>
+<p>poscis Quintilium deos.</p></lg>
+<lg><p>quid? si Threicio blandius Orpheo</p>
+<p>auditam moderere arboribus fidem,</p>
+<p>num vanae redeat sanguis imagini,</p>
+<p>quam virga semel horrida</p></lg>
+<lg><p>non lenis precibus fata recludere</p>
+<p>nigro conpulerit Mercurius gregi?</p>
+<p>durum: sed levius fit patientia</p>
+<p>quidquid corrigere est nefas.</p></lg></div2>
+<div2 type="Poem" n="25" met="Sapphic Strophe">
+<lg><p>Parcius iunctas quatiunt fenestras</p>
+<p>iactibus crebris iuvenes protervi</p>
+<p>nec tibi somnos adimunt amatque</p>
+<p>ianua limen,</p></lg>
+<lg><p>quae prius multum facilis movebat</p>
+<p>cardines. audis minus et minus iam:</p>
+<p>"me tuo longas pereunte noctes,</p>
+<p>Lydia, dormis?"</p></lg>
+<lg><p>invicem moechos anus arrogantis</p>
+<p>flebis in solo levis angiportu</p>
+<p>Thracio bacchante magis sub inter-</p>
+<p>lunia vento,</p></lg>
+<lg><p>cum tibi flagrans amor et libido,</p>
+<p>quae solet matres furiare equorum,</p>
+<p>saeviet circa iecur ulcerosum</p>
+<p>non sine questu,</p></lg>
+<lg><p>laeta quod pubes hedera virenti</p>
+<p>gaudeat pulla magis atque myrto,</p>
+<p>aridas frondes hiemis sodali</p>
+<p>dedicet Euro.</p></lg></div2>
+<div2 type="Poem" n="26" met="Alcaic Strophe">
+<lg><p>Musis amicus tristitiam et metus</p>
+<p>tradam protervis in mare Creticum</p>
+<p>portare ventis, quis sub Arcto</p>
+<p>rex gelidae metuatur orae,</p></lg>
+<lg><p>quid Tiridaten terreat, unice</p>
+<p>securus. o quae fontibus integris</p>
+<p>gaudes, apricos necte flores,</p>
+<p>necte meo Lamiae coronam,</p></lg>
+<lg><p>Piplei dulcis. nil sine te mei</p>
+<p>prosunt honores: hunc fidibus novis,</p>
+<p>hunc Lesbio sacrare plectro</p>
+<p>teque tuasque decet sorores.</p></lg></div2>
+<div2 type="Poem" n="27" met="Alcaic Strophe">
+<lg><p>Natis in usum laetitiae scyphis</p>
+<p>pugnare Thracum est: tollite barbarum</p>
+<p>morem verecundumque Bacchum</p>
+<p>sanguineis prohibete rixis.</p></lg>
+<lg><p>vino et lucernis Medus acinaces</p>
+<p>immane quantum discrepat: inpium</p>
+<p>lenite clamorem sodales</p>
+<p>et cubito remanete presso.</p></lg>
+<lg><p>voltis severi me quoque sumere</p>
+<p>partem Falerni? dicat Opuntiae</p>
+<p>frater Megillae, quo beatus</p>
+<p>volnere, qua pereat sagitta.</p></lg>
+<lg><p>cessat voluntas? non alia bibam</p>
+<p>mercede. quae te cumque domat Venus,</p>
+<p>non erubescendis adurit</p>
+<p>ignibus ingenuoque semper</p></lg>
+<lg><p>amore peccas. quidquid habes, age,</p>
+<p>depone tutis auribus. a miser,</p>
+<p>quanta laborabas Charybdi,</p>
+<p>digne puer meliore flamma.</p></lg>
+<lg><p>quae saga, quis te solvere Thessalis</p>
+<p>magus venenis, quis poterit deus?</p>
+<p>vix inligatum te triformi</p>
+<p>Pegasus expediet Chimaera.</p></lg></div2>
+<div2 type="Poem" n="28" met="Alcaic Strophe">
+<p>Te maris et terrae numeroque carentis harenae</p>
+<p>mensorem cohibent, Archyta,</p>
+<p>pulveris exigui prope litus parva Matinum</p>
+<p>munera nec quicquam tibi prodest</p>
+<p>aerias temptasse domos animoque rotundum</p>
+<p>percurrisse polum morituro.</p>
+<p>occidit et Pelopis genitor, conviva deorum,</p>
+<p>Tithonusque remotus in auras</p>
+<p>et Iovis arcanis Minos admissus habentque</p>
+<p>Tartara Panthoiden iterum Orco</p>
+<p>demissum, quamvis clipeo Troiana refixo</p>
+<p>tempora testatus nihil ultra</p>
+<p>nervos atque cutem morti concesserat atrae,</p>
+<p>iudice te non sordidus auctor</p>
+<p>naturae verique. sed omnis una manet nox</p>
+<p>et calcanda semel via leti.</p>
+<p>dant alios Furiae torvo spectacula Marti,</p>
+<p>exitio est avidum mare nautis;</p>
+<p>mixta senum ac iuvenum densentur funera, nullum</p>
+<p>saeva caput Proserpina fugit:</p>
+<p>me quoque devexi rapidus comes Orionis</p>
+<p>Illyricis Notus obruit undis.</p>
+<p>at tu, nauta, vagae ne parce malignus harenae</p>
+<p>ossibus et capiti inhumato</p>
+<p>particulam dare: sic quodcumque minabitur Eurus</p>
+<p>fluctibus Hesperiis Venusinae</p>
+<p>plectantur silvae te sospite multaque merces</p>
+<p>unde potest tibi defluat aequo</p>
+<p>ab Iove Neptunoque sacri custode Tarenti.</p>
+<p>neglegis inmeritis nocituram</p>
+<p>postmodo te natis fraudem conmittere? fors et</p>
+<p>debita iura vicesque superbae</p>
+<p>te maneant ipsum: precibus non linquar inultis</p>
+<p>teque piacula nulla resolvent.</p>
+<p>quamquam festinas, non est mora longa; licebit</p>
+<p>iniecto ter pulvere curras.</p></div2>
+<div2 type="Poem" n="29" met="Alcaic Strophe">
+<lg><p>Icci, beatis nunc Arabum invides</p>
+<p>gazis et acrem militiam paras</p>
+<p>non ante devictis Sabaeae</p>
+<p>regibus horribilique Medo</p></lg>
+<lg><p>nectis catenas? quae tibi virginum</p>
+<p>sponso necato barbara serviet,</p>
+<p>puer quis ex aula capillis</p>
+<p>ad cyathum statuetur unctis</p></lg>
+<lg><p>doctus sagittas tendere Sericas</p>
+<p>arcu paterno? quis neget arduis</p>
+<p>pronos relabi posse rivos</p>
+<p>montibus et Tiberim reverti,</p></lg>
+<lg><p>cum tu coemptos undique nobilis</p>
+<p>libros Panaeti Socraticam et domum</p>
+<p>mutare loricis Hiberis,</p>
+<p>pollicitus meliora, tendis?</p></lg></div2>
+<div2 type="Poem" n="30" met="Sapphic Strophe">
+<lg><p>O Venus regina Cnidi Paphique,</p>
+<p>sperne dilectam Cypron et vocantis</p>
+<p>ture te multo Glycerae decoram</p>
+<p>transfer in aedem.</p></lg>
+<lg><p>fervidus tecum puer et solutis</p>
+<p>Gratiae zonis properentque Nymphae</p>
+<p>et parum comis sine te Iuventas</p>
+<p>Mercuriusque.</p></lg></div2>
+<div2 type="Poem" n="31" met="Alcaic Strophe">
+<lg><p>Quid dedicatum poscit Apollinem</p>
+<p>vates? quid orat de patera novum</p>
+<p>fundens liquorem? non opimae</p>
+<p>Sardiniae segetes feracis,</p></lg>
+<lg><p>non aestuosae grata Calabriae</p>
+<p>armenta, non aurum aut ebur Indicum,</p>
+<p>non rura, quae Liris quieta</p>
+<p>mordet aqua taciturnus amnis.</p></lg>
+<lg><p>premant Calenam falce quibus dedit</p>
+<p>fortuna vitem, dives ut aureis</p>
+<p>mercator exsiccet culillis</p>
+<p>vina Syra reparata merce,</p></lg>
+<lg><p>dis carus ipsis, quippe ter et quater</p>
+<p>anno revisens aequor Atlanticum</p>
+<p>inpune. me pascunt olivae,</p>
+<p>me cichorea levesque malvae.</p></lg>
+<lg><p>frui paratis et valido mihi,</p>
+<p>Latoe, dones et precor integra</p>
+<p>cum mente nec turpem senectam</p>
+<p>degere nec cithara carentem.</p></lg></div2>
+<div2 type="Poem" n="32" met="Sapphic Strophe">
+<lg><p>Poscimur. si quid vacui sub umbra</p>
+<p>lusimus tecum, quod et hunc in annum</p>
+<p>vivat et pluris, age dic Latinum,</p>
+<p>barbite, carmen,</p></lg>
+<lg><p>Lesbio primum modulate civi,</p>
+<p>qui ferox bello tamen, inter arma</p>
+<p>sive iactatam religarat udo</p>
+<p>litore navim,</p></lg>
+<lg><p>Liberum et Musas Veneremque et illi</p>
+<p>semper haerentem puerum canebat</p>
+<p>et Lycum nigris oculis nigroque</p>
+<p>crine decorum.</p></lg>
+<lg><p>o decus Phoebi et dapibus supremi</p>
+<p>grata testudo Iovis, o laborum</p>
+<p>dulce lenimen, mihi cumque salve</p>
+<p>rite vocanti!</p></lg></div2>
+<div2 type="Poem" n="33" met="Third Asclepiadean">
+<lg><p>Albi, ne doleas plus nimio memor</p>
+<p>inmitis Glycerae neu miserabilis</p>
+<p>decantes elegos, cur tibi iunior</p>
+<p>laesa praeniteat fide.</p></lg>
+<lg><p>insignem tenui fronte Lycorida</p>
+<p>Cyri torret amor, Cyrus in asperam</p>
+<p>declinat Pholoen: sed prius Apulis</p>
+<p>iungentur capreae lupis</p></lg>
+<lg><p>quam turpi Pholoe peccet adultero.</p>
+<p>sic visum Veneri, cui placet inpares</p>
+<p>formas atque animos sub iuga aenea</p>
+<p>saevo mittere cum ioco.</p></lg>
+<lg><p>ipsum me melior cum peteret Venus,</p>
+<p>grata detinuit compede Myrtale</p>
+<p>libertina, fretis acrior Hadriae</p>
+<p>curvantis Calabros sinus.</p></lg></div2>
+<div2 type="Poem" n="34" met="Alcaic Strophe">
+<lg><p>Parcus deorum cultor et infrequens,</p>
+<p>insanientis dum sapientiae</p>
+<p>consultus erro, nunc retrorsum</p>
+<p>vela dare atque iterare cursus</p></lg>
+<lg><p>cogor relictos: namque Diespiter,</p>
+<p>igni corusco nubila dividens</p>
+<p>plerumque, per purum tonantis</p>
+<p>egit equos volucremque currum,</p></lg>
+<lg><p>quo bruta tellus et vaga flumina,</p>
+<p>quo Styx et invisi horrida Taenari</p>
+<p>sedes Atlanteusque finis</p>
+<p>concutitur. valet ima summis</p></lg>
+<lg><p>mutare et insignem attenuat deus</p>
+<p>obscura promens; hinc apicem rapax:</p>
+<p>Fortuna cum stridore acuto</p>
+<p>sustulit, hic posuisse gaudet.</p></lg></div2>
+<div2 type="Poem" n="35" met="Alcaic Strophe">
+<lg><p>O diva, gratum quae regis Antium,</p>
+<p>praesens vel imo tollere de gradu</p>
+<p>mortale corpus vel superbos</p>
+<p>vertere funeribus triumphos:</p></lg>
+<lg><p>te pauper ambit sollicita prece</p>
+<p>ruris colonus, te dominam aequoris</p>
+<p>quicumque Bithyna lacessit</p>
+<p>Carpathium pelagus carina;</p></lg>
+<lg><p>te Dacus asper, te profugi Scythae</p>
+<p>urbesque gentesque et Latium ferox</p>
+<p>regumque matres barbarorum et</p>
+<p>purpurei metuunt tyranni,</p></lg>
+<lg><p>iniurioso ne pede proruas</p>
+<p>stantem columnam neu populus frequens</p>
+<p>ad arma, cessantis ad arma</p>
+<p>concitet imperiumque frangat;</p></lg>
+<lg><p>te semper anteit saeva Necessitas,</p>
+<p>clavos trabalis et cuneos manu</p>
+<p>gestans aena nec severus</p>
+<p>uncus abest liquidumque plumbum;</p></lg>
+<lg><p>te Spes et albo rara Fides colit</p>
+<p>velata panno nec comitem abnegat,</p>
+<p>utcumque mutata potentis</p>
+<p>veste domos inimica linquis,</p></lg>
+<lg><p>at volgus infidum et meretrix retro</p>
+<p>periura cedit, diffugiunt cadis</p>
+<p>cum faece siccatis amici,</p>
+<p>ferre iugum pariter dolosi:</p></lg>
+<lg><p>serves iturum Caesarem in ultimos</p>
+<p>orbis Britannos et iuvenum recens</p>
+<p>examen Eois timendum</p>
+<p>partibus Oceanoque rubro.</p></lg>
+<lg><p>heu heu, cicatricum et sceleris pudet</p>
+<p>fratrumque. quid nos dura refugimus</p>
+<p>aetas? quid intactum nefasti</p>
+<p>liquimus? unde manum iuventus</p></lg>
+<lg><p>metu deorum continuit? quibus</p>
+<p>pepercit aris? o utinam nova</p>
+<p>incude diffingas retusum in</p>
+<p>Massagetas Arabasque ferrum.</p></lg></div2>
+<div2 type="Poem" n="36" met="Second Asclepiadean">
+<p>Et ture et fidibus iuvat</p>
+<p>placare et vituli sanguine debito</p>
+<p>custodes Numidae deos,</p>
+<p>qui nunc Hesperia sospes ab ultima</p>
+<p>caris multa sodalibus,</p>
+<p>nulli plura tamen dividet oscula</p>
+<p>quam dulci Lamiae, memor</p>
+<p>actae non alio rege puertiae</p>
+<p>mutataeque simul togae.</p>
+<p>Cressa ne careat pulcra dies nota</p>
+<p>neu promptae modus amphorae</p>
+<p>neu morem in Salium sit requies pedum</p>
+<p>neu multi Damalis meri</p>
+<p>Bassum Threicia vincat amystide</p>
+<p>neu desint epulis rosae</p>
+<p>neu vivax apium neu breve lilium.</p>
+<p>omnes in Damalin putris</p>
+<p>deponent oculos nec Damalis novo</p>
+<p>divelletur adultero</p>
+<p>lascivis hederis ambitiosior.</p></div2>
+<div2 type="Poem" n="37" met="Alcaic Strophe">
+<lg><p>Nunc est bibendum, nunc pede libero</p>
+<p>pulsanda tellus; nunc Saliaribus</p>
+<p>ornare pulvinar deorum</p>
+<p>tempus erat dapibus, sodales.</p></lg>
+<lg><p>antehac nefas depromere Caecubum</p>
+<p>cellis avitis, dum Capitolio</p>
+<p>regina dementis ruinas,</p>
+<p>funus et imperio parabat</p></lg>
+<lg><p>contaminato cum grege turpium</p>
+<p>morbo virorum quidlibet inpotens</p>
+<p>sperare fortunaque dulci</p>
+<p>ebria. sed minuit furorem</p></lg>
+<lg><p>vix una sospes navis ab ignibus</p>
+<p>mentemque lymphatam Mareotico</p>
+<p>redegit in veros timores</p>
+<p>Caesar ab Italia volantem</p></lg>
+<lg><p>remis adurgens, accipiter velut</p>
+<p>mollis columbas aut leporem citus</p>
+<p>venator in campis nivalis</p>
+<p>Haemoniae, daret ut catenis</p></lg>
+<lg><p>fatale monstrum. quae generosius</p>
+<p>perire quaerens nec muliebriter</p>
+<p>expavit ensem nec latentis</p>
+<p>classe cita reparavit oras.</p></lg>
+<lg><p>ausa et iacentem visere regiam</p>
+<p>voltu sereno, fortis et asperas</p>
+<p>tractare serpentes, ut atrum</p>
+<p>corpore conbiberet venenum,</p></lg>
+<lg><p>deliberata morte ferocior;</p>
+<p>saevis Liburnis scilicet invidens</p>
+<p>privata deduci superbo,</p>
+<p>non humilis mulier, triumpho.</p></lg></div2>
+<div2 type="Poem" n="38" met="Sapphic Strophe">
+<lg><p>Persicos odi, puer, adparatus,</p>
+<p>displicent nexae philyra coronae,</p>
+<p>mitte sectari, rosa quo locorum</p>
+<p>sera moretur.</p></lg>
+<lg><p>simplici myrto nihil adlabores</p>
+<p>sedulus curo: neque te ministrum</p>
+<p>dedecet myrtus neque me sub arta</p>
+<p>vite bibentem.</p></lg></div2></div1>
+<div1 type="Book" n="2">
+<div2 type="Poem" n="1" met="Alcaic Strophe">
+<lg><p>Motum ex Metello consule civicum</p>
+<p>bellique causas et vitia et modos</p>
+<p>ludumque Fortunae gravisque</p>
+<p>principum amicitias et arma</p></lg>
+<lg><p>nondum expiatis uncta cruoribus,</p>
+<p>periculosae plenum opus aleae,</p>
+<p>tractas et incedis per ignis</p>
+<p>suppositos cineri doloso.</p></lg>
+<lg><p>paulum severae musa tragoediae</p>
+<p>desit theatris: mox ubi publicas</p>
+<p>res ordinaris, grande munus</p>
+<p>Cecropio repetes cothurno,</p></lg>
+<lg><p>insigne maestis praesidium reis</p>
+<p>et consulenti, Pollio, curiae,</p>
+<p>cui laurus aeternos honores</p>
+<p>Delmatico peperit triumpho.</p></lg>
+<lg><p>iam nunc minaci murmure cornuum</p>
+<p>perstringis auris, iam litui strepunt,</p>
+<p>iam fulgor armorum fugacis</p>
+<p>terret equos equitumque voltus.</p></lg>
+<lg><p>audire magnos iam videor duces,</p>
+<p>non indecoro pulvere sordidos</p>
+<p>et cuncta terrarum subacta</p>
+<p>praeter atrocem animum Catonis.</p></lg>
+<lg><p>Iuno et deorum quisquis amicior</p>
+<p>Afris inulta cesserat inpotens</p>
+<p>tellure victorum nepotes</p>
+<p>rettulit inferias Iugurthae.</p></lg>
+<lg><p>quis non Latino sanguine pinguior</p>
+<p>campus sepulcris inpia proelia</p>
+<p>testatur auditumque Medis</p>
+<p>Hesperiae sonitum ruinae?</p></lg>
+<lg><p>qui gurges aut quae flumina lugubris</p>
+<p>ignara belli? quod mare Dauniae</p>
+<p>non decoloravere caedes?</p>
+<p>quae caret ora cruore nostro?</p></lg>
+<lg><p>sed ne relictis, Musa procax, iocis</p>
+<p>Ceae retractes munera neniae,</p>
+<p>mecum Dionaeo sub antro</p>
+<p>quaere modos leviore plectro.</p></lg></div2>
+<div2 type="Poem" n="2" met="Sapphic Strophe">
+<lg><p>Nullus argento color est avaris</p>
+<p>abdito terris, inimice lamnae</p>
+<p>Crispe Sallusti, nisi temperato</p>
+<p>splendeat usu.</p></lg>
+<lg><p>vivet extento Proculeius aevo,</p>
+<p>notus in fratres animi paterni:</p>
+<p>illum aget penna metuente solvi</p>
+<p>Fama superstes.</p></lg>
+<lg><p>latius regnes avidum domando</p>
+<p>spiritum quam si Libyam remotis</p>
+<p>Gadibus iungas et uterque Poenus</p>
+<p>serviat uni.</p></lg>
+<lg><p>crescit indulgens sibi dirus hydrops</p>
+<p>nec sitim pellit, nisi causa morbi</p>
+<p>fugerit venis et aquosus albo</p>
+<p>corpore languor.</p></lg>
+<lg><p>redditum Cyri solio Phraaten</p>
+<p>dissidens plebi numero beatorum</p>
+<p>eximit Virtus populumque falsis</p>
+<p>dedocet uti</p></lg>
+<lg><p>vocibus, regnum et diadema tutum</p>
+<p>deferens uni propriamque laurum</p>
+<p>quisquis ingentis oculo inretorto</p>
+<p>spectat acervos.</p></lg></div2>
+<div2 type="Poem" n="3" met="Alcaic Strophe">
+<lg><p>Aequam memento rebus in arduis</p>
+<p>servare mentem, non secus in bonis</p>
+<p>ab insolenti temperatam</p>
+<p>laetitia, moriture Delli,</p></lg>
+<lg><p>seu maestus omni tempore vixeris</p>
+<p>seu te in remoto gramine per dies</p>
+<p>festos reclinatum bearis</p>
+<p>interiore nota Falerni.</p></lg>
+<lg><p>quo pinus ingens albaque populus</p>
+<p>umbram hospitalem consociare amant</p>
+<p>ramis? quid obliquo laborat</p>
+<p>lympha fugax trepidare rivo?</p></lg>
+<lg><p>huc vina et unguenta et nimium brevis</p>
+<p>flores amoenae ferre iube rosae,</p>
+<p>dum res et aetas et sororum</p>
+<p>fila trium patiuntur atra.</p></lg>
+<lg><p>cedes coemptis saltibus et domo</p>
+<p>villaque, flavos quam Tiberis lavit,</p>
+<p>cedes et exstructis in altum</p>
+<p>divitiis potietur heres.</p></lg>
+<lg><p>divesne prisco natus ab Inacho</p>
+<p>nil interest an pauper et infima</p>
+<p>de gente sub divo moreris: </p>
+<p>victima nil miserantis Orci.</p></lg>
+<lg><p>omnes eodem cogimur, omnium</p>
+<p>versatur urna serius ocius</p>
+<p>sors exitura et nos in aeternum</p>
+<p>exilium inpositura cumbae.</p></lg></div2>
+<div2 type="Poem" n="4" met="Sapphic Strophe">
+<lg><p>Ne sit ancillae tibi amor pudori,</p>
+<p>Xanthia Phoceu: prius insolentem</p>
+<p>serva Briseis niveo colore</p>
+<p>movit Achillem,</p></lg>
+<lg><p>movit Aiacem Telamone natum</p>
+<p>forma captivae dominum Tecmessae,</p>
+<p>arsit Atrides medio in triumpho</p>
+<p>virgine rapta,</p></lg>
+<lg><p>barbarae postquam cecidere turmae</p>
+<p>Thessalo victore et ademptus Hector</p>
+<p>tradidit fessis leviora tolli</p>
+<p>Pergama Grais.</p></lg>
+<lg><p>nescias an te generum beati</p>
+<p>Phyllidis flavae decorent parentes:</p>
+<p>regium certe genus, et penatis</p>
+<p>maeret iniquos.</p></lg>
+<lg><p>crede non illam tibi de scelesta</p>
+<p>plebe dilectam neque sic fidelem,</p>
+<p>sic lucro aversam potuisse nasci</p>
+<p>matre pudenda.</p></lg>
+<lg><p>bracchia et voltum teretesque suras</p>
+<p>integer laudo: fuge suspicari,</p>
+<p>cuius octavum trepidavit aetas</p>
+<p>claudere lustrum.</p></lg></div2>
+<div2 type="Poem" n="5" met="Alcaic Strophe">
+<lg><p>Nondum subacta ferre iugum valet</p>
+<p>cervice, nondum munia conparis</p>
+<p>aequare nec tauri ruentis</p>
+<p>in venerem tolerare pondus;</p></lg>
+<lg><p>circa virentis est animus tuae</p>
+<p>campos iuvencae nunc fluviis gravem</p>
+<p>solantis aestum, nunc in udo</p>
+<p>ludere cum vitulis salicto</p></lg>
+<lg><p>praegestientis. tolle cupidinem</p>
+<p>inmitis uvae: iam tibi lividos</p>
+<p>distinguet autumnus racemos</p>
+<p>purpureo varius colore.</p></lg>
+<lg><p>iam te sequetur (currit enim ferox</p>
+<p>aetas et illi quos tibi dempserit</p>
+<p>adponet annos), iam proterva</p>
+<p>fronte petet Lalage maritum</p></lg>
+<lg><p>dilecta, quantum non Pholoe fugax,</p>
+<p>non Chloris albo sic umero nitens</p>
+<p>ut pura nocturno renidet</p>
+<p>luna mari, Cnidiusve Gyges,</p></lg>
+<lg><p>quem si puellarum insereres choro,</p>
+<p>mire sagacis falleret hospites</p>
+<p>discrimen obscurum solutis</p>
+<p>crinibus ambiguoque voltu.</p></lg></div2>
+<div2 type="Poem" n="6" met="Sapphic strophe">
+<lg><p>Septimi, Gadis aditure mecum et</p>
+<p>Cantabrum indoctum iuga ferre nostra et</p>
+<p>barbaras Syrtis, ubi Maura semper</p>
+<p>aestuat unda:</p></lg>
+<lg><p>Tibur Argeo positum colono</p>
+<p>sit meae sedes utinam senectae,</p>
+<p>sit modus lasso maris et viarum</p>
+<p>militiaeque.</p></lg>
+<lg><p>unde si Parcae prohibent iniquae,</p>
+<p>dulce pellitis ovibus Galaesi</p>
+<p>flumen et regnata petam Laconi</p>
+<p>rura Phalantho</p></lg>
+<lg><p>ille terrarum mihi praeter omnis</p>
+<p>angulus ridet, ubi non Hymetto</p>
+<p>mella decedunt viridique certat</p>
+<p>baca Venafro,</p></lg>
+<lg><p>ver ubi longum tepidasque praebet</p>
+<p>Iuppiter brumas et amicus Aulon</p>
+<p>fertili Baccho minimum Falernis</p>
+<p>invidet uvis;</p></lg>
+<lg><p>ille te mecum locus et beatae</p>
+<p>postulant arces: ibi tu calentem</p>
+<p>debita sparges lacrima favillam</p>
+<p>vatis amici.</p></lg></div2>
+<div2 type="Poem" n="7" met="Alcaic Strophe">
+<lg><p>O saepe mecum tempus in ultimum</p>
+<p>deducte Bruto militiae duce,</p>
+<p>quis te redonavit Quiritem</p>
+<p>dis patriis Italoque caelo,</p></lg>
+<lg><p>Pompei, meorum prime sodalium,</p>
+<p>cum quo morantem saepe diem mero</p>
+<p>fregi, coronatus nitentis</p>
+<p>malobathro Syrio capillos?</p></lg>
+<lg><p>tecum Philippos et celerem fugam</p>
+<p>sensi relicta non bene parmula,</p>
+<p>cum fracta virtus, et minaces</p>
+<p>turpe solum tetigere mento;</p></lg>
+<lg><p>sed me per hostis Mercurius celer</p>
+<p>denso paventem sustulit aere,</p>
+<p>te rursus in bellum resorbens</p>
+<p>unda fretis tulit aestuosis.</p></lg>
+<lg><p>ergo obligatam redde Iovi dapem</p>
+<p>longaque fessum militia latus</p>
+<p>depone sub lauru mea nec</p>
+<p>parce cadis tibi destinatis.</p></lg>
+<lg><p>oblivioso levia Massico</p>
+<p>ciboria exple, funde capacibus</p>
+<p>unguenta de conchis. quis udo</p>
+<p>deproperare apio coronas</p></lg>
+<lg><p>curatve myrto? quem Venus arbitrum</p>
+<p>dicet bibendi? non ego sanius</p>
+<p>bacchabor Edonis: recepto</p>
+<p>dulce mihi furere est amico.</p></lg></div2>
+<div2 type="Poem" n="8" met="Sapphic Strophe">
+<lg><p>Vlla si iuris tibi peierati</p>
+<p>poena, Barine, nocuisset umquam,</p>
+<p>dente si nigro fieres vel uno</p>
+<p>turpior ungui,</p></lg>
+<lg><p>crederem: sed tu simul obligasti</p>
+<p>perfidum votis caput, enitescis</p>
+<p>pulchrior multo iuvenumque prodis</p>
+<p>publica cura.</p></lg>
+<lg><p>expedit matris cineres opertos</p>
+<p>fallere et toto taciturna noctis</p>
+<p>signa cum caelo gelidaque divos</p>
+<p>morte carentis</p></lg>
+<lg><p>ridet hoc, inquam, Venus ipsa, rident</p>
+<p>simplices Nymphae, ferus et Cupido</p>
+<p>semper ardentis acuens sagittas</p>
+<p>cote cruenta.</p></lg>
+<lg><p>adde quod pubes tibi crescit omnis,</p>
+<p>servitus crescit nova nec priores</p>
+<p>inpiae tectum dominae relinquunt,</p>
+<p>saepe minati.</p></lg>
+<lg><p>te suis matres metuunt iuvencis,</p>
+<p>te senes parci miseraeque nuper</p>
+<p>virgines nuptae, tua ne retardet</p>
+<p>aura maritos.</p></lg></div2>
+<div2 type="Poem" n="9" met="Alcaic Strophe">
+<lg><p>Non semper imbres nubibus hispidos</p>
+<p>manant in agros aut mare Caspium</p>
+<p>vexant inaequales procellae</p>
+<p>usque nec Armeniis in oris,</p></lg>
+<lg><p>amice Valgi, stat glacies iners</p>
+<p>mensis per omnis aut Aquilonibus</p>
+<p>querceta Gargani laborant</p>
+<p>et foliis viduantur orni:</p></lg>
+<lg><p>tu semper urges flebilibus modis</p>
+<p>Mysten ademptum nec tibi Vespero</p>
+<p>surgente decedunt amores</p>
+<p>nec rapidum fugiente solem.</p></lg>
+<lg><p>at non ter aevo functus amabilem</p>
+<p>ploravit omnis Antilochum senex</p>
+<p>annos nec inpubem parentes</p>
+<p>Troilon aut Phrygiae sorores</p></lg>
+<lg><p>flevere semper. desine mollium</p>
+<p>tandem querellarum et potius nova</p>
+<p>cantemus Augusti tropaea</p>
+<p>Caesaris et rigidum Niphaten</p></lg>
+<lg><p>Medumque flumen gentibus additum</p>
+<p>victis minores volvere vertices</p>
+<p>intraque praescriptum Gelonos</p>
+<p>exiguis equitare campis.</p></lg></div2>
+<div2 type="Poem" n="10" met="Sapphic Strophe">
+<lg><p>Rectius vives, Licini, neque altum</p>
+<p>semper urgendo neque, dum procellas</p>
+<p>cautus horrescis, nimium premendo</p>
+<p>litus iniquum.</p></lg>
+<lg><p>auream quisquis mediocritatem</p>
+<p>diligit, tutus caret obsoleti</p>
+<p>sordibus tecti, caret invidenda</p>
+<p>sobrius aula.</p></lg>
+<lg><p>saepius ventis agitatur ingens</p>
+<p>pinus et celsae graviore casu</p>
+<p>decidunt turres feriuntque summos</p>
+<p>fulgura montis</p></lg>
+<lg><p>sperat infestis, metuit secundis</p>
+<p>alteram sortem bene praeparatum</p>
+<p>pectus. informis hiemes reducit</p>
+<p>Iuppiter, idem</p></lg>
+<lg><p>submovet. non, si male nunc, et olim</p>
+<p>sic erit: quondam cithara tacentem</p>
+<p>suscitat Musam neque semper arcum</p>
+<p>tendit Apollo.</p></lg>
+<lg><p>rebus angustis animosus atque</p>
+<p>fortis adpare: sapienter idem</p>
+<p>contrahes vento nimium secundo</p>
+<p>turgida vela.</p></lg></div2>
+<div2 type="Poem" n="11" met="Alcaic Strophe">
+<lg><p>Quid bellicosus Cantaber et Scythes,</p>
+<p>Hirpine Quinti, cogitet Hadria</p>
+<p>divisus obiecto, remittas</p>
+<p>quaerere nec trepides in usum</p></lg>
+<lg><p>poscentis aevi pauca: fugit retro</p>
+<p>levis iuventas et decor arida</p>
+<p>pellente lascivos amores</p>
+<p>canitie facilemque somnum.</p></lg>
+<lg><p>non semper idem floribus est honor</p>
+<p>vernis neque uno luna rubens nitet</p>
+<p>voltu: quid aeternis minorem</p>
+<p>consiliis animum fatigas?</p></lg>
+<lg><p>cur non sub alta vel platano vel hac</p>
+<p>pinu iacentes sic temere et rosa</p>
+<p>canos odorati capillos,</p>
+<p>dum licet, Assyriaque nardo</p></lg>
+<lg><p>potamus uncti? dissipat Euhius</p>
+<p>curas edacis. quis puer ocius</p>
+<p>restinguet ardentis Falerni</p>
+<p>pocula praetereunte lympha?</p></lg>
+<lg><p>quis devium scortum eliciet domo</p>
+<p>Lyden? eburna, dic age, cum lyra</p>
+<p>maturet, in comptum Lacaenae</p>
+<p>more comam religata nodum.</p></lg></div2>
+<div2 type="Poem" n="12" met="Third Asclepiadean">
+<lg><p>Nolis longa ferae bella Numantiae</p>
+<p>nec durum Hannibalem nec Siculum mare</p>
+<p>Poeno purpureum sanguine mollibus</p>
+<p>aptari citharae modis</p></lg>
+<lg><p>nec saevos Lapithas et nimium mero</p>
+<p>Hylaeum domitosque Herculea manu</p>
+<p>Telluris iuvenes, unde periculum</p>
+<p>fulgens contremuit domus</p></lg>
+<lg><p>Saturni veteris: tuque pedestribus</p>
+<p>dices historiis proelia Caesaris,</p>
+<p>Maecenas, melius ductaque per vias</p>
+<p>regum colla minacium.</p></lg>
+<lg><p>me dulcis dominae Musa Licymniae</p>
+<p>cantus, me voluit dicere lucidum</p>
+<p>fulgentis oculos et bene mutuis</p>
+<p>fidum pectus amoribus;</p></lg>
+<lg><p>quam nec ferre pedem dedecuit choris</p>
+<p>nec certare ioco nec dare bracchia</p>
+<p>ludentem nitidis virginibus sacro</p>
+<p>Dianae celebris die.</p></lg>
+<lg><p>num tu quae tenuit dives Achaemenes</p>
+<p>aut pinguis Phrygiae Mygdonias opes</p>
+<p>permutare velis crine Licymniae</p>
+<p>plenas aut Arabum domos,</p></lg>
+<lg><p>cum flagrantia detorquet ad oscula</p>
+<p>cervicem aut facili saevitia negat</p>
+<p>quae poscente magis gaudeat eripi,</p>
+<p>interdum rapere occupet?</p></lg></div2>
+<div2 type="Poem" n="13" met="Alcaic Strophe">
+<lg><p>Ille et nefasto te posuit die</p>
+<p>quicumque primum, et sacrilega manu</p>
+<p>produxit, arbos, in nepotum</p>
+<p>perniciem opprobriumque pagi;</p></lg>
+<lg><p>illum et parentis crediderim sui</p>
+<p>fregisse cervicem et penetralia</p>
+<p>sparsisse nocturno cruore</p>
+<p>hospitis; ille venena Colcha</p></lg>
+<lg><p>et quidquid usquam concipitur nefas</p>
+<p>tractavit, agro qui statuit meo</p>
+<p>te, triste lignum, te, caducum</p>
+<p>in domini caput inmerentis</p></lg>
+<lg><p>quid quisque vitet, numquam homini satis</p>
+<p>cautum est in horas: navita Bosporum</p>
+<p>Poenus perhorrescit neque ultra</p>
+<p>caeca timet aliunde fata,</p></lg>
+<lg><p>miles sagittas et celerem fugam</p>
+<p>Parthi, catenas Parthus et Italum</p>
+<p>robur; sed inprovisa leti</p>
+<p>vis rapuit rapietque gentis.</p></lg>
+<lg><p>quam paene furvae regna Proserpinae</p>
+<p>et iudicantem vidimus Aeacum</p>
+<p>sedesque discriptas piorum et</p>
+<p>Aeoliis fidibus querentem</p></lg>
+<lg><p>Sappho puellis de popularibus</p>
+<p>et te sonantem plenius aureo,</p>
+<p>Alcaee, plectro dura navis,</p>
+<p>dura fugae mala, dura belli.</p></lg>
+<lg><p>utrumque sacro digna silentio</p>
+<p>mirantur umbrae dicere, sed magis</p>
+<p>pugnas et exactos tyrannos</p>
+<p>densum umeris bibit aure volgus.</p></lg>
+<lg><p>quid mirum, ubi illis carminibus stupens</p>
+<p>demittit atras belua centiceps</p>
+<p>auris et intorti capillis</p>
+<p>Eumenidum recreantur angues?</p></lg>
+<lg><p>quin et Prometheus et Pelopis parens</p>
+<p>dulci laborem decipitur sono</p>
+<p>nec curat Orion leones</p>
+<p>aut timidos agitare lyncas</p></lg></div2>
+<div2 type="Poem" n="14" met="Alcaic Strophe">
+<lg><p>Eheu fugaces, Postume, Postume,</p>
+<p>labuntur anni nec pietas moram</p>
+<p>rugis et instanti senectae</p>
+<p>adferet indomitaeque morti,</p></lg>
+<lg><p>non, si trecenis quotquot eunt dies,</p>
+<p>amice, places inlacrimabilem</p>
+<p>Plutona tauris, qui ter amplum</p>
+<p>Geryonen Tityonque tristi</p></lg>
+<lg><p>conpescit unda, scilicet omnibus</p>
+<p>quicumque terrae munere vescimur</p>
+<p>enaviganda, sive reges</p>
+<p>sive inopes erimus coloni.</p></lg>
+<lg><p>frustra cruento Marte carebimus</p>
+<p>fractisque rauci fluctibus Hadriae,</p>
+<p>frustra per autumnos nocentem</p>
+<p>corporibus metuemus Austrum:</p></lg>
+<lg><p>visendus ater flumine languido</p>
+<p>Cocytos errans et Danai genus</p>
+<p>infame damnatusque longi</p>
+<p>Sisyphus Aeolides laboris.</p></lg>
+<lg><p>linquenda tellus et domus et placens</p>
+<p>uxor neque harum quas colis arborum</p>
+<p>te praeter invisas cupressos</p>
+<p>ulla brevem dominum sequetur.</p></lg>
+<lg><p>absumet heres Caecuba dignior</p>
+<p>servata centum clavibus et mero</p>
+<p>tinguet pavimentum superbo,</p>
+<p>pontificum potiore cenis.</p></lg></div2>
+<div2 type="Poem" n="15" met="Alcaic Strophe">
+<lg><p>Iam pauca aratro iugera regiae</p>
+<p>moles relinquent, undique latius</p>
+<p>extenta visentur Lucrino</p>
+<p>stagna lacu platanusque caelebs</p></lg>
+<lg><p>evincet ulmos; tum violaria et</p>
+<p>myrtus et omnis copia narium</p>
+<p>spargent olivetis odorem</p>
+<p>fertilibus domino priori,</p></lg>
+<lg><p>tum spissa ramis laurea fervidos</p>
+<p>excludet ictus. non ita Romuli</p>
+<p>praescriptum et intonsi Catonis</p>
+<p>auspiciis veterumque norma.</p></lg>
+<lg><p>privatus illis census erat brevis,</p>
+<p>commune magnum: nulla decempedis</p>
+<p>metata privatis opacam</p>
+<p>porticus excipiebat arcton</p></lg>
+<lg><p>nec fortuitum spernere caespitem</p>
+<p>leges sinebant, oppida publico</p>
+<p>sumptu iubentes et deorum</p>
+<p>templa novo decorare saxo.</p></lg></div2>
+<div2 type="Poem" n="16" met="Sapphic Strophe">
+<lg><p>Otium divos rogat in patenti</p>
+<p>prensus Aegaeo, simul atra nubes</p>
+<p>condidit lunam neque certa fulgent</p>
+<p>sidera nautis,</p></lg>
+<lg><p>otium bello furiosa Thrace,</p>
+<p>otium Medi pharetra decori,</p>
+<p>Grosphe, non gemmis neque purpura ve-</p>
+<p>nale nec auro.</p></lg>
+<lg><p>non enim gazae neque consularis</p>
+<p>submovet lictor miseros tumultus</p>
+<p>mentis et curas laqueata circum</p>
+<p>tecta volantis</p></lg>
+<lg><p>vivitur parvo bene cui paternum</p>
+<p>splendet in mensa tenui salinum</p>
+<p>nec levis somnos timor aut cupido</p>
+<p>sordidus aufert.</p></lg>
+<lg><p>quid brevi fortes iaculamur aevo</p>
+<p>multa? quid terras alio calentis</p>
+<p>sole mutamus? patriae quis exsul</p>
+<p>se quoque fugit?</p></lg>
+<lg><p>scandit aeratas vitiosa navis</p>
+<p>Cura nec turmas equitum relinquit</p>
+<p>ocior cervis et agente nimbos</p>
+<p>ocior Euro.</p></lg>
+<lg><p>laetus in praesens animus quod ultra est</p>
+<p>oderit curare et amara lento</p>
+<p>temperet risu: nihil est ab omni</p>
+<p>parte beatum.</p></lg>
+<lg><p>abstulit clarum cita mors Achillem,</p>
+<p>longa Tithonum minuit senectus</p>
+<p>et mihi forsan tibi quod negarit</p>
+<p>porriget hora.</p></lg>
+<lg><p>te greges centum Siculaeque circum</p>
+<p>mugiunt vaccae, tibi tollit hinnitum</p>
+<p>apta quadrigis equa, te bis Afro</p>
+<p>murice tinctae</p></lg>
+<lg><p>vestiunt lanae: mihi parva rura et</p>
+<p>spiritum Graiae tenuem Camenae</p>
+<p>Parca non mendax dedit et malignum</p>
+<p>spernere volgus.</p></lg></div2>
+<div2 type="Poem" n="17" met="Alcaic Strophe">
+<lg><p>Cur me querelis exanimas tuis?</p>
+<p>nec dis amicum est nec mihi te prius</p>
+<p>obire, Maecenas, mearum</p>
+<p>grande decus columenque rerum.</p></lg>
+<lg><p>a, te meae si partem animae rapit</p>
+<p>maturior vis, quid moror altera,</p>
+<p>nec carus aeque nec superstes</p>
+<p>integer? ille dies utramque</p></lg>
+<lg><p>ducet ruinam. non ego perfidum</p>
+<p>dixi sacramentum ibimus, ibimus,</p>
+<p>utcumque praecedes, supremum</p>
+<p>carpere iter comites parati.</p></lg>
+<lg><p>me nec Chimaerae spiritus igneae</p>
+<p>nec si resurgat centimanus Gyas</p>
+<p>divellet umquam: sic potenti</p>
+<p>Iustitiae placitumque Parcis.</p></lg>
+<lg><p>seu Libra seu me Scorpios adspicit</p>
+<p>formidolosus pars violentior</p>
+<p>natalis horae seu tyrannus</p>
+<p>Hesperiae Capricornus undae:</p></lg>
+<lg><p>utrumque nostrum incredibili modo</p>
+<p>consentit astrum; te Iovis inpio</p>
+<p>tutela Saturno refulgens</p>
+<p>eripuit volucrisque Fati</p></lg>
+<lg><p>tardavit alas, cum populus frequens</p>
+<p>laetum theatris ter crepuit sonum;</p>
+<p>me truncus inlapsus cerebro,</p>
+<p>sustulerat, nisi Faunus ictum</p></lg>
+<lg><p>dextra levasset, Mercurialium</p>
+<p>custos virorum. reddere victimas</p>
+<p>aedemque votivam memento;</p>
+<p>nos humilem feriemus agnam.</p></lg></div2>
+<div2 type="Poem" n="18" met="Trochaic strophe">
+<lg><p>Non ebur neque aureum</p>
+<p>mea renidet in domo lacunar,</p>
+<p>non trabes Hymettiae</p>
+<p>premunt columnas ultima recisas</p></lg>
+<lg><p>Africa neque Attali</p>
+<p>ignotus heres regiam occupavi</p>
+<p>nec Laconicas mihi</p>
+<p>trahunt honestae purpuras clientae.</p></lg>
+<lg><p>at fides et ingeni</p>
+<p>benigna vena est pauperemque dives</p>
+<p>me petit: nihil supra</p>
+<p>deos lacesso nec potentem amicum</p></lg>
+<lg><p>largiora flagito,</p>
+<p>satis beatus unicis Sabinis.</p>
+<p>truditur dies die</p>
+<p>novaeque pergunt interire lunae:</p></lg>
+<lg><p>tu secanda marmora</p>
+<p>locas sub ipsum funus et sepulcri</p>
+<p>inmemor struis domos</p>
+<p>marisque Bais obstrepentis urges</p></lg>
+<lg><p>submovere litora,</p>
+<p>parum locuples continente ripa;</p>
+<p>quid quod usque proximos</p>
+<p>revellis agri terminos et ultra</p></lg>
+<lg><p>limites clientium</p>
+<p>salis avarus? pellitur paternos</p>
+<p>in sinu ferens deos</p>
+<p>et uxor et vir sordidosque natos.</p></lg>
+<lg><p>nulla certior tamen</p>
+<p>rapacis Orci fine destinata</p>
+<p>aula divitem manet</p>
+<p>erum. quid ultra tendis? aequa tellus</p></lg>
+<lg><p>pauperi recluditur</p>
+<p>regumque pueris nec satelles Orci</p>
+<p>callidum Promethea</p>
+<p>revexit auro captus; hic superbum</p></lg>
+<lg><p>Tantalum atque Tantali</p>
+<p>genus coercet, hic levare functum</p>
+<p>pauperem laboribus</p>
+<p>vocatus atque non vocatus audit.</p></lg></div2>
+<div2 type="Poem" n="19" met="Alcaic Strophe">
+<lg><p>Bacchum in remotis carmina rupibus</p>
+<p>vidi docentem, credite posteri,</p>
+<p>Nymphasque discentis et auris</p>
+<p>capripedum Satyrorum acutas</p></lg>
+<lg><p>euhoe, recenti mens trepidat metu,</p>
+<p>plenoque Bacchi pectore turbidum</p>
+<p>laetatur. euhoe, parce Liber,</p>
+<p>parce gravi metuende thyrso.</p></lg>
+<lg><p>fas pervicacis est mihi Thyiadas</p>
+<p>vinique fontem lactis et uberes</p>
+<p>cantare rivos atque truncis</p>
+<p>lapsa cavis iterare mella;</p></lg>
+<lg><p>fas et beatae coniugis additum</p>
+<p>stellis honorem tectaque Penthei</p>
+<p>disiecta non leni ruina</p>
+<p>Thracis et exitium Lycurgi</p></lg>
+<lg><p>tu flectis amnis, tu mare barbarum,</p>
+<p>tu separatis uvidus in iugis</p>
+<p>nodo coerces viperino</p>
+<p>Bistonidum sine fraude crinis.</p></lg>
+<lg><p>tu, cum parentis regna per arduum</p>
+<p>cohors gigantum scanderet inpia,</p>
+<p>Rhoetum retorsisti leonis</p>
+<p>unguibus horribilique mala;</p></lg>
+<lg><p>quamquam choreis aptior et iocis</p>
+<p>ludoque dictus non sat idoneus</p>
+<p>pugnae ferebaris; sed idem</p>
+<p>pacis eras mediusque belli.</p></lg>
+<lg><p>te vidit insons Cerberus aureo</p>
+<p>cornu decorum leniter atterens</p>
+<p>caudam et recedentis trilingui</p>
+<p>ore pedes tetigitque crura.</p></lg></div2>
+<div2 type="Poem" n="20" met="Alcaic Strophe">
+<lg><p>Non usitata nec tenui ferar</p>
+<p>penna biformis per liquidum aethera</p>
+<p>vates neque in terris morabor</p>
+<p>longius invidiaque maior</p></lg>
+<lg><p>urbis relinquam. non ego, pauperum</p>
+<p>sanguis parentum, non ego, quem vocas.</p>
+<p>dilecte Maecenas, obibo</p>
+<p>nec Stygia cohibebor unda.</p></lg>
+<lg><p>iam iam residunt cruribus asperae</p>
+<p>pelles et album mutor in alitem</p>
+<p>superne nascunturque leves</p>
+<p>per digitos umerosque plumae.</p></lg>
+<lg><p>iam Daedaleo notior Icaro</p>
+<p>visam gementis litora Bospori</p>
+<p>Syrtisque Gaetulas canorus</p>
+<p>ales Hyperboreosque campos.</p></lg>
+<lg><p>me Colchus et qui dissimulat metum</p>
+<p>Marsae cohortis Dacus et ultimi</p>
+<p>noscent Geloni, me peritus</p>
+<p>discet Hiber Rhodanique potor.</p></lg>
+<lg><p>absint inani funere neniae</p>
+<p>luctusque turpes et querimoniae;</p>
+<p>conpesce clamorem ac sepulcri</p>
+<p>mitte supervacuos honores.</p></lg></div2></div1>
+<div1 type="Book" n="3">
+<div2 type="Poem" n="1" met="Alcaic Strophe">
+<lg><p>Odi profanum volgus et arceo.</p>
+<p>favete linguis: carmina non prius</p>
+<p>audita Musarum sacerdos</p>
+<p>virginibus puerisque canto.</p></lg>
+<lg><p>regum timendorum in proprios greges,</p>
+<p>reges in ipsos imperium est Iovis,</p>
+<p>clari Giganteo triumpho,</p>
+<p>cuncta supercilio moventis.</p></lg>
+<lg><p>est ut viro vir latius ordinet</p>
+<p>arbusta sulcis, hic generosior</p>
+<p>descendat in campum petitor,</p>
+<p>moribus hic meliorque fama</p></lg>
+<lg><p>contendat, illi turba clientium</p>
+<p>sit maior: aequa lege Necessitas</p>
+<p>sortitur insignis et imos,</p>
+<p>omne capax movet urna nomen.</p></lg>
+<lg><p>destrictus ensis cui super inpia</p>
+<p>cervice pendet, non Siculae dapes</p>
+<p>dulcem elaborabunt saporem,</p>
+<p>non avium citharaeque cantus</p></lg>
+<lg><p>somnum reducent: somnus agrestium</p>
+<p>lenis virorum non humilis domos</p>
+<p>fastidit umbrosamque ripam,</p>
+<p>non Zephyris agitata Tempe.</p></lg>
+<lg><p>desiderantem quod satis est neque</p>
+<p>tumultuosum sollicitat mare</p>
+<p>nec saevus Arcturi cadentis</p>
+<p>impetus aut orientis Haedi,</p></lg>
+<lg><p>non verberatae grandine vineae</p>
+<p>fundusque mendax arbore nunc aquas</p>
+<p>culpante, nunc torrentia agros</p>
+<p>sidera, nunc hiemes iniquas.</p></lg>
+<lg><p>contracta pisces aequora sentiunt</p>
+<p>iactis in altum molibus: huc frequens</p>
+<p>caementa demittit redemptor</p>
+<p>cum famulis dominusque terrae</p></lg>
+<lg><p>fastidiosus: sed Timor et Minae</p>
+<p>scandunt eodem, quo dominus, neque</p>
+<p>decedit aerata triremi et</p>
+<p>post equitem sedet atra Cura.</p></lg>
+<lg><p>quodsi dolentem nec Phrygius lapis</p>
+<p>nec purpurarum sidere clarior</p>
+<p>delenit usus nec Falerna</p>
+<p>vitis Achaemeniumque costum,</p></lg>
+<lg><p>cur invidendis postibus et novo</p>
+<p>sublime ritu moliar atrium?</p>
+<p>cur valle permutem Sabina</p>
+<p>divitias operosiores?</p></lg></div2>
+<div2 type="Poem" n="2" met="Alcaic Strophex">
+<lg><p>Angustam amice pauperiem pati</p>
+<p>robustus acri militia puer</p>
+<p>condiscat et Parthos ferocis</p>
+<p>vexet eques metuendus hasta</p></lg>
+<lg><p>vitamque sub divo et trepidis agat</p>
+<p>in rebus. illum ex moenibus hosticis</p>
+<p>matrona bellantis tyranni</p>
+<p>prospiciens et adulta virgo</p></lg>
+<lg><p>suspiret "eheu, ne rudis agminum</p>
+<p>sponsus lacessat regius asperum</p>
+<p>tactu leonem, quem cruenta</p>
+<p>per medias rapit ira caedes."</p></lg>
+<lg><p>dulce et decorum est pro patria mori:</p>
+<p>mors et fugacem persequitur virum</p>
+<p>nec parcit inbellis iuventae</p>
+<p>poplitibus timidoque tergo.</p></lg>
+<lg><p>Virtus, repulsae nescia sordidae,</p>
+<p>intaminatis fulget honoribus</p>
+<p>nec sumit aut ponit securis</p>
+<p>arbitrio popularis aurae.</p></lg>
+<lg><p>Virtus, recludens inmeritis mori</p>
+<p>caelum, negata temptat iter via</p>
+<p>coetusque volgaris et udam</p>
+<p>spernit humum fugiente penna.</p></lg>
+<lg><p>est et fideli tuta silentio</p>
+<p>merces: vetabo, qui Cereris sacrum</p>
+<p>volgarit arcanae, sub isdem</p>
+<p>sit trabibus fragilemque mecum</p></lg>
+<lg><p>solvat phaselon; saepe Diespiter</p>
+<p>neglectus incesto addidit integrum,</p>
+<p>raro antecedentem scelestum</p>
+<p>deseruit pede Poena claudo.</p></lg></div2>
+<div2 type="Poem" n="3" met="Alcaic Strophe">
+<lg><p>Iustum et tenacem propositi virum</p>
+<p>non civium ardor prava iubentium,</p>
+<p>non voltus instantis tyranni</p>
+<p>mente quatit solida neque Auster,</p></lg>
+<lg><p>dux inquieti turbidus Hadriae,</p>
+<p>nec fulminantis magna manus Iovis:</p>
+<p>si fractus inlabatur orbis,</p>
+<p>inpavidum ferient ruinae.</p></lg>
+<lg><p>hac arte Pollux et vagus Hercules</p>
+<p>enisus arcis attigit igneas,</p>
+<p>quos inter Augustus recumbens</p>
+<p>purpureo bibet ore nectar,</p></lg>
+<lg><p>hac te merentem, Bacche pater, tuae</p>
+<p>vexere tigres indocili iugum</p>
+<p>collo trahentes, hac Quirinus</p>
+<p>Martis equis Acheronta fugit,</p></lg>
+<lg><p>gratum elocuta consiliantibus</p>
+<p>Iunone divis: "Ilion, Ilion</p>
+<p>fatalis incestusque iudex</p>
+<p>et mulier peregrina vertit</p></lg>
+<lg><p>in pulverem  ex quo destituit deos</p>
+<p>mercede pacta Laomedon, mihi</p>
+<p>castaeque damnatum Minervae</p>
+<p>cum populo et duce fraudulento.</p></lg>
+<lg><p>iam nec Lacaenae splendet adulterae</p>
+<p>famosus hospes nec Priami domus</p>
+<p>periura pugnacis Achivos</p>
+<p>Hectoreis opibus refringit</p></lg>
+<lg><p>nostrisque ductum seditionibus</p>
+<p>bellum resedit; protinus et gravis</p>
+<p>iras et invisum nepotem,</p>
+<p>Troica quem peperit sacerdos,</p></lg>
+<lg><p>Marti redonabo; illum ego lucidas</p>
+<p>inire sedes, discere nectaris</p>
+<p>sucos et adscribi quietis</p>
+<p>ordinibus patiar deorum.</p></lg>
+<lg><p>dum longus inter saeviat Ilion</p>
+<p>Romamque pontus, qualibet exsules</p>
+<p>in parte regnanto beati;</p>
+<p>dum Priami Paridisque busto</p></lg>
+<lg><p>insultet armentum et catulos ferae</p>
+<p>celent inultae, stet Capitolium</p>
+<p>fulgens triumphatisque possit</p>
+<p>Roma ferox dare iura Medis.</p></lg>
+<lg><p>horrenda late nomen in ultimas</p>
+<p>extendat oras, qua medius liquor</p>
+<p>secernit Europen ab Afro,</p>
+<p>qua tumidus rigat arva Nilus.</p></lg>
+<lg><p>aurum inrepertum et sic melius situm,</p>
+<p>cum terra celat, spernere fortior</p>
+<p>quam cogere humanos in usus</p>
+<p>omne sacrum rapiente dextra,</p></lg>
+<lg><p>quicumque mundo terminus obstitit</p>
+<p>hunc tanget armis, visere gestiens,</p>
+<p>qua parte debacchentur ignes,</p>
+<p>qua nebulae pluviique rores.</p></lg>
+<lg><p>sed bellicosis fata Quiritibus</p>
+<p>hac lege dico, ne nimium pii</p>
+<p>rebusque fidentes avitae</p>
+<p>tecta velint reparare Troiae.</p></lg>
+<lg><p>Troiae renascens alite lugubri</p>
+<p>fortuna tristi clade iterabitur</p>
+<p>ducente victrices catervas</p>
+<p>coniuge me Iovis et sorore.</p></lg>
+<lg><p>ter si resurgat murus aeneus</p>
+<p>auctore Phoebo, ter pereat meis</p>
+<p>excisus Argivis, ter uxor</p>
+<p>capta virum puerosque ploret"</p></lg>
+<lg><p>non hoc iocosae conveniet lyrae —</p>
+<p>quo, Musa, tendis? desine pervicax</p>
+<p>referre sermones deorum et</p>
+<p>magna modis tenuare parvis.</p></lg></div2>
+<div2 type="Poem" n="4" met="Alcaic Strophe">
+<lg><p>Descende caelo et dic age tibia</p>
+<p>regina longum Calliope melos,</p>
+<p>seu voce nunc mavis acuta</p>
+<p>seu fidibus citharave Phoebi.</p></lg>
+<lg><p>auditis? an me ludit amabilis</p>
+<p>insania?  audire et videor pios</p>
+<p>errare per lucos, amoenae</p>
+<p>quos et aquae subeunt et aurae.</p></lg>
+<lg><p>me fabulosae Volture in Apulo</p>
+<p>nutricis extra limina Pulliae</p>
+<p>ludo fatigatumque somno</p>
+<p>fronde nova puerum palumbes</p></lg>
+<lg><p>texere, mirum quod foret omnibus</p>
+<p>quicumque celsae nidum Aceruntiae</p>
+<p>saltusque Bantinos et arvum</p>
+<p>pingue tenent humilis Forenti,</p></lg>
+<lg><p>ut tuto ab atris corpore viperis</p>
+<p>dormirem et ursis, ut premerer sacra</p>
+<p>lauroque conlataque myrto</p>
+<p>non sine dis animosus infans.</p></lg>
+<lg><p>vester, Camenae, vester in arduos</p>
+<p>tollor Sabinos, seu mihi frigidum</p>
+<p>Praeneste seu Tibur supinum</p>
+<p>seu liquidae placuere Baiae.</p></lg>
+<lg><p>vestris amicum fontibus et choris</p>
+<p>non me Philippis versa acies retro,</p>
+<p>devota non extinxit arbor</p>
+<p>nec Sicula Palinurus unda.</p></lg>
+<lg><p>utcumque mecum vos eritis, libens</p>
+<p>insanientem navita Bosporum</p>
+<p>temptabo et urentis harenas</p>
+<p>litoris Assyrii viator,</p></lg>
+<lg><p>visam Britannos hospitibus feros</p>
+<p>et laetum equino sanguine Concanum,</p>
+<p>visam pharetratos Gelonos</p>
+<p>et Scythicum inviolatus amnem.</p></lg>
+<lg><p>vos Caesarem altum, militia simul</p>
+<p>fessas cohortes abdidit oppidis,</p>
+<p>finire quaerentem labores</p>
+<p>Pierio recreatis antro.</p></lg>
+<lg><p>vos lene consilium et datis et dato</p>
+<p>gaudetis, almae. scimus, ut inpios</p>
+<p>Titanas immanemque turbam</p>
+<p>fulmine sustulerit caduco</p></lg>
+<lg><p>qui terram inertem, qui mare temperat</p>
+<p>ventosum et urbis regnaque tristia</p>
+<p>divosque mortalisque turmas</p>
+<p>imperio regit unus aequo.</p></lg>
+<lg><p>magnum illa terrorem intulerat Iovi</p>
+<p>fidens iuventus horrida bracchiis</p>
+<p>fratresque tendentes opaco</p>
+<p>Pelion inposuisse Olympo.</p></lg>
+<lg><p>sed quid Typhoeus et validus Mimas</p>
+<p>aut quid minaci Porphyrion statu,</p>
+<p>quid Rhoetus evolsisque truncis</p>
+<p>Enceladus iaculator audax</p></lg>
+<lg><p>contra sonantem Palladis aegida</p>
+<p>possent ruentes? hinc avidus stetit</p>
+<p>Volcanus, hinc matrona Iuno et</p>
+<p>numquam umeris positurus arcum</p></lg>
+<lg><p>qui rore puro Castaliae lavit</p>
+<p>crinis solutos, qui Lyciae tenet</p>
+<p>dumeta natalemque silvam</p>
+<p>Delius et Patareus Apollo.</p></lg>
+<lg><p>vis consili expers mole ruit sua,</p>
+<p>vim temperatam di quoque provehunt</p>
+<p>in maius; idem odere viris</p>
+<p>omne nefas animo moventis.</p></lg>
+<lg><p>testis mearum centimanus Gyas</p>
+<p>sententiarum, notus et integrae</p>
+<p>temptator Orion Dianae</p>
+<p>virginea domitus sagitta.</p></lg>
+<lg><p>iniecta monstris Terra dolet suis</p>
+<p>maeretque partus fulmine luridum</p>
+<p>missos ad Orcum; nec peredit</p>
+<p>inpositam celer ignis Aetnen</p></lg>
+<lg><p>incontinentis nec Tityi iecur</p>
+<p>reliquit ales, nequitiae additus</p>
+<p>custos; amatorem trecentae</p>
+<p>Pirithoum cohibent catenae.</p></lg></div2>
+<div2 type="Poem" n="5" met="Alcaic Strophe">
+<lg><p>Caelo tonantem credidimus Iovem</p>
+<p>regnare; praesens divus habebitur</p>
+<p>Augustus adiectis Britannis</p>
+<p>imperio gravibusque Persis.</p></lg>
+<lg><p>milesne Crassi coniuge barbara</p>
+<p>turpis maritus vixit et hostium,</p>
+<p>pro curia inversique mores!</p>
+<p>consenuit socerorum in armis</p></lg>
+<lg><p>sub rege Medo Marsus et Apulus,</p>
+<p>anciliorum et nominis et togae</p>
+<p>oblitus aeternaeque Vestae,</p>
+<p>incolumi Iove et urbe Roma?</p></lg>
+<lg><p>hoc caverat mens provida Reguli</p>
+<p>dissentientis condicionibus</p>
+<p>foedis et exemplo trahentis</p>
+<p>perniciem veniens in aevum,</p></lg>
+<lg><p>si non periret inmiserabilis</p>
+<p>captiva pubes. "signa ego Punicis</p>
+<p>adfixa delubris et arma</p>
+<p>militibus sine caede" dixit</p></lg>
+<lg><p>"derepta vidi, vidi ego civium</p>
+<p>retorta tergo bracchia libero</p>
+<p>portasque non clausas et arva</p>
+<p>Marte coli populata nostro.</p></lg>
+<lg><p>auro repensus scilicet acrior</p>
+<p>miles redibit: flagitio additis</p>
+<p>damnum; neque amissos colores</p>
+<p>lana refert medicata fuco</p></lg>
+<lg><p>nec vera virtus, cum semel excidit,</p>
+<p>curat reponi deterioribus.</p>
+<p>si pugnat extricata densis</p>
+<p>cerva plagis, erit ille fortis</p></lg>
+<lg><p>qui perfidis se credidit hostibus</p>
+<p>et Marte Poenos proteret altero;</p>
+<p>qui lora restrictis lacertis</p>
+<p>sensit iners timuitque mortem,</p></lg>
+<lg><p>hic, unde vitam sumeret inscius,</p>
+<p>pacem duello miscuit. o pudor!</p>
+<p>o magna Carthago, probrosis</p>
+<p>altior Italiae ruinis!"</p></lg>
+<lg><p>fertur pudicae coniugis osculum</p>
+<p>parvosque natos ut capitis minor</p>
+<p>ab se removisse et virilem</p>
+<p>torvus humi posuisse voltum,</p></lg>
+<lg><p>donec labantis consilio patres</p>
+<p>firmaret auctor numquam alias dato</p>
+<p>interque maerentis amicos</p>
+<p>egregius properaret exul.</p></lg>
+<lg><p>atqui sciebat, quae sibi barbarus</p>
+<p>tortor pararet: non aliter tamen</p>
+<p>dimovit obstantis propinquos</p>
+<p>et populum reditus morantem</p></lg>
+<lg><p>quam si clientum longa negotia</p>
+<p>diiudicata lite relinqueret</p>
+<p>tendens Venafranos in agros</p>
+<p>aut Lacedaemonium Tarentum.</p></lg></div2>
+<div2 type="Poem" n="6" met="Alcaic Strophe">
+<lg><p>Delicta maiorum inmeritus lues,</p>
+<p>Romane, donec templa refeceris</p>
+<p>aedisque labentis deorum et</p>
+<p>foeda nigro simulacra fumo.</p></lg>
+<lg><p>dis te minorem quod geris, imperas:</p>
+<p>hinc omne principium, huc refer exitum:</p>
+<p>di multa neglecti dederunt</p>
+<p>Hesperiae mala luctuosae.</p></lg>
+<lg><p>iam bis Monaeses et Pacori manus</p>
+<p>inauspicatos contudit impetus</p>
+<p>nostros et adiecisse praedam</p>
+<p>torquibus exiguis renidet.</p></lg>
+<lg><p>paene occupatam seditionibus</p>
+<p>delevit urbem Dacus et Aethiops,</p>
+<p>hic classe formidatus, ille</p>
+<p>missilibus melior sagittis.</p></lg>
+<lg><p>fecunda culpae saecula nuptias</p>
+<p>primum inquinavere et genus et domos:</p>
+<p>hoc fonte derivata clades</p>
+<p>in patriam populumque fluxit.</p></lg>
+<lg><p>motus doceri gaudet Ionicos</p>
+<p>matura virgo et fingitur artibus</p>
+<p>iam nunc et incestos amores</p>
+<p>de tenero meditatur ungui.</p></lg>
+<lg><p>mox iuniores quaerit adulteros</p>
+<p>inter mariti vina neque eligit</p>
+<p>cui donet inpermissa raptim</p>
+<p>gaudia luminibus remotis,</p></lg>
+<lg><p>sed iussa coram non sine conscio</p>
+<p>surgit marito, seu vocat institor</p>
+<p>seu navis Hispanae magister,</p>
+<p>dedecorum pretiosus emptor.</p></lg>
+<lg><p>non his iuventus orta parentibus</p>
+<p>infecit aequor sanguine Punico</p>
+<p>Pyrrhumque et ingentem cecidit</p>
+<p>Antiochum Hannibalemque dirum,</p></lg>
+<lg><p>sed rusticorum mascula militum</p>
+<p>proles, Sabellis docta ligonibus</p>
+<p>versare glaebas et severae</p>
+<p>matris ad arbitrium recisos</p></lg>
+<lg><p>portare fustis, sol ubi montium</p>
+<p>mutaret umbras et iuga demeret</p>
+<p>bubus fatigatis amicum</p>
+<p>tempus agens abeunte curru.</p></lg>
+<lg><p>damnosa quid non inminuit dies?</p>
+<p>aetas parentum, peior avis, tulit</p>
+<p>nos nequiores, mox daturos</p>
+<p>progeniem vitiosiorem.</p></lg></div2>
+<div2 type="Poem" n="7" met="Fourth Asclepiadean">
+<lg><p>Quid fles, Asterie, quem tibi, candidi</p>
+<p>primo restituent vere Favonii</p>
+<p>Thyna merce beatum,</p>
+<p>constantis iuvenem fide</p></lg>
+<lg><p>Gygen? ille Notis actus ad Oricum</p>
+<p>post insana Caprae sidera frigidas</p>
+<p>noctis non sine multis</p>
+<p>insomnis lacrimis agit.</p></lg>
+<lg><p>atqui sollicitae nuntius hospitae,</p>
+<p>suspirare Chloen et miseram tuis</p>
+<p>dicens ignibus uri,</p>
+<p>temptat mille vafer modis:</p></lg>
+<lg><p>ut Proetum mulier perfida credulum</p>
+<p>falsis inpulerit criminibus nimis</p>
+<p>casto Bellerophontae</p>
+<p>maturare necem, refert;</p></lg>
+<lg><p>narrat paene datum Pelea Tartaro,</p>
+<p>Magnessam Hippolyten dum fugit abstinens,</p>
+<p>et peccare docentis</p>
+<p>fallax historias movet.</p></lg>
+<lg><p>frustra: nam scopulis surdior Icari</p>
+<p>voces audit adhuc integer. at tibi</p>
+<p>ne vicinus Enipeus</p>
+<p>plus iusto placeat cave;</p></lg>
+<lg><p>quamvis non alius flectere equum sciens</p>
+<p>aeque conspicitur gramine Martio,</p>
+<p>nec quisquam citus aeque</p>
+<p>Tusco denatat alveo.</p></lg>
+<lg><p>prima nocte domum claude neque in vias</p>
+<p>sub cantu querulae despice tibiae</p>
+<p>et te saepe vocanti</p>
+<p>duram difficilis mane.</p></lg></div2>
+<div2 type="Poem" n="8" met="Sapphic Strophe">
+<lg><p>Martiis caelebs quid agam kalendis,</p>
+<p>quid velint flores et acerra turis</p>
+<p>plena miraris positusque carbo in</p>
+<p>caespite vivo,</p></lg>
+<lg><p>docte sermones utriusque linguae?</p>
+<p>voveram dulcis epulas et album</p>
+<p>Libero caprum prope funeratus</p>
+<p>arboris ictu.</p></lg>
+<lg><p>hic dies anno redeunte festus</p>
+<p>corticem adstrictum pice dimovebit</p>
+<p>amphorae fumum bibere institutae</p>
+<p>consule Tullo.</p></lg>
+<lg><p>sume, Maecenas, cyathos amici</p>
+<p>sospitis centum et vigiles lucernas</p>
+<p>perfer in lucem: procul omnis esto</p>
+<p>clamor et ira.</p></lg>
+<lg><p>mitte civilis super urbe curas:</p>
+<p>occidit Daci Cotisonis agmen,</p>
+<p>Medus infestus sibi luctuosis</p>
+<p>dissidet armis,</p></lg>
+<lg><p>servit Hispanae vetus hostis orae</p>
+<p>Cantaber, sera domitus catena,</p>
+<p>iam Scythae laxo meditantur arcu</p>
+<p>cedere campis.</p></lg>
+<lg><p>neglegens, ne qua populus laboret,</p>
+<p>parce privatus nimium cavere et</p>
+<p>dona praesentis cape laetus horae,</p>
+<p>linque severa.</p></lg></div2>
+<div2 type="Poem" n="9" met="Second Asclepiadean">
+<lg><p>"Donec gratus eram tibi</p>
+<p>nec quisquam potior bracchia candidae</p>
+<p>cervici iuvenis dabat,</p>
+<p>Persarum vigui rege beatior."</p></lg>
+<lg><p>"donec non alia magis</p>
+<p>arsisti neque erat Lydia post Chloen,</p>
+<p>multi Lydia nominis,</p>
+<p>Romana vigui clarior Ilia."</p></lg>
+<lg><p>"me nunc Thressa Chloe regit,</p>
+<p>dulcis docta modos et citharae sciens,</p>
+<p>pro qua non metuam mori,</p>
+<p>si parcent animae fata superstiti"</p></lg>
+<lg><p>"me torret face mutua</p>
+<p>Thurini Calais filius Ornyti,</p>
+<p>pro quo bis patiar mori,</p>
+<p>si parcent puero fata superstiti."</p></lg>
+<lg><p>"quid si prisca redit Venus</p>
+<p>diductosque iugo cogit aeneo?</p>
+<p>si flava excutitur Chloe</p>
+<p>reiectaeque patet ianua Lydiae?"</p></lg>
+<lg><p>"quamquam sidere pulchrior</p>
+<p>ille est, tu levior cortice et inprobo</p>
+<p>iracundior Hadria:</p>
+<p>tecum vivere amem, tecum obeam lubens."</p></lg></div2>
+<div2 type="Poem" n="10" met="Third Asclepiadean">
+<lg><p>Extremum Tanain si biberes, Lyce,</p>
+<p>saevo nupta viro, me tamen asperas</p>
+<p>porrectum ante foris obicere incolis</p>
+<p>plorares Aquilonibus</p></lg>
+<lg><p>audis, quo strepitu ianua, quo nemus</p>
+<p>inter pulcra satum tecta remugiat</p>
+<p>ventis et positas ut glaciet nives</p>
+<p>puro numine Iuppiter?</p></lg>
+<lg><p>ingratam Veneri pone superbiam,</p>
+<p>ne currente retro funis eat rota:</p>
+<p>non te Penelopen difficilem procis</p>
+<p>Tyrrhenus genuit parens.</p></lg>
+<lg><p>o quamvis neque te munera nec preces</p>
+<p>nec tinctus viola pallor amantium</p>
+<p>nec vir Pieria paelice saucius</p>
+<p>curvat, supplicibus tuis</p></lg>
+<lg><p>parcas, nec rigida mollior aesculo</p>
+<p>nec Mauris animum mitior anguibus:</p>
+<p>non hoc semper erit liminis aut aquae</p>
+<p>caelestis patiens latus.</p></lg></div2>
+<div2 type="Poem" n="11" met="Sapphic Strophe">
+<lg><p>Mercuri, nam te docilis magistro</p>
+<p>movit Amphion lapides canendo,</p>
+<p>tuque testudo resonare septem</p>
+<p>callida nervis,</p></lg>
+<lg><p>nec loquax olim neque grata, nunc et</p>
+<p>divitum mensis et amica templis,</p>
+<p>dic modos, Lyde quibus obstinatas</p>
+<p>adplicet auris,</p></lg>
+<lg><p>quae velut latis equa trima campis</p>
+<p>ludit exsultim metuitque tangi</p>
+<p>nuptiarum expers et adhuc protervo</p>
+<p>cruda marito.</p></lg>
+<lg><p>tu potes tigris comitesque silvas</p>
+<p>ducere et rivos celeres morari;</p>
+<p>cessit immanis tibi blandienti</p>
+<p>ianitor aulae</p></lg>
+<lg><p>Cerberus, quamvis furiale centum</p>
+<p>muniant angues caput eius atque</p>
+<p>spiritus taeter saniesque manet</p>
+<p>ore trilingui;</p></lg>
+<lg><p>quin et Ixion Tityosque voltu</p>
+<p>risit invito, stetit urna paulum</p>
+<p>sicca, dum grato Danai puellas</p>
+<p>carmine mulces.</p></lg>
+<lg><p>audiat Lyde scelus atque notas</p>
+<p>virginum poenas et inane lymphae</p>
+<p>dolium fundo pereuntis imo</p>
+<p>seraque fata,</p></lg>
+<lg><p>quae manent culpas etiam sub Orco.</p>
+<p>inpiae, (nam quid potuere maius?)</p>
+<p>inpiae sponsos potuere duro</p>
+<p>perdere ferro.</p></lg>
+<lg><p> una de multis face nuptiali</p>
+<p>digna periurum fuit in parentem</p>
+<p>splendide mendax et in omne virgo</p>
+<p>nobilis aevum,</p></lg>
+<lg><p>"surge" quae dixit iuveni marito,</p>
+<p>"surge, ne longus tibi somnus unde</p>
+<p>non times detur; socerum et scelestas</p>
+<p>falle sorores,</p></lg>
+<lg><p> quae velut nactae vitulos leaenae</p>
+<p>singulos eheu lacerant: ego illis</p>
+<p>mollior nec te feriam neque intra</p>
+<p>claustra tenebo.</p></lg>
+<lg><p>me pater saevis oneret catenis,</p>
+<p>quod viro clemens misero peperci,</p>
+<p>me vel extremos Numidarum in agros</p>
+<p>classe releget:</p></lg>
+<lg><p>i pedes quo te rapiunt et aurae,</p>
+<p>dum favet nox et Venus, i secundo</p>
+<p>omine et nostri memorem sepulcro</p>
+<p>scalpe querelam."</p></lg></div2>
+<div2 type="Poem" n="12" met="Ten Ionici a minore">
+<lg><p>Miserarum est neque amori dare ludum neque dulci</p>
+<p>mala vino lavere, aut exanimari metuentis</p>
+<p>patruae verbera linguae.</p></lg>
+<lg><p>tibi qualum Cythereae puer ales, tibi telas</p>
+<p>operosaeque Minervae studium aufert, Neobule,</p>
+<p>Liparaei nitor Hebri,</p></lg>
+<lg><p>simul unctos Tiberinis umeros lavit in undis,</p>
+<p>eques ipso melior Bellerophonte, neque pugno</p>
+<p>neque segni pede victus,</p></lg>
+<lg><p>catus idem per apertum fugientis agitato</p>
+<p>grege cervos iaculari et celer arto latitantem</p>
+<p>fruticeto excipere aprum.</p></lg></div2>
+<div2 type="Poem" n="13" met="Fourth Asclepiadean">
+<lg><p>O fons Bandusiae splendidior vitro,</p>
+<p>dulci digne mero non sine floribus,</p>
+<p>cras donaberis haedo,</p>
+<p>cui frons turgida cornibus</p></lg>
+<lg><p>primis et venerem et proelia destinat;</p>
+<p>frustra: nam gelidos inficiet tibi</p>
+<p>rubro sanguine rivos</p>
+<p>lascivi suboles gregis.</p></lg>
+<lg><p>te flagrantis atrox hora Caniculae</p>
+<p>nescit tangere, tu frigus amabile</p>
+<p>fessis vomere tauris</p>
+<p>praebes et pecori vago.</p></lg>
+<lg><p>fies nobilium tu quoque fontium</p>
+<p>me dicente cavis inpositam ilicem</p>
+<p>saxis, unde loquaces</p>
+<p>lymphae desiliunt tuae.</p></lg></div2>
+<div2 type="Poem" n="14" met="Sapphic Strophe">
+<lg><p>Herculis ritu modo dictus, o plebs,</p>
+<p>morte venalem petiisse laurum</p>
+<p>Caesar Hispana repetit penatis</p>
+<p>victor ab ora.</p></lg>
+<lg><p>unico gaudens mulier marito</p>
+<p>prodeat iustis operata sacris</p>
+<p>et soror clari ducis et decorae</p>
+<p>supplice vitta</p></lg>
+<lg><p>virginum matres iuvenumque nuper</p>
+<p>sospitum; vos, o pueri et puellae</p>
+<p>iam virum expertae, male nominatis</p>
+<p>parcite verbis.</p></lg>
+<lg><p>hic dies vere mihi festus atras</p>
+<p>exiget curas ego nec tumultum</p>
+<p>nec mori per vim metuam tenente</p>
+<p>Caesare terras.</p></lg>
+<lg><p>i pete unguentum, puer, et coronas</p>
+<p>et cadum Marsi memorem duelli,</p>
+<p>Spartacum siqua potuit vagantem</p>
+<p>fallere testa.</p></lg>
+<lg><p>dic et argutae properet Neaerae</p>
+<p>murreum nodo cohibere crinem;</p>
+<p>si per invisum mora ianitorem</p>
+<p>fiet, abito.</p></lg>
+<lg><p>lenit albescens animos capillus</p>
+<p>litium et rixae cupidos protervae;</p>
+<p>non ego hoc ferrem calidus iuventa</p>
+<p>consule Planco.</p></lg></div2>
+<div2 type="Poem" n="15" met="Second Asclepiadean">
+<lg><p>Uxor pauperis Ibyci,</p>
+<p>tandem nequitiae fige modum tuae</p>
+<p>famosisque laboribus;</p>
+<p>maturo propior desine funeri</p></lg>
+<lg><p>inter ludere virgines</p>
+<p>et stellis nebulam spargere candidis.</p>
+<p>non, siquid Pholoen, satis</p>
+<p>et te, Chlori, decet: filia rectius</p></lg>
+<lg><p>expugnat iuvenum domos,</p>
+<p>pulso Thyias uti concita tympano.</p>
+<p>illam cogit amor Nothi</p>
+<p>lascivae similem ludere capreae,</p></lg>
+<lg><p>te lanae prope nobilem</p>
+<p>tonsae Luceriam, non citharae decent</p>
+<p>nec flos purpureus rosae</p>
+<p>nec poti, vetulam, faece tenus cadi.</p></lg></div2>
+<div2 type="Poem" n="16" met="Third Asclepiadean">
+<lg><p>Inclusam Danaen turris aenea</p>
+<p>robustaeque fores et vigilum canum</p>
+<p>tristes excubiae munierant satis</p>
+<p>nocturnis ab adulteris,</p></lg>
+<lg><p>si non Acrisium virginis abditae</p>
+<p>custodem pavidum Iuppiter et Venus</p>
+<p>risissent: fore enim tutum iter et patens</p>
+<p>converso in pretium deo.</p></lg>
+<lg><p>aurum per medios ire satellites</p>
+<p>et perrumpere amat saxa potentius</p>
+<p>ictu fulmineo: concidit auguris</p>
+<p>Argivi domus ob lucrum</p></lg>
+<lg><p>demersa exitio; diffidit urbium</p>
+<p>portas vir Macedo et subruit aemulos</p>
+<p>reges muneribus; munera navium</p>
+<p>saevos inlaqueant duces.</p></lg>
+<lg><p>crescentem sequitur cura pecuniam</p>
+<p>maiorumque fames.  iure perhorrui</p>
+<p>late conspicuum tollere verticem,</p>
+<p>Maecenas, equitum decus.</p></lg>
+<lg><p>quanto quisque sibi plura negaverit,</p>
+<p>ab dis plura feret nil cupientium</p>
+<p>nudus castra peto et transfuga divitum</p>
+<p>partis linquere gestio,</p></lg>
+<lg><p>contemptae dominus splendidior rei,</p>
+<p>quam si quidquid arat inpiger Apulus</p>
+<p>occultare meis dicerer horreis,</p>
+<p>magnas inter opes inops.</p></lg>
+<lg><p>purae rivos aquae silvaque iugerum</p>
+<p>paucorum et segetis certa fides meae</p>
+<p>fulgentem imperio fertilis Africae</p>
+<p>fallit sorte beatior.</p></lg>
+<lg><p>quamquam nec Calabrae mella ferunt apes</p>
+<p>nec Laestrygonia Bacchus in amphora</p>
+<p>languescit mihi nec pinguia Gallicis</p>
+<p>crescunt vellera pascuis:</p></lg>
+<lg><p>inportuna tamen pauperies abest</p>
+<p>nec, si plura velim, tu dare deneges.</p>
+<p>contracto melius parva cupidine</p>
+<p>vectigalia porrigam</p></lg>
+<lg><p>quam si Mygdoniis regnum Alyattei</p>
+<p>campis continuem. multa petentibus</p>
+<p>desunt multa: bene est cui deus obtulit</p>
+<p>parca quod satis est manu.</p></lg></div2>
+<div2 type="Poem" n="17" met="Alcaic Strophe">
+<lg><p>Aeli vetusto nobilis ab Lamo,</p>
+<p>quando et priores hinc Lamias ferunt</p>
+<p>denominatos et nepotum</p>
+<p>per memores genus omne fastos,</p></lg>
+<lg><p>auctore ab illo ducis originem,</p>
+<p>qui Formiarum moenia dicitur</p>
+<p>princeps et innantem Maricae</p>
+<p>litoribus tenuisse Lirim,</p></lg>
+<lg><p>late tyrannus:— cras foliis nemus</p>
+<p>multis et alga litus inutili</p>
+<p>demissa tempestas ab Euro</p>
+<p>sternet, aquae nisi fallit augur</p></lg>
+<lg><p>annosa cornix. dum potes, aridum</p>
+<p>conpone lignum: cras genium mero</p>
+<p>curabis et porco bimenstri</p>
+<p>cum famulis operum solutis.</p></lg></div2>
+<div2 type="Poem" n="18" met="Sapphic Strophe">
+<lg><p>Faune, Nympharum fugientum amator,</p>
+<p>per meos finis et aprica rura</p>
+<p>lenis incedas abeasque parvis</p>
+<p>aequus alumnis,</p></lg>
+<lg><p>si tener pleno cadit haedus anno</p>
+<p>larga nec desunt Veneris sodali</p>
+<p>vina craterae, vetus ara multo</p>
+<p>fumat odore.</p></lg>
+<lg><p>ludit herboso pecus omne campo</p>
+<p>cum tibi nonae redeunt Decembres,</p>
+<p>festus in pratis vacat otioso</p>
+<p>cum bove pagus,</p></lg>
+<lg><p>inter audacis lupus errat agnos,</p>
+<p>spargit agrestis tibi silva frondes,</p>
+<p>gaudet invisam pepulisse fossor</p>
+<p>ter pede terram.</p></lg></div2>
+<div2 type="Poem" n="19" met="Second Asclepiadean">
+<lg><p>Quantum distet ab Inacho</p>
+<p>Codrus pro patria non timidus mori</p>
+<p>narras et genus Aeaci</p>
+<p>et pugnata sacro bella sub Ilio:</p></lg>
+<lg><p>quo Chium pretio cadum</p>
+<p>mercemur, quis aquam temperet ignibus,</p>
+<p>quo praebente domum et quota</p>
+<p>Paelignis caream frigoribus, taces.</p></lg>
+<lg><p>da lunae propere novae,</p>
+<p>da noctis mediae, da, puer, auguris</p>
+<p>Murenae: tribus aut novem</p>
+<p>miscentur cyathis pocula commodis.</p></lg>
+<lg><p>qui Musas amat imparis,</p>
+<p>ternos ter cyathos attonitus petet</p>
+<p>vates; tris prohibet supra</p>
+<p>rixarum metuens tangere Gratia</p></lg>
+<lg><p>nudis iuncta sororibus.</p>
+<p>insanire iuvat: cur Berecyntiae</p>
+<p>cessant flamina tibiae?</p>
+<p>cur pendet tacita fistula cum lyra?</p></lg>
+<lg><p>parcentis ego dexteras</p>
+<p>odi: sparge rosas, audiat invidus</p>
+<p>dementem strepitum Lycus</p>
+<p>et vicina seni non habilis Lyco.</p></lg>
+<lg><p>spissa te nitidum coma,</p>
+<p>puro te similem, Telephe, Vespero</p>
+<p>tempestiva petit Rhode;</p>
+<p>me lentus Glycerae torret amor meae.</p></lg></div2>
+<div2 type="Poem" n="20" met="Sapphic Strophe">
+<lg><p>Non vides, quanto moveas periclo,</p>
+<p>Pyrrhe, Gaetulae catulos leaenae?</p>
+<p>dura post paulo fugies inaudax</p>
+<p>proelia raptor,</p></lg>
+<lg><p>cum per obstantis iuvenum catervas</p>
+<p>ibit insignem repetens Nearchum:</p>
+<p>grande certamen, tibi praeda cedat,</p>
+<p>maior an illa.</p></lg>
+<lg><p>interim, dum tu celeres sagittas</p>
+<p>promis, haec dentis acuit timendos,</p>
+<p>arbiter pugnae posuisse nudo</p>
+<p>sub pede palmam</p></lg>
+<lg><p>fertur et leni recreare vento</p>
+<p>sparsum odoratis umerum capillis,</p>
+<p>qualis aut Nireus fuit aut aquosa</p>
+<p>raptus ab Ida.</p></lg></div2>
+<div2 type="Poem" n="21" met="Alcaic Strophe">
+<lg><p>O nata mecum consule Manlio,</p>
+<p>seu tu querellas sive geris iocos</p>
+<p>seu rixam et insanos amores</p>
+<p>seu facilem, pia testa, somnum,</p></lg>
+<lg><p>quocumque lectum nomine Massicum</p>
+<p>servas, moveri digna bono die,</p>
+<p>descende Corvino iubente</p>
+<p>promere languidiora vina.</p></lg>
+<lg><p>non ille, quamquam Socraticis madet</p>
+<p>sermonibus, te neglegit horridus:</p>
+<p>narratur et prisci Catonis</p>
+<p>saepe mero caluisse virtus.</p></lg>
+<lg><p>tu lene tormentum ingenio admoves</p>
+<p>plerumque duro, tu sapientium</p>
+<p>curas et arcanum iocoso</p>
+<p>consilium retegis Lyaeo,</p></lg>
+<lg><p>tu spem reducis mentibus anxiis</p>
+<p>virisque et addis cornua pauperi</p>
+<p>post te neque iratos trementi</p>
+<p>regum apices neque militum arma.</p></lg>
+<lg><p>te Liber et si laeta aderit Venus</p>
+<p>segnesque nodum solvere Gratiae</p>
+<p>vivaeque producent lucernae,</p>
+<p>dum rediens fugat astra Phoebus.</p></lg></div2>
+<div2 type="Poem" n="22" met="Sapphic Strophe">
+<lg><p>Montium custos nemorumque, virgo,</p>
+<p>quae laborantis utero puellas</p>
+<p>ter vocata audis adimisque leto,</p>
+<p>diva triformis,</p></lg>
+<lg><p>imminens villae tua pinus esto,</p>
+<p>quam per exactos ego laetus annos</p>
+<p>verris obliquum meditantis ictum</p>
+<p>sanguine donem.</p></lg></div2>
+<div2 type="Poem" n="23" met="Alcaic Strophe">
+<lg><p>Caelo supinas si tuleris manus</p>
+<p>nascente luna, rustica Phidyle,</p>
+<p>si ture placaris et horna</p>
+<p>fruge Laris avidaque porca:</p></lg>
+<lg><p>nec pestilentem sentiet Africum</p>
+<p>fecunda vitis nec sterilem seges</p>
+<p>robiginem aut dulces alumni</p>
+<p>pomifero grave tempus anno.</p></lg>
+<lg><p>nam quae nivali pascitur Algido</p>
+<p>devota quercus inter et ilices</p>
+<p>aut crescit Albanis in herbis</p>
+<p>victima, pontificum securis</p></lg>
+<lg><p>cervice tinguet: te nihil attinet</p>
+<p>temptare multa caede bidentium</p>
+<p>parvos coronantem marino</p>
+<p>rore deos fragilique myrto.</p></lg>
+<lg><p>inmunis aram si tetigit manus,</p>
+<p>non sumptuosa blandior hostia,</p>
+<p>mollivit aversos Penatis</p>
+<p>farre pio et saliente mica.</p></lg></div2>
+<div2 type="Poem" n="24" met="Second Asclepiadean">
+<lg><p>Intactis opulentior</p>
+<p>thesauris Arabum et divitis Indiae</p>
+<p>caementis licet occupes</p>
+<p>terrenum omne tuis et mare publicum:</p></lg>
+<lg><p>si figit adamantinos</p>
+<p>summis verticibus dira Necessitas</p>
+<p>clavos, non animum metu,</p>
+<p>non mortis laqueis expedies caput.</p></lg>
+<lg><p>campestres melius Scythae,</p>
+<p>quorum plaustra vagas rite trahunt domos</p>
+<p>vivunt et rigidi Getae,</p>
+<p>inmetata quibus iugera liberas</p></lg>
+<lg><p>fruges et Cererem ferunt</p>
+<p>nec cultura placet longior annua</p>
+<p>defunctumque laboribus</p>
+<p>aequali recreat sorte vicarius.</p></lg>
+<lg><p>illic matre carentibus</p>
+<p>privignis mulier temperat innocens</p>
+<p>nec dotata regit virum</p>
+<p>coniunx nec nitido fidit adultero;</p></lg>
+<lg><p>dos est magna parentium</p>
+<p>virtus et metuens alterius viri</p>
+<p>certo foedere castitas,</p>
+<p>et peccare nefas aut pretium est mori.</p></lg>
+<lg><p>o quisquis volet inpias</p>
+<p>caedis et rabiem tollere civicam,</p>
+<p>si quaeret pater urbium</p>
+<p>subscribi statuis, indomitam audeat</p></lg>
+<lg><p>refrenare licentiam,</p>
+<p>clarus postgenitis: quatenus, heu nefas</p>
+<p>virtutem incolumem odimus,</p>
+<p>sublatam ex oculis quaerimus invidi.</p></lg>
+<lg><p>quid tristes querimoniae,</p>
+<p>si non supplicio culpa reciditur,</p>
+<p>quid leges sine moribus</p>
+<p>vanae proficiunt, si neque fervidis</p></lg>
+<lg><p>pars inclusa caloribus</p>
+<p>mundi nec Boreae finitimum latus</p>
+<p>durataeque solo nives</p>
+<p>mercatorem abigunt, horrida callidi</p></lg>
+<lg><p>vincunt aequora navitae,</p>
+<p>magnum pauperies opprobrium iubet</p>
+<p>quidvis et facere et pati</p>
+<p>virtutisque viam deserit arduae?</p></lg>
+<lg><p>vel nos in Capitolium,</p>
+<p>quo clamor vocat et turba faventium,</p>
+<p>vel nos in mare proximum</p>
+<p>gemmas et lapides aurum et inutile,</p></lg>
+<lg><p>summi materiem mali,</p>
+<p>mittamus, scelerum si bene paenitet.</p>
+<p>eradenda cupidinis</p>
+<p>pravi sunt elementa et tenerae nimis</p></lg>
+<lg><p>mentes asperioribus</p>
+<p>formandae studiis. nescit equo rudis</p>
+<p>haerere ingenuus puer</p>
+<p>venarique timet, ludere doctior,</p></lg>
+<lg><p>seu Graeco iubeas trocho</p>
+<p>seu malis vetita legibus alea,</p>
+<p>cum periura patris fides</p>
+<p>consortem socium fallat et hospites</p></lg>
+<lg><p>indignoque pecuniam</p>
+<p>heredi properet. scilicet inprobae</p>
+<p>crescunt divitiae, tamen</p>
+<p>curtae nescio quid semper abest rei.</p></lg></div2>
+<div2 type="Poem" n="25" met="Second Asclepiadean">
+<lg><p>Quo me, Bacche, rapis tui</p>
+<p>plenum? quae nemora aut quos agor in specus,</p>
+<p>velox mente nova? quibus</p>
+<p>antris egregii Caesaris audiar</p></lg>
+<lg><p>aeternum meditans decus</p>
+<p>stellis inserere et consilio Iovis?</p>
+<p>dicam insigne, recens, adhuc</p>
+<p>indictum ore alio. non secus in iugis</p></lg>
+<lg><p>exsomnis stupet Euhias</p>
+<p>Hebrum prospiciens et nive candidam</p>
+<p>Thracen ac pede barbaro</p>
+<p>lustratam Rhodopen, ut mihi devio</p></lg>
+<lg><p>ripas et vacuum nemus</p>
+<p>mirari libet. o Naiadum potens</p>
+<p>Baccharumque valentium</p>
+<p>proceras manibus vertere fraxinos,</p></lg>
+<lg><p>nil parvum aut humili modo,</p>
+<p>nil mortale loquar. dulce periculum est,</p>
+<p>o Lenaee, sequi deum</p>
+<p>cingentem viridi tempora pampino.</p></lg></div2>
+<div2 type="Poem" n="26" met="Alcaic Strophe">
+<lg><p>Vixi puellis nuper idoneus</p>
+<p>et militavi non sine gloria;</p>
+<p>nunc arma defunctumque bello</p>
+<p>barbiton hic paries habebit,</p></lg>
+<lg><p>laevum marinae qui Veneris latus</p>
+<p>custodit. hic, hic ponite lucida</p>
+<p>funalia et vectis et arcus</p>
+<p>oppositis foribus minacis.</p></lg>
+<lg><p>o quae beatam diva tenes Cyprum et</p>
+<p>Memphin carentem Sithonia nive,</p>
+<p>regina, sublimi flagello</p>
+<p>tange Chloen semel arrogantem.</p></lg></div2>
+<div2 type="Poem" n="27" met="Sapphic Strophe">
+<lg><p>Inpios parrae recinentis omen</p>
+<p>ducat et praegnans canis aut ab agro</p>
+<p>rava decurrens lupa Lanuvino</p>
+<p>fetaque volpes;</p></lg>
+<lg><p>rumpat et serpens iter institutum,</p>
+<p>si per obliquum similis sagittae</p>
+<p>terruit mannos: ego cui timebo,</p>
+<p>providus auspex,</p></lg>
+<lg><p>antequam stantis repetat paludes</p>
+<p>imbrium divina avis imminentium,</p>
+<p>oscinem corvum prece suscitabo</p>
+<p>solis ab ortu.</p></lg>
+<lg><p>sis licet felix, ubicumque mavis,</p>
+<p>et memor nostri, Galatea, vivas</p>
+<p>teque nec laevos vetet ire picus</p>
+<p>nec vaga cornix.</p></lg>
+<lg><p>sed vides, quanto trepidet tumultu</p>
+<p>pronus Orion. ego quid sit ater</p>
+<p>Hadriae novi sinus et quid albus</p>
+<p>peccet Iapyx.</p></lg>
+<lg><p>hostium uxores puerique caecos</p>
+<p>sentiant motus orientis Austri et</p>
+<p>aequoris nigri fremitum et trementis</p>
+<p>verbere ripas.</p></lg>
+<lg><p>sic et Europe niveum doloso</p>
+<p>credidit tauro latus et scatentem</p>
+<p>beluis pontum mediasque fraudes</p>
+<p>palluit audax.</p></lg>
+<lg><p>nuper in pratis studiosa florum et</p>
+<p>debitae Nymphis opifex coronae</p>
+<p>nocte sublustri nihil astra praeter</p>
+<p>vidit et undas.</p></lg>
+<lg><p>quae simul centum tetigit potentem</p>
+<p>oppidis Creten, "pater, o relictum</p>
+<p>filiae nomen pietasque" dixit</p>
+<p>"victa furore!</p></lg>
+<lg><p>unde quo veni? levis una mors est</p>
+<p>virginum culpae. vigilansne ploro</p>
+<p>turpe conmissum an vitiis carentem</p>
+<p>ludit imago</p></lg>
+<lg><p>vana, quae porta fugiens eburna</p>
+<p>somnium ducit? meliusne fluctus</p>
+<p>ire per longos fuit an recentis</p>
+<p>carpere flores?</p></lg>
+<lg><p>siquis infamem mihi nunc iuvencum</p>
+<p>dedat iratae, lacerare ferro et</p>
+<p>frangere enitar modo multum amati</p>
+<p>cornua monstri.</p></lg>
+<lg><p>inpudens liqui patrios Penates,</p>
+<p>inpudens Orcum moror. o deorum</p>
+<p>siquis haec audis, utinam inter errem</p>
+<p>nuda leones.</p></lg>
+<lg><p>antequam turpis macies decentis</p>
+<p>occupet malas teneraeque sucus</p>
+<p>defluat praedae, speciosa quaero</p>
+<p>pascere tigris</p></lg>
+<lg><p>"vilis Europe" pater urget absens:</p>
+<p>"quid mori cessas?  potes hac ab orno</p>
+<p>pendulum zona bene te secuta</p>
+<p>laedere collum.</p></lg>
+<lg><p>sive te rupes et acuta leto</p>
+<p>saxa delectant, age te procellae</p>
+<p>crede veloci, nisi erile mavis</p>
+<p>carpere pensum</p></lg>
+<lg><p>regius sanguis dominaeque tradi</p>
+<p>barbarae paelex."" aderat querenti</p>
+<p>perfidum ridens Venus et remisso</p>
+<p>filius arcu.</p></lg>
+<lg><p>mox ubi lusit satis, "abstineto"</p>
+<p>dixit "irarum calidaeque rixae,</p>
+<p>cum tibi invisus laceranda reddet</p>
+<p>cornua taurus.</p></lg>
+<lg><p>uxor invicti Iovis esse nescis.</p>
+<p>mitte singultus, bene ferre magnam</p>
+<p>disce fortunam; tua sectus orbis</p>
+<p>nomina ducet."</p></lg></div2>
+<div2 type="Poem" n="28" met="Second Asclepiadean">
+<lg><p>Festo quid potius die</p>
+<p>Neptuni faciam? prome reconditum,</p>
+<p>Lyde, strenua Caecubum,</p>
+<p>munitaeque adhibe vim sapientiae.</p></lg>
+<lg><p>inclinare meridiem</p>
+<p>sentis et, veluti stet volucris dies,</p>
+<p>parcis deripere horreo</p>
+<p>cessantem Bibuli consulis amphoram.</p></lg>
+<lg><p>nos cantabimus invicem</p>
+<p>Neptunum et viridis Nereidum comas;</p>
+<p>tu curva recines lyra</p>
+<p>Latonam et celeris spicula Cynthiae;</p></lg>
+<lg><p>summo carmine quae Cnidon</p>
+<p>fulgentisque tenet Cycladas et Paphon</p>
+<p>iunctis visit oloribus</p>
+<p>dicetur, merita Nox quoque nenia.</p></lg></div2>
+<div2 type="Poem" n="29" met="Alcaic Strophe">
+<lg><p>Tyrrhena regum progenies, tibi</p>
+<p>non ante verso lene merum cado</p>
+<p>cum flore, Maecenas, rosarum et</p>
+<p>pressa tuis balanus capillis</p></lg>
+<lg><p>iamdudum apud me est: eripe te morae</p>
+<p>ne semper udum Tibur et Aefulae</p>
+<p>declive contempleris arvum et</p>
+<p>Telegoni iuga parricidae.</p></lg>
+<lg><p>fastidiosam desere copiam et</p>
+<p>molem propinquam nubibus arduis,</p>
+<p>omitte mirari beatae</p>
+<p>fumum et opes strepitumque Romae.</p></lg>
+<lg><p>plerumque gratae divitibus vices</p>
+<p>mundaeque parvo sub lare pauperum</p>
+<p>cenae sine aulaeis et ostro</p>
+<p>sollicitam explicuere frontem.</p></lg>
+<lg><p>Iam clarus occultum Andromedae pater</p>
+<p>ostendit ignem, iam Procyon furit</p>
+<p>et stella vesani Leonis,</p>
+<p>sole dies referente siccos;</p></lg>
+<lg><p>iam pastor umbras cum grege languido</p>
+<p>rivumque fessus quaerit et horidi</p>
+<p>dumeta Silvani, caretque</p>
+<p>ripa vagis taciturna ventis.</p></lg>
+<lg><p>tu civitatem quis deceat status</p>
+<p>curas et urbi sollicitus times</p>
+<p>quid Seres et regnata Cyro</p>
+<p>Bactra parent Tanaisque discors.</p></lg>
+<lg><p>prudens futuri temporis exitum</p>
+<p>caliginosa nocte premit deus</p>
+<p>ridetque, si mortalis ultra</p>
+<p>fas trepidat. quod adest memento</p></lg>
+<lg><p>conponere aequos; cetera fluminis</p>
+<p>ritu feruntur, nunc medio alveo</p>
+<p>cum pace delabentis Etruscum</p>
+<p>in mare, nunc lapides adesos</p></lg>
+<lg><p>stirpisque raptas et pecus et domos</p>
+<p>volventis una, non sine montium</p>
+<p>clamore vicinaeque silvae,</p>
+<p>cum fera diluvies quietos</p></lg>
+<lg><p>inritat amnis. ille potens sui</p>
+<p>laetusque deget cui licet in diem</p>
+<p>dixisse "vixi: cras vel atra</p>
+<p>nube polum pater occupato</p></lg>
+<lg><p>vel sole puro; non tamen inritum</p>
+<p>quodcumque retro est efficiet neque</p>
+<p>diffinget infectumque reddet</p>
+<p>quod fugiens semel hora vexit."</p></lg>
+<lg><p>Fortuna saevo laeta negotio et</p>
+<p>ludum insolentem ludere pertinax</p>
+<p>transmutat incertos honores,</p>
+<p>nunc mihi nunc alii benigna.</p></lg>
+<lg><p>laudo manentem; si celeres quatit</p>
+<p>pennas, resigno quae dedit et mea</p>
+<p>virtute me involvo probamque</p>
+<p>pauperiem sine dote quaero.</p></lg>
+<lg><p>non est meum, si mugiat Africis</p>
+<p>malus procellis, ad miseras preces</p>
+<p>decurrere et votis pacisci</p>
+<p>ne Cypriae Tyriaeque merces</p></lg>
+<lg><p>addant avaro divitias mari:</p>
+<p>tunc me biremis praesidio scaphae</p>
+<p>tutum per Aegaeos tumultus</p>
+<p>aura feret geminusque Pollux.</p></lg></div2>
+<div2 type="Poem" n="30" met="First Asclepiadean">
+<p>Exegi monumentum aere perennius</p>
+<p>regalique situ pyramidum altius,</p>
+<p>quod non imber edax, non aquilo impotens</p>
+<p>possit diruere aut innumerabilis</p>
+<p>annorum series et fuga temporum.</p>
+<p>non omnis moriar multaque pars mei</p>
+<p>vitabit Libitinam; usque ego postera</p>
+<p>crescam laude recens, dum Capitolium</p>
+<p>scandet cum tacita virgine pontifex.</p>
+<p>dicar, qua violens obstrepit Aufidus</p>
+<p>et qua pauper aquae Daunus agrestium</p>
+<p>regnavit populorum, ex humili potens,</p>
+<p>princeps Aeolium carmen ad Italos</p>
+<p>deduxisse modos. sume superbiam</p>
+<p>quaesitam meritis et mihi Delphica</p>
+<p>lauro cinge volens, Melpomene, comam.</p></div2></div1>
+<div1 type="Book" n="4">
+<div2 type="Poem" n="1" met="Second Asclepiadean">
+<lg><p>Intermissa, Venus, diu</p>
+<p>rursus bella moves? parce, precor precor.</p>
+<p>non sum qualis eram bonae</p>
+<p>sub regno Cinarae. desine, dulcium</p></lg>
+<lg><p>mater saeva Cupidinum,</p>
+<p>circa lustra decem flectere mollibus</p>
+<p>iam durum imperiis: abi,</p>
+<p>quo blandae iuvenum te revocant preces.</p></lg>
+<lg><p>tempestivius in domum</p>
+<p>Pauli purpureis ales oloribus</p>
+<p>comissabere Maximi,</p>
+<p>si torrere iecur quaeris idoneum;</p></lg>
+<lg><p>namque et nobilis et decens</p>
+<p>et pro sollicitis non tacitus reis</p>
+<p>et centum puer artium</p>
+<p>late signa feret militiae tuae</p></lg>
+<lg><p>et, quandoque potentior</p>
+<p>largi muneribus riserit aemuli,</p>
+<p>Albanos prope te lacus</p>
+<p>ponet marmoream sub trabe citrea.</p></lg>
+<lg><p>illic plurima naribus</p>
+<p>duces tura lyraeque et Berecyntiae</p>
+<p>delectabere tibiae</p>
+<p>mixtis carminibus non sine fistula;</p></lg>
+<lg><p>illic bis pueri die</p>
+<p>numen cum teneris virginibus tuum</p>
+<p>laudantes pede candido</p>
+<p>in morem Salium ter quatient humum.</p></lg>
+<lg><p>me nec femina nec puer</p>
+<p>iam nec spes animi credula mutui</p>
+<p>nec certare iuvat mero</p>
+<p>nec vincire novis tempora floribus.</p></lg>
+<lg><p>sed cur heu, Ligurine, cur</p>
+<p>manat rara meas lacrima per genas?</p>
+<p>cur facunda parum decoro</p>
+<p>inter verba cadit lingua silentio?</p></lg>
+<lg><p>nocturnis ego somniis</p>
+<p>iam captum teneo, iam volucrem sequor</p>
+<p>te per gramina Martii</p>
+<p>campi, te per aquas, dure, volubilis.</p></lg></div2>
+<div2 type="Poem" n="2" met="Sapphic Strophe">
+<lg><p>Pindarum quisquis studet aemulari,</p>
+<p>Iulle, ceratis ope Daedalea</p>
+<p>nititur pennis vitreo daturus</p>
+<p>nomina ponto.</p></lg>
+<lg><p>monte decurrens velut amnis, imbres</p>
+<p>quem super notas aluere ripas,</p>
+<p>fervet inmensusque ruit profundo</p>
+<p>Pindarus ore,</p></lg>
+<lg><p>laurea donandus Apollinari,</p>
+<p>seu per audacis nova dithyrambos</p>
+<p>verba devolvit numerisque fertur</p>
+<p>lege solutis,</p></lg>
+<lg><p>seu deos regesque canit, deorum</p>
+<p>sanguinem, per quos cecidere iusta</p>
+<p>morte Centauri, cecidit tremendae</p>
+<p>flamma Chimaerae,</p></lg>
+<lg><p>sive quos Elea domum reducit</p>
+<p>palma caelestis pugilemve equomve</p>
+<p>dicit et centum potiore signis</p>
+<p>munere donat,</p></lg>
+<lg><p>flebili sponsae iuvenemve raptum</p>
+<p>plorat et viris animumque moresque</p>
+<p>aureos educit in astra nigroque</p>
+<p>invidet Orco.</p></lg>
+<lg><p>multa Dircaeum levat aura cycnum,</p>
+<p>tendit, Antoni, quotiens in altos</p>
+<p>nubium tractus: ego apis Matinae</p>
+<p>more modoque</p></lg>
+<lg><p>grata carpentis thyma per laborem</p>
+<p>plurimum circa nemus uvidique</p>
+<p>Tiburis ripas operosa parvos</p>
+<p>carmina fingo.</p></lg>
+<lg><p>concines maiore poeta plectro</p>
+<p>Caesarem, quandoque trahet ferocis</p>
+<p>per sacrum clivum merita decorus</p>
+<p>fronde Sygambros;</p></lg>
+<lg><p>quo nihil maius meliusve terris</p>
+<p>fata donavere bonique divi</p>
+<p>nec dabunt, quamvis redeant in aurum</p>
+<p>tempora priscum.</p></lg>
+<lg><p>concines laetosque dies et urbis</p>
+<p>publicum ludum super inpetrato</p>
+<p>fortis Augusti reditu forumque</p>
+<p>litibus orbum.</p></lg>
+<lg><p>tum meae, si quid loquar audiendum,</p>
+<p>vocis accedet bona pars et "o sol</p>
+<p>pulcher, o laudande!" canam recepto</p>
+<p>Caesare felix.</p></lg>
+<lg><p>teque, dum procedis, "Io Triumphe"</p>
+<p>non semel dicemus, "Io Triumphe"</p>
+<p>civitas omnis dabimusque divis</p>
+<p>tura benignis.</p></lg>
+<lg><p>te decem tauri totidemque vaccae,</p>
+<p>me tener solvet vitulus, relicta</p>
+<p>matre qui largis iuvenescit herbis</p>
+<p>in mea vota,</p></lg>
+<lg><p>fronte curvatos imitatus ignis</p>
+<p>tertium lunae referentis ortum,</p>
+<p>qua notam duxit, niveus videri,</p>
+<p>cetera fulvos.</p></lg></div2>
+<div2 type="Poem" n="3" met="Second Asclepiadean">
+<lg><p>Quem tu, Melpomene, semel</p>
+<p>nascentem placido lumine videris,</p>
+<p>illum non labor Isthmius</p>
+<p>clarabit pugilem, non equos inpiger</p></lg>
+<lg><p>curru ducet Achaico</p>
+<p>victorem neque res bellica Deliis</p>
+<p>ornatum foliis ducem,</p>
+<p>quod regum tumidas contuderit minas,</p></lg>
+<lg><p>ostendet Capitolio:</p>
+<p>sed quae Tibur aquae fertile praefluunt</p>
+<p>et spissae nemorum comae</p>
+<p>fingent Aeolio carmine nobilem.</p></lg>
+<lg><p>Romae principis urbium</p>
+<p>dignatur suboles inter amabilis</p>
+<p>vatum ponere me choros</p>
+<p>et iam dente minus mordeor invido.</p></lg>
+<lg><p>o testudinis aureae</p>
+<p>dulcem quae strepitum, Pieri, temperas,</p>
+<p>o mutis quoque piscibus</p>
+<p>donatura cycni, si libeat, sonum,</p></lg>
+<lg><p>totum muneris hoc tui est,</p>
+<p>quod monstror digito praetereuntium</p>
+<p>Romanae fidicen lyrae:</p>
+<p>quod spiro et placeo, si placeo, tuum est.</p></lg></div2>
+<div2 type="Poem" n="4" met="Alcaic Strophe">
+<lg><p>Qualem ministrum fulminis alitem,</p>
+<p>cui rex deorum regnum in avis vagas</p>
+<p>permisit expertus fidelem</p>
+<p>Iuppiter in Ganymede flavo,</p></lg>
+<lg><p>olim iuventas et patrius vigor</p>
+<p>nido laborum propulit inscium,</p>
+<p>vernique iam nimbis remotis</p>
+<p>insolitos docuere nisus</p></lg>
+<lg><p>venti paventem, mox in ovilia</p>
+<p>demisit hostem vividus impetus,</p>
+<p>nunc in reluctantis dracones</p>
+<p>egit amor dapis atque pugnae;</p></lg>
+<lg><p>qualemve laetis caprea pascuis</p>
+<p>intenta fulvae matris ab ubere</p>
+<p>iam lacte depulsum leonem</p>
+<p>dente novo peritura vidit:</p></lg>
+<lg><p>videre Raetis bella sub Alpibus</p>
+<p>Drusum gerentem Vindelici. quibus</p>
+<p>mos unde deductus per omne</p>
+<p>tempus Amazonia securi</p></lg>
+<lg><p>dextras obarmet, quaerere distuli</p>
+<p>nec scire fas est omnia, sed diu</p>
+<p>lateque victrices catervae</p>
+<p>consiliis iuvenis revictae</p></lg>
+<lg><p>sensere, quid mens rite, quid indoles</p>
+<p>nutrita faustis sub penetralibus</p>
+<p>posset, quid Augusti paternus</p>
+<p>in pueros animus Nerones.</p></lg>
+<lg><p>fortes creantur fortibus et bonis:</p>
+<p>est in iuvencis, est in equis patrum</p>
+<p>virtus neque inbellem feroces</p>
+<p>progenerant aquilae columbam.</p></lg>
+<lg><p>doctrina sed vim promovet insitam</p>
+<p>rectique cultus pectora roborant;</p>
+<p>utcumque defecere mores,</p>
+<p>indecorant bene nata culpae.</p></lg>
+<lg><p>quid debeas, o Roma, Neronibus,</p>
+<p>testis Metaurum flumen et Hasdrubal</p>
+<p>devictus et pulcher fugatis</p>
+<p>ille dies Latio tenebris,</p></lg>
+<lg><p>qui primus alma risit adorea,</p>
+<p>dirus per urbis Afer ut Italas</p>
+<p>ceu flamma per taedas vel Eurus</p>
+<p>per Siculas equitavit undas.</p></lg>
+<lg><p>post hoc secundis usque laboribus</p>
+<p>Romana pubes crevit et inpio</p>
+<p>vastata Poenorum tumultu</p>
+<p>fana deos habuere rectos.</p></lg>
+<lg><p>dixitque tandem perfidus Hannibal:</p>
+<p>"cervi, luporum praeda rapacium,</p>
+<p>sectamur ultro quos opimus</p>
+<p>fallere et effugere est triumphus.</p></lg>
+<lg><p>gens, quae cremato fortis ab Ilio</p>
+<p>iactata Tuscis aequoribus sacra</p>
+<p>natosque maturosque patres</p>
+<p>pertulit Ausonias ad urbis,</p></lg>
+<lg><p>duris ut ilex tonsa bipennibus</p>
+<p>nigrae feraci frondis in Algido,</p>
+<p>per damna, per caedis ab ipso</p>
+<p>ducit opes animumque ferro.</p></lg>
+<lg><p>non hydra secto corpore firmior</p>
+<p>vinci dolentem crevit in Herculem</p>
+<p>monstrumve submisere Colchi</p>
+<p>maius Echioniaeve Thebae.</p></lg>
+<lg><p>merses profundo, pulchrior evenit;</p>
+<p>luctere, multa proruet integrum</p>
+<p>cum laude victorem geretque</p>
+<p>proelia coniugibus loquenda.</p></lg>
+<lg><p>Carthagini iam non ego nuntios</p>
+<p>mittam superbos: occidit, occidit</p>
+<p>spes omnis et fortuna nostri</p>
+<p>nominis Hasdrubale interempto.</p></lg>
+<lg><p>nil Claudiae non perficient manus,</p>
+<p>quas et benigno numine Iuppiter</p>
+<p>defendit et curae sagaces</p>
+<p>expediunt per acuta belli".</p></lg></div2>
+<div2 type="Poem" n="5" met="Third Asclepiadean">
+<lg><p>Divis orte bonis, optume Romulae</p>
+<p>custos gentis, abes iam nimium diu;</p>
+<p>maturum reditum pollicitus patrum</p>
+<p>sancto concilio redi.</p></lg>
+<lg><p>lucem redde tuae, dux bone, patriae:</p>
+<p>instar veris enim voltus ubi tuus</p>
+<p>adfulsit populo, gratior it dies</p>
+<p>et soles melius nitent.</p></lg>
+<lg><p>ut mater iuvenem, quem Notus invido</p>
+<p>flatu Carpathii trans maris aequora</p>
+<p>cunctantem spatio longius annuo</p>
+<p>dulci distinet a domo,</p></lg>
+<lg><p>votis ominibusque et precibus vocat</p>
+<p>curvo nec faciem litore dimovet:</p>
+<p>sic desideriis icta fidelibus</p>
+<p>quaerit patria Caesarem.</p></lg>
+<lg><p>tutus bos etenim rura perambulat,</p>
+<p>nutrit rura Ceres almaque Faustitas,</p>
+<p>pacatum volitant per mare navitae;</p>
+<p>culpari metuit fides,</p></lg>
+<lg><p>nullis polluitur casta domus stupris,</p>
+<p>mos et lex maculosum edomuit nefas,</p>
+<p>laudantur simili prole puerperae,</p>
+<p>culpam poena premit comes.</p></lg>
+<lg><p>quis Parthum paveat, quis gelidum Scythen,</p>
+<p>quis Germania quos horrida parturit</p>
+<p>fetus incolumi Caesare? quis ferae</p>
+<p>bellum curet Hiberiae?</p></lg>
+<lg><p>condit quisque diem collibus in suis</p>
+<p>et vitem viduas ducit ad arbores;</p>
+<p>hinc ad vina redit laetus et alteris</p>
+<p>te mensis adhibet deum;</p></lg>
+<lg><p>te multa prece, te prosequitur mero</p>
+<p>defuso pateris et Laribus tuum</p>
+<p>miscet numen, uti Graecia Castoris</p>
+<p>et magni memor Herculis.</p>
+<lg><p>"longas o utinam, dux bone, ferias</p>
+<p>praestes Hesperiae!" dicimus integro</p>
+<p>sicci mane die, dicimus uvidi,</p>
+<p>cum sol Oceano subest.</p></lg></lg></div2>
+<div2 type="Poem" n="6" met="Sapphic Strophe">
+<lg><p>Dive, quem proles Niobea magnae</p>
+<p>vindicem linguae Tityosque raptor</p>
+<p>sensit et Troiae prope victor altae</p>
+<p>Pthius Achilles,</p></lg>
+<lg><p>ceteris maior, tibi miles inpar,</p>
+<p>filius quamvis Thetidis marinae</p>
+<p>Dardanas turris quateret tremenda</p>
+<p>cuspide pugnax—</p></lg>
+<lg><p>ille, mordaci velut icta ferro</p>
+<p>pinus aut inpulsa cupressus Euro,</p>
+<p>procidit late posuitque collum in</p>
+<p>pulvere Teucro;</p></lg>
+<lg><p>ille non inclusus equo Minervae</p>
+<p>sacra mentito male feriatos</p>
+<p>Troas et laetam Priami choreis</p>
+<p>falleret aulam,</p></lg>
+<lg><p>sed palam captis gravis, heu nefas, heu,</p>
+<p>nescios fari pueros Achivis</p>
+<p>ureret flammis, etiam latentem</p>
+<p>matris in alvo,</p></lg>
+<lg><p>ni tuis victus Venerisque gratae</p>
+<p>vocibus divum pater adnuisset</p>
+<p>rebus Aeneae potiore ductos</p>
+<p>alite muros.</p></lg>
+<lg><p>doctor argutae fidicen Thaliae</p>
+<p>Phoebe, qui Xantho lavis amne crinis,</p>
+<p>Dauniae defende decus Camenae,</p>
+<p>levis Agyieu.</p></lg>
+<lg><p>spiritum Phoebus, mihi Phoebus artem</p>
+<p>carminis nomenque dedit poetae.</p>
+<p>virginum primae puerique claris</p>
+<p>patribus orti,</p></lg>
+<lg><p>Deliae tutela deae, fugacis</p>
+<p>lyncas et cervos cohibentis arcu,</p>
+<p>Lesbium servate pedem meique</p>
+<p>pollicis ictum</p></lg>
+<lg><p>rite Latonae puerum canentes,</p>
+<p>rite crescentem face Noctilucam,</p>
+<p>prosperam frugum celeremque pronos</p>
+<p>volvere mensis.</p></lg>
+<lg><p>nupta iam dices "ego dis amicum</p>
+<p>saeculo festas referente luces</p>
+<p>reddidi carmen docilis modorum</p>
+<p> vatis Horati."</p></lg></div2>
+<div2 type="Poem" n="7" met="First Archilochian">
+<lg><p>Diffugere nives, redeunt iam gramina campis</p>
+<p>arboribusque comae;</p>
+<p>mutat terra vices et decrescentia ripas</p>
+<p>flumina praetereunt;</p></lg>
+<lg><p>Gratia cum Nymphis geminisque sororibus audet</p>
+<p>ducere nuda choros:</p>
+<p>inmortalia ne speres, monet annus et almum</p>
+<p>quae rapit hora diem.</p></lg>
+<lg><p>frigora mitescunt Zephyris, ver proterit aestas</p>
+<p>interitura, simul</p>
+<p>pomifer autumnus fruges effuderit, et mox</p>
+<p>bruma recurrit iners.</p></lg>
+<lg><p>damna tamen celeres reparant caelestia lunae:</p>
+<p>nos ubi decidimus</p>
+<p>quo pius Aeneas, quo dives Tullus et Ancus,</p>
+<p>pulvis et umbra sumus.</p></lg>
+<lg><p>quis scit an adiciant hodiernae crastina summae</p>
+<p>tempora di superi?</p>
+<p>cuncta manus avidas fugient heredis amico</p>
+<p>quae dederis animo.</p></lg>
+<lg><p>cum semel occideris et de te, splendida, Minos</p>
+<p>fecerit arbitria,</p>
+<p>non, Torquate, genus, non te facundia, non te</p>
+<p>restituet pietas;</p></lg>
+<lg><p>infernis neque enim tenebris Diana pudicum</p>
+<p>liberat Hippolytum</p>
+<p>nec Lethaea valet Theseus abrumpere caro</p>
+<p>vincula Pirithoo.</p></lg></div2>
+<div2 type="Poem" n="8" met="First Asclepiadean">
+<p>Donarem pateras grataque commodus,</p>
+<p>Censorine, meis aera sodalibus,</p>
+<p>donarem tripodas, praemia fortium</p>
+<p>Graiorum, neque tu pessuma munerum</p>
+<p>ferres, divite me scilicet artium</p>
+<p>quas aut Parrhasius protulit aut Scopas,</p>
+<p>hic saxo, liquidis ille coloribus</p>
+<p>sollers nunc hominem ponere, nunc deum</p>
+<p>sed non haec mihi vis, nec tibi talium</p>
+<p>res est aut animus deliciarum egens.</p>
+<p>gaudes carminibus; carmina possumus</p>
+<p>donare et pretium dicere muneri.</p>
+<p>non incisa notis marmora publicis,</p>
+<p>per quae spiritus et vita redit bonis</p>
+<p>post mortem ducibus, non "celeres fugae</p>
+<p>reiectaeque retrorsum Hannibalis minae"</p>
+<p>non "incendia Karthaginis inpiae",</p>
+<p>eius, "qui domita nomen ab Africa</p>
+<p>lucratus rediit", clarius indicant</p>
+<p>laudes quam "Calabrae Pierides" neque,</p>
+<p>si chartae sileant quod bene feceris,</p>
+<p>mercedem tuleris. quid foret Iliae</p>
+<p>Mavortisque puer, si taciturnitas</p>
+<p>obstaret meritis invida Romuli?</p>
+<p>ereptum Stygiis fluctibus Aeacum</p>
+<p>virtus et favor et lingua potentium</p>
+<p>vatum divitibus consecrat insulis.</p>
+<p>dignum laude virum Musa vetat mori,</p>
+<p>caelo Musa beat. sic Iovis interest</p>
+<p>optatis epulis inpiger Hercules,</p>
+<p>clarum Tyndaridae sidus ab infimis</p>
+<p>quassas eripiunt aequoribus ratis,</p>
+<p>ornatus viridi tempora pampino</p>
+<p>Liber vota bonos ducit ad exitus.</p></div2>
+<div2 type="Poem" n="9" met="Alcaic Strophe">
+<lg><p>Ne forte credas interitura quae</p>
+<p>longe sonantem natus ad Aufidum</p>
+<p>non ante volgatas per artis</p>
+<p>verba loquor socianda chordis:</p></lg>
+<lg><p>non, si priores Maeonius tenet</p>
+<p>sedes Homerus, Pindaricae latent</p>
+<p>Ceaeque et Alcaei minaces</p>
+<p>Stesichorique graves Camenae</p></lg>
+<lg><p>nec siquid olim lusit Anacreon</p>
+<p>delevit aetas; spirat adhuc amor</p>
+<p>vivuntque conmissi calores</p>
+<p>Aeoliae fidibus puellae.</p></lg>
+<lg><p>non sola comptos arsit adulteri</p>
+<p>crinis et aurum vestibus inlitum</p>
+<p>mirata regalisque cultus</p>
+<p>et comites Helene Lacaena</p></lg>
+<lg><p>primusve Teucer tela Cydonio</p>
+<p>direxit arcu; non semel Ilios</p>
+<p>vexata; non pugnavit ingens</p>
+<p>Idomeneus Sthenelusve solus</p></lg>
+<lg><p>dicenda Musis proelia; non ferox</p>
+<p>Hector vel acer Deiphobus gravis</p>
+<p>excepit ictus pro pudicis</p>
+<p>coniugibus puerisque primus.</p></lg>
+<lg><p>vixere fortes ante Agamemnona</p>
+<p>multi; sed omnes inlacrimabiles</p>
+<p>urgentur ignotique longa</p>
+<p>nocte, carent quia vate sacro.</p></lg>
+<lg><p>paullum sepultae distat inertiae</p>
+<p>celata virtus. non ego te meis</p>
+<p>chartis inornatum silebo,</p>
+<p>totve tuos patiar labores</p></lg>
+<lg><p> inpune, Lolli, carpere lividas</p>
+<p>obliviones. est animus tibi</p>
+<p>rerumque prudens et secundis</p>
+<p>temporibus dubiisque rectus,</p></lg>
+<lg><p> vindex avarae fraudis et abstinens</p>
+<p>ducentis ad se cuncta pecuniae,</p>
+<p>consulque non unius anni,</p>
+<p>sed quotiens bonus atque fidus</p>
+<lg><p>iudex honestum praetulit utili,</p>
+<p>reiecit alto dona nocentium</p>
+<p>voltu, per obstantis catervas</p>
+<p>explicuit sua victor arma.</p></lg>
+<lg><p> non possidentem multa vocaveris</p>
+<p>recte beatum; rectius occupat</p>
+<p>nomen beati qui deorum</p>
+<p>muneribus sapienter uti</p></lg>
+<lg><p>duramque callet pauperiem pati</p>
+<p>peiusque leto flagitium timet,</p>
+<p>non ille pro caris amicis</p>
+<p>aut patria timidus perire.</p></lg></lg></div2>
+<div2 type="Poem" n="10" met="Fifth (Greater) Asclepiadean">
+<p>O crudelis adhuc et Veneris muneribus potens,</p>
+<p>insperata tuae cum veniet pluma superbiae</p>
+<p>et, quae nunc umeris involitant, deciderint comae,</p>
+<p>nunc et qui color est puniceae flore prior rosae</p>
+<p>mutatus Ligurinum in faciem verterit hispidam,</p>
+<p>dices "heu," quotiens te speculo videris alterum,</p>
+<p>"quae mens est hodie, cur eadem non puero fuit,</p>
+<p>vel cur his animis incolumes non redeunt genae?"</p></div2>
+<div2 type="Poem" n="11" met="Sapphic Strophe">
+<lg><p>Est mihi nonum superantis annum</p>
+<p>plenus Albani cadus, est in horto,</p>
+<p>Phylli, nectendis apium coronis;</p>
+<p>est hederae vis</p></lg>
+<lg><p>multa, qua crinis religata fulges,</p>
+<p>ridet argento domus, ara castis</p>
+<p>vincta verbenis avet immolato</p>
+<p>spargier agno;</p></lg>
+<lg><p>cuncta festinat manus, huc et illuc</p>
+<p>cursitant mixtae pueris puellae,</p>
+<p>sordidum flammae trepidant rotantes</p>
+<p>vertice fumum.</p></lg>
+<lg><p>ut tamen noris, quibus advoceris</p>
+<p>gaudiis: Idus tibi sunt agendae,</p>
+<p>qui dies mensem Veneris marinae</p>
+<p>findit Aprilem,</p></lg>
+<lg><p>iure sollemnis mihi sanctiorque</p>
+<p>paene natali proprio, quod ex hac</p>
+<p>luce Maecenas meus adfluentis</p>
+<p>ordinat annos.</p></lg>
+<lg><p>Telephum, quem tu petis, occupavit</p>
+<p>non tuae sortis iuvenem puella</p>
+<p>dives et lasciva tenetque grata</p>
+<p>compede vinctum.</p></lg>
+<lg><p>terret ambustus Phaethon avaras</p>
+<p>spes et exemplum grave praebet ales</p>
+<p>Pegasus terrenum equitem gravatus</p>
+<p>Bellerophontem,</p></lg>
+<lg><p>semper ut te digna sequare et ultra</p>
+<p>quam licet sperare nefas putando</p>
+<p>disparem vites. age iam, meorum</p>
+<p>finis amorum,</p></lg>
+<lg><p>(non enim posthac alia calebo</p>
+<p>femina) condisce modos, amanda</p>
+<p>voce quos reddas: minuentur atrae</p>
+<p>carmine curae.</p></lg></div2>
+<div2 type="Poem" n="12" met="Third Asclepiadean">
+<lg><p>Iam veris comites, quae mare temperant,</p>
+<p>inpellunt animae lintea Thraciae,</p>
+<p>iam nec prata rigent nec fluvii strepunt</p>
+<p>hiberna nive turgidi.</p></lg>
+<lg><p>nidum ponit, Ityn flebiliter gemens,</p>
+<p>infelix avis et Cecropiae domus</p>
+<p>aeternum opprobrium, quod male barbaras</p>
+<p>regum est ulta libidines.</p></lg>
+<lg><p>dicunt in tenero gramine pinguium</p>
+<p>custodes ovium carmina fistula</p>
+<p>delectantque deum, cui pecus et nigri</p>
+<p>colles Arcadiae placent.</p></lg>
+<lg><p>adduxere sitim tempora, Vergili:</p>
+<p>sed pressum Calibus ducere Liberum</p>
+<p>si gestis, iuvenum nobilium cliens,</p>
+<p>nardo vina merebere.</p></lg>
+<lg><p>nardi parvus onyx eliciet cadum,</p>
+<p>qui nunc Sulpiciis adcubat horreis,</p>
+<p>spes donare novas largus amaraque</p>
+<p>curarum eluere efficax.</p></lg>
+<lg><p>ad quae si properas gaudia, cum tua</p>
+<p>velox merce veni: non ego te meis</p>
+<p>inmunem meditor tinguere poculis,</p>
+<p>plena dives ut in domo.</p></lg>
+<lg><p>verum pone moras et studium lucri</p>
+<p>nigrorumque memor, dum licet, ignium</p>
+<p>misce stultitiam consiliis brevem:</p>
+<p>dulce est desipere in loco.</p></lg></div2>
+<div2 type="Poem" n="13" met="Fourth Asclepiadean">
+<lg><p>Audivere, Lyce, di mea vota, di</p>
+<p>audivere, Lyce: fis anus et tamen</p>
+<p>vis formosa videri</p>
+<p>ludisque et bibis inpudens</p></lg>
+<lg><p>et cantu tremulo pota Cupidinem</p>
+<p>lentum sollicitas. ille virentis et</p>
+<p>doctae psallere Chiae</p>
+<p>pulcris excubat in genis.</p></lg>
+<lg><p>inportunus enim transvolat aridas</p>
+<p>quercus et refugit te quia luridi</p>
+<p>dentes, te quia rugae</p>
+<p>turpant et capitis nives.</p></lg>
+<lg><p>nec Coae referunt iam tibi purpurae</p>
+<p>nec cari lapides tempora, quae semel</p>
+<p>notis condita fastis</p>
+<p>inclusit volucris dies.</p></lg>
+<lg><p>quo fugit venus, heu, quove color, decens</p>
+<p>quo motus? quid habes illius, illius,</p>
+<p>quae spirabat amores,</p>
+<p>quae me surpuerat mihi</p></lg>
+<lg><p>felix post Cinaram notaque et artium</p>
+<p>gratarum facies? sed Cinarae brevis</p>
+<p>annos fata dederunt,</p>
+<p>servatura diu parem</p></lg>
+<lg><p>cornicis vetulae temporibus Lycen,</p>
+<p>possent ut iuvenes visere fervidi</p>
+<p>multo non sine risu</p>
+<p>dilapsam in cineres facem.</p></lg></div2>
+<div2 type="Poem" n="14" met="Alcaic Strophe">
+<lg><p>Quae cura patrum quaeve Quiritium</p>
+<p>plenis honorum muneribus tuas,</p>
+<p>Auguste, virtutes in aevum</p>
+<p>per titulos memoresque fastos</p></lg>
+<lg><p>aeternet, o, qua sol habitabilis</p>
+<p>inlustrat oras, maxime principum,</p>
+<p>quem legis expertes Latinae</p>
+<p>Vindelici didicere nuper</p></lg>
+<lg><p>quid Marte posses. milite nam tuo</p>
+<p>Drusus Genaunos, inplacidum genus,</p>
+<p>Breunosque velocis et arcis</p>
+<p>Alpibus inpositas tremendis</p></lg>
+<lg><p>deiecit acer plus vice simplici;</p>
+<p>maior Neronum mox grave proelium</p>
+<p>conmisit immanisque Raetos</p>
+<p>auspiciis pepulit secundis,</p></lg>
+<lg><p>spectandus in certamine Martio</p>
+<p>devota morti pectora liberae</p>
+<p>quantis fatigaret ruinis,</p>
+<p>indomitas prope qualis undas</p></lg>
+<lg><p>exercet Auster Pleiadum choro</p>
+<p>scindente nubis, inpiger hostium</p>
+<p>vexare turmas et frementem</p>
+<p>mittere equum medios per ignis.</p></lg>
+<lg><p>sic tauriformis volvitur Aufidus,</p>
+<p>qui regna Dauni praefluit Apuli,</p>
+<p>cum saevit horrendamque cultis</p>
+<p>diluviem meditatur agris,</p></lg>
+<lg><p>ut barbarorum Claudius agmina</p>
+<p>ferrata vasto diruit impetu</p>
+<p>primosque et extremos metendo</p>
+<p>stravit humum sine clade victor,</p></lg>
+<lg><p>te copias, te consilium et tuos</p>
+<p>praebente divos. nam tibi quo die</p>
+<p>portus Alexandrea supplex</p>
+<p>et vacuam patefecit aulam,</p></lg>
+<lg><p>Fortuna lustro prospera tertio</p>
+<p>belli secundos reddidit exitus</p>
+<p>laudemque et optatum peractis</p>
+<p>imperiis decus adrogavit.</p></lg>
+<lg><p>te Cantaber non ante domabilis</p>
+<p>Medusque et Indus, te profugus Scythes</p>
+<p>miratur, o tutela praesens</p>
+<p>Italiae dominaeque Romae.</p></lg>
+<lg><p>te fontium qui celat origines</p>
+<p>Nilusque et Hister, te rapidus Tigris,</p>
+<p>te beluosus qui remotis</p>
+<p>obstrepit Oceanus Britannis,</p></lg>
+<lg><p>te non paventis funera Galliae</p>
+<p>duraeque tellus audit Hiberiae,</p>
+<p>te caede gaudentes Sygambri</p>
+<p>conpositis venerantur armis.</p></lg></div2>
+<div2 type="Poem" n="15" met="Alcaic Strophe">
+<lg><p>Phoebus volentem proelia me loqui</p>
+<p>victas et urbis increpuit lyra,</p>
+<p>ne parva Tyrrhenum per aequor</p>
+<p>vela darem. tua, Caesar, aetas</p></lg>
+<lg><p>fruges et agris rettulit uberes</p>
+<p>et signa nostro restituit Iovi</p>
+<p>derepta Parthorum superbis</p>
+<p>postibus et vacuum duellis</p></lg>
+<lg><p>Ianum Quirini clausit et ordinem</p>
+<p>rectum evaganti frena licentiae</p>
+<p>iniecit emovitque culpas</p>
+<p>et veteres revocavit artis,</p></lg>
+<lg><p>per quas Latinum nomen et Italae</p>
+<p>crevere vires famaque et imperi</p>
+<p>porrecta maiestas ad ortus</p>
+<p>solis ab Hesperio cubili.</p></lg>
+<lg><p>custode rerum Caesare non furor</p>
+<p>civilis aut vis exiget otium,</p>
+<p>non ira, quae procudit ensis</p>
+<p>et miseras inimicat urbis.</p></lg>
+<lg><p>non qui profundum Danuvium bibunt</p>
+<p>edicta rumpent Iulia, non Getae,</p>
+<p>non Seres infidique Persae,</p>
+<p>non Tanain prope flumen orti.</p></lg>
+<lg><p>nosque et profestis lucibus et sacris</p>
+<p>inter iocosi munera Liberi</p>
+<p>cum prole matronisque nostris,</p>
+<p>rite deos prius adprecati,</p></lg>
+<lg><p>virtute functos more patrum duces</p>
+<p>Lydis remixto carmine tibiis</p>
+<p>Troiamque et Anchisen et almae</p>
+<p>progeniem Veneris canemus.</p></lg>
+</div2></div1>
+</body></text>
+</work>

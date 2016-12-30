@@ -1,23 +1,14 @@
 <?xml version="1.0"?>
-<!DOCTYPE TEI.2 PUBLIC "-//TEI P4//DTD Main DTD Driver File//EN" "http://www.tei-c.org/Guidelines/DTD/tei2.dtd" [
-<!ENTITY % TEI.XML "INCLUDE">
-<!ENTITY % PersVerse PUBLIC "-//Perseus P4//DTD Perseus Verse//EN" "http://www.perseus.tufts.edu/DTD/1.0/PersVerse.dtd" >
-%PersVerse;
-]>
-<TEI.2>
-<teiHeader type="text" status="new">
+<work>
+<header type="text" status="new">
 <fileDesc>
 <titleStmt>
 <title>Carmina</title>
 <title type="sub">Machine readable text</title>
 <author>Q. Horatius Flaccus (Horace)</author>
 <editor role="editor">Paul Shorey</editor>
-<editor role="editor">Gordon Lang</editor>
-&responsibility;
-&fund.NEH;
 </titleStmt>
 <extent>about 132Kb</extent>
-&Perseus.publish;
 <sourceDesc>
 <biblStruct>
 <monogr>
@@ -26,74 +17,15 @@
 <editor role="editor">Paul Shorey and Gordon J. Laing</editor>
 <imprint>
 <pubPlace>Chicago</pubPlace>
-<publisher>Benj. H. Sanborn &amp; Co.</publisher>
+<publisher>Benj. H. Sanborn Co.</publisher>
 <date>1919</date>
 </imprint>
 </monogr>
 </biblStruct>
 </sourceDesc>
 </fileDesc>
+</header>
 
-<encodingDesc>
-<refsDecl doctype="TEI.2">
-<step delim="." refunit="book" from="DESCENDANT (1 DIV1 N %1)"/>
-<step delim="." refunit="poem" from="DESCENDANT (1 DIV2 N %2)" n="chunk"/>
-<!--<step refunit="line" from="DESCENDANT (1 L N %3)"/>-->
-</refsDecl>
-</encodingDesc>
-
-<profileDesc>
-<langUsage>
-<language id="la">Latin</language>
-</langUsage>
-</profileDesc>
-
-<revisionDesc>
-<change><date>July, 1997</date>
-<respStmt><name>WM</name><resp>ed.</resp></respStmt>
-<item>public domain text of Vollmer, Frederick,  _Q._Horati_Flacci_Carmina_  Leipzig: Teubner, 1912 Book 1
-downloaded from Libellus; Books 2-4 of Vollmer scanned and proofread by PE; entire text diffed with PHI and corrected to Shorey and Laing by WM.
-needs line nos.</item></change>
-<change><date>10/7/97</date>
-<respStmt><name>David Smith</name><resp>ed.</resp></respStmt>
-<item>
-$Log: hor.carm_lat.xml,v $
-Revision 1.1  2011-01-15 23:36:28  gcrane
-base file for sdl
-
-Revision 1.1  2009/11/24 20:08:27  rsingh04
-moved more xml files around based on copyright status
-
-Revision 1.5  2009/09/08 20:30:41  lcerrato
-fixed typo
-
-Revision 1.4  2009/08/03 19:50:33  rsingh04
-fixed horace lat citation scheme and removed errors to that text
-
-Revision 1.3  2008/11/14 21:23:21  lcerrato
-fixed author name for consistent sorting
-
-Revision 1.2  2005/08/01 16:12:23  packel
-removed stray item tags
-
-Revision 1.1  2005/07/25 14:37:19  packel
-Converted to XML
-
-Revision 1.4  2003/07/01 22:17:02  yorkc
-Updated texts to TEI P4 and Perseus P4 extensions; minor cleanup (esp. character encodings and typos.)
-
-Revision 1.3  2000/03/04 20:34:38  dasmith
-Added separate funder entity to TEI header.
-
-Revision 1.2  1999/10/19 15:12:55  dasmith
-Fixed refsDecl and titleStmt.
-
-Revision 1.1  1997/10/07 18:36:59  textgod
-Added to repository. Passed SGML parse.
-
-</item></change>
-</revisionDesc>
-</teiHeader>
 <text><body>
 <div1 type="Book" n="1">
 <div2 type="Poem" n="1" met="First Asclepiadean">
@@ -3237,4 +3169,4 @@ Added to repository. Passed SGML parse.
 <l>Troiamque et Anchisen et almae</l>
 <l>progeniem Veneris canemus.</l></lg>
 </div2></div1>
-</body></text></TEI.2>
+</body></text></header>
