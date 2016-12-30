@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.ericmschmidt.latinreader.R;
+import com.ericmschmidt.classicsreader.R;
 
 public class ErrorActivity extends AppCompatActivity {
 

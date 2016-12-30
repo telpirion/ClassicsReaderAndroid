@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.datamodel.Library;
+import com.ericmschmidt.latinreader.datamodel.Manifest;
 import com.ericmschmidt.latinreader.datamodel.ReadingViewModel;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
-import com.ericmschmidt.latinreader.R;
+import com.ericmschmidt.classicsreader.R;
 
 public class ReadingFragment extends Fragment {
 
@@ -79,7 +81,8 @@ public class ReadingFragment extends Fragment {
 
         } else {
 
-            Library library = new Library();
+            Manifest manifest = MyApplication.getManifest();
+            Library library = new Library(manifest.getCollection());
             WorkInfo work = library.getWorkInfoByID(workToGetId);
             int numLines = 1;
 

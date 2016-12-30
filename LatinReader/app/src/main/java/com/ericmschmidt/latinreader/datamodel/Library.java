@@ -12,8 +12,8 @@ public class Library {
     /**
      * Creates an instance of the Library class.
      */
-    public Library() {
-        this._workInfos = Manifest.getCollection();
+    public Library(ArrayList<WorkInfo> collection) {
+        this._workInfos = collection;
     }
 
     /**

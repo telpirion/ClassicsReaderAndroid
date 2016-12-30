@@ -1,5 +1,6 @@
 package com.ericmschmidt.latinreader.datamodel;
 
+import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.utilities.DictionaryXMLHelper;
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.utilities.ResourceHelper;
@@ -20,7 +21,7 @@ public class Dictionary  {
      * Creates a new instance of the dictionary class.
      */
     public Dictionary() {
-        this.dictionaryInfo = Manifest.getDictionaryInfo();
+        this.dictionaryInfo = MyApplication.getManifest().getDictionaryInfo();
         initEntries();
     }
 
@@ -76,7 +77,8 @@ public class Dictionary  {
     // Gets the number of alphabet chapters in dictionary.
     private void initEntries() {
         try {
-            InputStream stream = ResourceHelper.getResourceStream(Manifest.getDictionaryEntryResource());
+            Manifest manifest = MyApplication.getManifest();
+            InputStream stream = ResourceHelper.getResourceStream(manifest.getDictionaryEntryResource());
             this._entryHeaders = DictionaryXMLHelper.getEntryHeaders2(stream);
 
         } catch (Exception ex) {

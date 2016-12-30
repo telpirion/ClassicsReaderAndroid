@@ -1,1 +1,1 @@
-include ':app', ':latinreader'
+include ':app', ':latinreader', ':greekreader'

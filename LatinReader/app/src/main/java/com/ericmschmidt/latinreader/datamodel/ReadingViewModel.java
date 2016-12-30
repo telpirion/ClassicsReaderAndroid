@@ -5,7 +5,6 @@ import android.support.v7.preference.PreferenceManager;
 
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.utilities.ITextConverter;
-import com.ericmschmidt.latinreader.utilities.TextConverter;
 
 import java.util.Locale;
 
@@ -25,16 +24,21 @@ public class ReadingViewModel {
     private String _author;
     private String _title;
     private boolean _isTranslation;
+    private ITextConverter converter;
 
     /**
      * Creates an instance of the ReadingViewModel class with a work open.
      * @param work the work to open.
      * @param isTranslation determines whether to return the translation of this work.
      */
-    public ReadingViewModel(WorkInfo work, boolean isTranslation, int pageOffset) {
+    public ReadingViewModel(WorkInfo work,
+                            boolean isTranslation,
+                            int pageOffset) {
         this._currentWorkInfo = work;
         this._pageOffset = (pageOffset > -1) ? pageOffset : 1;
         this._isTranslation = isTranslation;
+        this.converter = MyApplication.isNonRomanChar() ?
+            MyApplication.getTextConverter() : null;
 
         if (!loadLastReadingPosition()) { // This work hasn't been read yet.
             this._currentLineIndex = 0;
@@ -138,8 +142,10 @@ public class ReadingViewModel {
 
     // Translate the current line from Latin characters to another character set.
     private String convertCharacters(String latinSource) {
-        ITextConverter converter = new TextConverter();
-        return converter.convertSourceToTargetCharacters(latinSource);
+        if (converter != null) {
+            return converter.convertSourceToTargetCharacters(latinSource);
+        }
+        return latinSource;
     }
 
     // Increase the reading position.

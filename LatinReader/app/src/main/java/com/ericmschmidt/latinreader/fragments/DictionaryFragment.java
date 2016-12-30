@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.ericmschmidt.latinreader.R;
+import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.datamodel.Dictionary;
 
 public class DictionaryFragment extends Fragment {

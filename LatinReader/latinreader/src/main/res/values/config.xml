@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="manifest">com.ericmschmidt.latinreader.datamodel.LatinReaderManifest</string>
+    <bool name="non_roman_char">false</bool>
+    <string name="text_converter">error</string>
+</resources>

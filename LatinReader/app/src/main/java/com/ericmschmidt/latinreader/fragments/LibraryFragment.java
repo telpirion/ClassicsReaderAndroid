@@ -1,8 +1,13 @@
 package com.ericmschmidt.latinreader.fragments;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +16,21 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.ericmschmidt.latinreader.R;
+import com.ericmschmidt.classicsreader.R;
+import com.ericmschmidt.latinreader.MyApplication;
+import com.ericmschmidt.latinreader.datamodel.Manifest;
 import com.ericmschmidt.latinreader.datamodel.Library;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 import com.ericmschmidt.latinreader.layouts.LibraryListViewAdapter;
 import com.ericmschmidt.latinreader.layouts.TranslationListViewAdapter;
 
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+
 public class LibraryFragment extends Fragment {
 
     public static final String TRANSLATION_FLAG = "translation";
+    private static final String TAG = "LibraryFragment";
 
     private boolean translationFlag;
     private Library library;
@@ -58,21 +69,28 @@ public class LibraryFragment extends Fragment {
 
         super.onActivityCreated(onSavedInstanceState);
 
-        // Set the content of the main list view.
-        library = new Library();
+        try {
+
+            // Retrieve the manifest class from the package using config settings.
+            Manifest manifest = MyApplication.getManifest();
+            library = new Library(manifest.getCollection());
             works = library.getWorks();
 
-        ArrayAdapter<WorkInfo> adapter;
+            ArrayAdapter<WorkInfo> adapter;
 
-        if (translationFlag) {
-            adapter = new TranslationListViewAdapter(getActivity(), works);
-        } else {
-            adapter = new LibraryListViewAdapter(getActivity(), works);
+            if (translationFlag) {
+                adapter = new TranslationListViewAdapter(getActivity(), works);
+            } else {
+                adapter = new LibraryListViewAdapter(getActivity(), works);
+            }
+
+            ListView listView = (ListView)getActivity().findViewById(R.id.library_listView);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(mMessageClickedHandler);
+
+        } catch (Exception ex) {
+            MyApplication.logError(this.getClass(), ex.getMessage());
         }
-
-        ListView listView = (ListView)getActivity().findViewById(R.id.library_listView);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(mMessageClickedHandler);
     }
 
     // Create a message handling object as an anonymous class.

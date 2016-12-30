@@ -8,13 +8,18 @@ import java.util.ArrayList;
 /**
  * Contains the resource manifest for the app.
  */
-public class Manifest {
+public class LatinReaderManifest extends Manifest {
+
+    public LatinReaderManifest() {
+        super();
+    }
 
     /**
      * Gets the collection of works for this app.
      * @return WorkInfo the collection
      */
-    public static ArrayList<WorkInfo> getCollection() {
+    @Override
+    public ArrayList<WorkInfo> getCollection() {
         ArrayList<WorkInfo> workInfos = new ArrayList<WorkInfo>();
 
         workInfos.add(new WorkInfo("CaesarBG",
@@ -87,7 +92,8 @@ public class Manifest {
      * Gets the resource information of the dictionary file.
      * @return WorkInfo
      */
-    public static WorkInfo getDictionaryInfo() {
+    @Override
+    public WorkInfo getDictionaryInfo() {
         return new WorkInfo("dictionary",
                 "An Elementary Latin Dictionary",
                 "Charles Lewis",
@@ -102,7 +108,8 @@ public class Manifest {
      * Gets the resource ID of the dictionary entry file.
      * @return int the dictionary entry file's ID.
      */
-    public static int getDictionaryEntryResource() {
+    @Override
+    public int getDictionaryEntryResource() {
         return R.raw.dictionary_entries;
     }
 }

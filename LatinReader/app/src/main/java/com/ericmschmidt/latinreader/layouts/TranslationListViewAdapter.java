@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ericmschmidt.latinreader.R;
+import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 
 /**

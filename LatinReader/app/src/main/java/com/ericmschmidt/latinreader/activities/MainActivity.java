@@ -18,7 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ericmschmidt.latinreader.MyApplication;
-import com.ericmschmidt.latinreader.R;
+import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.exceptions.ForceCloseHandler;
 import com.ericmschmidt.latinreader.fragments.DictionaryFragment;
 import com.ericmschmidt.latinreader.fragments.LibraryFragment;
