@@ -102,7 +102,7 @@ public class ReadingFragment extends Fragment {
             // After parsing the XML, the app presents poetry lines one at a time.
             // The user can override the number of lines to show per page.
             // This setting doesn't matter for prose, since one "line" equals one paragraph.
-            if (work.getWorkType() == WorkInfo.WorkType.poem) {
+            if (work.getWorkType() == WorkInfo.WorkType.POEM) {
                 String linesPerPage = sharedPreferences.getString(SettingsFragment.POEM_LINES, SettingsFragment.POEM_LINES_DEFAULT);
                 numLines = Integer.parseInt(linesPerPage);
             }

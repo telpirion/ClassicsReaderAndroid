@@ -23,7 +23,7 @@ public class GreekReaderManifest extends Manifest {
                 "Aristotle",
                 R.raw.aristot_pol_gk,
                 R.raw.aristot_pol_eng,
-                WorkInfo.WorkType.prose));
+                WorkInfo.WorkType.PROSE));
 
         workInfos.add(new WorkInfo("Herodotus",
                 "Histories",
@@ -32,7 +32,7 @@ public class GreekReaderManifest extends Manifest {
                 "Herodotus",
                 R.raw.hdt_gk,
                 R.raw.hdt_gk,
-                WorkInfo.WorkType.prose));
+                WorkInfo.WorkType.PROSE));
 
         workInfos.add(new WorkInfo("HomerIliad",
                 "Iliad",
@@ -41,7 +41,7 @@ public class GreekReaderManifest extends Manifest {
                 "Homer",
                 R.raw.hom_il_gk,
                 R.raw.hom_il_gk,
-                WorkInfo.WorkType.poem));
+                WorkInfo.WorkType.POEM));
 
         workInfos.add(new WorkInfo("HomerOdyssey",
                 "Odyssey",
@@ -50,7 +50,7 @@ public class GreekReaderManifest extends Manifest {
                 "Homer",
                 R.raw.hom_od_gk,
                 R.raw.hom_od_eng,
-                WorkInfo.WorkType.poem));
+                WorkInfo.WorkType.POEM));
 
         workInfos.add(new WorkInfo("Lysias",
                 "Speeches",
@@ -59,7 +59,7 @@ public class GreekReaderManifest extends Manifest {
                 "Lysias",
                 R.raw.lys_gk,
                 R.raw.lys_gk,
-                WorkInfo.WorkType.prose));
+                WorkInfo.WorkType.PROSE));
 
         workInfos.add(new WorkInfo("PlatoRep",
                 "Republic",
@@ -68,7 +68,7 @@ public class GreekReaderManifest extends Manifest {
                 "Plato",
                 R.raw.plat_rep_gk,
                 R.raw.plat_rep_eng,
-                WorkInfo.WorkType.prose));
+                WorkInfo.WorkType.PROSE));
 
         workInfos.add(new WorkInfo("XenophonAn",
                 "Anabasis",
@@ -77,7 +77,7 @@ public class GreekReaderManifest extends Manifest {
                 "Xenophon",
                 R.raw.xen_anab_gk,
                 R.raw.xen_anab_eng,
-                WorkInfo.WorkType.prose));
+                WorkInfo.WorkType.PROSE));
 
         return workInfos;
     }
@@ -91,7 +91,7 @@ public class GreekReaderManifest extends Manifest {
                 "",
                 R.raw.ml,
                 R.raw.ml,
-                WorkInfo.WorkType.prose);
+                WorkInfo.WorkType.PROSE);
     }
 
     /**

@@ -29,7 +29,7 @@ public class LatinReaderManifest extends Manifest {
                 "Caesar",
                 R.raw.caes_bg_lat,
                 R.raw.caes_bg_eng,
-                WorkInfo.WorkType.prose));
+                WorkInfo.WorkType.PROSE));
 
         workInfos.add(new WorkInfo("Horace",
                 "Carmina",
@@ -38,7 +38,7 @@ public class LatinReaderManifest extends Manifest {
                 "Horace",
                 R.raw.hor_carm_lat,
                 R.raw.hor_carm_eng,
-                WorkInfo.WorkType.poem));
+                WorkInfo.WorkType.POEM));
 
         workInfos.add(new WorkInfo("Lucretius",
                 "De Rerum Natura",
@@ -47,7 +47,7 @@ public class LatinReaderManifest extends Manifest {
                 "Lucretius",
                 R.raw.lucretius_lat,
                 R.raw.lucretius_eng,
-                WorkInfo.WorkType.poem));
+                WorkInfo.WorkType.POEM));
 
         workInfos.add(new WorkInfo("OvidM",
                 "Metamorphosis",
@@ -56,7 +56,7 @@ public class LatinReaderManifest extends Manifest {
                 "Ovid",
                 R.raw.ovid_met_lat,
                 R.raw.ovid_met_eng,
-                WorkInfo.WorkType.poem));
+                WorkInfo.WorkType.POEM));
 
         workInfos.add(new WorkInfo("Petronius",
                 "Satyricon, Fragmenta, and Poems",
@@ -65,7 +65,7 @@ public class LatinReaderManifest extends Manifest {
                 "Petronius",
                 R.raw.petr_lat,
                 R.raw.petr_eng,
-                WorkInfo.WorkType.prose));
+                WorkInfo.WorkType.PROSE));
 
         workInfos.add(new WorkInfo("SalJug",
                 "Bellum Jugurthinum",
@@ -74,7 +74,7 @@ public class LatinReaderManifest extends Manifest {
                 "Sallust",
                 R.raw.sallust_jugur_lat,
                 R.raw.sallust_jugur_eng,
-                WorkInfo.WorkType.prose));
+                WorkInfo.WorkType.PROSE));
 
         workInfos.add(new WorkInfo("SenApoc",
                 "Apocolocyntosis",
@@ -83,7 +83,7 @@ public class LatinReaderManifest extends Manifest {
                 "Seneca",
                 R.raw.sen_apoc_lat,
                 R.raw.sen_apoc_eng,
-                WorkInfo.WorkType.prose));
+                WorkInfo.WorkType.PROSE));
 
         workInfos.add(new WorkInfo("VirgA",
                 "Aeneid",
@@ -92,7 +92,7 @@ public class LatinReaderManifest extends Manifest {
                 "Vergil",
                 R.raw.verg_a_lat,
                 R.raw.verg_a_eng,
-                WorkInfo.WorkType.poem));
+                WorkInfo.WorkType.POEM));
 
         return workInfos;
     }
@@ -110,7 +110,7 @@ public class LatinReaderManifest extends Manifest {
                 "",
                 R.raw.lewis,
                 R.raw.lewis,
-                WorkInfo.WorkType.prose);
+                WorkInfo.WorkType.PROSE);
     }
 
     /**

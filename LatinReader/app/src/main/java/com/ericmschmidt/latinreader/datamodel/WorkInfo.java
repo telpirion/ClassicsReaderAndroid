@@ -28,7 +28,7 @@ public class WorkInfo {
     private String _englishAuthor;
     private int _location;
     private int _englishLocation;
-    private WorkType _workType;
+    private int _workType;
 
     /**
      * Creates a new instance of the Work class.
@@ -48,7 +48,7 @@ public class WorkInfo {
                 String englishAuthor,
                 int location,
                 int englishLocation,
-                WorkType workType)
+                int workType)
     {
         this._id = id;
         this._title = title;
@@ -140,12 +140,13 @@ public class WorkInfo {
      * Gets the type of text that this info represents.
      * @return the WorkType for this work.
      */
-    public WorkType getWorkType() {
+    public int getWorkType() {
         return this._workType;
     }
 
-    public enum WorkType {
-        prose,
-        poem
+
+    public class WorkType {
+        public static final int PROSE = 1;
+        public static final int POEM = 2;
     }
 }
