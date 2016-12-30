@@ -1,7 +1,10 @@
-package com.ericmschmidt.latinreader.utilities;
+package com.ericmschmidt.greekreader.utilities;
+
+import com.ericmschmidt.greekreader.R;
 
 import com.ericmschmidt.latinreader.MyApplication;
-import com.ericmschmidt.latinreader.R;
+import com.ericmschmidt.latinreader.utilities.ITextConverter;
+import com.ericmschmidt.latinreader.utilities.ResourceHelper;
 
 import android.util.JsonReader;
 import android.util.Log;

@@ -1,17 +1,19 @@
-package com.ericmschmidt.latinreader.datamodel;
+package com.ericmschmidt.greekreader.datamodel;
 
-import com.ericmschmidt.latinreader.R;
+import com.ericmschmidt.greekreader.R;
+import com.ericmschmidt.latinreader.datamodel.Manifest;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 
 import java.util.ArrayList;
 
-public class Manifest {
+public class GreekReaderManifest extends Manifest {
 
     /**
      * Gets the collection of works for this app.
      * @return the collection
      */
-    public static ArrayList<WorkInfo> getCollection() {
+    @Override
+    public ArrayList<WorkInfo> getCollection() {
         ArrayList<WorkInfo> workInfos = new ArrayList<WorkInfo>();
 
         workInfos.add(new WorkInfo("AristotlePol",
@@ -80,7 +82,8 @@ public class Manifest {
         return workInfos;
     }
 
-    public static WorkInfo getDictionaryInfo() {
+    @Override
+    public WorkInfo getDictionaryInfo() {
         return new WorkInfo("dictionary",
                 "An Intermediate Greek-English Lexicon",
                 "Henry George Liddell and Robert SCott",
@@ -95,7 +98,8 @@ public class Manifest {
      * Gets the resource ID of the dictionary entry file.
      * @return int the dictionary entry file's ID.
      */
-    public static int getDictionaryEntryResource() {
+    @Override
+    public int getDictionaryEntryResource() {
         return R.raw.dictionary_entries;
     }
 }
