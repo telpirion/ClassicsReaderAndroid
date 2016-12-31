@@ -20,8 +20,9 @@ import java.util.HashMap;
  * Version 2.0.
  *
  * http://www.unicode.org/charts/PDF/U1F00.pdf
+ * http://www.fileformat.info/search/google.htm
  *
- * Revised: 2016-06-01
+ * Revised: 2016-12-30
  */
 public class TextConverter implements ITextConverter {
 
@@ -38,17 +39,23 @@ public class TextConverter implements ITextConverter {
 
     @Override
     public String convertSourceToTargetCharacters(String source) {
-        String[] paraArray = source.split(" ");
+        String[] paraArray = source.split("\n");
         String convertedString = "";
 
         for (int i = 0; i < paraArray.length; i++) {
-            convertedString += convertWord(paraArray[i]) + " ";
+            String[] wordArray = paraArray[i].split(" ");
+
+            for (int j = 0; j < wordArray.length; j++) {
+                convertedString += convertWord(wordArray[j]) + " ";
+            }
+            convertedString += "\n";
         }
         return convertedString;
     }
 
     // Converts the JSON resource into a HashMap.
     private void initCharacterHash() throws IOException {
+        //InputStream stream = ResourceHelper.getResourceStream(R.raw.latin_greek_text_conversion);
         InputStream stream = ResourceHelper.getResourceStream(R.raw.latin_greek_text_conversion);
         JsonReader reader = new JsonReader(new InputStreamReader(stream));
 
@@ -120,19 +127,44 @@ public class TextConverter implements ITextConverter {
         convertedWord += resolveDiacriticals(holdVowelChar, holdCapital);
 
         // Replace any final sigmas with the ending sigma.
-        // TODO: Handle case where the sigma is followed by a comma, period, semi-colon or colon.
-        //if (String.valueOf(convertedWord.charAt(convertedWord.length() - 1)).equals("σ")) {
-        //    convertedWord = convertedWord.substring(0, convertedWord.length() - 1) + "ς";
-        //}
+        if (convertedWord.indexOf("σ") > -1) {
+            convertedWord = convertFinalSigma(convertedWord);
+        }
 
-        Log.d("T", convertedWord);
+        //Log.d("T", convertedWord);
+
+        return convertedWord;
+    }
+
+    // Convert final sigma.
+    private String convertFinalSigma(String convertedWord){
+        String trimmedWord = convertedWord.replace(" ", "");
+        StringBuilder cleaner = new StringBuilder(trimmedWord);
+
+        Character last = trimmedWord.charAt(trimmedWord.length() - 1);
+        Character secondToLast = trimmedWord.charAt(trimmedWord.length() - 2);
+
+        if (last.equals('σ')) {
+            cleaner.setCharAt(trimmedWord.length() - 1, 'ς');
+            return cleaner.toString();
+        }
+
+        if ((secondToLast.equals('σ')) && (last.equals(',')
+                || last.equals('.')
+                || last.equals(':')
+                || last.equals(';')
+                || last.equals('\n'))) {
+
+            cleaner.setCharAt(trimmedWord.length() - 2, 'ς');
+            return cleaner.toString();
+        }
 
         return convertedWord;
     }
 
     // Determine whether a character is a diacritical.
     private boolean isDiacritical(String character) {
-        return ")(\\/=|".indexOf(character) > -1;
+        return ")(\\/=|+".indexOf(character) > -1;
     }
 
     // Resolve any unresolved vowels + diacriticals.
