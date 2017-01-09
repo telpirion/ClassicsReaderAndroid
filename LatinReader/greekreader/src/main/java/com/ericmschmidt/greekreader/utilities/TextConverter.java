@@ -100,7 +100,7 @@ public class TextConverter implements ITextConverter {
                 } else {
                     convertedWord += resolveDiacriticals(holdVowelChar, holdCapital);
                     convertedWord += this._characterHash.get(currChar);
-                    holdCapital = "";
+                    holdCapital = ""; // TODO: This can probably be moved to outside the if/else; delete above.
                     holdVowelChar = "";
                 }
             } else if (String.valueOf(currChar).equals(("*"))) {
@@ -170,6 +170,8 @@ public class TextConverter implements ITextConverter {
     // Resolve any unresolved vowels + diacriticals.
     private String resolveDiacriticals(String holdVowel, String holdCapital) {
         String convertedWord = "";
+
+        // TODO: Change this to a simple "resolve" method and two method calls.
 
         if (!holdVowel.isEmpty() && (this._characterHash.containsKey(holdVowel))) {
             convertedWord += this._characterHash.get(holdVowel);
