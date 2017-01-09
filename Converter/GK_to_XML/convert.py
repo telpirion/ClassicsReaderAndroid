@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import sys
 import xml.etree.ElementTree as ET
 import json
@@ -12,9 +15,12 @@ def convertCharacter(c):
 
 # Open an XML file and return the root element.
 def openXMLSource(filename):
-    tree = ET.parse(filename)
-    root = tree.getroot()
-    return root
+    try:
+        tree = ET.parse(filename)
+        root = tree.getroot()
+        return root
+    except RuntimeError:
+        print ("There was an error opening the source file,")
 
 # Open the JSON conversion file and add key/value
 # pairs to the character dictionary.
@@ -100,9 +106,8 @@ def convertWord(word):
     for i in range(len(word)):
         c = word[i]
 
+        # Convert the character if it's known.
         if c in __characterHash:
-            # Convert the character
-            #convertedWord += convertCharacter(c)
 
             # Resolving a capital letter.
             if holdCapital != "":
@@ -118,10 +123,12 @@ def convertWord(word):
             holdCapital = ""
             holdVowelChar = ""
 
+        # The character is the beginning of a capital letter.
         elif c == '*':
             # Build the holdCapital value
             holdCapital += "*"
 
+        # The character is a diacritical mark.
         elif isDiacritical(c):
             # Build the holdVowelChar value
             if holdCapital != "":
@@ -137,11 +144,17 @@ def convertWord(word):
                 holdVowelChar += word[i - 1] + c
                 convertedWord = convertedWord[0:(len(convertedWord) - 1)]
 
+        # Don't know what to do with this
+        # character; convert as-is and output to the terminal.
         else:
-            # Don't know what to do with this
-            # character; output to the terminal
             convertedWord += c
             print (c)
+
+    convertedWord += resolve(holdVowelChar)
+    convertedWord += resolve(holdCapital)
+
+    if convertedWord.find(u"σ") > -1:
+        convertedWord = convertFinalSigma(convertedWord)
 
     return convertedWord
 
@@ -165,12 +178,32 @@ def resolve(s):
 
     return newChar
 
+# Replace any final sigma characters with the correct version
+# of the character.
+def convertFinalSigma(convertedWord):
+    trimmedWord = convertedWord.replace(" ", "")
+    trimmedWordLen = len(trimmedWord)
+    lastChar = trimmedWord[trimmedWordLen - 1]
+    secondToLast = trimmedWord[trimmedWordLen - 2]
+    cleanedWord = ""
+
+    if lastChar == u"σ":
+        cleanedWord = trimmedWord[:trimmedWordLen - 2] + u"ς"
+
+    if (secondToLast == u"σ") and (".:;,".find(lastChar) > -1):
+        cleanedWord = trimmedWord[:trimmedWordLen - 3] + u"ς" +lastChar
+
+    return cleanedWord
+
 def main():
 
     # Determine that we're actually converting,
     # not just testing a method
     if len(sys.argv) > 1:
-        source = openXMLSource('hom_il_gk.xml')
+        filename = sys.argv[1]
+
+        #source = openXMLSource('hom_il_gk.xml')
+        source = openXMLSource(filename)
 
         # Populate the dictionary with entries from JSON
         initDictionary()
@@ -185,7 +218,8 @@ def main():
         iterateBooks(source, newTextElement)
 
         # Write the resulting XML to file
-        newFile.write("output.xml", encoding="UTF-8", xml_declaration=True)
+        newFileName = "output/gk_" + filename
+        newFile.write(newFileName, encoding="UTF-8", xml_declaration=True)
 
         print ("Conversion complete")
 
