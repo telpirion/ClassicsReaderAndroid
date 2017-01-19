@@ -1,6 +1,8 @@
 package com.ericmschmidt.latinreader.activities;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +18,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
@@ -25,7 +28,6 @@ import com.ericmschmidt.latinreader.fragments.LibraryFragment;
 import com.ericmschmidt.latinreader.fragments.ReadingFragment;
 import com.ericmschmidt.latinreader.fragments.SettingsFragment;
 import com.ericmschmidt.latinreader.fragments.VocabularyFragment;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -54,6 +56,17 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Apply the current icon to the nav bar.
+        try {
+            String applicationName = getApplicationContext().getPackageName();
+            View headerView = navigationView.getHeaderView(0);
+            ImageView iconHolder = (ImageView)headerView.findViewById(R.id.icon_image);
+            Drawable icon = getPackageManager().getApplicationIcon(applicationName);
+            iconHolder.setImageDrawable(icon);
+        } catch (Exception e) {
+            MyApplication.logError(this.getClass(), e.getMessage());
+        }
 
         // Need to load first fragment (library view) into activity.
         FragmentManager fragmentManager = getSupportFragmentManager();

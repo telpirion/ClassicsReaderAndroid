@@ -12,11 +12,11 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/icon_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher_backup"/>
 
     <TextView
         android:layout_width="match_parent"
