@@ -188,12 +188,12 @@ def convertFinalSigma(convertedWord):
     trimmedWordLen = len(trimmedWord)
     lastChar = trimmedWord[trimmedWordLen - 1]
     secondToLast = trimmedWord[trimmedWordLen - 2]
-    cleanedWord = ""
+    cleanedWord = convertedWord
 
     if lastChar == u"σ":
         cleanedWord = trimmedWord[:trimmedWordLen - 1] + u"ς"
 
-    if (secondToLast == u"σ") and (".:;,".find(lastChar) > -1):
+    elif (secondToLast == u"σ") and (".:;,".find(lastChar) > -1):
         cleanedWord = trimmedWord[:trimmedWordLen - 2] + u"ς" +lastChar
 
     return cleanedWord
@@ -228,6 +228,20 @@ def cleanFile(f):
 
     return cleanFileName
 
+def reformatXMLFile(fName):
+
+    stringsToReplace = ["<div1", "<p"]
+
+    fileToFormat = open(fName, 'r')
+    fileText = fileToFormat.read()
+    fileToFormat.close()
+
+    for s in stringsToReplace:
+        fileText = fileText.replace(s, "\n" + s)
+
+    with open(fName, 'w') as formattedFile:
+        formattedFile.write(fileText)
+
 def main():
 
     try:
@@ -259,6 +273,11 @@ def main():
             newFile.write(newFileName, encoding="UTF-8", xml_declaration=True)
 
             f.close()
+
+            # Reformat the XML result
+            reformatXMLFile(newFileName)
+
+            print ("Output file: " + newFileName)
             print ("Conversion complete")
 
     except RuntimeError:

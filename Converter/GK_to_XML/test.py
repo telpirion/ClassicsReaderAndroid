@@ -37,6 +37,10 @@ def testConvertWord():
 
     print(convert.convertWord(word))
 
+    word2 = "si"
+
+    print (convert.convertWord(word2))
+
 def testIsDiacritical():
     print ("testIsDiacritical:")
 
@@ -96,6 +100,6 @@ main()
 #testConvertCharacters()
 #testOpenXMLSource()
 #testIsDiacritical()
-#testConvertWord()
+testConvertWord()
 #testConvertFinalSigma()
-testCleanFile()
+#testCleanFile()
