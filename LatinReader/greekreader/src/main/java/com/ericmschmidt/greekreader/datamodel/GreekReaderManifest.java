@@ -21,26 +21,27 @@ public class GreekReaderManifest extends Manifest {
                 "Aristotle",
                 "Politics",
                 "Aristotle",
-                R.raw.aristot_pol_gk,
+                R.raw.gk_aristot_pol_gk,
                 R.raw.aristot_pol_eng,
                 WorkInfo.WorkType.PROSE));
 
-        workInfos.add(new WorkInfo("Herodotus",
+        // TODO: Fix Herodotus transcription.
+        /*workInfos.add(new WorkInfo("Herodotus",
                 "Histories",
                 "Herodotus",
                 "Histories",
                 "Herodotus",
-                R.raw.hdt_gk,
-                R.raw.hdt_gk,
-                WorkInfo.WorkType.PROSE));
+                R.raw.gk_hdt_gk,
+                R.raw.hdt_eng,
+                WorkInfo.WorkType.PROSE));*/
 
         workInfos.add(new WorkInfo("HomerIliad",
                 "Iliad",
                 "Homer",
                 "Iliad",
                 "Homer",
-                R.raw.hom_il_gk,
-                R.raw.hom_il_gk,
+                R.raw.gk_hom_il_gk,
+                R.raw.hom_il_eng,
                 WorkInfo.WorkType.POEM));
 
         workInfos.add(new WorkInfo("HomerOdyssey",
@@ -48,7 +49,7 @@ public class GreekReaderManifest extends Manifest {
                 "Homer",
                 "Odyssey",
                 "Homer",
-                R.raw.hom_od_gk,
+                R.raw.gk_hom_od_gk,
                 R.raw.hom_od_eng,
                 WorkInfo.WorkType.POEM));
 
@@ -57,25 +58,26 @@ public class GreekReaderManifest extends Manifest {
                 "Lysias",
                 "Speeches",
                 "Lysias",
-                R.raw.lys_gk,
-                R.raw.lys_gk,
+                R.raw.gk_lys_gk,
+                R.raw.lys_eng,
                 WorkInfo.WorkType.PROSE));
 
-        workInfos.add(new WorkInfo("PlatoRep",
+        // TODO: Fix Plato's Republic Transcription
+        /*workInfos.add(new WorkInfo("PlatoRep",
                 "Republic",
                 "Plato",
                 "Republic",
                 "Plato",
-                R.raw.plat_rep_gk,
+                R.raw.gk_plat_rep_gk,
                 R.raw.plat_rep_eng,
-                WorkInfo.WorkType.PROSE));
+                WorkInfo.WorkType.PROSE));*/
 
         workInfos.add(new WorkInfo("XenophonAn",
                 "Anabasis",
                 "Xenophon",
                 "Anabasis",
                 "Xenophon",
-                R.raw.xen_anab_gk,
+                R.raw.gk_xen_anab_gk,
                 R.raw.xen_anab_eng,
                 WorkInfo.WorkType.PROSE));
 

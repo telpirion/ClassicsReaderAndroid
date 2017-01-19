@@ -28,6 +28,9 @@ public class TextConverter implements ITextConverter {
 
     private HashMap<String, String> _characterHash;
 
+    public static final String DIACRITICALS = ")(\\/=|+";
+    public static final String PUNCTUATION = ":;'.\n";
+
     public TextConverter() {
         try {
             _characterHash = new HashMap<>();
@@ -94,15 +97,15 @@ public class TextConverter implements ITextConverter {
             if (this._characterHash.containsKey(currChar)) {
                 if (!holdCapital.isEmpty()) {
                     holdCapital += currChar;
-                    convertedWord += resolveDiacriticals(holdVowelChar, holdCapital);
-                    holdCapital = "";
-                    holdVowelChar = "";
+                    convertedWord += resolveDiacriticals(holdVowelChar);
+                    convertedWord += resolveDiacriticals(holdCapital);
                 } else {
-                    convertedWord += resolveDiacriticals(holdVowelChar, holdCapital);
+                    convertedWord += resolveDiacriticals(holdVowelChar);
+                    convertedWord += resolveDiacriticals(holdCapital);
                     convertedWord += this._characterHash.get(currChar);
-                    holdCapital = ""; // TODO: This can probably be moved to outside the if/else; delete above.
-                    holdVowelChar = "";
                 }
+                holdCapital = "";
+                holdVowelChar = "";
             } else if (String.valueOf(currChar).equals(("*"))) {
                 holdCapital += "*";
             } else if (isDiacritical(currChar)) {
@@ -124,7 +127,8 @@ public class TextConverter implements ITextConverter {
         }
 
         // Resolve any remaining vowel plus diacriticals.
-        convertedWord += resolveDiacriticals(holdVowelChar, holdCapital);
+        convertedWord += resolveDiacriticals(holdVowelChar);
+        convertedWord += resolveDiacriticals(holdCapital);
 
         // Replace any final sigmas with the ending sigma.
         if (convertedWord.indexOf("σ") > -1) {
@@ -149,12 +153,8 @@ public class TextConverter implements ITextConverter {
             return cleaner.toString();
         }
 
-        if ((secondToLast.equals('σ')) && (last.equals(',')
-                || last.equals('.')
-                || last.equals(':')
-                || last.equals(';')
-                || last.equals('\n'))) {
-
+        else if ((TextConverter.PUNCTUATION.indexOf(last) > -1)
+            && (secondToLast.equals('σ'))){
             cleaner.setCharAt(trimmedWord.length() - 2, 'ς');
             return cleaner.toString();
         }
@@ -168,23 +168,17 @@ public class TextConverter implements ITextConverter {
     }
 
     // Resolve any unresolved vowels + diacriticals.
-    private String resolveDiacriticals(String holdVowel, String holdCapital) {
+    private String resolveDiacriticals(String s) {
         String convertedWord = "";
 
-        // TODO: Change this to a simple "resolve" method and two method calls.
-
-        if (!holdVowel.isEmpty() && (this._characterHash.containsKey(holdVowel))) {
-            convertedWord += this._characterHash.get(holdVowel);
-        } else if (!holdVowel.isEmpty()) {
-            convertedWord += holdVowel;
-        }
-
-        if (!holdCapital.isEmpty() && (this._characterHash.containsKey(holdCapital))) {
-            convertedWord += this._characterHash.get(holdCapital);
-        } else if (!holdCapital.isEmpty()) {
-            convertedWord += holdCapital;
+        if (!s.isEmpty() && this._characterHash.containsKey(s)) {
+            convertedWord += this._characterHash.get(s);
+        } else if (!s.isEmpty()) {
+            convertedWord += s;
         }
 
         return convertedWord;
     }
+
+
 }

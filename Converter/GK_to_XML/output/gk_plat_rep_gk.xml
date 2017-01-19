@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<work><header status="new" type="text">
+
+<fileDesc>
+
+<titleStmt>
+<title>Republic (Greek). Machine readable text</title>
+<author>Plato</author>
+</titleStmt>
+
+<extent>About 1354Kb</extent>
+    
+
+<notesStmt><note anchored="yes">Text was scanned at St. Olaf Spring, 1992.</note></notesStmt>
+<sourceDesc>
+<biblStruct>
+	<monogr>
+		<author>Plato</author><title>Platonis Opera, ed. John Burnet</title>
+	
+		<imprint>
+<publisher>Oxford University Press</publisher><date>1903</date></imprint>
+	</monogr>
+</biblStruct>
+</sourceDesc>
+    
+</fileDesc>
+
+</header>
+<body><text /></body></work>

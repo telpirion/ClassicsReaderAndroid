@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<work><header status="new" type="text">
+    <fileDesc>
+      <titleStmt>
+	<title>The Histories</title>
+	<title type="sub">Machine readable text</title>
+	<author>Herodotus</author>
+      </titleStmt>
+      <extent>about 258Kb</extent>
+      <notesStmt>
+	<note anchored="yes">Text scanned at U. Chicago in 1988-9.  Basic tagging
+	done by EM, Scott Ettinger, Roger Travis.</note>
+      </notesStmt>
+      <sourceDesc>
+	<biblStruct>
+	  <monogr>
+	    <title>Herodotus, with an English translation by A. D. Godley</title>
+	    <imprint>
+	      
+<pubPlace>Cambridge</pubPlace>
+	      
+<publisher>Harvard University Press</publisher>
+	      <date>1920</date>
+	    </imprint>
+	  </monogr>
+	  <idno type="ISBN">0674991303</idno>
+	  <idno type="ISBN">0674991311</idno>
+	  <idno type="ISBN">0674991338</idno>
+	  <idno type="ISBN">0674991346</idno>
+	</biblStruct>
+      </sourceDesc>
+    </fileDesc>
+  </header>
+
+<body><text>
+<div1 lines="1" n="1">
+<p /></div1>
+<div1 lines="1" n="2">
+<p /></div1>
+<div1 lines="1" n="3">
+<p /></div1>
+<div1 lines="1" n="4">
+<p /></div1>
+<div1 lines="1" n="5">
+<p /></div1>
+<div1 lines="1" n="6">
+<p /></div1>
+<div1 lines="1" n="7">
+<p /></div1>
+<div1 lines="1" n="8">
+<p /></div1>
+<div1 lines="1" n="9">
+<p /></div1></text></body></work>
