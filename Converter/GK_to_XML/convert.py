@@ -102,6 +102,7 @@ def iterateWords(words):
 # Convert a word from Latin chars to Greek polytonic
 # characters.
 def convertWord(word):
+
     convertedWord = ""
     holdVowelChar = ""
     holdCapital = ""
@@ -228,9 +229,7 @@ def cleanFile(f):
 
     return cleanFileName
 
-def reformatXMLFile(fName):
-
-    stringsToReplace = ["<div1", "<p"]
+def reformatXMLFile(fName, stringsToReplace):
 
     fileToFormat = open(fName, 'r')
     fileText = fileToFormat.read()
@@ -275,7 +274,7 @@ def main():
             f.close()
 
             # Reformat the XML result
-            reformatXMLFile(newFileName)
+            reformatXMLFile(newFileName, ["<div1", "<p"])
 
             print ("Output file: " + newFileName)
             print ("Conversion complete")
@@ -286,4 +285,4 @@ def main():
 #############################
 
 # Run the program
-main()
+#main()
