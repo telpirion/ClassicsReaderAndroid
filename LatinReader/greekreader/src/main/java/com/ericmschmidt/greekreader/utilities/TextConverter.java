@@ -27,6 +27,7 @@ import java.util.HashMap;
 public class TextConverter implements ITextConverter {
 
     private HashMap<String, String> _characterHash;
+    private HashMap<String, String> _reverseCharacterHash;
 
     public static final String DIACRITICALS = ")(\\/=|+";
     public static final String PUNCTUATION = ":;'.\n";
@@ -34,6 +35,7 @@ public class TextConverter implements ITextConverter {
     public TextConverter() {
         try {
             _characterHash = new HashMap<>();
+            _reverseCharacterHash = new HashMap<>();
             initCharacterHash();
         } catch (Exception ex) {
             MyApplication.logError(this.getClass(), ex.getMessage());
@@ -46,6 +48,7 @@ public class TextConverter implements ITextConverter {
         String convertedString = "";
 
         for (int i = 0; i < paraArray.length; i++) {
+            
             String[] wordArray = paraArray[i].split(" ");
 
             for (int j = 0; j < wordArray.length; j++) {
@@ -53,6 +56,18 @@ public class TextConverter implements ITextConverter {
             }
             convertedString += "\n";
         }
+        return convertedString;
+    }
+
+    @Override
+    public String convertTargetToSourceCharacters(String target) {
+        String [] wordArray = target.split(" ");
+        String convertedString = "";
+
+        for (int i = 0; i < wordArray.length; i++){
+            convertedString += revertWord(target);
+        }
+
         return convertedString;
     }
 
@@ -69,6 +84,7 @@ public class TextConverter implements ITextConverter {
             String value = reader.nextString();
 
             this._characterHash.put(entry, value);
+            this._reverseCharacterHash.put(value, entry);
         }
     }
 
@@ -80,12 +96,8 @@ public class TextConverter implements ITextConverter {
         return character;
     }
 
-    /**
-     * Converts a single word of Latin characters into
-     * a Greek polytonic-formatted Greek word (string).
-     * @param word The word to convert.
-     * @return The word as a converted string
-     */
+    // Converts a single word of Latin characters into
+    //a Greek polytonic-formatted Greek word (string).
     private String convertWord(String word) {
 
         String convertedWord = "";
@@ -140,6 +152,21 @@ public class TextConverter implements ITextConverter {
         return convertedWord;
     }
 
+    // Convert a word in polytonic-formatted Greek characters
+    // to Latin characters with diacritical marks.
+    private String revertWord(String word){
+        String revertedWord = "";
+        for (int i = 0; i < word.length(); i++) {
+            String currChar = Character.toString(word.charAt(i));
+            if (this._reverseCharacterHash.containsKey(currChar)) {
+                revertedWord += this._reverseCharacterHash.get(currChar);
+            } else {
+                revertedWord += currChar;
+            }
+        }
+        return revertedWord;
+    }
+
     // Convert final sigma.
     private String convertFinalSigma(String convertedWord){
         String trimmedWord = convertedWord.replace(" ", "");
@@ -179,6 +206,4 @@ public class TextConverter implements ITextConverter {
 
         return convertedWord;
     }
-
-
 }

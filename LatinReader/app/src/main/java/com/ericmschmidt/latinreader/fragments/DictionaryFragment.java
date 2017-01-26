@@ -116,7 +116,9 @@ public class DictionaryFragment extends Fragment {
         String searchString = searchQuery.getText().toString();
 
         ITextConverter converter = MyApplication.getTextConverter();
-        String formattedString = converter.convertSourceToTargetCharacters(searchString);
+        //String formattedString = converter.convertSourceToTargetCharacters(searchString);
+        String formattedString = converter.convertTargetToSourceCharacters(searchString);
+        formattedString = converter.convertSourceToTargetCharacters(formattedString);
 
         formattedString = formattedString.replace("\n", "").replace(" ", "");
         searchQuery.setText(formattedString);
