@@ -46,12 +46,12 @@ public class TextConverter implements ITextConverter {
         String[] paraArray = source.split("\n");
         String convertedString = "";
 
-        for (int i = 0; i < paraArray.length; i++) {
+        for (String para : paraArray) {
 
-            String[] wordArray = paraArray[i].split(" ");
+            String[] wordArray = para.split(" ");
 
-            for (int j = 0; j < wordArray.length; j++) {
-                convertedString += convertWord(wordArray[j]) + " ";
+            for (String word : wordArray) {
+                convertedString += convertWord(word) + " ";
             }
             convertedString += "\n";
         }
@@ -83,14 +83,6 @@ public class TextConverter implements ITextConverter {
             this._characterHash.put(entry, value);
             this._reverseCharacterHash.put(value, entry);
         }
-    }
-
-    // Lookup characters in the specified string.
-    private String convertCharacter(String character) {
-        if (this._characterHash.containsKey(character)) {
-            return this._characterHash.get(character);
-        }
-        return character;
     }
 
     // Converts a single word of Latin characters into
