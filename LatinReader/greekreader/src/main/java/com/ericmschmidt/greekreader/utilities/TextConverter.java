@@ -7,7 +7,6 @@ import com.ericmschmidt.latinreader.utilities.ITextConverter;
 import com.ericmschmidt.latinreader.utilities.ResourceHelper;
 
 import android.util.JsonReader;
-import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,8 +28,8 @@ public class TextConverter implements ITextConverter {
     private HashMap<String, String> _characterHash;
     private HashMap<String, String> _reverseCharacterHash;
 
-    public static final String DIACRITICALS = ")(\\/=|+";
-    public static final String PUNCTUATION = ":;'.\n";
+    private static final String DIACRITICALS = ")(\\/=|+";
+    private static final String PUNCTUATION = ":;'.\n";
 
     public TextConverter() {
         try {
@@ -48,7 +47,7 @@ public class TextConverter implements ITextConverter {
         String convertedString = "";
 
         for (int i = 0; i < paraArray.length; i++) {
-            
+
             String[] wordArray = paraArray[i].split(" ");
 
             for (int j = 0; j < wordArray.length; j++) {
@@ -64,16 +63,14 @@ public class TextConverter implements ITextConverter {
         String [] wordArray = target.split(" ");
         String convertedString = "";
 
-        for (int i = 0; i < wordArray.length; i++){
-            convertedString += revertWord(target);
-        }
+        for (String word : wordArray)
+            convertedString += revertWord(word);
 
         return convertedString;
     }
 
     // Converts the JSON resource into a HashMap.
     private void initCharacterHash() throws IOException {
-        //InputStream stream = ResourceHelper.getResourceStream(R.raw.latin_greek_text_conversion);
         InputStream stream = ResourceHelper.getResourceStream(R.raw.latin_greek_text_conversion);
         JsonReader reader = new JsonReader(new InputStreamReader(stream));
 
@@ -143,7 +140,7 @@ public class TextConverter implements ITextConverter {
         convertedWord += resolveDiacriticals(holdCapital);
 
         // Replace any final sigmas with the ending sigma.
-        if (convertedWord.indexOf("σ") > -1) {
+        if (convertedWord.contains("σ")) {
             convertedWord = convertFinalSigma(convertedWord);
         }
 
@@ -191,7 +188,7 @@ public class TextConverter implements ITextConverter {
 
     // Determine whether a character is a diacritical.
     private boolean isDiacritical(String character) {
-        return ")(\\/=|+".indexOf(character) > -1;
+        return DIACRITICALS.contains(character);
     }
 
     // Resolve any unresolved vowels + diacriticals.
