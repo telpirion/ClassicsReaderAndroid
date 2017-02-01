@@ -21,17 +21,28 @@
             android:imeActionLabel="@string/dictionary_query_submit"
             android:imeOptions="actionSearch"/>
 
-        <ScrollView
-            android:paddingTop="16dp"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scrollbars="vertical"
-            android:fillViewport="true">
-
-        <TextView android:id="@+id/dictionary_result"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        </ScrollView>
+            android:layout_height="match_parent">
 
+            <ProgressBar
+                android:id="@+id/dictionary_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <ScrollView
+                android:id="@+id/dictionary_results"
+                android:paddingTop="16dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scrollbars="vertical"
+                android:fillViewport="true">
+
+            <TextView android:id="@+id/dictionary_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            </ScrollView>
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

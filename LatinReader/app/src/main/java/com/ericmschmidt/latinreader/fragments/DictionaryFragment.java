@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ericmschmidt.classicsreader.R;
@@ -64,8 +65,8 @@ public class DictionaryFragment extends Fragment {
 
         super.onActivityCreated(onSavedInstanceState);
 
-        // Instantiate the dictionary.
-        dictionary = new Dictionary();
+        // Hide progress bar.
+        getActivity().findViewById(R.id.dictionary_progress).setVisibility(View.INVISIBLE);
 
         EditText searchQuery = (EditText)getActivity().findViewById(R.id.search_query);
 
@@ -127,11 +128,19 @@ public class DictionaryFragment extends Fragment {
 
     // Sends and receives a search query from the integrated dictionary.
     private void submitSearchQuery(String query) {
+
+        // Show the indefinite progress indicator.
+        ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.dictionary_progress);
+        progress.setVisibility(View.VISIBLE);
+
+        // To improve fragment loading time, load dictionary after user
+        // submits a query.
+        dictionary = new Dictionary();
+
         String transcribedQuery = query;
 
-        if (MyApplication.isNonRomanChar()) {
+        if (MyApplication.isNonRomanChar())
             transcribedQuery = converter.convertTargetToSourceCharacters(query);
-        }
 
         TextView resultsField = (TextView)getActivity().findViewById(R.id.dictionary_result);
         String queryResults;
@@ -143,5 +152,6 @@ public class DictionaryFragment extends Fragment {
             queryResults = resources.getString(R.string.dictionary_query_no_results);
         }
         resultsField.setText(queryResults);
+        progress.setVisibility(View.INVISIBLE);
     }
 }
