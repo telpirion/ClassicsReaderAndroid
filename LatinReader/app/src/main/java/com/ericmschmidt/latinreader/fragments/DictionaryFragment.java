@@ -25,6 +25,7 @@ public class DictionaryFragment extends Fragment {
 
     private String query;
     private Dictionary dictionary;
+    private ITextConverter converter;
 
 
     public DictionaryFragment() {
@@ -42,9 +43,10 @@ public class DictionaryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
             query = getArguments().getString(QUERY);
-        }
+        if (MyApplication.isNonRomanChar())
+            converter = MyApplication.getTextConverter();
     }
 
     @Override
@@ -115,8 +117,6 @@ public class DictionaryFragment extends Fragment {
         EditText searchQuery = (EditText)getActivity().findViewById(R.id.search_query);
         String searchString = searchQuery.getText().toString();
 
-        ITextConverter converter = MyApplication.getTextConverter();
-        //String formattedString = converter.convertSourceToTargetCharacters(searchString);
         String formattedString = converter.convertTargetToSourceCharacters(searchString);
         formattedString = converter.convertSourceToTargetCharacters(formattedString);
 
@@ -127,11 +127,17 @@ public class DictionaryFragment extends Fragment {
 
     // Sends and receives a search query from the integrated dictionary.
     private void submitSearchQuery(String query) {
+        String transcribedQuery = query;
+
+        if (MyApplication.isNonRomanChar()) {
+            transcribedQuery = converter.convertTargetToSourceCharacters(query);
+        }
+
         TextView resultsField = (TextView)getActivity().findViewById(R.id.dictionary_result);
         String queryResults;
 
-        if(dictionary.isInDictionary(query)) {
-            queryResults = dictionary.getEntry(query);
+        if(dictionary.isInDictionary(transcribedQuery)) {
+            queryResults = dictionary.getEntry(transcribedQuery);
         } else {
             Resources resources = getResources();
             queryResults = resources.getString(R.string.dictionary_query_no_results);
