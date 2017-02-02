@@ -80,22 +80,6 @@ public class ReadingViewModel {
     }
 
     /**
-     * Gets the index of the current book being read from the work.
-     * @return int
-     */
-    public int getCurrentBookIndex() {
-        return this._currentBookIndex;
-    }
-
-    /**\
-     * Gets the index of the current line being read from the book.
-     * @return int
-     */
-    public int getCurrentLineIndex() {
-        return this._currentLineIndex;
-    }
-
-    /**
      * Scans the position in the book forwards or backwards.
      *
      * If the value goes beyond the end of the current book, it goes to the next book.
@@ -151,7 +135,7 @@ public class ReadingViewModel {
     // Increase the reading position.
     private void advancePages(int offset) {
         int count = 0;
-        int bookLineCount = this._currentBook.getLineCount();
+        int bookLineCount = this._currentBook.getLineCount() - 1;
         int bookCount = this._currentWork.getBookCount() - 1;
 
         while (count < offset) {
@@ -163,6 +147,7 @@ public class ReadingViewModel {
                 this._currentBookIndex++;
                 this._currentBook = this._currentWork.getBook(this._currentBookIndex);
                 this._currentLineIndex = 0;
+                break;
             }
             count++;
         }
