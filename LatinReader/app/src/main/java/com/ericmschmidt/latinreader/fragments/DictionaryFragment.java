@@ -1,7 +1,9 @@
 package com.ericmschmidt.latinreader.fragments;
 
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -133,25 +135,40 @@ public class DictionaryFragment extends Fragment {
         ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.dictionary_progress);
         progress.setVisibility(View.VISIBLE);
 
-        // To improve fragment loading time, load dictionary after user
-        // submits a query.
-        dictionary = new Dictionary();
+        // To improve fragment UI responsiveness, submit query
+        // and load dictionary in an AsyncTask.
+        new SearchDictionaryTask().execute(query);
+    }
 
-        String transcribedQuery = query;
+    private class SearchDictionaryTask extends AsyncTask<String, Integer, Long> {
 
-        if (MyApplication.isNonRomanChar())
-            transcribedQuery = converter.convertTargetToSourceCharacters(query);
+        protected String queryResults = "";
 
-        TextView resultsField = (TextView)getActivity().findViewById(R.id.dictionary_result);
-        String queryResults;
+        protected Long doInBackground(String... query) {
 
-        if(dictionary.isInDictionary(transcribedQuery)) {
-            queryResults = dictionary.getEntry(transcribedQuery);
-        } else {
-            Resources resources = getResources();
-            queryResults = resources.getString(R.string.dictionary_query_no_results);
+            dictionary = new Dictionary();
+
+            String transcribedQuery = query[0];
+
+            if (MyApplication.isNonRomanChar())
+                transcribedQuery = converter.convertTargetToSourceCharacters(transcribedQuery);
+
+            if(dictionary.isInDictionary(transcribedQuery)) {
+                queryResults = dictionary.getEntry(transcribedQuery);
+            } else {
+                Resources resources = getResources();
+                queryResults = resources.getString(R.string.dictionary_query_no_results);
+            }
+
+            return  new Long(1);
         }
-        resultsField.setText(queryResults);
-        progress.setVisibility(View.INVISIBLE);
+
+        protected void onPostExecute(Long result){
+            TextView resultsField = (TextView)getActivity().findViewById(R.id.dictionary_result);
+            resultsField.setText(queryResults);
+
+            ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.dictionary_progress);
+            progress.setVisibility(View.INVISIBLE);
+        }
     }
 }
