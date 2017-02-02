@@ -27,7 +27,6 @@ public class DictionaryFragment extends Fragment {
     public static final String QUERY = "query";
 
     private String query;
-    private Dictionary dictionary;
     private ITextConverter converter;
 
 
@@ -140,18 +139,22 @@ public class DictionaryFragment extends Fragment {
         new SearchDictionaryTask().execute(query);
     }
 
+    // Create AsyncTask for fetching and displaying dictionary search result.
     private class SearchDictionaryTask extends AsyncTask<String, Integer, Long> {
 
         protected String queryResults = "";
+        private Dictionary dictionary;
 
         protected Long doInBackground(String... query) {
 
-            dictionary = new Dictionary();
-
             String transcribedQuery = query[0];
 
-            if (MyApplication.isNonRomanChar())
+            if (MyApplication.isNonRomanChar()) {
                 transcribedQuery = converter.convertTargetToSourceCharacters(transcribedQuery);
+                dictionary = new Dictionary(converter);
+            } else {
+                dictionary = new Dictionary();
+            }
 
             if(dictionary.isInDictionary(transcribedQuery)) {
                 queryResults = dictionary.getEntry(transcribedQuery);

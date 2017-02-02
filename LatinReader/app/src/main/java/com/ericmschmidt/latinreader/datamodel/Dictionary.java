@@ -1,8 +1,10 @@
 package com.ericmschmidt.latinreader.datamodel;
 
-import com.ericmschmidt.classicsreader.R;
+import android.util.Log;
+
 import com.ericmschmidt.latinreader.utilities.DictionaryXMLHelper;
 import com.ericmschmidt.latinreader.MyApplication;
+import com.ericmschmidt.latinreader.utilities.ITextConverter;
 import com.ericmschmidt.latinreader.utilities.ResourceHelper;
 
 import java.io.InputStream;
@@ -16,6 +18,7 @@ public class Dictionary  {
 
     private ArrayList<String>  _entryHeaders;
     private WorkInfo dictionaryInfo;
+    private ITextConverter _converter;
 
     /**
      * Creates a new instance of the dictionary class.
@@ -23,6 +26,16 @@ public class Dictionary  {
     public Dictionary() {
         this.dictionaryInfo = MyApplication.getManifest().getDictionaryInfo();
         initEntries();
+    }
+
+    /**
+     * Creates a new instance of the Dictionary class
+     * and instantiates a text converter for non-Latin orthographies.
+     * @param converter the ITextConverter to use
+     */
+    public Dictionary(ITextConverter converter) {
+        this();
+        this._converter = converter;
     }
 
     /**
@@ -52,7 +65,7 @@ public class Dictionary  {
         try {
             if (isInDictionary(searchEntry)) {
                 InputStream stream = ResourceHelper.getResourceStream(this.dictionaryInfo.getLocation());
-                definition = DictionaryXMLHelper.getEntry(stream, searchEntry);
+                definition = DictionaryXMLHelper.getEntry(stream, searchEntry, _converter);
             }
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
@@ -79,7 +92,7 @@ public class Dictionary  {
         try {
             Manifest manifest = MyApplication.getManifest();
             InputStream stream = ResourceHelper.getResourceStream(manifest.getDictionaryEntryResource());
-            this._entryHeaders = DictionaryXMLHelper.getEntryHeaders2(stream);
+            this._entryHeaders = DictionaryXMLHelper.getEntryHeaders(stream);
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();

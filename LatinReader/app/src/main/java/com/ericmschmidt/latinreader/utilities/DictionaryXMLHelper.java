@@ -1,5 +1,7 @@
 package com.ericmschmidt.latinreader.utilities;
 
+import android.util.Log;
+
 import com.ericmschmidt.latinreader.MyApplication;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -16,9 +18,9 @@ import org.w3c.dom.*;
 public class DictionaryXMLHelper extends XmlParserHelper {
 
     // Overrides constants in super class.
-    private static final String sectionTag = "div0";
-    private static final String lineTag = "entry";
-    private static final String keyAttribute = "key";
+    private static final String LINE_TAG = "entry";
+    private static final String KEY_ATTRIBUTE = "key";
+    private static final String LANG_ATTRIBUTE = "lang";
 
     /*
     The XML dictionary is structured like this:
@@ -55,65 +57,13 @@ public class DictionaryXMLHelper extends XmlParserHelper {
     */
 
     /**
-     * Gets the number of alphabetical sections in the dictionary.
-     * @param stream the inputStream of the dictionary.
-     * @return the count of the alphabetical sections.
-     * @throws XmlPullParserException
-     * @throws IOException
-     */
-    public static int getSectionCount(InputStream stream) throws XmlPullParserException, IOException {
-        int count = 0;
-        try {
-            XmlPullParser parser = initParser(stream);
-            count = countSections(parser, sectionTag);
-
-        } catch (Exception ex) {
-            String errorMessage = ex.getMessage();
-            MyApplication.logError(errorMessage);
-        } finally {
-            stream.close();
-        }
-        return count;
-    }
-
-    /**
-     * Gets the keys of all the entries in this dictionary.
-     * @param stream the inputStream of the dictionary.
-     * @return the ArrayList of dictionary entries.
-     * @throws XmlPullParserException
-     * @throws IOException
-     */
-    public static ArrayList<String> getEntryHeaders(InputStream stream) throws XmlPullParserException, IOException {
-        ArrayList<String> headers = new ArrayList<String>();
-
-        try {
-            XmlPullParser parser = initParser(stream);
-
-            while (nextSection(parser, lineTag)) {
-                parser.require(XmlPullParser.START_TAG, XmlParserHelper.ns, lineTag);
-
-                String keyAttributeValue = parser.getAttributeValue(XmlParserHelper.ns, keyAttribute);
-                if (keyAttributeValue != null) {
-                    headers.add(keyAttributeValue);
-                }
-            }
-
-        } catch (Exception ex) {
-            String errorMessage = ex.getMessage();
-            MyApplication.logError(errorMessage);
-        } finally {
-            stream.close();
-        }
-        return headers;
-    }
-    /**
      * Gets the keys of all the entries in this dictionary from an entries resource.
      * @param stream the inputStream of the dictionary.
      * @return the ArrayList of dictionary entries.
      * @throws Exception
      */
-    public static ArrayList<String> getEntryHeaders2(InputStream stream) throws Exception {
-        ArrayList<String> headers = new ArrayList<String>();
+    public static ArrayList<String> getEntryHeaders(InputStream stream) throws Exception {
+        ArrayList<String> headers = new ArrayList<>();
         try {
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -143,22 +93,22 @@ public class DictionaryXMLHelper extends XmlParserHelper {
      * @throws XmlPullParserException
      * @throws IOException
      */
-    public static String getEntry(InputStream stream, String searchEntry) throws XmlPullParserException, IOException {
+    public static String getEntry(InputStream stream, String searchEntry, ITextConverter converter) throws XmlPullParserException, IOException {
         String definition = null;
 
         try {
             XmlPullParser parser = initParser(stream);
-            while (nextSection(parser, lineTag)) { // TODO: Generalize this loop for this and previous method.
-                parser.require(XmlPullParser.START_TAG, XmlParserHelper.ns, lineTag);
+            while (nextSection(parser, LINE_TAG)) {
+                parser.require(XmlPullParser.START_TAG, XmlParserHelper.ns, LINE_TAG);
 
-                String keyAttributeValue = parser.getAttributeValue(XmlParserHelper.ns, keyAttribute);
+                String keyAttributeValue = parser.getAttributeValue(XmlParserHelper.ns, KEY_ATTRIBUTE);
                 if (keyAttributeValue != null
                         && searchEntry.equals(keyAttributeValue)) {
                     break;
                 }
             }
 
-            definition = getLine(parser, lineTag);
+            definition = getDictionaryLine(parser, LINE_TAG, converter);
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
@@ -168,5 +118,39 @@ public class DictionaryXMLHelper extends XmlParserHelper {
         }
 
         return removeExtraneousCharacters(definition);
+    }
+
+    private static String getDictionaryLine(XmlPullParser parser, String lineTag, ITextConverter converter) throws XmlPullParserException, IOException {
+        String line = "";
+        String currentSubLine;
+        boolean isNonLatin = false;
+        parser.require(XmlPullParser.START_TAG, ns, lineTag);
+
+        while (!checkTag(lineTag, parser, XmlPullParser.END_TAG)) {
+            parser.next();
+
+            if ((parser.getEventType() == XmlPullParser.START_TAG) &&
+                    hasAttribute(parser, LANG_ATTRIBUTE) &&
+                    (converter != null)) {
+                isNonLatin = true;
+            }
+
+            if (parser.getEventType() == XmlPullParser.TEXT) {
+
+                // Check the entry for non-Latin characters and
+                // convert to the other orthography, if necessary.
+                currentSubLine = isNonLatin ?
+                        converter.convertSourceToTargetCharacters(parser.getText()) :
+                        parser.getText();
+                line += removeExtraneousCharacters(currentSubLine);
+                isNonLatin = false;
+            }
+        }
+
+        return line;
+    }
+
+    private static boolean hasAttribute(XmlPullParser parser, String attributeName){
+        return (parser.getAttributeValue(null, attributeName) != null);
     }
 }
