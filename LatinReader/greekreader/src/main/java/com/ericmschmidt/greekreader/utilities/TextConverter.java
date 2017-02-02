@@ -30,6 +30,7 @@ public class TextConverter implements ITextConverter {
 
     private static final String DIACRITICALS = ")(\\/=|+";
     private static final String PUNCTUATION = ":;'.\n";
+    private static final String LANG = "greek";
 
     public TextConverter() {
         try {
@@ -39,6 +40,11 @@ public class TextConverter implements ITextConverter {
         } catch (Exception ex) {
             MyApplication.logError(this.getClass(), ex.getMessage());
         }
+    }
+
+    @Override
+    public String getLang() {
+        return this.LANG;
     }
 
     @Override

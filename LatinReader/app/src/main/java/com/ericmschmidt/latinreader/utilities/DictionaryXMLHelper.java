@@ -130,8 +130,8 @@ public class DictionaryXMLHelper extends XmlParserHelper {
             parser.next();
 
             if ((parser.getEventType() == XmlPullParser.START_TAG) &&
-                    hasAttribute(parser, LANG_ATTRIBUTE) &&
-                    (converter != null)) {
+                    converter != null &&
+                    hasAttribute(parser, LANG_ATTRIBUTE, converter.getLang())) {
                 isNonLatin = true;
             }
 
@@ -140,7 +140,7 @@ public class DictionaryXMLHelper extends XmlParserHelper {
                 // Check the entry for non-Latin characters and
                 // convert to the other orthography, if necessary.
                 currentSubLine = isNonLatin ?
-                        converter.convertSourceToTargetCharacters(parser.getText()) :
+                        converter.convertSourceToTargetCharacters(parser.getText()):
                         parser.getText();
                 line += removeExtraneousCharacters(currentSubLine);
                 isNonLatin = false;
@@ -150,7 +150,8 @@ public class DictionaryXMLHelper extends XmlParserHelper {
         return line;
     }
 
-    private static boolean hasAttribute(XmlPullParser parser, String attributeName){
-        return (parser.getAttributeValue(null, attributeName) != null);
+    private static boolean hasAttribute(XmlPullParser parser, String attributeName, String languageName){
+        String attributeValue = parser.getAttributeValue(null, attributeName);
+        return ((attributeValue!= null) && (attributeValue.equals(languageName)));
     }
 }
