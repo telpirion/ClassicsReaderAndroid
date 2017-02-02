@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.RequiresPermission;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,10 +30,15 @@ import com.ericmschmidt.latinreader.fragments.ReadingFragment;
 import com.ericmschmidt.latinreader.fragments.SettingsFragment;
 import com.ericmschmidt.latinreader.fragments.VocabularyFragment;
 
+import static com.ericmschmidt.latinreader.fragments.ReadingFragment.TRANSLATION_FLAG;
+import static com.ericmschmidt.latinreader.fragments.ReadingFragment.WORKTOGET;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         LibraryFragment.OnLibraryListViewClick,
         ReadingFragment.OnReadingViewSwitch {
+
+    private String currentFragmentTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +79,8 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         LibraryFragment libFragment = new LibraryFragment();
+        currentFragmentTag = libFragment.getClass().getName();
+
         fragmentTransaction.add(R.id.fragment_container, libFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
@@ -197,18 +205,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void createReadingView(String workId, String isTranslation) {
+
         ReadingFragment fragment = ReadingFragment.newInstance(workId, isTranslation);
+
         swapFragments(fragment);
     }
 
     private void swapFragments(Fragment fragment) {
 
         try {
-            // Need to load first fragment into activity.
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            // Track fragments on backstack using tags.
+            currentFragmentTag = fragment.getClass().getName();
+
+            fragmentTransaction.replace(R.id.fragment_container, fragment, currentFragmentTag);
             fragmentTransaction.addToBackStack(fragment.toString());
             fragmentTransaction.commit();
         } catch (Exception ex) {

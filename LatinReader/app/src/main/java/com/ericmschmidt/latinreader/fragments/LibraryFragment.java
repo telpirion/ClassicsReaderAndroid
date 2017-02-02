@@ -84,7 +84,7 @@ public class LibraryFragment extends Fragment {
                 adapter = new LibraryListViewAdapter(getActivity(), works);
             }
 
-            ListView listView = (ListView)getActivity().findViewById(R.id.library_listView);
+            ListView listView = (ListView)this.getView().findViewById(R.id.library_listView);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(mMessageClickedHandler);
 

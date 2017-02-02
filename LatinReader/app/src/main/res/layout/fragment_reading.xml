@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ericmschmidt.latinreader.fragments.ReadingFragment">
+    tools:context=".fragments.ReadingFragment">
 
     <TextView android:id="@+id/reading_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:paddingTop="16dp"

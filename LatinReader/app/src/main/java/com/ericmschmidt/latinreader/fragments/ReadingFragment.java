@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ public class ReadingFragment extends Fragment {
     public static final String TRANSLATION_FLAG = "translation";
     public static final int HIT_AREA_RATIO = 4;
     public static final String RECENTLY_READ = "recently_read";
+    public static final String TAG = "ReadingFragment";
 
     private final int MENU_SWITCH_VIEW = 1;
 
@@ -74,7 +76,7 @@ public class ReadingFragment extends Fragment {
 
         super.onActivityCreated(onSavedInstanceState);
 
-        TextView readingPane = (TextView) getActivity().findViewById(R.id.reading_surface);
+        TextView readingPane = (TextView) this.getView().findViewById(R.id.reading_surface);
 
         if (workToGetId == null || workToGetId.equals("")) {
             readingPane.setText(getResources().getString(R.string.reading_no_book_open));
@@ -151,8 +153,8 @@ public class ReadingFragment extends Fragment {
     // Change the text on the page by advancing the reading position.
     private void updateReadingSurface() {
 
-        TextView readingPane = (TextView)getActivity().findViewById(R.id.reading_surface);
-        TextView readingInfo = (TextView)getActivity().findViewById(R.id.reading_info);
+        TextView readingPane = (TextView)this.getView().findViewById(R.id.reading_surface);
+        TextView readingInfo = (TextView)this.getView().findViewById(R.id.reading_info);
 
         readingPane.setText(viewModel.getCurrentPage());
         readingInfo.setText(viewModel.getReadingInfo());
