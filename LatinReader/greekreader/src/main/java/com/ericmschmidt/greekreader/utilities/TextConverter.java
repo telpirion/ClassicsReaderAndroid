@@ -21,16 +21,17 @@ import java.util.HashMap;
  * http://www.unicode.org/charts/PDF/U1F00.pdf
  * http://www.fileformat.info/search/google.htm
  *
- * Revised: 2016-12-30
+ * Last updated: 2017-02-03
  */
 public class TextConverter implements ITextConverter {
 
     private HashMap<String, String> _characterHash;
     private HashMap<String, String> _reverseCharacterHash;
 
+    private final String _lang = "greek";
+
     private static final String DIACRITICALS = ")(\\/=|+";
     private static final String PUNCTUATION = ":;'.\n";
-    private static final String LANG = "greek";
 
     public TextConverter() {
         try {
@@ -44,9 +45,14 @@ public class TextConverter implements ITextConverter {
 
     @Override
     public String getLang() {
-        return this.LANG;
+        return this._lang;
     }
 
+    /**
+     * Converts Latin characters to Greek polytonic characters.
+     * @param source a string of Latin characters to convert.
+     * @return String Greek polytonic characters, UTF-8
+     */
     @Override
     public String convertSourceToTargetCharacters(String source) {
         String[] paraArray = source.split("\n");
@@ -64,6 +70,11 @@ public class TextConverter implements ITextConverter {
         return convertedString;
     }
 
+    /**
+     * Converts Greek polytonic characters to Latin characters.
+     * @param target a string of UTF-8 Greek characters to convert.
+     * @return String Latin characters.
+     */
     @Override
     public String convertTargetToSourceCharacters(String target) {
         String [] wordArray = target.split(" ");
@@ -89,6 +100,9 @@ public class TextConverter implements ITextConverter {
             this._characterHash.put(entry, value);
             this._reverseCharacterHash.put(value, entry);
         }
+
+        // Add final sigma character to reverseCharacterHash
+        this._reverseCharacterHash.put("ς", "s");
     }
 
     // Converts a single word of Latin characters into
@@ -141,8 +155,6 @@ public class TextConverter implements ITextConverter {
         if (convertedWord.contains("σ")) {
             convertedWord = convertFinalSigma(convertedWord);
         }
-
-        //Log.d("T", convertedWord);
 
         return convertedWord;
     }
