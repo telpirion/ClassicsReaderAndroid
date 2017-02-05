@@ -6,7 +6,10 @@ import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.utilities.ITextConverter;
 import com.ericmschmidt.latinreader.utilities.ResourceHelper;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.JsonReader;
+import android.widget.EditText;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,6 +46,11 @@ public class TextConverter implements ITextConverter {
         }
     }
 
+    /**
+     * Get a string indicating the target language of the text converter,
+     * in this case Greek polyonic.
+     * @return
+     */
     @Override
     public String getLang() {
         return this._lang;
@@ -86,6 +94,32 @@ public class TextConverter implements ITextConverter {
         return convertedString;
     }
 
+    @Override
+    public TextWatcher getTextWatcher(final EditText editText){
+        return new TextWatcher() {
+
+            private boolean isCanceled;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!isCanceled) {
+                    isCanceled = true;
+                    convertText(editText);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                isCanceled = false;
+            }
+        };
+    }
+
     // Converts the JSON resource into a HashMap.
     private void initCharacterHash() throws IOException {
         InputStream stream = ResourceHelper.getResourceStream(R.raw.latin_greek_text_conversion);
@@ -103,6 +137,18 @@ public class TextConverter implements ITextConverter {
 
         // Add final sigma character to reverseCharacterHash
         this._reverseCharacterHash.put("ς", "s");
+    }
+
+    // Converts the characters typed into the EditText box to another orthography.
+    private void convertText(EditText editText){
+        String searchString = editText.getText().toString();
+
+        String formattedString = convertTargetToSourceCharacters(searchString);
+        formattedString = convertSourceToTargetCharacters(formattedString);
+
+        formattedString = formattedString.replace("\n", "").replace(" ", "");
+        editText.setText(formattedString);
+        editText.setSelection(formattedString.length());
     }
 
     // Converts a single word of Latin characters into

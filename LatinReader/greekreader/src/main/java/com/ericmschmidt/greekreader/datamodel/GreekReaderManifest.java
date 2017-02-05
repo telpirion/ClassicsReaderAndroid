@@ -16,6 +16,7 @@ public class GreekReaderManifest extends Manifest {
     public ArrayList<WorkInfo> getCollection() {
         ArrayList<WorkInfo> workInfos = new ArrayList<WorkInfo>();
 
+        // TODO: Break each chapter into separate pages.
         workInfos.add(new WorkInfo("AristotlePol",
                 "Politics",
                 "Aristotle",
@@ -35,6 +36,8 @@ public class GreekReaderManifest extends Manifest {
                 R.raw.hdt_eng,
                 WorkInfo.WorkType.PROSE));*/
 
+        // TODO: Add translater info
+        // Iliad: Richard Lattimore
         workInfos.add(new WorkInfo("HomerIliad",
                 "Iliad",
                 "Homer",

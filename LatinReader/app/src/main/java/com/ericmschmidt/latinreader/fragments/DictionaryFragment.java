@@ -73,28 +73,9 @@ public class DictionaryFragment extends Fragment {
 
         // Convert text as user types.
         if (MyApplication.isNonRomanChar()) {
-            TextWatcher watcher = new TextWatcher() {
-
-                private boolean isCanceled;
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (!isCanceled) {
-                        isCanceled = true;
-                        convertText();
-                    }
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    isCanceled = false;
-                }
-            };
+            TextWatcher watcher = converter != null ?
+                    converter.getTextWatcher(searchQuery) :
+                    MyApplication.getTextConverter().getTextWatcher(searchQuery);
             searchQuery.addTextChangedListener(watcher);
         }
 
@@ -112,19 +93,6 @@ public class DictionaryFragment extends Fragment {
             searchQuery.setText(query);
             submitSearchQuery(query);
         }
-    }
-
-    // Converts the characters typed into the EditText box to another orthography.
-    private void convertText(){
-        EditText searchQuery = (EditText)getActivity().findViewById(R.id.search_query);
-        String searchString = searchQuery.getText().toString();
-
-        String formattedString = converter.convertTargetToSourceCharacters(searchString);
-        formattedString = converter.convertSourceToTargetCharacters(formattedString);
-
-        formattedString = formattedString.replace("\n", "").replace(" ", "");
-        searchQuery.setText(formattedString);
-        searchQuery.setSelection(formattedString.length());
     }
 
     // Sends and receives a search query from the integrated dictionary.
