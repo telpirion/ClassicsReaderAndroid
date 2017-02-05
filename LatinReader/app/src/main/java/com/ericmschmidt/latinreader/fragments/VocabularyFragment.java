@@ -1,14 +1,19 @@
 package com.ericmschmidt.latinreader.fragments;
 
+import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ericmschmidt.classicsreader.R;
+import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.datamodel.Dictionary;
+import com.ericmschmidt.latinreader.utilities.ITextConverter;
 
 public class VocabularyFragment extends Fragment {
 
@@ -32,12 +37,31 @@ public class VocabularyFragment extends Fragment {
 
         super.onActivityCreated(onSavedInstanceState);
 
-        // Get a random entry from the dictionary to sow.
-        Dictionary dictionary = new Dictionary();
-        String vocabEntry = dictionary.getRandomEntry();
+        // Get the random entry from the dictionary.
+        new VocabDictionaryTask().execute();
+    }
 
-        TextView vocabTextView = (TextView)getActivity().findViewById(R.id.vocab_result);
-        vocabTextView.setText(vocabEntry);
+    private class VocabDictionaryTask extends AsyncTask<String, Integer, Long>{
+        protected String vocabEntry = "";
 
+        protected Long doInBackground(String... query) {
+
+            ITextConverter converter = MyApplication.isNonRomanChar() ?
+                    MyApplication.getTextConverter() : null;
+
+            // Get a random entry from the dictionary to sow.
+            Dictionary dictionary = new Dictionary(converter);
+            vocabEntry = dictionary.getRandomEntry();
+
+            return new Long(1);
+        }
+
+        protected void onPostExecute(Long result){
+            TextView vocabTextView = (TextView)getActivity().findViewById(R.id.vocab_result);
+            vocabTextView.setText(vocabEntry);
+
+            ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.vocab_progress);
+            progress.setVisibility(View.INVISIBLE);
+        }
     }
 }

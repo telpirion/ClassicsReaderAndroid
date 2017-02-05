@@ -19,18 +19,30 @@
             android:text="@string/nav_drawer_vocab"
             android:textSize="28sp"/>
 
-        <ScrollView
-            android:paddingTop="16dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            android:fillViewport="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView android:id="@+id/vocab_result"
-                android:paddingTop="@dimen/fab_margin"
+            <ProgressBar
+                android:id="@+id/vocab_progress"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <ScrollView
+                android:paddingTop="0dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:fillViewport="true">
+
+                <TextView android:id="@+id/vocab_result"
+                    android:paddingTop="@dimen/fab_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </ScrollView>
+        </RelativeLayout>
+
     </LinearLayout>
 
 </LinearLayout>
