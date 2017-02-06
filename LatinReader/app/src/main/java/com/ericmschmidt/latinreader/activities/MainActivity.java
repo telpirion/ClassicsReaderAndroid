@@ -75,15 +75,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         // Need to load first fragment (library view) into activity.
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        LibraryFragment libFragment = new LibraryFragment();
-        currentFragmentTag = libFragment.getClass().getName();
-
-        fragmentTransaction.add(R.id.fragment_container, libFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        swapFragments(new LibraryFragment(), false);
 
     }
 
@@ -113,7 +105,7 @@ public class MainActivity extends AppCompatActivity
             public boolean onQueryTextSubmit(String query) {
 
                 DictionaryFragment fragment = DictionaryFragment.newInstance(query);
-                swapFragments(fragment);
+                swapFragments(fragment, true);
 
                 return false;
             }
@@ -138,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
 
             Fragment fragment = new SettingsFragment();
-            swapFragments(fragment);
+            swapFragments(fragment, true);
             return true;
         }
 
@@ -183,7 +175,7 @@ public class MainActivity extends AppCompatActivity
             fragment = new SettingsFragment();
         }
 
-        swapFragments(fragment);
+        swapFragments(fragment, true);
 
         // Close drawer animation.
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -192,11 +184,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onLibraryListViewClick(String workId, String isTranslation) {
-        createReadingView(workId,  isTranslation);
+        swapFragments(ReadingFragment.newInstance(workId, isTranslation), true);
     }
 
     public void onReadingViewSwitch(String workId, String isTranslation) {
-        createReadingView(workId, isTranslation);
+        swapFragments(ReadingFragment.newInstance(workId, isTranslation), true);
     }
 
     private String getRecentlyRead() {
@@ -204,15 +196,8 @@ public class MainActivity extends AppCompatActivity
         return sharedPrefs.getString(ReadingFragment.RECENTLY_READ, "");
     }
 
-    private void createReadingView(String workId, String isTranslation) {
-
-        ReadingFragment fragment = ReadingFragment.newInstance(workId, isTranslation);
-
-        swapFragments(fragment);
-    }
-
-    private void swapFragments(Fragment fragment) {
-
+    // Replace (or add) fragments to the fragment container in the activity.
+    private void swapFragments(Fragment fragment, boolean isReplace) {
         try {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -220,7 +205,11 @@ public class MainActivity extends AppCompatActivity
             // Track fragments on backstack using tags.
             currentFragmentTag = fragment.getClass().getName();
 
-            fragmentTransaction.replace(R.id.fragment_container, fragment, currentFragmentTag);
+            if (isReplace)
+                fragmentTransaction.replace(R.id.fragment_container, fragment, currentFragmentTag);
+            else
+                fragmentTransaction.add(R.id.fragment_container, fragment, currentFragmentTag);
+
             fragmentTransaction.addToBackStack(fragment.toString());
             fragmentTransaction.commit();
         } catch (Exception ex) {
