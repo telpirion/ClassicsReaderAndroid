@@ -14,6 +14,14 @@ Windows: http://apps.microsoft.com/windows/app/latin-reader/a2dfd50f-a94d-41ed-8
 
 The Latin Reader app is for Latinists by a Latinist. I not only build the app, but I use it myself to keep my Latim reading skills up to par. If you encounter a problem in the app, please file an issue here on the GitHub project home page.
 
+To log an issue, do the following:
+
+  1. Go to the [issues page](https://github.com/telpirion/ClassicsReader/issues).
+  1. Click the **New Issue** button.
+  1. Enter a title for your issue. Please indicate which version (Android or Windows) you are using.
+  1. Describe your issue in the **Write** tab.
+  1. When you finish writing, click **Submit new issue**.
+
 ###Use of licensed material
 
 Texts in this app are available under the the Creative Commons ShareAlike 3.0 license.
