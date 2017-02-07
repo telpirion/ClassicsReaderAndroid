@@ -4,7 +4,9 @@ import java.util.Formatter;
 import java.util.Locale;
 
 /**
- * Created by ericmschmidt on 1/6/16.
+ * A class that contains the data for a work contained in the app.
+ * It includes the relevant bibliographical info (author, translator)
+ * and the locations of the text in the app.
  */
 public class WorkInfo {
 
@@ -21,6 +23,7 @@ public class WorkInfo {
 
      */
 
+    // TODO: Add translater info
     private String _id;
     private String _author;
     private String _title;
@@ -29,6 +32,11 @@ public class WorkInfo {
     private int _location;
     private int _englishLocation;
     private int _workType;
+
+    // Unless specified otherwise, assume a 1-to-1 relationship
+    // between line numbers in the English and
+    private int _offset = 1;
+    private int _englishOffset = 1;
 
     /**
      * Creates a new instance of the Work class.
@@ -58,6 +66,40 @@ public class WorkInfo {
         this._location = location;
         this._englishLocation = englishLocation;
         this._workType = workType;
+    }
+
+    /**
+     * Creates a new instance of the Work class.
+     * @param id The internal ID of the work.
+     * @param title The title of the work in the original language.
+     * @param author The author of the work (original language).
+     * @param englishTitle The title of the work in English.
+     * @param englishAuthor The name of the author in English.
+     * @param location The location of the resource in the assembly.
+     * @param englishLocation The location of the English translation in the assembly.
+     * @param workType The type of text, poem or prose.
+     * @param offset The offset of the source text by line
+     * @param englishOffset The offset of the translation text by line
+     */
+    public WorkInfo(String id,
+                    String title,
+                    String author,
+                    String englishTitle,
+                    String englishAuthor,
+                    int location,
+                    int englishLocation,
+                    int workType,
+                    int offset,
+                    int englishOffset)
+    {
+        this(id, title,
+                author,
+                englishTitle,
+                englishAuthor,
+                location,
+                englishLocation,workType);
+        this._offset = offset;
+        this._englishOffset = englishOffset;
     }
 
     /**
@@ -123,6 +165,11 @@ public class WorkInfo {
         return this._englishLocation;
     }
 
+    /**
+     * Override the toString method for this class to provide
+     * a formatted string
+     * @return
+     */
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
@@ -144,9 +191,102 @@ public class WorkInfo {
         return this._workType;
     }
 
+    /**
+     * Gets the number of lines offset in the source text
+     * @return int lines offset
+     */
+    public int getOffset() {
+        return this._offset;
+    }
 
+    /**
+     * Gets the number of lines offset in the English translation
+     * @return int lines offset
+     */
+    public int getEnglishOffset(){
+        return this._englishOffset;
+    }
+
+    /**
+     * Specifies the type of work, poem or prose.
+     */
     public class WorkType {
         public static final int PROSE = 1;
         public static final int POEM = 2;
+    }
+
+    /**
+     * Builder class for generating new WorkInfo objects.
+     */
+    public static class Builder {
+        private String _id;
+        private String _author;
+        private String _title;
+        private String _englishTitle;
+        private String _englishAuthor;
+        private int _location;
+        private int _englishLocation;
+        private int _workType;
+        private int _offset = 1;
+        private int _englishOffset = 1;
+
+        public Builder(String id){
+            this._id = id;
+        }
+        public Builder author(String author){
+            this._author = author;
+            return this;
+        }
+        public Builder title(String title){
+            this._title = title;
+            return this;
+        }
+        public Builder englishTitle(String englishTitle){
+            this._englishTitle = englishTitle;
+            return this;
+        }
+        public Builder englishAuthor(String englishAuthor){
+            this._englishAuthor = englishAuthor;
+            return this;
+        }
+        public Builder location(int location){
+            this._location = location;
+            return this;
+        }
+        public Builder englishLocation(int englishLocation){
+            this._englishLocation = englishLocation;
+            return this;
+        }
+        public Builder workType(int workType){
+            this._workType = workType;
+            return this;
+        }
+        public Builder offset(int offset, int englishOffset){
+            this._offset = offset;
+            this._englishOffset = englishOffset;
+            return this;
+        }
+        public WorkInfo create(){
+            /*
+                String id,
+                String title,
+                String author,
+                String englishTitle,
+                String englishAuthor,
+                int location,
+                int englishLocation,
+                int workType
+             */
+            return new WorkInfo(this._id,
+                    this._title,
+                    this._author,
+                    this._englishTitle,
+                    this._englishAuthor,
+                    this._location,
+                    this._englishLocation,
+                    this._workType,
+                    this._offset,
+                    this._englishOffset);
+        }
     }
 }

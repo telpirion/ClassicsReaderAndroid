@@ -17,14 +17,15 @@ public class GreekReaderManifest extends Manifest {
         ArrayList<WorkInfo> workInfos = new ArrayList<WorkInfo>();
 
         // TODO: Break each chapter into separate pages.
-        workInfos.add(new WorkInfo("AristotlePol",
-                "Politics",
-                "Aristotle",
-                "Politics",
-                "Aristotle",
-                R.raw.gk_aristot_pol_gk,
-                R.raw.aristot_pol_eng,
-                WorkInfo.WorkType.PROSE));
+        workInfos.add(new WorkInfo.Builder("AristotlePol")
+                .title("Politics")
+                .author("Aristotle")
+                .englishTitle("Politics")
+                .englishAuthor("Aristotle")
+                .location(R.raw.gk_aristot_pol_gk)
+                .englishLocation(R.raw.aristot_pol_eng)
+                .workType(WorkInfo.WorkType.PROSE)
+                .create());
 
         // TODO: Fix Herodotus transcription.
         /*workInfos.add(new WorkInfo("Herodotus",
@@ -36,25 +37,27 @@ public class GreekReaderManifest extends Manifest {
                 R.raw.hdt_eng,
                 WorkInfo.WorkType.PROSE));*/
 
-        // TODO: Add translater info
-        // Iliad: Richard Lattimore
-        workInfos.add(new WorkInfo("HomerIliad",
-                "Iliad",
-                "Homer",
-                "Iliad",
-                "Homer",
-                R.raw.gk_hom_il_gk,
-                R.raw.hom_il_eng,
-                WorkInfo.WorkType.POEM));
+        workInfos.add(new WorkInfo.Builder("HomerIliad")
+                .author("Homer")
+                .title("Iliad")
+                .englishAuthor("Homer")
+                .englishTitle("Iliad")
+                .location(R.raw.gk_hom_il_gk)
+                .englishLocation(R.raw.hom_il_eng)
+                .workType(WorkInfo.WorkType.POEM)
+                .offset(1, 5)
+                .create());
 
-        workInfos.add(new WorkInfo("HomerOdyssey",
-                "Odyssey",
-                "Homer",
-                "Odyssey",
-                "Homer",
-                R.raw.gk_hom_od_gk,
-                R.raw.hom_od_eng,
-                WorkInfo.WorkType.POEM));
+        workInfos.add(new WorkInfo.Builder("HomerOdyssey")
+                .author("Homer")
+                .title("Odyssey")
+                .englishAuthor("Homer")
+                .englishTitle("Odyssey")
+                .location(R.raw.gk_hom_od_gk)
+                .englishLocation(R.raw.hom_od_eng)
+                .workType(WorkInfo.WorkType.POEM)
+                .offset(1, 5)
+                .create());
 
         workInfos.add(new WorkInfo("Lysias",
                 "Speeches",
