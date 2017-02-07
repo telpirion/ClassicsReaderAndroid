@@ -129,8 +129,7 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            Fragment fragment = new SettingsFragment();
-            swapFragments(fragment, true);
+            swapFragments(new SettingsFragment(), true);
             return true;
         }
 
