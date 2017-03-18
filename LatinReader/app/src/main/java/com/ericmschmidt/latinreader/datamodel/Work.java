@@ -6,7 +6,6 @@ import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.utilities.ResourceHelper;
 import com.ericmschmidt.latinreader.utilities.WorkXMLParser;
 
-
 /**
  * Contains the data for a text ('work') contained in the reader.
  */
@@ -20,8 +19,7 @@ public class Work {
      * Creates an instance of the Work class.
      * @param location the resource location of the Work to get.
      */
-    public Work(int location)
-    {
+    public Work(int location) {
         this._location = location;
         initBooks();
     }
@@ -41,7 +39,6 @@ public class Work {
 
         return this._getBook(indexToGet, this._location, this._books);
     }
-
 
     /**
      * Get the number of books contained in this work.

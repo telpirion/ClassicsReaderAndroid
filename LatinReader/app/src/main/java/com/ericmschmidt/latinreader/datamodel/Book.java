@@ -1,6 +1,9 @@
 package com.ericmschmidt.latinreader.datamodel;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a sub-division within a larger text.
@@ -46,11 +49,37 @@ public class Book {
                 && position < this._lines.size()) {
             line = this._lines.get(position);
         } else if (position > this._lines.size()) {
-
+            return null;
         } else {
             line = this._lines.get(0); // Default is to return the first line of the book.
         }
         return line;
+    }
+
+    /**
+     * Get a sequence of lines from the book.
+     * @param position the position to start the text from.
+     * @param offset the number of lines to get.
+     * @return String the text from the position indicated.
+     */
+    public String getLines(int position, int offset) {
+        String text = "";
+        List<String> lines;
+
+        if (position < 0)
+            return getLines(0, offset);
+
+        if (position + offset < this._lines.size()) {
+            lines = this._lines.subList(position, position + offset);
+        } else {
+            lines = this._lines.subList(position, this._lines.size());
+        }
+
+        for (String l : lines) {
+            text += l + "\n";
+        }
+
+        return text;
     }
 
     /**

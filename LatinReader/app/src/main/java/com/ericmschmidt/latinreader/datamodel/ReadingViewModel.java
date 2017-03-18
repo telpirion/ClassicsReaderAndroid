@@ -30,6 +30,7 @@ public class ReadingViewModel {
      * Creates an instance of the ReadingViewModel class with a work open.
      * @param work the work to open.
      * @param isTranslation determines whether to return the translation of this work.
+     * @param pageOffset
      */
     public ReadingViewModel(WorkInfo work,
                             boolean isTranslation,
@@ -64,19 +65,14 @@ public class ReadingViewModel {
      * @return String the text to read.
      */
     public String getCurrentPage() {
-        String currentPage = "";
+        int projectedIndex;
 
-        for (int i = 0; i < this._pageOffset; i++){
-            if ((this._currentLineIndex + i) < this._currentBook.getLineCount()) {
-                currentPage += this._currentBook.getLine(this._currentLineIndex + i) +"\n";
-            }
+        if (_isTranslation){
+            projectedIndex = (int)Math.floor(this._pageOffset / this._currentWorkInfo.getEnglishOffset());
+        } else {
+            projectedIndex = this._pageOffset;
         }
-
-        // Convert characters to source alphabet.
-        if (!this._isTranslation)
-            currentPage = convertCharacters(currentPage);
-
-        return currentPage;
+        return this._currentBook.getLines(this._currentLineIndex, projectedIndex);
     }
 
     /**
@@ -124,12 +120,10 @@ public class ReadingViewModel {
                  this._currentLineIndex + 1);
     }
 
-    // Translate the current line from Latin characters to another character set.
-    private String convertCharacters(String latinSource) {
-        if (converter != null) {
-            return converter.convertSourceToTargetCharacters(latinSource);
-        }
-        return latinSource;
+    // Determines the line to get given the page offset
+    // of the work and its translation
+    private int resolvePageIndex() {
+        return 0;
     }
 
     // Increase the reading position.
