@@ -94,6 +94,16 @@ public class LatinReaderManifest extends Manifest {
                 R.raw.verg_a_eng,
                 WorkInfo.WorkType.POEM));
 
+        workInfos.add(new WorkInfo.Builder("Livy1")
+                .author("Titus Livius")
+                .title("Ab Urbe Condita, liber I-II")
+                .englishAuthor("Livy")
+                .englishTitle("The History of Rome, books 1-2")
+                .location(R.raw.livy_01_02_lat)
+                .englishLocation(R.raw.livy_01_02_eng)
+                .workType(WorkInfo.WorkType.PROSE)
+                .create());
+
         return workInfos;
     }
 
