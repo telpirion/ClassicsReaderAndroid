@@ -22,6 +22,8 @@
     <string name="pref_poem_lines_default">5</string>
 
     <string name="reading_no_book_open">Go to the Library to open a book!</string>
+    <string name="reading_book_page_of_pages">Book %1$d, page %2$d of %3$d</string>
+    <string name="reading_page_of_pages">Page %1$d of %2$d</string>
 
     <string name="dictionary_query_hint">Enter word to look up</string>
     <string name="dictionary_query_hint_short">Lookup word</string>

@@ -153,11 +153,16 @@ public class ReadingFragment extends Fragment {
     // Change the text on the page by advancing the reading position.
     private void updateReadingSurface() {
 
-        TextView readingPane = (TextView)this.getView().findViewById(R.id.reading_surface);
-        TextView readingInfo = (TextView)this.getView().findViewById(R.id.reading_info);
+        TextView readingPane = (TextView)this.getView()
+                .findViewById(R.id.reading_surface);
+        TextView readingInfo = (TextView)this.getView()
+                .findViewById(R.id.reading_info);
+        TextView readingPosition = (TextView)this.getView()
+                .findViewById(R.id.reading_position);
 
         readingPane.setText(viewModel.getCurrentPage());
         readingInfo.setText(viewModel.getReadingInfo());
+        readingPosition.setText(viewModel.getReadingPositionString());
     }
 
     @Override

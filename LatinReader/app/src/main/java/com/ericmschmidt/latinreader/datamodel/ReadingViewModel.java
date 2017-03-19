@@ -3,6 +3,7 @@ package com.ericmschmidt.latinreader.datamodel;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 
+import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.utilities.ITextConverter;
 
@@ -113,11 +114,31 @@ public class ReadingViewModel {
      */
     public String getReadingInfo() {
 
-         return String.format(Locale.US, "%s, %s %d.%d",
+         return String.format(Locale.US, "%s, %s",
                  this._author,
-                 this._title,
-                 this._currentBookIndex + 1,
-                 this._currentLineIndex + 1);
+                 this._title);
+    }
+
+    /**
+     * Gets the book number, current page, and total pages in the book as a formatted
+     * string.
+     * @return String
+     */
+    public String getReadingPositionString() {
+
+        if (this._currentWork.getBookCount() == 1) {
+            return MyApplication.getContext()
+                    .getResources()
+                    .getString(R.string.reading_page_of_pages,
+                            this._currentLineIndex + 1,
+                            this._currentBook.getLineCount());
+        }
+        return MyApplication.getContext()
+                        .getResources()
+                        .getString(R.string.reading_book_page_of_pages,
+                                this._currentBookIndex + 1,
+                                this._currentLineIndex + 1,
+                                this._currentBook.getLineCount());
     }
 
     // Determines the line to get given the page offset

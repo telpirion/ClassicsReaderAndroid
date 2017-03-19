@@ -6,19 +6,27 @@
     tools:context=".fragments.ReadingFragment">
 
     <TextView android:id="@+id/reading_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/ReadingViewDimensions"/>
 
     <ScrollView
         android:paddingTop="16dp"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="8"
         android:scrollbars="vertical"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:fadeScrollbars="false">
 
         <TextView android:id="@+id/reading_surface"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.0"/>
+            android:layout_height="wrap_content" />
     </ScrollView>
+
+    <TextView android:id="@+id/reading_position"
+        android:paddingTop="16dp"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:textAlignment="viewEnd"
+        style="@style/ReadingViewDimensions"/>
 </LinearLayout>
