@@ -1,6 +1,6 @@
-#Classics Readers
+# Classics Reader apps
 
-##Latin Reader
+## Latin Reader
 
 This open source code for an Android and Windows app is available for anyone to clone, rebuild, copy, or alter for educational purposes. The app allows users to read Latin texts, to read English translations of Latin texts, lookup Latin words in an integrated dictionary, and take margin notes [Windows only].
 
@@ -10,7 +10,7 @@ Windows: http://apps.microsoft.com/windows/app/latin-reader/a2dfd50f-a94d-41ed-8
 
 <b>Windows and Windows Phone users:</b> I've currently stopped all development on the Windows version of this app. Instead, I'm focusing my efforts on Android and iOS. If you use the Windows version and want to see an updated version, please let me know by logging an issue.
 
-###Report bugs!
+## Report bugs!
 
 The Latin Reader app is for Latinists by a Latinist. I not only build the app, but I use it myself to keep my Latim reading skills up to par. If you encounter a problem in the app, please file an issue here on the GitHub project home page.
 
