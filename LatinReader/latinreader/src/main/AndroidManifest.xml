@@ -3,8 +3,6 @@
     package="com.ericmschmidt.latinreader">
     <uses-sdk
         xmlns:tools="http://schemas.android.com/tools"
-        android:minSdkVersion="18"
-        android:targetSdkVersion="23"
         tools:overrideLibrary="android.support.v14.preference" />
 
     <application
