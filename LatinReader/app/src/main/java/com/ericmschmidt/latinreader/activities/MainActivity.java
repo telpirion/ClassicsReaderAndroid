@@ -1,10 +1,8 @@
 package com.ericmschmidt.latinreader.activities;
 
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.RequiresPermission;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,15 +26,14 @@ import com.ericmschmidt.latinreader.fragments.DictionaryFragment;
 import com.ericmschmidt.latinreader.fragments.LibraryFragment;
 import com.ericmschmidt.latinreader.fragments.ReadingFragment;
 import com.ericmschmidt.latinreader.fragments.SettingsFragment;
+import com.ericmschmidt.latinreader.fragments.TOCFragment;
 import com.ericmschmidt.latinreader.fragments.VocabularyFragment;
-
-import static com.ericmschmidt.latinreader.fragments.ReadingFragment.TRANSLATION_FLAG;
-import static com.ericmschmidt.latinreader.fragments.ReadingFragment.WORKTOGET;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         LibraryFragment.OnLibraryListViewClick,
-        ReadingFragment.OnReadingViewSwitch {
+        ReadingFragment.OnReadingViewSwitch,
+        ReadingFragment.OnViewTOCClick {
 
     private String currentFragmentTag;
 
@@ -219,5 +216,10 @@ public class MainActivity extends AppCompatActivity
     private void toggleSystemTray(int uiOptions){
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    public void onViewTOC(String workId) {
+        swapFragments(TOCFragment.newInstance(workId), true);
     }
 }

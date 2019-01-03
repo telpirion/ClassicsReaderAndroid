@@ -1,11 +1,11 @@
 package com.ericmschmidt.latinreader.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -24,17 +24,19 @@ import com.ericmschmidt.classicsreader.R;
 
 public class ReadingFragment extends Fragment {
 
-    public static final String WORKTOGET = "workToGet";
+    public static final String WORK_TO_GET = "work";
     public static final String TRANSLATION_FLAG = "translation";
     public static final int HIT_AREA_RATIO = 4;
     public static final String RECENTLY_READ = "recently_read";
     public static final String TAG = "ReadingFragment";
 
-    private final int MENU_SWITCH_VIEW = 1;
+    private final int MENU_SWITCH_VIEW = 0;
+    private final int MENU_VIEW_TOC = 1;
 
     private String workToGetId;
     private boolean translationFlag;
     private OnReadingViewSwitch mListener;
+    private OnViewTOCClick tocListener;
     private ReadingViewModel viewModel;
 
     public ReadingFragment() {
@@ -44,7 +46,7 @@ public class ReadingFragment extends Fragment {
     public static ReadingFragment newInstance(String workId, String isTranslation) {
         ReadingFragment fragment = new ReadingFragment();
         Bundle args = new Bundle();
-        args.putString(WORKTOGET, workId);
+        args.putString(WORK_TO_GET, workId);
         args.putString(TRANSLATION_FLAG, isTranslation);
         fragment.setArguments(args);
         return fragment;
@@ -54,7 +56,7 @@ public class ReadingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            workToGetId = getArguments().getString(WORKTOGET);
+            workToGetId = getArguments().getString(WORK_TO_GET);
             String isTranslation = getArguments().getString(TRANSLATION_FLAG);
 
             translationFlag = isTranslation != null && isTranslation.equals("true");
@@ -72,11 +74,12 @@ public class ReadingFragment extends Fragment {
      * Loads the fragment and the associated ReadingViewModel.
      * @param onSavedInstanceState Bundle
      */
+    @SuppressLint("ClickableViewAccessibility")
     public void onActivityCreated(Bundle onSavedInstanceState) {
 
         super.onActivityCreated(onSavedInstanceState);
 
-        TextView readingPane = (TextView) this.getView().findViewById(R.id.reading_surface);
+        final TextView readingPane = (TextView) this.getView().findViewById(R.id.reading_surface);
 
         if (workToGetId == null || workToGetId.equals("")) {
             readingPane.setText(getResources().getString(R.string.reading_no_book_open));
@@ -133,13 +136,11 @@ public class ReadingFragment extends Fragment {
 
                             if (eventX > viewWidth / 2) {
                                 viewModel.goToPage(true);
-                            } else {
-                                viewModel.goToPage(false);
-                            }
+                            } else viewModel.goToPage(false);
 
                             updateReadingSurface();
                         } else { // The user touched the middle of the screen.
-                            getActivity().openContextMenu(v);
+                            readingPane.performClick();
                         }
 
                         return true;
@@ -147,6 +148,14 @@ public class ReadingFragment extends Fragment {
                     return true;
                 }
             });
+
+            readingPane.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().openContextMenu(v);
+                }
+            });
+
         }
     }
 
@@ -170,6 +179,7 @@ public class ReadingFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnReadingViewSwitch) {
             mListener = (OnReadingViewSwitch) context;
+            tocListener = (OnViewTOCClick) context;
         }
     }
 
@@ -188,7 +198,10 @@ public class ReadingFragment extends Fragment {
                 R.string.context_menu_source :
                 R.string.context_menu_translation;
 
-        menu.add(0, 1, 0,menuLabel);
+        menu.add(0, MENU_SWITCH_VIEW, 0, menuLabel);
+
+        if (this.viewModel.getTOC().size() > 0)
+            menu.add(0, MENU_VIEW_TOC, 1, R.string.context_menu_toc);
     }
 
     // Switch views, translation to/from source
@@ -201,6 +214,9 @@ public class ReadingFragment extends Fragment {
             case MENU_SWITCH_VIEW:
                 mListener.onReadingViewSwitch(workToGetId, Boolean.toString(!translationFlag));
                 return true;
+            case MENU_VIEW_TOC:
+                tocListener.onViewTOC(workToGetId);
+                return true;
             default:
                 return super.onContextItemSelected(item);
         }
@@ -208,5 +224,9 @@ public class ReadingFragment extends Fragment {
 
     public interface OnReadingViewSwitch {
         void onReadingViewSwitch(String workId, String isTranslation);
+    }
+
+    public interface OnViewTOCClick {
+        void onViewTOC(String workId);
     }
 }

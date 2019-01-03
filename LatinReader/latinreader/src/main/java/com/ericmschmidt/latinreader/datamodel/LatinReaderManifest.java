@@ -1,7 +1,6 @@
 package com.ericmschmidt.latinreader.datamodel;
 
 import com.ericmschmidt.latinreader.R;
-import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 
 import java.util.ArrayList;
 
@@ -22,14 +21,23 @@ public class LatinReaderManifest extends Manifest {
     public ArrayList<WorkInfo> getCollection() {
         ArrayList<WorkInfo> workInfos = new ArrayList<WorkInfo>();
 
-        workInfos.add(new WorkInfo("CaesarBG",
-                "De Bello Gallico",
-                "C. Julius Caesar",
-                "The Gallic War",
-                "Caesar",
-                R.raw.caes_bg_lat,
-                R.raw.caes_bg_eng,
-                WorkInfo.WorkType.PROSE));
+        workInfos.add(new WorkInfo.Builder("CaesarBG")
+                        .author("C. Julius Caesar")
+                        .title("De Bello Gallico")
+                        .englishAuthor("Caesar")
+                        .englishTitle("The Gallic War")
+                        .location(R.raw.caes_bg_lat)
+                        .englishLocation(R.raw.caes_bg_eng)
+                        .workType(WorkInfo.WorkType.PROSE)
+                        .TOCEntry(new TOCEntry("", 0, 0))
+                        .TOCEntry(new TOCEntry("", 1, 0))
+                        .TOCEntry(new TOCEntry("", 2, 0))
+                        .TOCEntry(new TOCEntry("", 3, 0))
+                        .TOCEntry(new TOCEntry("", 4, 0))
+                        .TOCEntry(new TOCEntry("", 5, 0))
+                        .TOCEntry(new TOCEntry("", 6, 0))
+                        .TOCEntry(new TOCEntry("", 7, 0))
+                        .create());
 
         workInfos.add(new WorkInfo("Horace",
                 "Carmina",

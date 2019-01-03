@@ -7,6 +7,7 @@ import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.utilities.ITextConverter;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -139,6 +140,14 @@ public class ReadingViewModel {
                                 this._currentBookIndex + 1,
                                 this._currentLineIndex + 1,
                                 this._currentBook.getLineCount());
+    }
+
+    /**
+     * Gets the table of contents for the work.
+     * @return ArrayList
+     */
+    public ArrayList<TOCEntry> getTOC() {
+        return this._currentWorkInfo.getTocEntries();
     }
 
     // Determines the line to get given the page offset

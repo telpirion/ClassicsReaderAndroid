@@ -1,5 +1,6 @@
 package com.ericmschmidt.latinreader.datamodel;
 
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Locale;
 
@@ -32,9 +33,10 @@ public class WorkInfo {
     private int _location;
     private int _englishLocation;
     private int _workType;
+    private ArrayList<TOCEntry> tocEntries;
 
     // Unless specified otherwise, assume a 1-to-1 relationship
-    // between line numbers in the English and
+    // between line numbers in the English and source language
     private int _offset = 1;
     private int _englishOffset = 1;
 
@@ -97,9 +99,11 @@ public class WorkInfo {
                 englishTitle,
                 englishAuthor,
                 location,
-                englishLocation,workType);
+                englishLocation,
+                workType);
         this._offset = offset;
         this._englishOffset = englishOffset;
+        this.tocEntries = new ArrayList<>();
     }
 
     /**
@@ -208,6 +212,22 @@ public class WorkInfo {
     }
 
     /**
+     * Gets the table of content entries
+     * @return ArrayList
+     */
+    public ArrayList<TOCEntry> getTocEntries() {
+        return tocEntries;
+    }
+
+    public int getTOCCount() {
+        return this.tocEntries.size();
+    }
+
+    public void addTOCEntry(TOCEntry entry) {
+        this.tocEntries.add(entry);
+    }
+
+    /**
      * Specifies the type of work, poem or prose.
      */
     public class WorkType {
@@ -229,55 +249,51 @@ public class WorkInfo {
         private int _workType;
         private int _offset = 1;
         private int _englishOffset = 1;
+        private ArrayList<TOCEntry> tocEntries;
 
         public Builder(String id){
             this._id = id;
+            this.tocEntries = new ArrayList<>();
         }
-        public Builder author(String author){
+        public Builder author(String author) {
             this._author = author;
             return this;
         }
-        public Builder title(String title){
+        public Builder title(String title) {
             this._title = title;
             return this;
         }
-        public Builder englishTitle(String englishTitle){
+        public Builder englishTitle(String englishTitle) {
             this._englishTitle = englishTitle;
             return this;
         }
-        public Builder englishAuthor(String englishAuthor){
+        public Builder englishAuthor(String englishAuthor) {
             this._englishAuthor = englishAuthor;
             return this;
         }
-        public Builder location(int location){
+        public Builder location(int location) {
             this._location = location;
             return this;
         }
-        public Builder englishLocation(int englishLocation){
+        public Builder englishLocation(int englishLocation) {
             this._englishLocation = englishLocation;
             return this;
         }
-        public Builder workType(int workType){
+        public Builder workType(int workType) {
             this._workType = workType;
             return this;
         }
-        public Builder offset(int offset, int englishOffset){
+        public Builder offset(int offset, int englishOffset) {
             this._offset = offset;
             this._englishOffset = englishOffset;
             return this;
         }
-        public WorkInfo create(){
-            /*
-                String id,
-                String title,
-                String author,
-                String englishTitle,
-                String englishAuthor,
-                int location,
-                int englishLocation,
-                int workType
-             */
-            return new WorkInfo(this._id,
+        public Builder TOCEntry(TOCEntry entry) {
+            this.tocEntries.add(entry);
+            return this;
+        }
+        public WorkInfo create() {
+            WorkInfo info = new WorkInfo(this._id,
                     this._title,
                     this._author,
                     this._englishTitle,
@@ -287,6 +303,10 @@ public class WorkInfo {
                     this._workType,
                     this._offset,
                     this._englishOffset);
+
+            info.tocEntries = this.tocEntries;
+
+            return info;
         }
     }
 }

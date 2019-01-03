@@ -37,4 +37,7 @@
 
     <string name="context_menu_translation">Show translation</string>
     <string name="context_menu_source">Show source text</string>
+    <string name="context_menu_toc">View table of contents</string>
+
+    <string name="toc_subtitle">Table of contents:</string>
 </resources>
