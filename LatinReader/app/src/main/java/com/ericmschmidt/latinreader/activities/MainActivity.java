@@ -3,6 +3,7 @@ package com.ericmschmidt.latinreader.activities;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.RequiresPermission;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         LibraryFragment.OnLibraryListViewClick,
         ReadingFragment.OnReadingViewSwitch,
-        ReadingFragment.OnViewTOCClick {
+        ReadingFragment.OnViewTOCClick,
+        TOCFragment.OnTOCListViewClick {
 
     private String currentFragmentTag;
 
@@ -145,7 +147,8 @@ public class MainActivity extends AppCompatActivity
             String workId = getRecentlyRead();
             if (!workId.equals("")) {
                 String[] workIdData = workId.split(";");
-                fragment = ReadingFragment.newInstance(workIdData[0], workIdData[1]);
+                boolean isTranslation = Boolean.getBoolean(workIdData[1]);
+                fragment = ReadingFragment.newInstance(workIdData[0], isTranslation);
             }
             else {
                 fragment = new ReadingFragment();
@@ -179,11 +182,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void onLibraryListViewClick(String workId, String isTranslation) {
+    public void onLibraryListViewClick(String workId, boolean isTranslation) {
         swapFragments(ReadingFragment.newInstance(workId, isTranslation), true);
     }
 
-    public void onReadingViewSwitch(String workId, String isTranslation) {
+    public void onReadingViewSwitch(String workId, boolean isTranslation) {
         swapFragments(ReadingFragment.newInstance(workId, isTranslation), true);
     }
 
@@ -219,7 +222,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onViewTOC(String workId) {
-        swapFragments(TOCFragment.newInstance(workId), true);
+    public void onViewTOC(TOCFragment.TOCViewOptions options) {
+        swapFragments(TOCFragment.newInstance(options), true);
+    }
+
+
+    @Override
+    public void onTOCListViewClick(ReadingFragment.ReadingViewOptions options) {
+        swapFragments(ReadingFragment.newInstance(options), true);
     }
 }

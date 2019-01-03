@@ -32,7 +32,7 @@ public class TOCEntry {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Formatter formatter = new Formatter(sb, Locale.US);
-        return formatter.format("Book %d.%d%s)",
+        return formatter.format("Book %d.%d%s",
                 (this.book + 1),
                 this.line,
                 (this.title.isEmpty() ? "" : ": " + this.title)).toString();

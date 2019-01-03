@@ -25,7 +25,9 @@ import com.ericmschmidt.classicsreader.R;
 public class ReadingFragment extends Fragment {
 
     public static final String WORK_TO_GET = "work";
-    public static final String TRANSLATION_FLAG = "translation";
+    public static final String TRANSLATION_KEY = "translation";
+    public static final String BOOK_KEY = "book";
+    public static final String LINE_KEY = "line";
     public static final int HIT_AREA_RATIO = 4;
     public static final String RECENTLY_READ = "recently_read";
     public static final String TAG = "ReadingFragment";
@@ -38,16 +40,29 @@ public class ReadingFragment extends Fragment {
     private OnReadingViewSwitch mListener;
     private OnViewTOCClick tocListener;
     private ReadingViewModel viewModel;
+    private int bookNum;
+    private int lineNum;
 
     public ReadingFragment() {
         // Required empty public constructor
     }
 
-    public static ReadingFragment newInstance(String workId, String isTranslation) {
+    public static ReadingFragment newInstance(String workId, boolean isTranslation) {
         ReadingFragment fragment = new ReadingFragment();
         Bundle args = new Bundle();
         args.putString(WORK_TO_GET, workId);
-        args.putString(TRANSLATION_FLAG, isTranslation);
+        args.putBoolean(TRANSLATION_KEY, isTranslation);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static ReadingFragment newInstance(ReadingViewOptions options) {
+        ReadingFragment fragment = new ReadingFragment();
+        Bundle args = new Bundle();
+        args.putString(WORK_TO_GET, options.workId);
+        args.putBoolean(TRANSLATION_KEY, options.isTranslation);
+        args.putInt(BOOK_KEY, options.book);
+        args.putInt(LINE_KEY, options.line);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,11 +70,15 @@ public class ReadingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bookNum = lineNum = -1;
         if (getArguments() != null) {
             workToGetId = getArguments().getString(WORK_TO_GET);
-            String isTranslation = getArguments().getString(TRANSLATION_FLAG);
+            translationFlag = getArguments().getBoolean(TRANSLATION_KEY);
+        }
 
-            translationFlag = isTranslation != null && isTranslation.equals("true");
+        if (getArguments() != null && getArguments().getInt(BOOK_KEY) >= 0) {
+            bookNum = getArguments().getInt(BOOK_KEY);
+            lineNum = getArguments().getInt(LINE_KEY);
         }
     }
 
@@ -113,6 +132,11 @@ public class ReadingFragment extends Fragment {
             }
 
             viewModel = new ReadingViewModel(work, translationFlag, numLines);
+
+            if (bookNum >= 0) {
+                viewModel.setCurrentBook(bookNum);
+                viewModel.setCurrentLine(lineNum);
+            }
             updateReadingSurface();
 
         /*
@@ -155,7 +179,6 @@ public class ReadingFragment extends Fragment {
                     getActivity().openContextMenu(v);
                 }
             });
-
         }
     }
 
@@ -187,6 +210,7 @@ public class ReadingFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        tocListener = null;
     }
 
     @Override
@@ -200,7 +224,7 @@ public class ReadingFragment extends Fragment {
 
         menu.add(0, MENU_SWITCH_VIEW, 0, menuLabel);
 
-        if (this.viewModel.getTOC().size() > 0)
+        if (this.viewModel.getTOC().length > 0)
             menu.add(0, MENU_VIEW_TOC, 1, R.string.context_menu_toc);
     }
 
@@ -212,21 +236,40 @@ public class ReadingFragment extends Fragment {
 
         switch (id) {
             case MENU_SWITCH_VIEW:
-                mListener.onReadingViewSwitch(workToGetId, Boolean.toString(!translationFlag));
+                mListener.onReadingViewSwitch(workToGetId, !translationFlag);
                 return true;
             case MENU_VIEW_TOC:
-                tocListener.onViewTOC(workToGetId);
+                TOCFragment.TOCViewOptions options = new TOCFragment.TOCViewOptions();
+                options.isTranslation = this.translationFlag;
+                options.workId = this.workToGetId;
+                tocListener.onViewTOC(options);
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
+    /**
+     * Communicates reading view switch click to host activity.
+     */
     public interface OnReadingViewSwitch {
-        void onReadingViewSwitch(String workId, String isTranslation);
+        void onReadingViewSwitch(String workId, boolean isTranslation);
     }
 
+    /**
+     * Communicates TOC menu item click to host activity.
+     */
     public interface OnViewTOCClick {
-        void onViewTOC(String workId);
+        void onViewTOC(TOCFragment.TOCViewOptions options);
+    }
+
+    /**
+     * Small struct for passing data between fragments and activity.
+     */
+    public static class ReadingViewOptions {
+        public boolean isTranslation;
+        public String workId;
+        public int book;
+        public int line;
     }
 }

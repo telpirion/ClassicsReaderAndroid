@@ -1,31 +1,40 @@
 package com.ericmschmidt.latinreader.fragments;
 
-import android.app.Activity;
-import android.databinding.DataBindingUtil;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.databinding.FragmentTocBinding;
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.datamodel.Library;
 import com.ericmschmidt.latinreader.datamodel.Manifest;
+import com.ericmschmidt.latinreader.datamodel.TOCEntry;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
+import com.ericmschmidt.latinreader.layouts.TOCListViewAdapter;
 
 /**
  * Fragment that presents work's table of contents.
  */
 public class TOCFragment extends Fragment {
 
-    public static final String ID = "work_id";
+    public static final String WORK_ID_KEY = "work_id";
+    public static final String IS_TRANSLATION_KEY = "isTranslation";
 
+    public static final String TAG = "TOCFragment";
 
     private String workId;
+    private boolean isTranslation;
     private WorkInfo work;
     private FragmentTocBinding binding;
+    private OnTOCListViewClick mListener;
+
     /**
      * Required empty constructor.
      */
@@ -33,13 +42,14 @@ public class TOCFragment extends Fragment {
 
     /**
      * Creates a new TOCFragment instance for a specified work
-     * @param workId the work to show the TOC
+     * @param opts the data from the reading view
      * @return TOCFragment
      */
-    public static TOCFragment newInstance(String workId) {
+    public static TOCFragment newInstance(TOCViewOptions opts) {
         TOCFragment fragment = new TOCFragment();
         Bundle args = new Bundle();
-        args.putString(ID, workId);
+        args.putString(WORK_ID_KEY, opts.workId);
+        args.putBoolean(IS_TRANSLATION_KEY, opts.isTranslation);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,7 +58,8 @@ public class TOCFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            workId = getArguments().getString(ID);
+            this.workId = getArguments().getString(WORK_ID_KEY);
+            this.isTranslation = getArguments().getBoolean(IS_TRANSLATION_KEY);
 
             Manifest manifest = MyApplication.getManifest();
             Library library = new Library(manifest.getCollection());
@@ -73,5 +84,58 @@ public class TOCFragment extends Fragment {
     public void onActivityCreated(Bundle onSavedInstanceState) {
         super.onActivityCreated(onSavedInstanceState);
 
+        ArrayAdapter<TOCEntry> adapter = new TOCListViewAdapter(getActivity(),
+                        work.getTocEntries());
+
+        ListView listView = (ListView)this.getView().findViewById(R.id.toc_listView);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(onItemClickListener);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof TOCFragment.OnTOCListViewClick) {
+            mListener = (TOCFragment.OnTOCListViewClick) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    // Create a message handling object as an anonymous class.
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View v, int position, long id) {
+            TOCEntry entry = work.getTocEntries()[position];
+            if (mListener != null) {
+                ReadingFragment.ReadingViewOptions options =
+                        new ReadingFragment.ReadingViewOptions();
+                options.book = entry.getBook();
+                options.line = entry.getLine();
+                options.workId = work.getId();
+                options.isTranslation = isTranslation;
+                mListener.onTOCListViewClick(options);
+            }
+        }
+    };
+
+    /**
+     * Allows the LibraryFragment to communicate to the Activity
+     * when the user clicks an item in the ListView.
+     */
+    public interface OnTOCListViewClick {
+        void onTOCListViewClick(ReadingFragment.ReadingViewOptions options);
+    }
+
+    /**
+     * Struct for passing information to the TOC fragment.
+     */
+    public static class TOCViewOptions {
+        public TOCViewOptions() {}
+        public String workId;
+        public boolean isTranslation;
     }
 }

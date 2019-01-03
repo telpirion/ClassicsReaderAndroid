@@ -68,6 +68,7 @@ public class WorkInfo {
         this._location = location;
         this._englishLocation = englishLocation;
         this._workType = workType;
+        this.tocEntries = new ArrayList<>();
     }
 
     /**
@@ -215,8 +216,9 @@ public class WorkInfo {
      * Gets the table of content entries
      * @return ArrayList
      */
-    public ArrayList<TOCEntry> getTocEntries() {
-        return tocEntries;
+    public TOCEntry[] getTocEntries() {
+        TOCEntry[] entries = new TOCEntry[tocEntries.size()];
+        return tocEntries.toArray(entries);
     }
 
     public int getTOCCount() {

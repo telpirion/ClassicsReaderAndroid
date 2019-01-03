@@ -146,8 +146,26 @@ public class ReadingViewModel {
      * Gets the table of contents for the work.
      * @return ArrayList
      */
-    public ArrayList<TOCEntry> getTOC() {
+    public TOCEntry[] getTOC() {
         return this._currentWorkInfo.getTocEntries();
+    }
+
+    /**
+     * Sets the current book for reading.
+     * @param currentBook the book to set as current
+     */
+    public void setCurrentBook(int currentBook) {
+        this._currentBookIndex = currentBook;
+        updatePage();
+    }
+
+    /**
+     * Sets the current line for reading
+     * @param currentLine the current line to set as current
+     */
+    public void setCurrentLine(int currentLine) {
+        this._currentLineIndex = currentLine;
+        updatePage();
     }
 
     // Determines the line to get given the page offset

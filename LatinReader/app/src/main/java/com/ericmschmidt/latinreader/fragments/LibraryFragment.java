@@ -100,9 +100,9 @@ public class LibraryFragment extends Fragment {
 
             // Need to navigate to ReadingFragment.
             if (mListener != null && translationFlag) {
-                mListener.onLibraryListViewClick(clickedWork.getId(), "true");
+                mListener.onLibraryListViewClick(clickedWork.getId(), true);
             } else if (mListener != null) {
-                mListener.onLibraryListViewClick(clickedWork.getId(), "false");
+                mListener.onLibraryListViewClick(clickedWork.getId(), false);
             }
         }
     };
@@ -126,6 +126,6 @@ public class LibraryFragment extends Fragment {
      * when the user clicks an item in the ListView.
      */
     public interface OnLibraryListViewClick {
-        void onLibraryListViewClick(String workId, String isTranslation);
+        void onLibraryListViewClick(String workId, boolean isTranslation);
     }
 }
