@@ -156,6 +156,7 @@ public class ReadingViewModel {
      */
     public void setCurrentBook(int currentBook) {
         this._currentBookIndex = currentBook;
+        this._currentBook = this._currentWork.getBook(currentBook);
         updatePage();
     }
 
@@ -166,6 +167,22 @@ public class ReadingViewModel {
     public void setCurrentLine(int currentLine) {
         this._currentLineIndex = currentLine;
         updatePage();
+    }
+
+    /**
+     * Access the currently viewed book.
+     * @return int
+     */
+    public int getCurrentBookIndex() {
+        return this._currentBookIndex;
+    }
+
+    /**
+     * Access the currently viewed line.
+     * @return int
+     */
+    public int getCurrentLineIndex() {
+        return this._currentLineIndex;
     }
 
     // Determines the line to get given the page offset

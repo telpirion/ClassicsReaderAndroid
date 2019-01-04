@@ -186,8 +186,8 @@ public class MainActivity extends AppCompatActivity
         swapFragments(ReadingFragment.newInstance(workId, isTranslation), true);
     }
 
-    public void onReadingViewSwitch(String workId, boolean isTranslation) {
-        swapFragments(ReadingFragment.newInstance(workId, isTranslation), true);
+    public void onReadingViewSwitch(ReadingFragment.ReadingViewOptions options) {
+        swapFragments(ReadingFragment.newInstance(options), true);
     }
 
     private String getRecentlyRead() {

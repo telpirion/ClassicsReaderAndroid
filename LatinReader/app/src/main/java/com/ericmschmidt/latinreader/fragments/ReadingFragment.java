@@ -37,8 +37,8 @@ public class ReadingFragment extends Fragment {
 
     private String workToGetId;
     private boolean translationFlag;
-    private OnReadingViewSwitch mListener;
-    private OnViewTOCClick tocListener;
+    private OnReadingViewSwitch onReadingViewSwitch;
+    private OnViewTOCClick onViewTOCClick;
     private ReadingViewModel viewModel;
     private int bookNum;
     private int lineNum;
@@ -98,46 +98,46 @@ public class ReadingFragment extends Fragment {
 
         super.onActivityCreated(onSavedInstanceState);
 
-        final TextView readingPane = (TextView) this.getView().findViewById(R.id.reading_surface);
+        final TextView readingPane = (TextView)getView().findViewById(R.id.reading_surface);
 
         if (workToGetId == null || workToGetId.equals("")) {
             readingPane.setText(getResources().getString(R.string.reading_no_book_open));
+            return;
+        }
 
-        } else {
+        Manifest manifest = MyApplication.getManifest();
+        Library library = new Library(manifest.getCollection());
+        WorkInfo work = library.getWorkInfoByID(workToGetId);
+        int numLines = 1;
 
-            Manifest manifest = MyApplication.getManifest();
-            Library library = new Library(manifest.getCollection());
-            WorkInfo work = library.getWorkInfoByID(workToGetId);
-            int numLines = 1;
+        // Register the context menu
+        registerForContextMenu(readingPane);
 
-            // Register the context menu
-            registerForContextMenu(readingPane);
+        // Set text size.
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String textSize = sharedPreferences.getString(SettingsFragment.TEXT_SIZE, SettingsFragment.TEXT_SIZE_DEFAULT);
+        readingPane.setTextSize(TypedValue.COMPLEX_UNIT_DIP, Float.parseFloat(textSize));
 
-            // Set text size.
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            String textSize = sharedPreferences.getString(SettingsFragment.TEXT_SIZE, SettingsFragment.TEXT_SIZE_DEFAULT);
-            readingPane.setTextSize(TypedValue.COMPLEX_UNIT_DIP, Float.parseFloat(textSize));
+        // Register this as the most recently read book.
+        sharedPreferences.edit()
+            .putString(RECENTLY_READ, String.format("%s;%s",workToGetId,Boolean.toString(translationFlag)))
+            .apply();
 
-            // Register this as the most recently read book.
-            sharedPreferences.edit()
-                .putString(RECENTLY_READ, String.format("%s;%s",workToGetId,Boolean.toString(translationFlag)))
-                .apply();
+        // After parsing the XML, the app presents poetry lines one at a time.
+        // The user can override the number of lines to show per page.
+        // This setting doesn't matter for prose, since one "line" equals one paragraph.
+        if (work.getWorkType() == WorkInfo.WorkType.POEM) {
+            String linesPerPage = sharedPreferences.getString(SettingsFragment.POEM_LINES, SettingsFragment.POEM_LINES_DEFAULT);
+            numLines = Integer.parseInt(linesPerPage);
+        }
 
-            // After parsing the XML, the app presents poetry lines one at a time.
-            // The user can override the number of lines to show per page.
-            // This setting doesn't matter for prose, since one "line" equals one paragraph.
-            if (work.getWorkType() == WorkInfo.WorkType.POEM) {
-                String linesPerPage = sharedPreferences.getString(SettingsFragment.POEM_LINES, SettingsFragment.POEM_LINES_DEFAULT);
-                numLines = Integer.parseInt(linesPerPage);
-            }
+        viewModel = new ReadingViewModel(work, translationFlag, numLines);
 
-            viewModel = new ReadingViewModel(work, translationFlag, numLines);
-
-            if (bookNum >= 0) {
-                viewModel.setCurrentBook(bookNum);
-                viewModel.setCurrentLine(lineNum);
-            }
-            updateReadingSurface();
+        if (bookNum >= 0) {
+            viewModel.setCurrentBook(bookNum);
+            viewModel.setCurrentLine(lineNum);
+        }
+        updateReadingSurface();
 
         /*
             Set touch responses:
@@ -145,72 +145,57 @@ public class ReadingFragment extends Fragment {
             - touch the right side of the reading area, go forward a page.
             - touch the middle of the reading area, either scroll or bring up context menu.
         */
-            readingPane.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
+        readingPane.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
-                    if (event.getAction() == MotionEvent.ACTION_UP) {
-                        int viewWidth = v.getWidth();
-                        float eventX = event.getX();
-                        int hitArea = viewWidth / HIT_AREA_RATIO;
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    int viewWidth = v.getWidth();
+                    float eventX = event.getX();
+                    int hitArea = viewWidth / HIT_AREA_RATIO;
 
-                        // the user has touched an edge; flip the page.
-                        if ((eventX < hitArea) ||
-                                (eventX > viewWidth - hitArea)) {
+                    // the user has touched an edge; flip the page.
+                    if ((eventX < hitArea) ||
+                            (eventX > viewWidth - hitArea)) {
 
-                            if (eventX > viewWidth / 2) {
-                                viewModel.goToPage(true);
-                            } else viewModel.goToPage(false);
+                        if (eventX > viewWidth / 2) {
+                            viewModel.goToPage(true);
+                        } else viewModel.goToPage(false);
 
-                            updateReadingSurface();
-                        } else { // The user touched the middle of the screen.
-                            readingPane.performClick();
-                        }
-
-                        return true;
+                        updateReadingSurface();
+                    } else { // The user touched the middle of the screen.
+                        readingPane.performClick();
                     }
+
                     return true;
                 }
-            });
+                return true;
+            }
+        });
 
-            readingPane.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getActivity().openContextMenu(v);
-                }
-            });
-        }
-    }
+        readingPane.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().openContextMenu(v);
+            }
+        });
 
-    // Change the text on the page by advancing the reading position.
-    private void updateReadingSurface() {
-
-        TextView readingPane = (TextView)this.getView()
-                .findViewById(R.id.reading_surface);
-        TextView readingInfo = (TextView)this.getView()
-                .findViewById(R.id.reading_info);
-        TextView readingPosition = (TextView)this.getView()
-                .findViewById(R.id.reading_position);
-
-        readingPane.setText(viewModel.getCurrentPage());
-        readingInfo.setText(viewModel.getReadingInfo());
-        readingPosition.setText(viewModel.getReadingPositionString());
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnReadingViewSwitch) {
-            mListener = (OnReadingViewSwitch) context;
-            tocListener = (OnViewTOCClick) context;
+            onReadingViewSwitch = (OnReadingViewSwitch) context;
+            onViewTOCClick = (OnViewTOCClick) context;
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-        tocListener = null;
+        onReadingViewSwitch = null;
+        onViewTOCClick = null;
     }
 
     @Override
@@ -236,24 +221,44 @@ public class ReadingFragment extends Fragment {
 
         switch (id) {
             case MENU_SWITCH_VIEW:
-                mListener.onReadingViewSwitch(workToGetId, !translationFlag);
+                ReadingViewOptions readingViewOptions = new ReadingViewOptions();
+                readingViewOptions.workId = workToGetId;
+                readingViewOptions.isTranslation = !translationFlag;
+                readingViewOptions.book = viewModel.getCurrentBookIndex();
+                readingViewOptions.line = viewModel.getCurrentLineIndex();
+                onReadingViewSwitch.onReadingViewSwitch(readingViewOptions);
                 return true;
             case MENU_VIEW_TOC:
                 TOCFragment.TOCViewOptions options = new TOCFragment.TOCViewOptions();
                 options.isTranslation = this.translationFlag;
                 options.workId = this.workToGetId;
-                tocListener.onViewTOC(options);
+                onViewTOCClick.onViewTOC(options);
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
+    // Change the text on the page by advancing the reading position.
+    private void updateReadingSurface() {
+
+        TextView readingPane = (TextView)this.getView()
+                .findViewById(R.id.reading_surface);
+        TextView readingInfo = (TextView)this.getView()
+                .findViewById(R.id.reading_info);
+        TextView readingPosition = (TextView)this.getView()
+                .findViewById(R.id.reading_position);
+
+        readingPane.setText(viewModel.getCurrentPage());
+        readingInfo.setText(viewModel.getReadingInfo());
+        readingPosition.setText(viewModel.getReadingPositionString());
+    }
+
     /**
      * Communicates reading view switch click to host activity.
      */
     public interface OnReadingViewSwitch {
-        void onReadingViewSwitch(String workId, boolean isTranslation);
+        void onReadingViewSwitch(ReadingViewOptions options);
     }
 
     /**
