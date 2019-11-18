@@ -29,6 +29,11 @@ public class LibraryRecyclerViewAdapter extends
     private Listener listener;
 
 
+    /**
+     * Constructor for class
+     * @param works the collection of works to display in the RecyclerView
+     * @param isTranslation whether the list is English translations.
+     */
     public LibraryRecyclerViewAdapter(WorkInfo[] works, boolean isTranslation) {
         this.works = works;
         this.isTranslation = isTranslation;

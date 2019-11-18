@@ -1,12 +1,12 @@
 package com.ericmschmidt.latinreader.datamodel;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents a sub-division within a larger text.
+ *
+ * @version 2019-11-17
  */
 public class Book {
 
@@ -14,7 +14,7 @@ public class Book {
     private int _id;
 
     /**
-     * Creates an instance of the Bok class
+     * Creates an instance of the Book class
      */
     public Book(int id) {
         this._lines = new ArrayList<String>();
