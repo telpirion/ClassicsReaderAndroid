@@ -9,6 +9,7 @@
 gradle.properties
 gradlew
 gradlew.bat
-
+latinreader/release/
 /.idea
 /gradle
+*.hprof
