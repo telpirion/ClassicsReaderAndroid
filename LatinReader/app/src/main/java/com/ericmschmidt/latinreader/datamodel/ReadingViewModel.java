@@ -289,7 +289,7 @@ public class ReadingViewModel {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
         String prefs = sharedPreferences.getString(_currentWorkInfo.getId(), DEFAULT_READING_POSITION);
 
-        if (!prefs.equals(DEFAULT_READING_POSITION)) {
+        if (!prefs.contains(DEFAULT_READING_POSITION)) {
             String[] readingPosition = prefs.split(",");
 
             // Need to store reading position as bookIndex,lineIndex

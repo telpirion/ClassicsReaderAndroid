@@ -24,6 +24,7 @@
             android:id="@+id/toc_listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:dividerHeight="7dp"
             android:divider="@android:color/transparent"
             android:layout_marginTop="@dimen/fab_margin">
         </ListView>

@@ -4,12 +4,9 @@
     android:layout_height="match_parent"
     tools:context=".fragments.LibraryFragment">
 
-    <ListView
-        android:id="@+id/library_listView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="@dimen/fab_margin">
-    </ListView>
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

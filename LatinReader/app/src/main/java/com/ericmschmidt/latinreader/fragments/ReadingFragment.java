@@ -52,6 +52,11 @@ public class ReadingFragment extends Fragment {
         Bundle args = new Bundle();
         args.putString(WORK_TO_GET, workId);
         args.putBoolean(TRANSLATION_KEY, isTranslation);
+
+        // Must explicitly set to -1.
+        // Otherwise, getArguments().getInt() returns 0.
+        args.putInt(BOOK_KEY, -1);
+        args.putInt(LINE_KEY, -1);
         fragment.setArguments(args);
         return fragment;
     }

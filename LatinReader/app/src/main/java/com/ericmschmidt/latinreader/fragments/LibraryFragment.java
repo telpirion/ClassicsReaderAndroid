@@ -1,38 +1,40 @@
 package com.ericmschmidt.latinreader.fragments;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.MyApplication;
-import com.ericmschmidt.latinreader.datamodel.Manifest;
 import com.ericmschmidt.latinreader.datamodel.Library;
+import com.ericmschmidt.latinreader.datamodel.Manifest;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
-import com.ericmschmidt.latinreader.layouts.LibraryListViewAdapter;
-import com.ericmschmidt.latinreader.layouts.TranslationListViewAdapter;
+import com.ericmschmidt.latinreader.layouts.LibraryRecyclerViewAdapter;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-
-public class LibraryFragment extends Fragment {
+/**
+ * Subclass of Fragment.
+ * <p>
+ * Displays works (books) in a RecyclerView.
+ * This class is used for presenting both foreign language and English texts.
+ * <p>
+ * Layout files:
+ * - res/layout/fragment_library.xml
+ * - res/layout/cardviewitem_libraryrecyclerview.xml
+ *
+ * @version 2019-11-17
+ */
+public class LibraryFragment extends Fragment
+        implements LibraryRecyclerViewAdapter.Listener {
 
     public static final String TRANSLATION_FLAG = "translation";
     private static final String TAG = "LibraryFragment";
 
-    private boolean translationFlag;
+    private boolean isTranslation;
     private Library library;
     private WorkInfo[] works;
     private OnLibraryListViewClick mListener;
@@ -53,8 +55,8 @@ public class LibraryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            String translationParam= getArguments().getString(TRANSLATION_FLAG);
-            translationFlag = (translationParam != null);
+            String translationParam = getArguments().getString(TRANSLATION_FLAG);
+            isTranslation = (translationParam != null);
         }
     }
 
@@ -71,41 +73,30 @@ public class LibraryFragment extends Fragment {
 
         try {
 
-            // Retrieve the manifest class from the package using config settings.
+            // Retrieve the manifest from the package using config settings.
             Manifest manifest = MyApplication.getManifest();
             library = new Library(manifest.getCollection());
             works = library.getWorks();
 
-            ArrayAdapter<WorkInfo> adapter;
+            // Create and populate the RecyclerView.
+            RecyclerView recyclerView =
+                    (RecyclerView) findViewById(R.id.recyclerview);
+            recyclerView.setHasFixedSize(true);
 
-            if (translationFlag) {
-                adapter = new TranslationListViewAdapter(getActivity(), works);
-            } else {
-                adapter = new LibraryListViewAdapter(getActivity(), works);
-            }
+            LinearLayoutManager manager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(manager);
 
-            ListView listView = (ListView)this.getView().findViewById(R.id.library_listView);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(mMessageClickedHandler);
+            LibraryRecyclerViewAdapter adapter =
+                    new LibraryRecyclerViewAdapter(works, this.isTranslation);
+
+            adapter.setListener(this);
+            recyclerView.setAdapter(adapter);
 
         } catch (Exception ex) {
             MyApplication.logError(this.getClass(), ex.getMessage());
         }
     }
 
-    // Create a message handling object as an anonymous class.
-    private OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
-        public void onItemClick(AdapterView parent, View v, int position, long id) {
-            WorkInfo clickedWork = works[position];
-
-            // Need to navigate to ReadingFragment.
-            if (mListener != null && translationFlag) {
-                mListener.onLibraryListViewClick(clickedWork.getId(), true);
-            } else if (mListener != null) {
-                mListener.onLibraryListViewClick(clickedWork.getId(), false);
-            }
-        }
-    };
 
     @Override
     public void onAttach(Context context) {
@@ -119,6 +110,20 @@ public class LibraryFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(int position) {
+        WorkInfo clickedWork = works[position];
+
+        // Need to navigate to ReadingFragment.
+        if (mListener != null) {
+            mListener.onLibraryListViewClick(clickedWork.getId(), isTranslation);
+        }
+    }
+
+    private View findViewById(int id) {
+        return this.getView().findViewById(id);
     }
 
     /**
