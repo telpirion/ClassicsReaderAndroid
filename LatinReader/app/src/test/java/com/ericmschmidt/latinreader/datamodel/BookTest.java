@@ -3,7 +3,6 @@ package com.ericmschmidt.latinreader.datamodel;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import static com.google.common.truth.Truth.assertThat;
 
 public class BookTest {
@@ -23,7 +22,7 @@ public class BookTest {
 
 
     @Test
-    public void test_GetLine() {
+    public void testGetLine() {
 
         // Verify that it gets the correct line.
         String actualResult1 = testBook.getLine(0);
@@ -40,7 +39,7 @@ public class BookTest {
     }
 
     @Test
-    public void test_GetLines() {
+    public void testGetLines() {
 
         // Verify that it gets the correct lines.
         String actualResult1 = testBook.getLines(0, 2);
