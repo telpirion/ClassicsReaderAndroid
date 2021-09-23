@@ -1,23 +1,20 @@
 package com.ericmschmidt.latinreader.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.fragment.app.Fragment;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -32,6 +29,12 @@ import com.ericmschmidt.latinreader.fragments.TOCFragment;
 import com.ericmschmidt.latinreader.fragments.VocabularyFragment;
 import com.google.android.material.navigation.NavigationView;
 
+/** Base activity for this app.
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.0
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         LibraryFragment.OnLibraryListViewClick,
@@ -52,23 +55,23 @@ public class MainActivity extends AppCompatActivity
         // Hide the system bar.
         //toggleSystemTray(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Apply the current icon to the nav bar.
         try {
             String applicationName = getApplicationContext().getPackageName();
             View headerView = navigationView.getHeaderView(0);
-            ImageView iconHolder = (ImageView)headerView.findViewById(R.id.icon_image);
+            ImageView iconHolder = headerView.findViewById(R.id.icon_image);
             Drawable icon = getPackageManager().getApplicationIcon(applicationName);
             iconHolder.setImageDrawable(icon);
         } catch (Exception e) {
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -129,7 +132,6 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
             swapFragments(new SettingsFragment(), true);
             return true;
         }
@@ -178,7 +180,7 @@ public class MainActivity extends AppCompatActivity
         swapFragments(fragment, true);
 
         // Close drawer animation.
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -226,7 +228,6 @@ public class MainActivity extends AppCompatActivity
     public void onViewTOC(TOCFragment.TOCViewOptions options) {
         swapFragments(TOCFragment.newInstance(options), true);
     }
-
 
     @Override
     public void onTOCListViewClick(ReadingFragment.ReadingViewOptions options) {

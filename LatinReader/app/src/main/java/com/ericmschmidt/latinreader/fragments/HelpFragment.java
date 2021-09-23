@@ -8,6 +8,13 @@ import android.view.ViewGroup;
 
 import com.ericmschmidt.classicsreader.R;
 
+/** UI for help "page".
+ *
+ * NOT YET USED.
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ */
 public class HelpFragment extends Fragment {
 
     public HelpFragment() {

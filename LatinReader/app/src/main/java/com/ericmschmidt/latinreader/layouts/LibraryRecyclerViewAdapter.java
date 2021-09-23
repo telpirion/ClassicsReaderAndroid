@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,15 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 
-/**
- * Subclass of RecyclerViewAdapter.
+/**Subclass of RecyclerViewAdapter.
  * Used for displaying works in the LibraryFragment's RecyclerView.
  *
  * Has two nested types:
  * - class ViewHolder (for holding individual items in the RecyclerView)
  * - interface Listener (for responding to clicks in the RecyclerView)
  *
- * @version 2019-11-17
+ * Layout files:
+ * - res/layout/cardviewitem_libraryrecyclerview.xml
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.4
  */
 public class LibraryRecyclerViewAdapter extends
         RecyclerView.Adapter<LibraryRecyclerViewAdapter.ViewHolder> {

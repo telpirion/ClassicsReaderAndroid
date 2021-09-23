@@ -1,7 +1,5 @@
 package com.ericmschmidt.latinreader.datamodel;
 
-import android.util.Log;
-
 import com.ericmschmidt.latinreader.utilities.DictionaryXMLHelper;
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.utilities.ITextConverter;
@@ -11,8 +9,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Contains the data and methods for getting dictionary entries.
+/** Contains the data and methods for getting dictionary entries.
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.1
  */
 public class Dictionary  {
 

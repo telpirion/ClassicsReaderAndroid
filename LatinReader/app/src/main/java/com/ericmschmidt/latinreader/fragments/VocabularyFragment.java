@@ -1,7 +1,5 @@
 package com.ericmschmidt.latinreader.fragments;
 
-import androidx.fragment.app.Fragment;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import androidx.fragment.app.Fragment;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.datamodel.Dictionary;
 import com.ericmschmidt.latinreader.utilities.ITextConverter;
 
+/** Displays the vocabulary word-builder page.
+ *
+ *  Source files:
+ *  - res/layout/fragment_vocabulary.xml
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.2
+ */
 public class VocabularyFragment extends Fragment {
 
     public VocabularyFragment() {

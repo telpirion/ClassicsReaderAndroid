@@ -4,27 +4,28 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Locale;
 
-/**
- * A class that contains the data for a work contained in the app.
+/** Contains the data for a work contained in the app.
+ *
  * It includes the relevant bibliographical info (author, translator)
  * and the locations of the text in the app.
+ *
+ * Example:
+ *
+ *             id: "CaesarBG",
+ *             title: "De Bello Gallico", author: "C. Julius Caesar",
+ *             engTitle: "The Gallic Wars", engAuthor: "Caesar",
+ *             location: encodeURI(_dataURI + "caes_bg_lat.xml"),
+ *             translation: encodeURI(_dataURI + "caes_bg_eng.xml")
+ *             workType: prose || poem
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.0
  */
 public class WorkInfo {
 
-    /*
-
-            Example:
-
-            id: "CaesarBG",
-            title: "De Bello Gallico", author: "C. Julius Caesar",
-            engTitle: "The Gallic Wars", engAuthor: "Caesar",
-            location: encodeURI(_dataURI + "caes_bg_lat.xml"),
-            translation: encodeURI(_dataURI + "caes_bg_eng.xml")
-            workType: prose || poem
-
-     */
-
-    // TODO: Add translater info
+    // TODO(telpirion): Add translater info
     private String _id;
     private String _author;
     private String _title;

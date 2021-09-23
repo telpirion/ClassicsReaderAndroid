@@ -1,15 +1,14 @@
 package com.ericmschmidt.greekreader.utilities;
 
-import com.ericmschmidt.greekreader.R;
-
-import com.ericmschmidt.latinreader.MyApplication;
-import com.ericmschmidt.latinreader.utilities.ITextConverter;
-import com.ericmschmidt.latinreader.utilities.ResourceHelper;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.JsonReader;
 import android.widget.EditText;
+
+import com.ericmschmidt.greekreader.R;
+import com.ericmschmidt.latinreader.MyApplication;
+import com.ericmschmidt.latinreader.utilities.ITextConverter;
+import com.ericmschmidt.latinreader.utilities.ResourceHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,12 +18,15 @@ import java.util.HashMap;
 /**
  * A Latin character to Greek polytonic converter.
  * Copyright 2015, Eric Schmidt. All rights reserved.
- * Version 2.0.
  *
  * http://www.unicode.org/charts/PDF/U1F00.pdf
  * http://www.fileformat.info/search/google.htm
  *
  * Last updated: 2017-02-03
+ *
+ * @author Eric SChmidt
+ * @author http://telpirion.com
+ * @version 2.0
  */
 public class TextConverter implements ITextConverter {
 

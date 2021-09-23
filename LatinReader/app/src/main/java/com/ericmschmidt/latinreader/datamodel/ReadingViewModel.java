@@ -3,16 +3,17 @@ package com.ericmschmidt.latinreader.datamodel;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.utilities.ITextConverter;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
-/**
- * A ViewModel that maps reading behaviors to a view.
+/** A ViewModel that maps reading behaviors to a view.
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.1
  */
 public class ReadingViewModel {
 

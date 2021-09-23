@@ -6,8 +6,11 @@ import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.utilities.ResourceHelper;
 import com.ericmschmidt.latinreader.utilities.WorkXMLParser;
 
-/**
- * Contains the data for a text ('work') contained in the reader.
+/** Contains the data for a text ('work') contained in the reader.
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.0
  */
 public class Work {
 

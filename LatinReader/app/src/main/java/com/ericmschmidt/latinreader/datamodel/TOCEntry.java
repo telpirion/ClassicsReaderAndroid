@@ -3,8 +3,11 @@ package com.ericmschmidt.latinreader.datamodel;
 import java.util.Formatter;
 import java.util.Locale;
 
-/**
- * An entry within a table of contents.
+/** An entry within a table of contents.
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.4
  */
 public class TOCEntry {
     private String title;

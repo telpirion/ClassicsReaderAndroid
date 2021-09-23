@@ -1,11 +1,9 @@
 package com.ericmschmidt.latinreader.fragments;
 
 import android.annotation.SuppressLint;
-import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import android.preference.PreferenceManager;
 import android.util.TypedValue;
 import android.view.ContextMenu;
@@ -15,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.fragment.app.Fragment;
 
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.datamodel.Library;
@@ -23,6 +22,18 @@ import com.ericmschmidt.latinreader.datamodel.ReadingViewModel;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 import com.ericmschmidt.classicsreader.R;
 
+/** Displays the text of a work (source or translation).
+ *
+ *  This class is used for presenting both foreign language and English texts.
+ *
+ *  Layout files:
+ *  - res/layout/fragment_reading.xml
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.0
+ */
 public class ReadingFragment extends Fragment {
 
     public static final String WORK_TO_GET = "work";

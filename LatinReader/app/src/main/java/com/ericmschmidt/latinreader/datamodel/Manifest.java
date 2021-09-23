@@ -5,6 +5,12 @@ import com.ericmschmidt.latinreader.MyApplication;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
+/** Stores information about the works (source works, translations) in this app.
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.1
+ */
 public class Manifest {
 
     public Manifest() {}

@@ -2,7 +2,6 @@ package com.ericmschmidt.latinreader.fragments;
 
 import android.os.Bundle;
 import android.content.SharedPreferences;
-
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -10,8 +9,18 @@ import androidx.preference.PreferenceManager;
 
 import com.ericmschmidt.classicsreader.R;
 
+/** Displays the settings for this app.
+ *
+ *  Source files:
+ *  - res/xml/settings.xml
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.2
+ */
 public class SettingsFragment extends PreferenceFragmentCompat
-implements SharedPreferences.OnSharedPreferenceChangeListener {
+    implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final String TEXT_SIZE = "textSize";
     public static final String TEXT_SIZE_DEFAULT = "20";

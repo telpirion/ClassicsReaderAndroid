@@ -10,6 +10,12 @@ import com.ericmschmidt.latinreader.MyApplication;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/** Base exception for uncaught exceptions in this app.
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.1
+ */
 public class ForceCloseHandler implements Thread.UncaughtExceptionHandler {
 
     private final String LINE_SEPARATOR = "\n";

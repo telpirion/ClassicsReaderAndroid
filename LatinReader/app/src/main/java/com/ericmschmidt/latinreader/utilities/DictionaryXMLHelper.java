@@ -1,19 +1,21 @@
 package com.ericmschmidt.latinreader.utilities;
 
-import android.util.Log;
-
 import com.ericmschmidt.latinreader.MyApplication;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 import java.io.*;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.*;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
-/**
- * Gets dictionary resources out of the XML.
+/** Gets dictionary resources out of the XML.
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.0
  */
 public class DictionaryXMLHelper extends XmlParserHelper {
 

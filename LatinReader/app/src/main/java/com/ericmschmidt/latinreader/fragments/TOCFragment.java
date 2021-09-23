@@ -1,6 +1,5 @@
 package com.ericmschmidt.latinreader.fragments;
 
-import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import androidx.fragment.app.Fragment;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.databinding.FragmentTocBinding;
@@ -19,8 +19,15 @@ import com.ericmschmidt.latinreader.datamodel.TOCEntry;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 import com.ericmschmidt.latinreader.layouts.TOCListViewAdapter;
 
-/**
- * Fragment that presents work's table of contents.
+/** Displays a work's table of contents.
+ *
+ *  Source files:
+ *  - res/layout/fragment_toc.xml
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.4
  */
 public class TOCFragment extends Fragment {
 

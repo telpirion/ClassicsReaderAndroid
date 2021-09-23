@@ -4,8 +4,12 @@ import com.ericmschmidt.latinreader.R;
 
 import java.util.ArrayList;
 
-/**
- * Contains the resource manifest for the app.
+/** Contains the resource manifest for the Latin Reader app.
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.1
  */
 public class LatinReaderManifest extends Manifest {
 

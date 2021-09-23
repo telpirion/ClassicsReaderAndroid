@@ -6,6 +6,12 @@ import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 
 import java.util.ArrayList;
 
+/** Contains the resource manifest for the Greek Reader app.
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 0.1
+ */
 public class GreekReaderManifest extends Manifest {
 
     /**

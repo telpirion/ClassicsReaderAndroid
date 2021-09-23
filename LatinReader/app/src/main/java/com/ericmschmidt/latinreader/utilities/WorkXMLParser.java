@@ -3,14 +3,18 @@ package com.ericmschmidt.latinreader.utilities;
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.datamodel.Book;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Parses an XML work containing a text.
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+/** Parses an XML work containing a text.
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.0
  */
 public class WorkXMLParser extends XmlParserHelper {
 

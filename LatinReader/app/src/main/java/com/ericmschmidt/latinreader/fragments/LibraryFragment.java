@@ -1,12 +1,11 @@
 package com.ericmschmidt.latinreader.fragments;
 
-import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,17 +16,18 @@ import com.ericmschmidt.latinreader.datamodel.Manifest;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
 import com.ericmschmidt.latinreader.layouts.LibraryRecyclerViewAdapter;
 
-/**
- * Subclass of Fragment.
- * <p>
- * Displays works (books) in a RecyclerView.
- * This class is used for presenting both foreign language and English texts.
- * <p>
- * Layout files:
- * - res/layout/fragment_library.xml
- * - res/layout/cardviewitem_libraryrecyclerview.xml
+/** Displays works (books) in a RecyclerView.
  *
- * @version 2019-11-17
+ *  This class is used for presenting both foreign language and English texts.
+ *
+ *  Layout files:
+ *  - res/layout/fragment_library.xml
+ *  - res/layout/cardviewitem_libraryrecyclerview.xml
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.0
  */
 public class LibraryFragment extends Fragment
         implements LibraryRecyclerViewAdapter.Listener {

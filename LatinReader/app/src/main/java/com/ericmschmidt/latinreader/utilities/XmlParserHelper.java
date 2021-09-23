@@ -3,15 +3,19 @@ package com.ericmschmidt.latinreader.utilities;
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.datamodel.Book;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-/**
- * A helper class for working with an XmlPullParser.
+/** A helper class for working with an XmlPullParser.
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.0
  */
 public class XmlParserHelper {
 

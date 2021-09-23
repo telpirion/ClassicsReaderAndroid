@@ -10,6 +10,17 @@ import android.widget.TextView;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.datamodel.TOCEntry;
 
+/**Subclass of ArrayAdapter.
+ * Used for displaying chapters in the TOCFragment
+ *
+ * Layout files:
+ * - res/layout/toc_item.xml
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.4
+ */
 public class TOCListViewAdapter extends ArrayAdapter<TOCEntry> {
     protected final Context context;
     protected final TOCEntry[] values;

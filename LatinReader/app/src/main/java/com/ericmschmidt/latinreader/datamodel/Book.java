@@ -3,10 +3,11 @@ package com.ericmschmidt.latinreader.datamodel;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents a sub-division within a larger text.
- *
+/** Represents a sub-division within a larger text.
+ * @author Eric Schmidt
+ * @author http://telpirion.com
  * @version 2019-11-17
+ * @since 1.0
  */
 public class Book {
 

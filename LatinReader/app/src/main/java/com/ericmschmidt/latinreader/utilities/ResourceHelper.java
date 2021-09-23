@@ -1,4 +1,5 @@
 package com.ericmschmidt.latinreader.utilities;
+
 import android.content.res.Resources;
 import android.content.Context;
 
@@ -6,8 +7,12 @@ import com.ericmschmidt.latinreader.MyApplication;
 
 import java.io.InputStream;
 
-/**
- * A static class to help parse XML resources.
+/** A static class to help parse XML resources.
+ *
+ * @author Eric Schmidt
+ * @author http://telpirion.com
+ * @version 1.5
+ * @since 1.0
  */
 public class ResourceHelper {
 
