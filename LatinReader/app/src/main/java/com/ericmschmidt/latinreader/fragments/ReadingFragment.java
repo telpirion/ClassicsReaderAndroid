@@ -1,11 +1,12 @@
 package com.ericmschmidt.latinreader.fragments;
 
 import android.annotation.SuppressLint;
+import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.preference.PreferenceManager;
+
+import android.preference.PreferenceManager;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;

@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="android.support.v4.app.Fragment"/>
+        <import type="androidx.fragment.app.Fragment"/>
         <variable name="work" type="com.ericmschmidt.latinreader.datamodel.WorkInfo"/>
     </data>
     <LinearLayout

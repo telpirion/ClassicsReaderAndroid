@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_find_in_page_white_24dp"
         android:title="@string/action_dictionary"
         app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView" />
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

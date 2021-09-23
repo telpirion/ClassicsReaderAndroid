@@ -1,12 +1,13 @@
 package com.ericmschmidt.latinreader.layouts;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.datamodel.WorkInfo;
@@ -48,6 +49,7 @@ public class LibraryRecyclerViewAdapter extends
     }
 
     @Override
+    @SuppressWarnings("all") // TODO(telpirion): Switch position determination.
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         CardView cardView = holder.layout;
         WorkInfo info = works[position];

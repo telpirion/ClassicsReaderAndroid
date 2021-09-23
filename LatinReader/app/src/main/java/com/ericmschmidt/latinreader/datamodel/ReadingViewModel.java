@@ -1,7 +1,8 @@
 package com.ericmschmidt.latinreader.datamodel;
 
 import android.content.SharedPreferences;
-import android.support.v7.preference.PreferenceManager;
+import android.preference.PreferenceManager;
+
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.MyApplication;

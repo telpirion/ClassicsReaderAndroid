@@ -1,16 +1,13 @@
 package com.ericmschmidt.latinreader.fragments;
 
+import androidx.fragment.app.Fragment;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
-import android.support.v4.app.Fragment;
-import android.text.Editable;
+
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
