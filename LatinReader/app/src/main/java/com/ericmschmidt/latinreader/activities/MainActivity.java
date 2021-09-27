@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -17,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavArgs;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -26,8 +25,10 @@ import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.exceptions.ForceCloseHandler;
 import com.ericmschmidt.latinreader.fragments.DictionaryFragment;
+import com.ericmschmidt.latinreader.fragments.DictionaryFragmentArgs;
 import com.ericmschmidt.latinreader.fragments.LibraryFragment;
 import com.ericmschmidt.latinreader.fragments.LibraryFragmentDirections;
+import com.ericmschmidt.latinreader.fragments.LibraryFragmentDirections.ActionLibraryFragmentToDictionaryDest;
 import com.ericmschmidt.latinreader.fragments.ReadingFragment;
 import com.ericmschmidt.latinreader.fragments.SettingsFragment;
 import com.ericmschmidt.latinreader.fragments.TOCFragment;
@@ -57,9 +58,6 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_main);
 
-        // Hide the system bar.
-        //toggleSystemTray(View.SYSTEM_UI_FLAG_FULLSCREEN);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,11 +67,6 @@ public class MainActivity extends AppCompatActivity
                 R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-        FragmentManager supportFragmentManager = this.getSupportFragmentManager();
-        NavHostFragment navHostFragment =
-                (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
 
         // Apply the current icon to the nav bar.
         try {
@@ -109,9 +102,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                DictionaryFragment fragment = DictionaryFragment.newInstance(query);
-                swapFragments(fragment, true);
-
+                ActionLibraryFragmentToDictionaryDest direction =
+                        LibraryFragmentDirections.actionLibraryFragmentToDictionaryDest();
+                direction.setDictionaryQuery(query);
+                swapFragments(direction);
                 return false;
             }
 
@@ -130,7 +124,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            swapFragments(new SettingsFragment(), true);
+            NavDirections direction = LibraryFragmentDirections.actionLibraryFragmentToSettingsDest();
+            swapFragments(direction);
             return true;
         }
 
@@ -217,9 +212,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void toggleSystemTray(int uiOptions){
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(uiOptions);
+    private void swapFragments(NavDirections direction) {
+        FragmentManager supportFragmentManager = this.getSupportFragmentManager();
+        NavHostFragment navHostFragment =
+                (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
+        navController.navigate(direction);
     }
 
     @Override

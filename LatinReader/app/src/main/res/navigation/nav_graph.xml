@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/libraryFragment">
 
@@ -9,11 +10,36 @@
         android:name="com.ericmschmidt.latinreader.fragments.LibraryFragment"
         android:label="LibraryFragment" >
         <action
-            android:id="@+id/action_libraryFragment_to_readingFragment"
-            app:destination="@id/readingFragment" />
+            android:id="@+id/action_libraryFragment_to_reading_dest"
+            app:destination="@id/reading_dest" />
+        <action
+            android:id="@+id/action_libraryFragment_to_dictionary_dest"
+            app:destination="@id/dictionary_dest">
+            <argument
+                android:name="dictionaryQuery"
+                app:argType="string"
+                android:defaultValue=""/>
+        </action>
+        <action
+            android:id="@+id/action_libraryFragment_to_settings_dest"
+            app:destination="@id/settings_dest" />
     </fragment>
     <fragment
-        android:id="@+id/readingFragment"
+        android:id="@+id/reading_dest"
         android:name="com.ericmschmidt.latinreader.fragments.ReadingFragment"
         android:label="ReadingFragment" />
+    <fragment
+        android:id="@+id/dictionary_dest"
+        android:name="com.ericmschmidt.latinreader.fragments.DictionaryFragment"
+        android:label="fragment_dictionary"
+        tools:layout="@layout/fragment_dictionary">
+        <argument
+            android:name="dictionaryQuery"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
+    <fragment
+        android:id="@+id/settings_dest"
+        android:name="com.ericmschmidt.latinreader.fragments.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
