@@ -1,12 +1,5 @@
 # Release notes for Latin Reader app
 
-## Release 2.0 (Version 10)
-
-_Date: YYYY-MM-DD_
-
-* Converted navigation from `FragmentManager` to navigation graph.
-* Added animations between navigations.
-
 ## Release 1.5 (Version 9)
 
 _Date: 2021-09-22_
