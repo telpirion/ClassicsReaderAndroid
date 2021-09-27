@@ -17,12 +17,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.exceptions.ForceCloseHandler;
 import com.ericmschmidt.latinreader.fragments.DictionaryFragment;
 import com.ericmschmidt.latinreader.fragments.LibraryFragment;
+import com.ericmschmidt.latinreader.fragments.LibraryFragmentDirections;
 import com.ericmschmidt.latinreader.fragments.ReadingFragment;
 import com.ericmschmidt.latinreader.fragments.SettingsFragment;
 import com.ericmschmidt.latinreader.fragments.TOCFragment;
@@ -60,27 +65,23 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        FragmentManager supportFragmentManager = this.getSupportFragmentManager();
+        NavHostFragment navHostFragment =
+                (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
 
         // Apply the current icon to the nav bar.
         try {
             String applicationName = getApplicationContext().getPackageName();
-            View headerView = navigationView.getHeaderView(0);
-            ImageView iconHolder = headerView.findViewById(R.id.icon_image);
             Drawable icon = getPackageManager().getApplicationIcon(applicationName);
-            iconHolder.setImageDrawable(icon);
         } catch (Exception e) {
             MyApplication.logError(this.getClass(), e.getMessage());
         }
-
-        // Need to load first fragment (library view) into activity.
-        swapFragments(new LibraryFragment(), false);
-
     }
 
     @Override
@@ -125,9 +126,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -208,9 +206,9 @@ public class MainActivity extends AppCompatActivity
             currentFragmentTag = fragment.getClass().getName();
 
             if (isReplace)
-                fragmentTransaction.replace(R.id.fragment_container, fragment, currentFragmentTag);
+                fragmentTransaction.replace(R.id.nav_host_fragment, fragment, currentFragmentTag);
             else
-                fragmentTransaction.add(R.id.fragment_container, fragment, currentFragmentTag);
+                fragmentTransaction.add(R.id.nav_host_fragment, fragment, currentFragmentTag);
 
             fragmentTransaction.addToBackStack(fragment.toString());
             fragmentTransaction.commit();

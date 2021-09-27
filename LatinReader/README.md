@@ -33,6 +33,8 @@ The `app` module has six packages within it:
 
 ### Data model
 
+The `datamodel` package includes the following classes:
+
 * The [`WorkInfo`][workinfo] class is the foundational data structure for the app. It coordinates
   the user experience of a work (current page, location, offset, translation name) with the text
   itself. It also includes the resource ID for the work along with its URI.
