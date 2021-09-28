@@ -11,14 +11,18 @@
         android:label="LibraryFragment" >
         <action
             android:id="@+id/action_libraryFragment_to_reading_dest"
-            app:destination="@id/reading_dest">
+            app:destination="@id/reading_dest"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right">
             <argument
                 android:name="workId"
-                app:argType="string"/>
+                app:argType="string" />
             <argument
                 android:name='isTranslation'
-                app:argType="boolean"
-                android:defaultValue="false"/>
+                android:defaultValue="false"
+                app:argType="boolean" />
         </action>
         <argument android:name="isTranslations"
             app:argType="boolean"
@@ -44,14 +48,18 @@
             android:defaultValue="-1"/>
         <action
             android:id="@+id/action_reading_dest_to_toc_dest"
-            app:destination="@id/toc_dest">
+            app:destination="@id/toc_dest"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out">
             <argument
                 android:name="workId"
-                app:argType="string"/>
+                app:argType="string" />
             <argument
                 android:name="isTranslation"
-                app:argType="boolean"
-                android:defaultValue="false"/>
+                android:defaultValue="false"
+                app:argType="boolean" />
         </action>
     </fragment>
     <fragment
@@ -86,22 +94,26 @@
             android:defaultValue="false"/>
         <action
             android:id="@+id/action_toc_dest_to_reading_dest"
-            app:destination="@id/reading_dest">
+            app:destination="@id/reading_dest"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out">
             <argument
                 android:name="workId"
-                app:argType="string"/>
+                app:argType="string" />
             <argument
                 android:name="isTranslation"
-                app:argType="boolean"
-                android:defaultValue="false"/>
+                android:defaultValue="false"
+                app:argType="boolean" />
             <argument
                 android:name="book"
-                app:argType="integer"
-                android:defaultValue="-1"/>
+                android:defaultValue="-1"
+                app:argType="integer" />
             <argument
                 android:name="line"
-                app:argType="integer"
-                android:defaultValue="-1"/>
+                android:defaultValue="-1"
+                app:argType="integer" />
         </action>
     </fragment>
 </navigation>

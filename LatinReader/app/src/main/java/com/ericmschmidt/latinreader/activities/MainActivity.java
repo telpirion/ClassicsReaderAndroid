@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.ericmschmidt.latinreader.MyApplication;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity
                 DictionaryFragmentArgs args = new DictionaryFragmentArgs.Builder()
                         .setDictionaryQuery(query)
                         .build();
-                swapFragments(R.id.dictionary_dest, args.toBundle());
+                swapFragments(R.id.dictionary_dest, args.toBundle(), true);
                 return false;
             }
 
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            swapFragments(R.id.settings_dest, null);
+            swapFragments(R.id.settings_dest, null, true);
             return true;
         }
 
@@ -146,16 +147,16 @@ public class MainActivity extends AppCompatActivity
                         .setWorkId(workIdData[0])
                         .build();
 
-                swapFragments(R.id.reading_dest, args.toBundle());
+                swapFragments(R.id.reading_dest, args.toBundle(), false);
 
             }
             else {
-                swapFragments(R.id.reading_dest, null);
+                swapFragments(R.id.reading_dest, null, false);
             }
         }
 
         else if (id == R.id.nav_library) {
-            swapFragments(R.id.libraryFragment, null);
+            swapFragments(R.id.libraryFragment, null, false);
 
         } else if (id == R.id.nav_translation) {
 
@@ -165,16 +166,16 @@ public class MainActivity extends AppCompatActivity
                     .setIsTranslations(true)
                     .build();
 
-            swapFragments(R.id.libraryFragment, args.toBundle());
+            swapFragments(R.id.libraryFragment, args.toBundle(), false);
 
         } else if (id == R.id.nav_dictionary) {
-            swapFragments(R.id.dictionary_dest, null);
+            swapFragments(R.id.dictionary_dest, null, true);
 
         } else if (id == R.id.nav_vocab) {
-            swapFragments(R.id.vocab_dest, null);
+            swapFragments(R.id.vocab_dest, null, true);
 
         } else if (id == R.id.nav_settings) {
-            swapFragments(R.id.settings_dest, null);
+            swapFragments(R.id.settings_dest, null, true);
         }
 
         return true;
@@ -186,14 +187,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     // Use nav controller and nav graph to navigate to different fragments.
-    private void swapFragments(int resourceId, @Nullable Bundle args) {
+    private void swapFragments(int resourceId, @Nullable Bundle args, boolean useDefaultAnim) {
         FragmentManager supportFragmentManager = this.getSupportFragmentManager();
         NavHostFragment navHostFragment =
                 (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
 
-        if (args != null) {
+        NavOptions defaultNavOptions = new NavOptions.Builder()
+                .setEnterAnim(R.anim.fragment_fade_enter)
+                .setExitAnim(R.anim.fragment_fade_exit)
+                .setPopEnterAnim(R.anim.fragment_fade_enter)
+                .setPopExitAnim(R.anim.fragment_fade_exit)
+                .build();
+
+        if ((args != null) && useDefaultAnim) {
+            navController.navigate(resourceId, args, defaultNavOptions);
+        } else if (args != null) {
             navController.navigate(resourceId, args);
+        } else if (useDefaultAnim){
+            navController.navigate(resourceId, null, defaultNavOptions);
         } else {
             navController.navigate(resourceId);
         }
