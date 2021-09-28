@@ -11,23 +11,41 @@
         android:label="LibraryFragment" >
         <action
             android:id="@+id/action_libraryFragment_to_reading_dest"
-            app:destination="@id/reading_dest" />
-        <action
-            android:id="@+id/action_libraryFragment_to_dictionary_dest"
-            app:destination="@id/dictionary_dest">
+            app:destination="@id/reading_dest">
             <argument
-                android:name="dictionaryQuery"
-                app:argType="string"
-                android:defaultValue=""/>
+                android:name="workID"
+                app:argType="string"/>
+            <argument
+                android:name='isTranslation'
+                app:argType="boolean"
+                android:defaultValue="false"/>
         </action>
-        <action
-            android:id="@+id/action_libraryFragment_to_settings_dest"
-            app:destination="@id/settings_dest" />
+        <argument android:name="isTranslations"
+            app:argType="boolean"
+            android:defaultValue="false"/>
     </fragment>
     <fragment
         android:id="@+id/reading_dest"
         android:name="com.ericmschmidt.latinreader.fragments.ReadingFragment"
-        android:label="ReadingFragment" />
+        android:label="ReadingFragment">
+        <argument android:name="isTranslation"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <argument android:name="workId"
+            app:argType="string"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_reading_dest_to_toc_dest"
+            app:destination="@id/toc_dest">
+            <argument
+                android:name="workId"
+                app:argType="string"/>
+            <argument
+                android:name="isTranslation"
+                app:argType="boolean"
+                android:defaultValue="false"/>
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/dictionary_dest"
         android:name="com.ericmschmidt.latinreader.fragments.DictionaryFragment"
@@ -42,4 +60,40 @@
         android:id="@+id/settings_dest"
         android:name="com.ericmschmidt.latinreader.fragments.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/vocab_dest"
+        android:name="com.ericmschmidt.latinreader.fragments.VocabularyFragment"
+        android:label="fragment_vocabulary"
+        tools:layout="@layout/fragment_vocabulary" />
+    <fragment
+        android:id="@+id/toc_dest"
+        android:name="com.ericmschmidt.latinreader.fragments.TOCFragment"
+        android:label="TOCFragment">
+        <argument
+            android:name="workId"
+            app:argType="string"/>
+        <argument
+            android:name="isTranslation"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <action
+            android:id="@+id/action_toc_dest_to_reading_dest"
+            app:destination="@id/reading_dest">
+            <argument
+                android:name="workId"
+                app:argType="string"/>
+            <argument
+                android:name="isTranslation"
+                app:argType="boolean"
+                android:defaultValue="false"/>
+            <argument
+                android:name="book"
+                app:argType="integer"
+                android:defaultValue="0"/>
+            <argument
+                android:name="line"
+                app:argType="integer"
+                android:defaultValue="0"/>
+        </action>
+    </fragment>
 </navigation>

@@ -32,7 +32,7 @@ import com.ericmschmidt.latinreader.layouts.LibraryRecyclerViewAdapter;
 public class LibraryFragment extends Fragment
         implements LibraryRecyclerViewAdapter.Listener {
 
-    public static final String TRANSLATION_FLAG = "translation";
+    public static final String TRANSLATION_FLAG = "isTranslations";
     private static final String TAG = "LibraryFragment";
 
     private boolean isTranslation;
@@ -56,8 +56,8 @@ public class LibraryFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            String translationParam = getArguments().getString(TRANSLATION_FLAG);
-            isTranslation = (translationParam != null);
+            boolean translationParam = getArguments().getBoolean(TRANSLATION_FLAG);
+            isTranslation = translationParam;
         }
     }
 

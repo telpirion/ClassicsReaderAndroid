@@ -45,7 +45,21 @@ The `datamodel` package includes the following classes:
 * The [`TOCEntry`][tocentry] class contains information about a table of contents entry for a work.
   It connects a "chapter" title with a location (int) with in the book.
 
+* The [`Book`][book] class contains information for accessing lines of text within a section,
+  chapter, or "book" within a larger work. 
+  
+* The [`Library`][library] class contains the list of `WorkInfo` objects contained in the app.
+
+* The [`Manifest`][manifest] class contains the concrete list of works, stored as XML or JSON,
+  within the app. It essentially acts as an interface for each APK or app bundle.
+  
+* The [`ReadingViewModel`][readingviewmodel] class allows the app to manage the reading position
+  in the UI along with the source `Work` object.
 
 [work]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/Work.java
 [workinfo]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/WorkInfo.java
 [tocentry]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/TOCEntry.java
+[book]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/Book.java
+[library]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/Library.java
+[manifest]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/Manifest.java
+[readingviewmodel]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/ReadingViewModel.java

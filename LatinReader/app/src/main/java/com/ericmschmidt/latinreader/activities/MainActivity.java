@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -15,24 +17,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavArgs;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.latinreader.exceptions.ForceCloseHandler;
-import com.ericmschmidt.latinreader.fragments.DictionaryFragment;
 import com.ericmschmidt.latinreader.fragments.DictionaryFragmentArgs;
 import com.ericmschmidt.latinreader.fragments.LibraryFragment;
-import com.ericmschmidt.latinreader.fragments.LibraryFragmentDirections;
-import com.ericmschmidt.latinreader.fragments.LibraryFragmentDirections.ActionLibraryFragmentToDictionaryDest;
+import com.ericmschmidt.latinreader.fragments.LibraryFragmentArgs;
 import com.ericmschmidt.latinreader.fragments.ReadingFragment;
-import com.ericmschmidt.latinreader.fragments.SettingsFragment;
+import com.ericmschmidt.latinreader.fragments.ReadingFragmentArgs;
 import com.ericmschmidt.latinreader.fragments.TOCFragment;
-import com.ericmschmidt.latinreader.fragments.VocabularyFragment;
 import com.google.android.material.navigation.NavigationView;
 
 /** Base activity for this app.
@@ -68,6 +64,9 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         // Apply the current icon to the nav bar.
         try {
             String applicationName = getApplicationContext().getPackageName();
@@ -101,11 +100,10 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-                ActionLibraryFragmentToDictionaryDest direction =
-                        LibraryFragmentDirections.actionLibraryFragmentToDictionaryDest();
-                direction.setDictionaryQuery(query);
-                swapFragments(direction);
+                DictionaryFragmentArgs args = new DictionaryFragmentArgs.Builder()
+                        .setDictionaryQuery(query)
+                        .build();
+                swapFragments(R.id.dictionary_dest, args.toBundle());
                 return false;
             }
 
@@ -124,8 +122,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            NavDirections direction = LibraryFragmentDirections.actionLibraryFragmentToSettingsDest();
-            swapFragments(direction);
+            swapFragments(R.id.settings_dest, null);
             return true;
         }
 
@@ -134,9 +131,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        // Close drawer animation.
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
 
         if (id == R.id.nav_recent) {
             // Remember to store recently read as workId;isTranslation.
@@ -144,37 +145,43 @@ public class MainActivity extends AppCompatActivity
             if (!workId.equals("")) {
                 String[] workIdData = workId.split(";");
                 boolean isTranslation = Boolean.getBoolean(workIdData[1]);
-                fragment = ReadingFragment.newInstance(workIdData[0], isTranslation);
+
+                ReadingFragmentArgs args = new ReadingFragmentArgs.Builder()
+                        .setIsTranslation(isTranslation)
+                        .setWorkId(workIdData[0])
+                        .build();
+
+                swapFragments(R.id.reading_dest, args.toBundle());
+
             }
             else {
-                fragment = new ReadingFragment();
+                swapFragments(R.id.reading_dest, null);
             }
         }
 
         else if (id == R.id.nav_library) {
-            fragment = new LibraryFragment();
+            swapFragments(R.id.libraryFragment, null);
 
         } else if (id == R.id.nav_translation) {
 
             // Pass a flag to the library Fragment to let it
             // know that we want to show the translations.
-            fragment = LibraryFragment.newInstance("true");
+            LibraryFragmentArgs args = new LibraryFragmentArgs.Builder()
+                    .setIsTranslations(true)
+                    .build();
+
+            swapFragments(R.id.libraryFragment, args.toBundle());
 
         } else if (id == R.id.nav_dictionary) {
-            fragment = new DictionaryFragment();
+            swapFragments(R.id.dictionary_dest, null);
 
         } else if (id == R.id.nav_vocab) {
-            fragment = new VocabularyFragment();
+            swapFragments(R.id.vocab_dest, null);
 
         } else if (id == R.id.nav_settings) {
-            fragment = new SettingsFragment();
+            swapFragments(R.id.settings_dest, null);
         }
 
-        swapFragments(fragment, true);
-
-        // Close drawer animation.
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -212,12 +219,18 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void swapFragments(NavDirections direction) {
+    // Use nav controller to navigate to different fragments.
+    private void swapFragments(int resourceId, @Nullable Bundle args) {
         FragmentManager supportFragmentManager = this.getSupportFragmentManager();
         NavHostFragment navHostFragment =
                 (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
-        navController.navigate(direction);
+
+        if (args != null) {
+            navController.navigate(resourceId, args);
+        } else {
+            navController.navigate(resourceId);
+        }
     }
 
     @Override
