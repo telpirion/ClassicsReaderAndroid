@@ -59,6 +59,7 @@ public class ReadingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Use safeArgs.
         if (getArguments() != null) {
             ReadingFragmentArgs args = ReadingFragmentArgs.fromBundle(getArguments());
             workToGetId = args.getWorkId();
@@ -165,16 +166,6 @@ public class ReadingFragment extends Fragment {
             }
         });
 
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override

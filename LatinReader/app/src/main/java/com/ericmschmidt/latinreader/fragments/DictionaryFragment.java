@@ -26,30 +26,31 @@ import com.ericmschmidt.latinreader.utilities.ITextConverter;
  * @since 1.0
  */
 public class DictionaryFragment extends Fragment {
-
-    public static final String QUERY = "dictionaryQuery";
-
     private String query;
     private ITextConverter converter;
 
-
-    public DictionaryFragment() {
-        // Required empty public constructor
-    }
+    /**
+     * Required empty public constructor
+     */
+    public DictionaryFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-            query = getArguments().getString(QUERY);
-        if (MyApplication.isNonRomanChar())
+
+        // Use safeArgs to get data out of navigation.
+        assert getArguments() != null;
+        DictionaryFragmentArgs args = DictionaryFragmentArgs.fromBundle(getArguments());
+        this.query = args.getDictionaryQuery();
+
+        if (MyApplication.isNonRomanChar()) {
             converter = MyApplication.getTextConverter();
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dictionary, container, false);
     }
 

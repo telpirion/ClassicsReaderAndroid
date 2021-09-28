@@ -35,7 +35,6 @@ import com.ericmschmidt.latinreader.layouts.LibraryRecyclerViewAdapter;
 public class LibraryFragment extends Fragment
         implements LibraryRecyclerViewAdapter.Listener {
 
-    public static final String TRANSLATION_FLAG = "isTranslations";
     private static final String TAG = "LibraryFragment";
 
     private boolean isTranslation;
@@ -50,9 +49,11 @@ public class LibraryFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            isTranslation = getArguments().getBoolean(TRANSLATION_FLAG);
-        }
+
+        // Use safeArgs.
+        assert getArguments() != null;
+        LibraryFragmentArgs args = LibraryFragmentArgs.fromBundle(getArguments());
+        this.isTranslation = args.getIsTranslations();
     }
 
     @Override
@@ -90,21 +91,11 @@ public class LibraryFragment extends Fragment
         }
     }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
     @Override
     public void onLibraryRecyclerViewClick(int position) {
         WorkInfo clickedWork = works[position];
 
+        // Navigate to the ReadingFragment based upon clicks on the RecyclerView.
         NavController navController = NavHostFragment.findNavController(this);
         LibraryFragmentDirections.ActionLibraryFragmentToReadingDest action =
                 LibraryFragmentDirections.actionLibraryFragmentToReadingDest(clickedWork.getId());

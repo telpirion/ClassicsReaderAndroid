@@ -83,16 +83,6 @@ public class TOCFragment extends Fragment {
         listView.setOnItemClickListener(onItemClickListener);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
     // Create a message handling object as an anonymous class.
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -110,13 +100,4 @@ public class TOCFragment extends Fragment {
             navController.navigate(action);
         }
     };
-
-    /**
-     * Struct for passing information to the TOC fragment.
-     */
-    public static class TOCViewOptions {
-        public TOCViewOptions() {}
-        public String workId;
-        public boolean isTranslation;
-    }
 }
