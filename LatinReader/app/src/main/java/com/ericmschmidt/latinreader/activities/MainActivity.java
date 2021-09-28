@@ -29,6 +29,7 @@ import com.ericmschmidt.latinreader.fragments.LibraryFragmentArgs;
 import com.ericmschmidt.latinreader.fragments.ReadingFragment;
 import com.ericmschmidt.latinreader.fragments.ReadingFragmentArgs;
 import com.ericmschmidt.latinreader.fragments.TOCFragment;
+import com.ericmschmidt.latinreader.fragments.TOCFragmentArgs;
 import com.google.android.material.navigation.NavigationView;
 
 /** Base activity for this app.
@@ -185,41 +186,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void onLibraryListViewClick(String workId, boolean isTranslation) {
-        swapFragments(ReadingFragment.newInstance(workId, isTranslation), true);
-    }
-
-    public void onReadingViewSwitch(ReadingFragment.ReadingViewOptions options) {
-        swapFragments(ReadingFragment.newInstance(options), true);
-    }
-
     private String getRecentlyRead() {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         return sharedPrefs.getString(ReadingFragment.RECENTLY_READ, "");
     }
 
-    // Replace (or add) fragments to the fragment container in the activity.
-    private void swapFragments(Fragment fragment, boolean isReplace) {
-        try {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            // Track fragments on backstack using tags.
-            currentFragmentTag = fragment.getClass().getName();
-
-            if (isReplace)
-                fragmentTransaction.replace(R.id.nav_host_fragment, fragment, currentFragmentTag);
-            else
-                fragmentTransaction.add(R.id.nav_host_fragment, fragment, currentFragmentTag);
-
-            fragmentTransaction.addToBackStack(fragment.toString());
-            fragmentTransaction.commit();
-        } catch (Exception ex) {
-            MyApplication.logError(this.getClass(), ex.getMessage());
-        }
-    }
-
-    // Use nav controller to navigate to different fragments.
+    // Use nav controller and nav graph to navigate to different fragments.
     private void swapFragments(int resourceId, @Nullable Bundle args) {
         FragmentManager supportFragmentManager = this.getSupportFragmentManager();
         NavHostFragment navHostFragment =
@@ -235,11 +208,39 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onViewTOC(TOCFragment.TOCViewOptions options) {
-        swapFragments(TOCFragment.newInstance(options), true);
+        TOCFragmentArgs args = new TOCFragmentArgs.Builder(options.workId)
+                .setIsTranslation(options.isTranslation)
+                .build();
+        swapFragments(R.id.toc_dest, args.toBundle());
     }
 
     @Override
     public void onTOCListViewClick(ReadingFragment.ReadingViewOptions options) {
-        swapFragments(ReadingFragment.newInstance(options), true);
+        ReadingFragmentArgs args = new ReadingFragmentArgs.Builder()
+                .setWorkId(options.workId)
+                .setIsTranslation(options.isTranslation)
+                .setBook(options.book)
+                .setLine(options.line)
+                .build();
+        swapFragments(R.id.reading_dest, args.toBundle());
+    }
+
+    public void onLibraryListViewClick(String workId, boolean isTranslation) {
+        ReadingFragmentArgs args = new ReadingFragmentArgs.Builder()
+                .setWorkId(workId)
+                .setIsTranslation(isTranslation)
+                .build();
+        swapFragments(R.id.reading_dest, args.toBundle());
+    }
+
+    public void onReadingViewSwitch(ReadingFragment.ReadingViewOptions options) {
+        ReadingFragmentArgs args = new ReadingFragmentArgs.Builder()
+                .setWorkId(options.workId)
+                .setIsTranslation(options.isTranslation)
+                .setBook(options.book)
+                .setLine(options.line)
+                .build();
+        swapFragments(R.id.reading_dest, args.toBundle());
     }
 }
+

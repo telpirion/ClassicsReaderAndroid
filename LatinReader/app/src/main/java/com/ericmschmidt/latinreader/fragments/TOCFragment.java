@@ -31,7 +31,7 @@ import com.ericmschmidt.latinreader.layouts.TOCListViewAdapter;
  */
 public class TOCFragment extends Fragment {
 
-    public static final String WORK_ID_KEY = "work_id";
+    public static final String WORK_ID_KEY = "workId";
     public static final String IS_TRANSLATION_KEY = "isTranslation";
 
     public static final String TAG = "TOCFragment";

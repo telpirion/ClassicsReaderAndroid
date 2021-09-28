@@ -36,8 +36,8 @@ import com.ericmschmidt.classicsreader.R;
  */
 public class ReadingFragment extends Fragment {
 
-    public static final String WORK_TO_GET = "work";
-    public static final String TRANSLATION_KEY = "translation";
+    public static final String WORK_TO_GET = "workId";
+    public static final String TRANSLATION_KEY = "isTranslation";
     public static final String BOOK_KEY = "book";
     public static final String LINE_KEY = "line";
     public static final int HIT_AREA_RATIO = 4;

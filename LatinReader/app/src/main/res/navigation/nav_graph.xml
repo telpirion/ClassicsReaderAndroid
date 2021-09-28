@@ -34,6 +34,14 @@
         <argument android:name="workId"
             app:argType="string"
             android:defaultValue=""/>
+        <argument
+            android:name="book"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+        <argument
+            android:name="line"
+            app:argType="integer"
+            android:defaultValue="-1"/>
         <action
             android:id="@+id/action_reading_dest_to_toc_dest"
             app:destination="@id/toc_dest">
@@ -89,11 +97,11 @@
             <argument
                 android:name="book"
                 app:argType="integer"
-                android:defaultValue="0"/>
+                android:defaultValue="-1"/>
             <argument
                 android:name="line"
                 app:argType="integer"
-                android:defaultValue="0"/>
+                android:defaultValue="-1"/>
         </action>
     </fragment>
 </navigation>

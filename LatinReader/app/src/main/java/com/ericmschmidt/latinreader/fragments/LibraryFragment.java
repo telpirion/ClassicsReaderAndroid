@@ -56,8 +56,7 @@ public class LibraryFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            boolean translationParam = getArguments().getBoolean(TRANSLATION_FLAG);
-            isTranslation = translationParam;
+            isTranslation = getArguments().getBoolean(TRANSLATION_FLAG);
         }
     }
 
