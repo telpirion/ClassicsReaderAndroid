@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.databinding.FragmentTocBinding;
@@ -30,49 +32,31 @@ import com.ericmschmidt.latinreader.layouts.TOCListViewAdapter;
  * @since 1.4
  */
 public class TOCFragment extends Fragment {
-
-    public static final String WORK_ID_KEY = "workId";
-    public static final String IS_TRANSLATION_KEY = "isTranslation";
-
     public static final String TAG = "TOCFragment";
 
     private String workId;
     private boolean isTranslation;
     private WorkInfo work;
     private FragmentTocBinding binding;
-    private OnTOCListViewClick mListener;
 
     /**
      * Required empty constructor.
      */
     public TOCFragment() {}
 
-    /**
-     * Creates a new TOCFragment instance for a specified work
-     * @param opts the data from the reading view
-     * @return TOCFragment
-     */
-    public static TOCFragment newInstance(TOCViewOptions opts) {
-        TOCFragment fragment = new TOCFragment();
-        Bundle args = new Bundle();
-        args.putString(WORK_ID_KEY, opts.workId);
-        args.putBoolean(IS_TRANSLATION_KEY, opts.isTranslation);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            this.workId = getArguments().getString(WORK_ID_KEY);
-            this.isTranslation = getArguments().getBoolean(IS_TRANSLATION_KEY);
 
-            Manifest manifest = MyApplication.getManifest();
-            Library library = new Library(manifest.getCollection());
-            this.work = library.getWorkInfoByID(workId);
-        }
+        // Use safeArgs to extract data from bundle.
+        assert getArguments() != null;
+        TOCFragmentArgs args = TOCFragmentArgs.fromBundle(getArguments());
+        this.workId = args.getWorkId();
+        this.isTranslation = args.getIsTranslation();
 
+        Manifest manifest = MyApplication.getManifest();
+        Library library = new Library(manifest.getCollection());
+        this.work = library.getWorkInfoByID(workId);
     }
 
     @Override
@@ -102,40 +86,30 @@ public class TOCFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof TOCFragment.OnTOCListViewClick) {
-            mListener = (TOCFragment.OnTOCListViewClick) context;
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     // Create a message handling object as an anonymous class.
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
             TOCEntry entry = work.getTocEntries()[position];
-            if (mListener != null) {
-                ReadingFragment.ReadingViewOptions options =
-                        new ReadingFragment.ReadingViewOptions();
-                options.book = entry.getBook();
-                options.line = entry.getLine();
-                options.workId = work.getId();
-                options.isTranslation = isTranslation;
-                mListener.onTOCListViewClick(options);
-            }
+
+            assert getParentFragment() != null;
+            NavController navController = NavHostFragment.findNavController(getParentFragment());
+
+            TOCFragmentDirections.ActionTocDestToReadingDest action =
+                    TOCFragmentDirections.actionTocDestToReadingDest(work.getId());
+            action.setBook(entry.getBook());
+            action.setLine(entry.getLine());
+            action.setIsTranslation(isTranslation);
+
+            navController.navigate(action);
         }
     };
-
-    /**
-     * Allows the LibraryFragment to communicate to the Activity
-     * when the user clicks an item in the ListView.
-     */
-    public interface OnTOCListViewClick {
-        void onTOCListViewClick(ReadingFragment.ReadingViewOptions options);
-    }
 
     /**
      * Struct for passing information to the TOC fragment.

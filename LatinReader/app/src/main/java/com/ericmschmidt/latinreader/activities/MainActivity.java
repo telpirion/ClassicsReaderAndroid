@@ -39,13 +39,7 @@ import com.google.android.material.navigation.NavigationView;
  * @since 1.0
  */
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        LibraryFragment.OnLibraryListViewClick,
-        ReadingFragment.OnReadingViewSwitch,
-        ReadingFragment.OnViewTOCClick,
-        TOCFragment.OnTOCListViewClick {
-
-    private String currentFragmentTag;
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,7 +185,6 @@ public class MainActivity extends AppCompatActivity
         return sharedPrefs.getString(ReadingFragment.RECENTLY_READ, "");
     }
 
-
     // Use nav controller and nav graph to navigate to different fragments.
     private void swapFragments(int resourceId, @Nullable Bundle args) {
         FragmentManager supportFragmentManager = this.getSupportFragmentManager();
@@ -205,42 +198,4 @@ public class MainActivity extends AppCompatActivity
             navController.navigate(resourceId);
         }
     }
-
-    @Override
-    public void onViewTOC(TOCFragment.TOCViewOptions options) {
-        TOCFragmentArgs args = new TOCFragmentArgs.Builder(options.workId)
-                .setIsTranslation(options.isTranslation)
-                .build();
-        swapFragments(R.id.toc_dest, args.toBundle());
-    }
-
-    @Override
-    public void onTOCListViewClick(ReadingFragment.ReadingViewOptions options) {
-        ReadingFragmentArgs args = new ReadingFragmentArgs.Builder()
-                .setWorkId(options.workId)
-                .setIsTranslation(options.isTranslation)
-                .setBook(options.book)
-                .setLine(options.line)
-                .build();
-        swapFragments(R.id.reading_dest, args.toBundle());
-    }
-
-    public void onLibraryListViewClick(String workId, boolean isTranslation) {
-        ReadingFragmentArgs args = new ReadingFragmentArgs.Builder()
-                .setWorkId(workId)
-                .setIsTranslation(isTranslation)
-                .build();
-        swapFragments(R.id.reading_dest, args.toBundle());
-    }
-
-    public void onReadingViewSwitch(ReadingFragment.ReadingViewOptions options) {
-        ReadingFragmentArgs args = new ReadingFragmentArgs.Builder()
-                .setWorkId(options.workId)
-                .setIsTranslation(options.isTranslation)
-                .setBook(options.book)
-                .setLine(options.line)
-                .build();
-        swapFragments(R.id.reading_dest, args.toBundle());
-    }
 }
-

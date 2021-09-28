@@ -74,7 +74,7 @@ public class LibraryRecyclerViewAdapter extends
             @Override
             public void onClick(View view) {
                 if (listener != null) {
-                    listener.onClick(position);
+                    listener.onLibraryRecyclerViewClick(position);
                 }
             }
         });
@@ -90,7 +90,7 @@ public class LibraryRecyclerViewAdapter extends
     }
 
     public interface Listener {
-        void onClick(int position);
+        void onLibraryRecyclerViewClick(int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

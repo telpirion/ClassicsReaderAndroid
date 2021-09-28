@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.ericmschmidt.latinreader.MyApplication;
 import com.ericmschmidt.latinreader.datamodel.Library;
@@ -35,11 +37,6 @@ import com.ericmschmidt.classicsreader.R;
  * @since 1.0
  */
 public class ReadingFragment extends Fragment {
-
-    public static final String WORK_TO_GET = "workId";
-    public static final String TRANSLATION_KEY = "isTranslation";
-    public static final String BOOK_KEY = "book";
-    public static final String LINE_KEY = "line";
     public static final int HIT_AREA_RATIO = 4;
     public static final String RECENTLY_READ = "recently_read";
     public static final String TAG = "ReadingFragment";
@@ -48,61 +45,32 @@ public class ReadingFragment extends Fragment {
     private final int MENU_VIEW_TOC = 1;
 
     private String workToGetId;
-    private boolean translationFlag;
-    private OnReadingViewSwitch onReadingViewSwitch;
-    private OnViewTOCClick onViewTOCClick;
+    private boolean isTranslation;
     private ReadingViewModel viewModel;
     private int bookNum;
     private int lineNum;
 
-    public ReadingFragment() {
-        // Required empty public constructor
-    }
-
-    public static ReadingFragment newInstance(String workId, boolean isTranslation) {
-        ReadingFragment fragment = new ReadingFragment();
-        Bundle args = new Bundle();
-        args.putString(WORK_TO_GET, workId);
-        args.putBoolean(TRANSLATION_KEY, isTranslation);
-
-        // Must explicitly set to -1.
-        // Otherwise, getArguments().getInt() returns 0.
-        args.putInt(BOOK_KEY, -1);
-        args.putInt(LINE_KEY, -1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public static ReadingFragment newInstance(ReadingViewOptions options) {
-        ReadingFragment fragment = new ReadingFragment();
-        Bundle args = new Bundle();
-        args.putString(WORK_TO_GET, options.workId);
-        args.putBoolean(TRANSLATION_KEY, options.isTranslation);
-        args.putInt(BOOK_KEY, options.book);
-        args.putInt(LINE_KEY, options.line);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    /**
+     * Required empty public constructor
+     */
+    public ReadingFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bookNum = lineNum = -1;
-        if (getArguments() != null) {
-            workToGetId = getArguments().getString(WORK_TO_GET);
-            translationFlag = getArguments().getBoolean(TRANSLATION_KEY);
-        }
 
-        if (getArguments() != null && getArguments().getInt(BOOK_KEY) >= 0) {
-            bookNum = getArguments().getInt(BOOK_KEY);
-            lineNum = getArguments().getInt(LINE_KEY);
+        if (getArguments() != null) {
+            ReadingFragmentArgs args = ReadingFragmentArgs.fromBundle(getArguments());
+            workToGetId = args.getWorkId();
+            isTranslation = args.getIsTranslation();
+            bookNum = args.getBook();
+            lineNum = args.getLine();
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_reading, container, false);
     }
 
@@ -137,7 +105,7 @@ public class ReadingFragment extends Fragment {
 
         // Register this as the most recently read book.
         sharedPreferences.edit()
-            .putString(RECENTLY_READ, String.format("%s;%s",workToGetId,Boolean.toString(translationFlag)))
+            .putString(RECENTLY_READ, String.format("%s;%s",workToGetId,Boolean.toString(isTranslation)))
             .apply();
 
         // After parsing the XML, the app presents poetry lines one at a time.
@@ -148,7 +116,7 @@ public class ReadingFragment extends Fragment {
             numLines = Integer.parseInt(linesPerPage);
         }
 
-        viewModel = new ReadingViewModel(work, translationFlag, numLines);
+        viewModel = new ReadingViewModel(work, isTranslation, numLines);
 
         if (bookNum >= 0) {
             viewModel.setCurrentBook(bookNum);
@@ -202,17 +170,11 @@ public class ReadingFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnReadingViewSwitch) {
-            onReadingViewSwitch = (OnReadingViewSwitch) context;
-            onViewTOCClick = (OnViewTOCClick) context;
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        onReadingViewSwitch = null;
-        onViewTOCClick = null;
     }
 
     @Override
@@ -220,7 +182,7 @@ public class ReadingFragment extends Fragment {
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        int menuLabel = translationFlag ?
+        int menuLabel = isTranslation ?
                 R.string.context_menu_source :
                 R.string.context_menu_translation;
 
@@ -235,21 +197,24 @@ public class ReadingFragment extends Fragment {
     public boolean onContextItemSelected(MenuItem item) {
 
         int id = item.getItemId();
+        NavController navController = NavHostFragment.findNavController(this);
 
         switch (id) {
+            // In this case, the fragment navigates to itself
             case MENU_SWITCH_VIEW:
-                ReadingViewOptions readingViewOptions = new ReadingViewOptions();
-                readingViewOptions.workId = workToGetId;
-                readingViewOptions.isTranslation = !translationFlag;
-                readingViewOptions.book = viewModel.getCurrentBookIndex();
-                readingViewOptions.line = viewModel.getCurrentLineIndex();
-                onReadingViewSwitch.onReadingViewSwitch(readingViewOptions);
+                ReadingFragmentArgs args = new ReadingFragmentArgs.Builder()
+                        .setWorkId(workToGetId)
+                        .setIsTranslation(!isTranslation)
+                        .setBook(viewModel.getCurrentBookIndex())
+                        .setLine(viewModel.getCurrentLineIndex())
+                        .build();
+                navController.navigate(R.id.reading_dest, args.toBundle());
                 return true;
             case MENU_VIEW_TOC:
-                TOCFragment.TOCViewOptions options = new TOCFragment.TOCViewOptions();
-                options.isTranslation = this.translationFlag;
-                options.workId = this.workToGetId;
-                onViewTOCClick.onViewTOC(options);
+                ReadingFragmentDirections.ActionReadingDestToTocDest action =
+                        ReadingFragmentDirections.actionReadingDestToTocDest(this.workToGetId);
+                action.setIsTranslation(this.isTranslation);
+                navController.navigate(action);
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -269,29 +234,5 @@ public class ReadingFragment extends Fragment {
         readingPane.setText(viewModel.getCurrentPage());
         readingInfo.setText(viewModel.getReadingInfo());
         readingPosition.setText(viewModel.getReadingPositionString());
-    }
-
-    /**
-     * Communicates reading view switch click to host activity.
-     */
-    public interface OnReadingViewSwitch {
-        void onReadingViewSwitch(ReadingViewOptions options);
-    }
-
-    /**
-     * Communicates TOC menu item click to host activity.
-     */
-    public interface OnViewTOCClick {
-        void onViewTOC(TOCFragment.TOCViewOptions options);
-    }
-
-    /**
-     * Small struct for passing data between fragments and activity.
-     */
-    public static class ReadingViewOptions {
-        public boolean isTranslation;
-        public String workId;
-        public int book;
-        public int line;
     }
 }

@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,19 +41,11 @@ public class LibraryFragment extends Fragment
     private boolean isTranslation;
     private Library library;
     private WorkInfo[] works;
-    private OnLibraryListViewClick mListener;
 
-    public LibraryFragment() {
-        // Required empty public constructor
-    }
-
-    public static LibraryFragment newInstance(String translationFlag) {
-        LibraryFragment fragment = new LibraryFragment();
-        Bundle args = new Bundle();
-        args.putString(TRANSLATION_FLAG, translationFlag);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    /**
+     * Required empty public constructor
+     */
+    public LibraryFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,12 +58,10 @@ public class LibraryFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_library, container, false);
     }
 
     public void onActivityCreated(Bundle onSavedInstanceState) {
-
         super.onActivityCreated(onSavedInstanceState);
 
         try {
@@ -101,36 +94,25 @@ public class LibraryFragment extends Fragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnLibraryListViewClick) {
-            mListener = (OnLibraryListViewClick) context;
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     @Override
-    public void onClick(int position) {
+    public void onLibraryRecyclerViewClick(int position) {
         WorkInfo clickedWork = works[position];
 
-        // Need to navigate to ReadingFragment.
-        if (mListener != null) {
-            mListener.onLibraryListViewClick(clickedWork.getId(), isTranslation);
-        }
+        NavController navController = NavHostFragment.findNavController(this);
+        LibraryFragmentDirections.ActionLibraryFragmentToReadingDest action =
+                LibraryFragmentDirections.actionLibraryFragmentToReadingDest(clickedWork.getId());
+        action.setIsTranslation(isTranslation);
+        navController.navigate(action);
     }
 
     private View findViewById(int id) {
         return this.getView().findViewById(id);
-    }
-
-    /**
-     * Allows the LibraryFragment to communicate to the Activity
-     * when the user clicks an item in the ListView.
-     */
-    public interface OnLibraryListViewClick {
-        void onLibraryListViewClick(String workId, boolean isTranslation);
     }
 }

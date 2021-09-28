@@ -22,13 +22,14 @@ import com.ericmschmidt.latinreader.utilities.ITextConverter;
  * @author Eric Schmidt
  * @author http://telpirion.com
  * @version 1.5
- * @since 1.2
+ * @since 1.0
  */
 public class VocabularyFragment extends Fragment {
 
-    public VocabularyFragment() {
-        // Required empty public constructor
-    }
+    /**
+     * Required empty public constructor
+     */
+    public VocabularyFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

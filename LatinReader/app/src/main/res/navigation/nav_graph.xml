@@ -13,7 +13,7 @@
             android:id="@+id/action_libraryFragment_to_reading_dest"
             app:destination="@id/reading_dest">
             <argument
-                android:name="workID"
+                android:name="workId"
                 app:argType="string"/>
             <argument
                 android:name='isTranslation'
