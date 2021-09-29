@@ -6,10 +6,8 @@
 .DS_Store
 /build
 /captures
-gradle.properties
 gradlew
 gradlew.bat
 latinreader/release/
 /.idea
-/gradle
 *.hprof
