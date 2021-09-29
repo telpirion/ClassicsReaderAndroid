@@ -4,7 +4,10 @@
 
 This open source code for an Android app is available for anyone to clone, rebuild, copy, or alter for educational purposes. The app allows users to read Latin texts, to read English translations of Latin texts, and lookup Latin words in an integrated dictionary.
 
-The built app can be downloaded from the [Google Play Store](https://play.google.com/store/apps/details?id=com.ericmschmidt.latinreader)
+The built app can be downloaded from the [Google Play Store](https://play.google.com/store/apps/details?id=com.ericmschmidt.latinreader).
+
+You can see a complete list of the releases for this app
+[here](https://github.com/telpirion/ClassicsReaderAndroid/blob/main/release-notes.md).
 
 ## Report bugs!
 
