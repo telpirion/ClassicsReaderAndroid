@@ -2,10 +2,12 @@
 
 ## Release 2.0 (Version 10)
 
-_Date: YYYY-MM-DD_
+_Date: 2021-10-01_
 
 * Converted navigation from `FragmentManager` to navigation graph.
 * Added animations between navigations.
+* Updated `targetSdkVersion` to 30.
+* Converted app to App Bundles format.
 
 ## Release 1.5 (Version 9)
 
