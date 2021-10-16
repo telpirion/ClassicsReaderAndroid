@@ -176,6 +176,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_settings) {
             swapFragments(R.id.settings_dest, null, true);
+        } else if (id == R.id.nav_help) {
+            swapFragments(R.id.help_dest, null, true);
         }
 
         return true;
