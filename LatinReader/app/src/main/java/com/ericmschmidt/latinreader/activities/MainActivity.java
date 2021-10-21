@@ -153,9 +153,7 @@ public class MainActivity extends AppCompatActivity
             else {
                 swapFragments(R.id.reading_dest, null, false);
             }
-        }
-
-        else if (id == R.id.nav_library) {
+        } else if (id == R.id.nav_library) {
             swapFragments(R.id.libraryFragment, null, false);
 
         } else if (id == R.id.nav_translation) {
@@ -176,8 +174,11 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_settings) {
             swapFragments(R.id.settings_dest, null, true);
+
         } else if (id == R.id.nav_help) {
             swapFragments(R.id.help_dest, null, true);
+        } else if (id == R.id.nav_info) {
+            swapFragments(R.id.info_dest, null, true);
         }
 
         return true;

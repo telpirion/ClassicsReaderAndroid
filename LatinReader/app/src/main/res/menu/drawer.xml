@@ -34,5 +34,8 @@
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_baseline_help_24"
             android:title="@string/nav_drawer_help"/>
+        <item android:id="@+id/nav_info"
+            android:icon="@drawable/ic_baseline_info_24"
+            android:title="@string/nav_drawer_info"/>
     </group>
 </menu>

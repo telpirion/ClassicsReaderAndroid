@@ -6,30 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ericmschmidt.classicsreader.R
+import com.ericmschmidt.latinreader.MyApplication
 import com.mukesh.MarkdownView
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import java.io.BufferedReader
 
 /**
- * A simple [Fragment] subclass.
- * Use the [HelpFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Displays the help file for this app.
  */
 class HelpFragment : Fragment() {
-  // TODO: Rename and change types of parameters
-  private var param1: String? = null
-  private var param2: String? = null
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    arguments?.let {
-      param1 = it.getString(ARG_PARAM1)
-      param2 = it.getString(ARG_PARAM2)
-    }
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -41,27 +25,14 @@ class HelpFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    var markdownView = view.findViewById<MarkdownView>(R.id.markdown_view)
-    markdownView.setMarkDownText("# Hello World\nThis is a simple markdown")
-  }
+    var markdownView = view.findViewById<MarkdownView>(R.id.help_markdown_view)
 
-  companion object {
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HelpFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    @JvmStatic
-    fun newInstance(param1: String, param2: String) =
-      HelpFragment().apply {
-        arguments = Bundle().apply {
-          putString(ARG_PARAM1, param1)
-          putString(ARG_PARAM2, param2)
-        }
-      }
+    // Open the help.md file from the resources
+    var context = MyApplication.getContext()
+    var resources = context.resources
+    var inputStream = resources.openRawResource(R.raw.help);
+    val helpString = inputStream.bufferedReader().use(BufferedReader::readText)
+
+    markdownView.setMarkDownText(helpString)
   }
 }

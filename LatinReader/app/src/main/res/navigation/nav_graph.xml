@@ -121,4 +121,9 @@
         android:name="com.ericmschmidt.latinreader.fragments.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/info_dest"
+        android:name="com.ericmschmidt.latinreader.fragments.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
 </navigation>

@@ -9,7 +9,7 @@
     tools:context="com.ericmschmidt.latinreader.fragments.HelpFragment">
 
   <com.mukesh.MarkdownView
-      android:id="@+id/markdown_view"
+      android:id="@+id/help_markdown_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       />
