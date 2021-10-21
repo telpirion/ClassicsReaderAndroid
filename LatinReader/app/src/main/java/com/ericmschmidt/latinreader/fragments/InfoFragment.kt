@@ -52,7 +52,9 @@ class InfoFragment : Fragment() {
     stringBuilder.append("\n\n## App details\n")
     stringBuilder.append(String.format("+ **Version name**: %s\n", versionName))
     stringBuilder.append(String.format("+ **Version code**: %d\n", versionNumber))
-    stringBuilder.append(String.format("+ **Developer website**: %s\n", developerSite))
+
+    // TODO(telpirion): Ensure website is ready for customer feedback
+    //stringBuilder.append(String.format("+ **Developer website**: %s\n", developerSite))
     
     markdownView.setMarkDownText(stringBuilder.toString())
   }
