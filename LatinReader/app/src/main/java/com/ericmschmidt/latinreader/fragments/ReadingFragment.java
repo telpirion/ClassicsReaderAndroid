@@ -1,7 +1,6 @@
 package com.ericmschmidt.latinreader.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -11,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -49,6 +51,7 @@ public class ReadingFragment extends Fragment {
     private ReadingViewModel viewModel;
     private int bookNum;
     private int lineNum;
+    private OnClickListener mOnPrevNextClickListener;
 
     /**
      * Required empty public constructor
@@ -101,19 +104,22 @@ public class ReadingFragment extends Fragment {
 
         // Set text size.
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String textSize = sharedPreferences.getString(SettingsFragment.TEXT_SIZE, SettingsFragment.TEXT_SIZE_DEFAULT);
+        String textSize = sharedPreferences.getString(SettingsFragment.TEXT_SIZE,
+            SettingsFragment.TEXT_SIZE_DEFAULT);
         readingPane.setTextSize(TypedValue.COMPLEX_UNIT_DIP, Float.parseFloat(textSize));
 
         // Register this as the most recently read book.
         sharedPreferences.edit()
-            .putString(RECENTLY_READ, String.format("%s;%s",workToGetId,Boolean.toString(isTranslation)))
+            .putString(RECENTLY_READ, String.format("%s;%s",workToGetId,
+                Boolean.toString(isTranslation)))
             .apply();
 
         // After parsing the XML, the app presents poetry lines one at a time.
         // The user can override the number of lines to show per page.
         // This setting doesn't matter for prose, since one "line" equals one paragraph.
         if (work.getWorkType() == WorkInfo.WorkType.POEM) {
-            String linesPerPage = sharedPreferences.getString(SettingsFragment.POEM_LINES, SettingsFragment.POEM_LINES_DEFAULT);
+            String linesPerPage = sharedPreferences.getString(SettingsFragment.POEM_LINES,
+                SettingsFragment.POEM_LINES_DEFAULT);
             numLines = Integer.parseInt(linesPerPage);
         }
 
@@ -124,6 +130,41 @@ public class ReadingFragment extends Fragment {
             viewModel.setCurrentLine(lineNum);
         }
         updateReadingSurface();
+
+        // Determine whether to show the next/previous page controls and
+        // add button click listeners.
+        boolean showPageControls = sharedPreferences.getBoolean(SettingsFragment.SHOW_PAGE_CONTROLS,
+            SettingsFragment.SHOW_PAGE_CONTROLS_DEFAULT);
+        if (!showPageControls) {
+            ConstraintLayout buttonBar = getView().findViewById(R.id.reading_next_prev);
+            buttonBar.setVisibility(View.GONE);
+        } else {
+            ImageButton prevButton = getView().findViewById(R.id.btn_prev_page);
+            ImageButton nextButton = getView().findViewById(R.id.btn_next_page);
+
+            mOnPrevNextClickListener = new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // Just in case the viewModel isn't populated yet.
+                    if (viewModel == null) {
+                        return;
+                    }
+
+                    if (view.getId() == R.id.btn_prev_page) {
+                        viewModel.goToPage(false);
+                    } else {
+                        viewModel.goToPage(true);
+                    }
+
+                    updateReadingSurface();
+                }
+            };
+
+            prevButton.setOnClickListener(mOnPrevNextClickListener);
+            nextButton.setOnClickListener(mOnPrevNextClickListener);
+        }
+
 
         /*
             Set touch responses:

@@ -24,15 +24,23 @@
   <string name="action_dictionary">Dictionary</string>
 
   <string name="pref_text_size">Text Size</string>
-  <string name="pref_text_size_summary">Change the size of the text on the reading page.</string>
+  <string name="pref_text_size_summary">Change the size of the text on
+    the reading page.</string>
   <string name="pref_text_size_default">20</string>
   <string name="pref_poem_lines">Poem Lines Per Page</string>
-  <string name="pref_poem_lines_summary">Change the number of poem lines shown on the reading page.</string>
+  <string name="pref_poem_lines_summary">Change the number of poem lines shown
+    on the reading page.</string>
   <string name="pref_poem_lines_default">5</string>
+  <string name="pref_show_page_controls">Show Page Controls</string>
+  <string name="pref_show_page_controls_summary">Change whether the previous and
+    next page buttons are shown on the reading page.
+  </string>
 
   <string name="reading_no_book_open">Go to the Library to open a book!</string>
   <string name="reading_book_page_of_pages">Book %1$d, page %2$d of %3$d</string>
   <string name="reading_page_of_pages">Page %1$d of %2$d</string>
+  <string name="reading_btn_prev">Previous page</string>
+  <string name="reading_btn_next">Next page</string>
 
   <string name="dictionary_query_hint">Enter word to look up</string>
   <string name="dictionary_query_hint_short">Lookup word</string>

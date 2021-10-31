@@ -2,6 +2,7 @@ package com.ericmschmidt.latinreader.fragments;
 
 import android.os.Bundle;
 import android.content.SharedPreferences;
+import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -26,7 +27,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
     public static final String TEXT_SIZE_DEFAULT = "20";
     public static final String POEM_LINES = "poemLines";
     public static final String POEM_LINES_DEFAULT = "5";
-
+    public static final String SHOW_PAGE_CONTROLS = "showPageControls";
+    public static final boolean SHOW_PAGE_CONTROLS_DEFAULT = true;
 
     public void onCreatePreferences(Bundle bundle, String settings) {
         addPreferencesFromResource(R.xml.settings);
@@ -36,6 +38,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
         onSharedPreferenceChanged(sharedPrefs, TEXT_SIZE);
         onSharedPreferenceChanged(sharedPrefs, POEM_LINES);
+        onSharedPreferenceChanged(sharedPrefs, SHOW_PAGE_CONTROLS);
     }
 
     @Override
@@ -51,6 +54,11 @@ public class SettingsFragment extends PreferenceFragmentCompat
             String poemLines = sharedPreferences.getString(POEM_LINES, POEM_LINES_DEFAULT);
             ListPreference listPref = (ListPreference)pref;
             listPref.setValue(poemLines);
+        } else if ((key.equals(SHOW_PAGE_CONTROLS)) && (pref instanceof CheckBoxPreference)) {
+            boolean showPageControls = sharedPreferences
+                .getBoolean(SHOW_PAGE_CONTROLS, SHOW_PAGE_CONTROLS_DEFAULT);
+            CheckBoxPreference chxPref = (CheckBoxPreference) pref;
+            chxPref.setChecked(showPageControls);
         }
     }
 }

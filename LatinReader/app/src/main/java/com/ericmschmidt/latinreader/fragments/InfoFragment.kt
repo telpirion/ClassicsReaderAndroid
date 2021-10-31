@@ -10,7 +10,6 @@ import com.ericmschmidt.classicsreader.R
 import com.ericmschmidt.latinreader.MyApplication
 import com.mukesh.MarkdownView
 
-
 /**
  * Displays the app info, like version number, version name, and feedback link
  */
