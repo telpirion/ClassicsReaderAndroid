@@ -2,6 +2,8 @@
 
 ## Release 1.7 (Version 14)
 
+_Date: 2021-10-31_
+
 * Adds previous and next page buttons to app
 * Fixes some padding bugs.
 
