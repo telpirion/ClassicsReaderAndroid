@@ -1,6 +1,24 @@
 # Release notes for Latin Reader app
 
-## Release 2.0 (Version 10)
+## Release 1.7 (Version 14)
+
+* Adds previous and next page buttons to app
+* Fixes some padding bugs.
+
+## Release 1.6 (Version 12)
+
+_Date: 2021-10-21_
+
+* Adds a "Help" page to the app.
+* Adds an "About" page to the app.
+
+## Release 1.5.1 (Version 11)
+
+_Date: 2021-10-15_
+
+* Fixed navigation drawer image issue.
+
+## Release 1.5 (Version 10)
 
 _Date: 2021-10-01_
 
@@ -9,7 +27,7 @@ _Date: 2021-10-01_
 * Updated `targetSdkVersion` to 30.
 * Converted app to App Bundles format.
 
-## Release 1.5 (Version 9)
+## Release Version 9 (No version name)
 
 _Date: 2021-09-22_
 
