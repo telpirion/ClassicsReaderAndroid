@@ -1,7 +1,9 @@
 package com.ericmschmidt.latinreader.datamodel;
 
-import com.ericmschmidt.latinreader.utilities.ResourceHelper;
-import com.ericmschmidt.latinreader.utilities.WorkXMLParser;
+import com.ericmschmidt.classicsreader.datamodel.Book;
+import com.ericmschmidt.classicsreader.datamodel.Work;
+import com.ericmschmidt.classicsreader.utilities.ResourceHelper;
+import com.ericmschmidt.classicsreader.utilities.WorkXMLParser;
 
 import org.junit.Before;
 import org.junit.Test;

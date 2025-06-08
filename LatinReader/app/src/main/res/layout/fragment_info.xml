@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ericmschmidt.latinreader.fragments.InfoFragment">
+    tools:context="com.ericmschmidt.latinreader.com.ericmschmidt.classicsreader.fragments.InfoFragment">
 
   <com.mukesh.MarkdownView
       android:id="@+id/info_markdown_view"

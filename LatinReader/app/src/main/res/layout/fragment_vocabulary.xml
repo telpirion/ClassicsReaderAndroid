@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ericmschmidt.latinreader.fragments.VocabularyFragment">
+    tools:context="com.ericmschmidt.latinreader.com.ericmschmidt.classicsreader.fragments.VocabularyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

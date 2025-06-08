@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.ericmschmidt.latinreader.fragments.LibraryFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.LibraryFragment"
         android:label="LibraryFragment" >
         <action
             android:id="@+id/action_libraryFragment_to_reading_dest"
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/reading_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.ReadingFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.ReadingFragment"
         android:label="ReadingFragment">
         <argument android:name="isTranslation"
             app:argType="boolean"
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/dictionary_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.DictionaryFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.DictionaryFragment"
         android:label="fragment_dictionary"
         tools:layout="@layout/fragment_dictionary">
         <argument
@@ -74,16 +74,16 @@
     </fragment>
     <fragment
         android:id="@+id/settings_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.SettingsFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.SettingsFragment"
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/vocab_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.VocabularyFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.VocabularyFragment"
         android:label="fragment_vocabulary"
         tools:layout="@layout/fragment_vocabulary" />
     <fragment
         android:id="@+id/toc_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.TOCFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.TOCFragment"
         android:label="TOCFragment">
         <argument
             android:name="workId"
@@ -118,12 +118,12 @@
     </fragment>
     <fragment
         android:id="@+id/help_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.HelpFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/info_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.InfoFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
 </navigation>

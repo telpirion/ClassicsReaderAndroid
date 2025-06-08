@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    namespace("com.ericmschmidt.latinreader")
+    compileSdk(35)
     dataBinding {
         enabled = true
     }
     defaultConfig {
         applicationId "com.ericmschmidt.latinreader"
         minSdkVersion 18
-        targetSdkVersion 30
+        targetSdkVersion(35)
         versionCode 14
         versionName "1.7.0"
 

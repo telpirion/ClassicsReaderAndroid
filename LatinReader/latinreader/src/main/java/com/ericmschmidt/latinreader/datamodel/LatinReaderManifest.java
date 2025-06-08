@@ -1,5 +1,8 @@
 package com.ericmschmidt.latinreader.datamodel;
 
+import com.ericmschmidt.classicsreader.datamodel.Manifest;
+import com.ericmschmidt.classicsreader.datamodel.TOCEntry;
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
 import com.ericmschmidt.latinreader.R;
 
 import java.util.ArrayList;

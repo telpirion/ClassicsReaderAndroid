@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.ericmschmidt.classicsreader.datamodel.Book;
+
 public class BookTest {
 
     Book testBook;
