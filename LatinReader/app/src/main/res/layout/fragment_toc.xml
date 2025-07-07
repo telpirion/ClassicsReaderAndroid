@@ -3,7 +3,7 @@
 
     <data>
         <import type="androidx.fragment.app.Fragment"/>
-        <variable name="work" type="com.ericmschmidt.latinreader.datamodel.WorkInfo"/>
+        <variable name="work" type="com.ericmschmidt.classicsreader.datamodel.WorkInfo"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"

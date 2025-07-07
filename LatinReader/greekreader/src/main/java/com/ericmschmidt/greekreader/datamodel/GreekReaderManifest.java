@@ -1,8 +1,8 @@
 package com.ericmschmidt.greekreader.datamodel;
 
 import com.ericmschmidt.greekreader.R;
-import com.ericmschmidt.latinreader.datamodel.Manifest;
-import com.ericmschmidt.latinreader.datamodel.WorkInfo;
+import com.ericmschmidt.classicsreader.datamodel.Manifest;
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
 
 import java.util.ArrayList;
 

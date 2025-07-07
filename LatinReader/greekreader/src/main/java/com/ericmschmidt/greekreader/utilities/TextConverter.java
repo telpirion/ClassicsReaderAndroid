@@ -6,9 +6,9 @@ import android.util.JsonReader;
 import android.widget.EditText;
 
 import com.ericmschmidt.greekreader.R;
-import com.ericmschmidt.latinreader.MyApplication;
-import com.ericmschmidt.latinreader.utilities.ITextConverter;
-import com.ericmschmidt.latinreader.utilities.ResourceHelper;
+import com.ericmschmidt.classicsreader.MyApplication;
+import com.ericmschmidt.classicsreader.utilities.ITextConverter;
+import com.ericmschmidt.classicsreader.utilities.ResourceHelper;
 
 import java.io.IOException;
 import java.io.InputStream;

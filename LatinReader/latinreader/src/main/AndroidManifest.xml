@@ -6,15 +6,15 @@
         tools:overrideLibrary="android.support.v14.preference" />
 
     <application
-        android:name=".MyApplication"
+        android:name="com.ericmschmidt.classicsreader.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.MainActivity"
-            android:label="@string/app_name"
+            android:name="com.ericmschmidt.classicsreader.activities.MainActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
                 android:value=".activities.SearchActivity" />
         </activity>
         <activity
-            android:name=".activities.ErrorActivity"
+            android:name="com.ericmschmidt.classicsreader.activities.ErrorActivity"
             android:label="@string/error_activity" />
     </application>
 </manifest>

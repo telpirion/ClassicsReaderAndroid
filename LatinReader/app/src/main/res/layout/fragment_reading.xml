@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".fragments.ReadingFragment">
+    tools:context="com.ericmschmidt.classicsreader.fragments.ReadingFragment">
 
     <TextView android:id="@+id/reading_info"
         android:layout_height="wrap_content"

@@ -7,15 +7,15 @@
 
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.ericmschmidt.latinreader.fragments.LibraryFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.LibraryFragment"
         android:label="LibraryFragment" >
         <action
             android:id="@+id/action_libraryFragment_to_reading_dest"
             app:destination="@id/reading_dest"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_close_exit"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right">
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim">
             <argument
                 android:name="workId"
                 app:argType="string" />
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/reading_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.ReadingFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.ReadingFragment"
         android:label="ReadingFragment">
         <argument android:name="isTranslation"
             app:argType="boolean"
@@ -49,10 +49,10 @@
         <action
             android:id="@+id/action_reading_dest_to_toc_dest"
             app:destination="@id/toc_dest"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out">
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim">
             <argument
                 android:name="workId"
                 app:argType="string" />
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/dictionary_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.DictionaryFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.DictionaryFragment"
         android:label="fragment_dictionary"
         tools:layout="@layout/fragment_dictionary">
         <argument
@@ -74,16 +74,16 @@
     </fragment>
     <fragment
         android:id="@+id/settings_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.SettingsFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.SettingsFragment"
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/vocab_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.VocabularyFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.VocabularyFragment"
         android:label="fragment_vocabulary"
         tools:layout="@layout/fragment_vocabulary" />
     <fragment
         android:id="@+id/toc_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.TOCFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.TOCFragment"
         android:label="TOCFragment">
         <argument
             android:name="workId"
@@ -95,8 +95,8 @@
         <action
             android:id="@+id/action_toc_dest_to_reading_dest"
             app:destination="@id/reading_dest"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out">
             <argument
@@ -118,12 +118,12 @@
     </fragment>
     <fragment
         android:id="@+id/help_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.HelpFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/info_dest"
-        android:name="com.ericmschmidt.latinreader.fragments.InfoFragment"
+        android:name="com.ericmschmidt.classicsreader.fragments.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
 </navigation>

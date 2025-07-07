@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    namespace("com.ericmschmidt.greekreader")
+    compileSdk(35)
     dataBinding {
         enabled = true
     }
     defaultConfig {
         applicationId "com.telpirion.greekreader"
-        minSdkVersion 18
-        targetSdkVersion 30
+        minSdkVersion 21
+        targetSdk 35
         versionCode 1
         versionName "1.0"
     }
