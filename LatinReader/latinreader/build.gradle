@@ -8,10 +8,10 @@ android {
     }
     defaultConfig {
         applicationId "com.ericmschmidt.latinreader"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion(35)
-        versionCode 14
-        versionName "1.7.0"
+        versionCode 15
+        versionName "1.8.0"
 
     }
     buildTypes {
@@ -19,10 +19,13 @@ android {
             minifyEnabled false
         }
     }
-
-    lintOptions {
-        checkReleaseBuilds false
+    lint {
         abortOnError false
+        checkReleaseBuilds false
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
+        targetCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
     }
 }
 

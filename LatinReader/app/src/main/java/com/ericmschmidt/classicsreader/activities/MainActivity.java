@@ -22,10 +22,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.exceptions.ForceCloseHandler;
-import com.ericmschmidt.latinreader.fragments.DictionaryFragmentArgs;
-import com.ericmschmidt.latinreader.fragments.LibraryFragmentArgs;
+import com.ericmschmidt.classicsreader.fragments.DictionaryFragmentArgs;
+import com.ericmschmidt.classicsreader.fragments.LibraryFragmentArgs;
 import com.ericmschmidt.classicsreader.fragments.ReadingFragment;
-import com.ericmschmidt.latinreader.fragments.ReadingFragmentArgs;
+import com.ericmschmidt.classicsreader.fragments.ReadingFragmentArgs;
 import com.google.android.material.navigation.NavigationView;
 
 /** Base activity for this app.
@@ -192,10 +192,6 @@ public class MainActivity extends AppCompatActivity
         NavController navController = navHostFragment.getNavController();
 
         NavOptions defaultNavOptions = new NavOptions.Builder()
-                .setEnterAnim(R.anim.fragment_fade_enter)
-                .setExitAnim(R.anim.fragment_fade_exit)
-                .setPopEnterAnim(R.anim.fragment_fade_enter)
-                .setPopExitAnim(R.anim.fragment_fade_exit)
                 .build();
 
         if ((args != null) && useDefaultAnim) {

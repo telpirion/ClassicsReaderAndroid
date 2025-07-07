@@ -23,6 +23,13 @@ allprojects {
         maven {
             url = "https://jitpack.io"
         }
+        jcenter() //here
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains:annotations:13.0")
     }
 }
 

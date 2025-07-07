@@ -12,10 +12,10 @@
         <action
             android:id="@+id/action_libraryFragment_to_reading_dest"
             app:destination="@id/reading_dest"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_close_exit"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right">
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim">
             <argument
                 android:name="workId"
                 app:argType="string" />
@@ -49,10 +49,10 @@
         <action
             android:id="@+id/action_reading_dest_to_toc_dest"
             app:destination="@id/toc_dest"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out">
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim">
             <argument
                 android:name="workId"
                 app:argType="string" />
@@ -95,8 +95,8 @@
         <action
             android:id="@+id/action_toc_dest_to_reading_dest"
             app:destination="@id/reading_dest"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out">
             <argument
