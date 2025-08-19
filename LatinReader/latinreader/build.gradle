@@ -23,13 +23,13 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
-        targetCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
-    }
+    //compileOptions {
+    //    sourceCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
+    //    targetCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
+    //}
 }
 
 dependencies {
-    implementation project (":app")
+    implementation project(':core')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

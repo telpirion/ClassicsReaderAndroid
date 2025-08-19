@@ -11,7 +11,7 @@ import java.util.Locale;
 
 /** A ViewModel that maps reading behaviors to a view.
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.1
  */
