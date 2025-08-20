@@ -27,7 +27,7 @@ public class WorkInfoTest {
                 .location(2)
                 .offset(2, 2)
                 .TOCEntry(tocEntry)
-                .create();
+                .build();
     }
 
     @Test

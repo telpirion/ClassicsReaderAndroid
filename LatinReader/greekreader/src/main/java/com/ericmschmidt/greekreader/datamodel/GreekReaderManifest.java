@@ -1,5 +1,7 @@
 package com.ericmschmidt.greekreader.datamodel;
 
+import android.util.Log;
+
 import com.ericmschmidt.greekreader.R;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 /** Contains the resource manifest for the Greek Reader app.
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author https://telpirion.com
  * @version 0.1
  */
 public class GreekReaderManifest extends Manifest {
@@ -24,88 +26,100 @@ public class GreekReaderManifest extends Manifest {
 
         // TODO: Break each chapter into separate pages.
         workInfos.add(new WorkInfo.Builder("AristotlePol")
-                .title("Politics")
-                .author("Aristotle")
-                .englishTitle("Politics")
-                .englishAuthor("Aristotle")
-                .location(R.raw.gk_aristot_pol_gk)
-                .englishLocation(R.raw.aristot_pol_eng)
-                .workType(WorkInfo.WorkType.PROSE)
-                .create());
-
-        // TODO: Fix Herodotus transcription.
-        /*workInfos.add(new WorkInfo("Herodotus",
-                "Histories",
-                "Herodotus",
-                "Histories",
-                "Herodotus",
-                R.raw.gk_hdt_gk,
-                R.raw.hdt_eng,
-                WorkInfo.WorkType.PROSE));*/
+                        .title("Politics")
+                        .author("Aristotle")
+                        .englishTitle("Politics")
+                        .englishAuthor("Aristotle")
+                        .location(R.raw.gk_aristot_pol_gk)
+                        .englishLocation(R.raw.aristot_pol_eng)
+                        .workType(WorkInfo.WorkType.PROSE)
+                        .build());
 
         workInfos.add(new WorkInfo.Builder("HomerIliad")
-                .author("Homer")
-                .title("Iliad")
-                .englishAuthor("Homer")
-                .englishTitle("Iliad")
-                .location(R.raw.gk_hom_il_gk)
-                .englishLocation(R.raw.hom_il_eng)
-                .workType(WorkInfo.WorkType.POEM)
-                .offset(1, 5)
-                .create());
+                        .author("Homer")
+                        .title("Iliad")
+                        .englishAuthor("Homer")
+                        .englishTitle("Iliad")
+                        .location(R.raw.gk_hom_il_gk)
+                        .englishLocation(R.raw.hom_il_eng)
+                        .workType(WorkInfo.WorkType.POEM)
+                        .offset(1, 5)
+                        .build());
 
         workInfos.add(new WorkInfo.Builder("HomerOdyssey")
-                .author("Homer")
-                .title("Odyssey")
-                .englishAuthor("Homer")
-                .englishTitle("Odyssey")
-                .location(R.raw.gk_hom_od_gk)
-                .englishLocation(R.raw.hom_od_eng)
-                .workType(WorkInfo.WorkType.POEM)
-                .offset(1, 5)
-                .create());
+                        .author("Homer")
+                        .title("Odyssey")
+                        .englishAuthor("Homer")
+                        .englishTitle("Odyssey")
+                        .location(R.raw.gk_hom_od_gk)
+                        .englishLocation(R.raw.hom_od_eng)
+                        .workType(WorkInfo.WorkType.POEM)
+                        .offset(1, 5)
+                        .build());
 
-        workInfos.add(new WorkInfo("Lysias",
-                "Speeches",
-                "Lysias",
-                "Speeches",
-                "Lysias",
-                R.raw.gk_lys_gk,
-                R.raw.lys_eng,
-                WorkInfo.WorkType.PROSE));
+        // If you enter "Speeches", "Anabasis", "Histories", or "Republic" into
+        // the title(), the whole list fails to render!
+        // No error is thrown
+        workInfos.add(new WorkInfo.Builder("XenophonAn")
+                        .author("Xenophon")
+                        .title("Anabasis")
+                        .englishAuthor("Xenophon")
+                        .englishTitle("Anabasis")
+                        .location(R.raw.gk_xen_anab_gk)
+                        .englishLocation(R.raw.xen_anab_eng)
+                        .workType(WorkInfo.WorkType.PROSE)
+                        .build());
+
+        workInfos.add(new WorkInfo.Builder("Lysias")
+                        .author("Lysias")
+                        .title("Speeches")
+                        .englishTitle("Speeches")
+                        .englishAuthor("Lysias")
+                        .location(R.raw.gk_lys_gk)
+                        .englishLocation(R.raw.lys_eng)
+                        .workType(WorkInfo.WorkType.PROSE)
+                        .build());
+
+        Log.i("GreekReaderManifest", "workInfos.size() = " + workInfos.size());
+
+        /*
+        // TODO: Fix Herodotus transcription.
+        // "Histories" is also a title that breaks the list ...
+        workInfos.add(new WorkInfo.Builder("Herodotus")
+                        .title("Mysteries")
+                        .author("Herodotus")
+                        .englishTitle("Histories")
+                        .englishAuthor("Herodotus")
+                        .location(R.raw.gk_hdt_gk)
+                        .englishLocation(R.raw.hdt_eng)
+                        .workType(WorkInfo.WorkType.PROSE)
+                        .build());
 
         // TODO: Fix Plato's Republic Transcription
-        /*workInfos.add(new WorkInfo("PlatoRep",
-                "Republic",
-                "Plato",
-                "Republic",
-                "Plato",
-                R.raw.gk_plat_rep_gk,
-                R.raw.plat_rep_eng,
-                WorkInfo.WorkType.PROSE));*/
-
-        workInfos.add(new WorkInfo("XenophonAn",
-                "Anabasis",
-                "Xenophon",
-                "Anabasis",
-                "Xenophon",
-                R.raw.gk_xen_anab_gk,
-                R.raw.xen_anab_eng,
-                WorkInfo.WorkType.PROSE));
-
+        // "Republic" is also a title that breaks the list ...
+        workInfos.add(new WorkInfo.Builder("PlatoRep")
+                        .title("Republic")
+                        .author("Plato")
+                        .englishTitle("Republic")
+                        .englishAuthor("Plato")
+                        .location(R.raw.gk_plat_rep_gk)
+                        .englishLocation(R.raw.plat_rep_eng)
+                        .workType(WorkInfo.WorkType.PROSE)
+                        .build());
+        */
         return workInfos;
     }
 
     @Override
     public WorkInfo getDictionaryInfo() {
-        return new WorkInfo("dictionary",
-                "An Intermediate Greek-English Lexicon",
-                "Henry George Liddell and Robert SCott",
-                "",
-                "",
-                R.raw.ml,
-                R.raw.ml,
-                WorkInfo.WorkType.PROSE);
+        return new WorkInfo.Builder("dictionary")
+                .title("An Intermediate Greek-English Lexicon")
+                .author("Henry George Liddell and Robert Scott")
+                .englishAuthor("Henry George Liddell and Robert Scott")
+                .englishTitle("An Intermediate Greek-English Lexicon")
+                .location(R.raw.ml)
+                .englishLocation(R.raw.ml)
+                .build();
     }
 
     /**

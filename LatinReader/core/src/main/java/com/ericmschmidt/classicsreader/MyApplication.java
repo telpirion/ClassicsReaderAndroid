@@ -2,6 +2,7 @@ package com.ericmschmidt.classicsreader;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
@@ -41,6 +42,7 @@ public class MyApplication extends Application {
      */
     public static Manifest getManifest() {
         String manifestName = MyApplication.getContext().getResources().getString(R.string.manifest);
+        Log.i("MyApplication", "manifestName = " + manifestName);
         return Manifest.getManifest(manifestName);
     }
 
@@ -79,6 +81,7 @@ public class MyApplication extends Application {
      * @param message the message to write.
      */
     public static void logError(Class type, String message) {
-        // Need to add Crash analytics
+        // TODO: add Crash analytics
+        Log.e(type.getName(), message);
     }
 }

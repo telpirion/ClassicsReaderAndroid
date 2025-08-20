@@ -1,6 +1,7 @@
 package com.ericmschmidt.classicsreader.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,10 +65,11 @@ public class LibraryFragment extends Fragment
         super.onActivityCreated(onSavedInstanceState);
 
         try {
-
             // Retrieve the manifest from the package using config settings.
             Manifest manifest = MyApplication.getManifest();
+
             library = new Library(manifest.getCollection());
+            Log.i("LibraryFragment", "library length = " + library.getWorks().length);
             works = library.getWorks();
 
             // Create and populate the RecyclerView.

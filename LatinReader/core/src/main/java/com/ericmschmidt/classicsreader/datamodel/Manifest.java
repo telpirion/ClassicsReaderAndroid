@@ -1,5 +1,7 @@
 package com.ericmschmidt.classicsreader.datamodel;
 
+import android.util.Log;
+
 import com.ericmschmidt.classicsreader.MyApplication;
 
 import java.lang.reflect.Constructor;
