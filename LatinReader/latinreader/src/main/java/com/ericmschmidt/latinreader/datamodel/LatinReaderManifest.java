@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /** Contains the resource manifest for the Latin Reader app.
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author https://telpirion.com
  * @version 1.5
  * @since 1.1
  */

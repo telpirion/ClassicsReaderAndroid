@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.fragments;
+package com.ericmschmidt.classicsreader.ui.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +16,7 @@ import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.datamodel.Library;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
-import com.ericmschmidt.classicsreader.layouts.LibraryRecyclerViewAdapter;
+import com.ericmschmidt.classicsreader.ui.layouts.LibraryRecyclerViewAdapter;
 
 /** Displays works (books) in a RecyclerView.
  *

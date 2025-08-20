@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.layouts;
+package com.ericmschmidt.classicsreader.ui.layouts;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /** Stores information about the works (source works, translations) in this app.
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author https://telpirion.com
  * @version 1.5
  * @since 1.1
  */

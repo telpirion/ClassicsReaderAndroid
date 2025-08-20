@@ -3,10 +3,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 apply plugin: 'com.android.library'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
 android {
     namespace("com.ericmschmidt.classicsreader")
-    compileSdk(35)
+    compileSdk(36)
 
     dataBinding {
         enabled = true
@@ -14,7 +15,7 @@ android {
 
     defaultConfig {
         minSdkVersion(21)
-        targetSdkVersion(35)
+        targetSdkVersion(36)
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,29 +26,61 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8 // Ensure this is 1.8
         targetCompatibility = JavaVersion.VERSION_1_8 // Ensure this is 1.8
     }
-
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10"
+    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
 
 dependencies {
-    implementation('androidx.legacy:legacy-support-v4:1.0.0')
     def nav_version = '2.9.0'
+    def lifecycle_version = rootProject.extensions["ext"]["lifecycle_version"]
     implementation(fileTree(dir: 'libs', include: ['*.jar']))
-    implementation('androidx.recyclerview:recyclerview:1.4.0')
-    implementation('androidx.preference:preference:1.2.1')
-    implementation('com.google.android.material:material:1.12.0')
+
+    // TODO: Clean build script to remove duplicative dependencies
+    implementation(platform("androidx.compose:compose-bom:2025.08.00"))
+
+    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation("androidx.compose.foundation:foundation:1.7.0+")
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.compose.material:material-ripple:1.7.0+")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material3:material3-window-size-class")
+    implementation("androidx.compose.material3.adaptive:adaptive:1.2.0-alpha11")
+    implementation("androidx.compose.material3.adaptive:adaptive-layout:1.2.0-alpha11")
+    implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.2.0-alpha11")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.core:core-ktx:1.17.0")
+    implementation('androidx.legacy:legacy-support-v4:1.0.0')
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
     implementation("androidx.navigation:navigation-fragment:$nav_version")
     implementation("androidx.navigation:navigation-ui:$nav_version")
+    implementation('androidx.preference:preference:1.2.1')
+    implementation('androidx.recyclerview:recyclerview:1.4.0')
 
     // Third-party MD viewer
     implementation('com.github.mukeshsolanki:MarkdownView-Android:1.1.1')
 
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+
     // Test resources
-    testImplementation('junit:junit:4.13.2')
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.03.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation('com.android.support.test:runner:1.0.2')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2')
+    testImplementation("junit:junit:4.13.2")
+    testImplementation('junit:junit:4.13.2')
     testImplementation('com.google.truth:truth:1.4.4')
     testImplementation('org.mockito:mockito-core:5.18.0')
     testImplementation('androidx.test:core:1.6.1')

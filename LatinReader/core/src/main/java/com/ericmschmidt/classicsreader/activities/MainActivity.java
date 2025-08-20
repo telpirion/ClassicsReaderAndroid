@@ -22,10 +22,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.exceptions.ForceCloseHandler;
-import com.ericmschmidt.classicsreader.fragments.DictionaryFragmentArgs;
-import com.ericmschmidt.classicsreader.fragments.LibraryFragmentArgs;
-import com.ericmschmidt.classicsreader.fragments.ReadingFragment;
-import com.ericmschmidt.classicsreader.fragments.ReadingFragmentArgs;
+import com.ericmschmidt.classicsreader.ui.fragments.DictionaryFragmentArgs;
+import com.ericmschmidt.classicsreader.ui.fragments.LibraryFragmentArgs;
+import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment;
+import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragmentArgs;
 import com.google.android.material.navigation.NavigationView;
 
 /** Base activity for this app.

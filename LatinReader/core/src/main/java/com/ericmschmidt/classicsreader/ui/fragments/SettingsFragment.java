@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.fragments;
+package com.ericmschmidt.classicsreader.ui.fragments;
 
 import android.os.Bundle;
 import android.content.SharedPreferences;

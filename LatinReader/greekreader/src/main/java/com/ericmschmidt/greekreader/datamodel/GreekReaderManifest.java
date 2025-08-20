@@ -57,9 +57,6 @@ public class GreekReaderManifest extends Manifest {
                         .offset(1, 5)
                         .build());
 
-        // If you enter "Speeches", "Anabasis", "Histories", or "Republic" into
-        // the title(), the whole list fails to render!
-        // No error is thrown
         workInfos.add(new WorkInfo.Builder("XenophonAn")
                         .author("Xenophon")
                         .title("Anabasis")
@@ -79,8 +76,6 @@ public class GreekReaderManifest extends Manifest {
                         .englishLocation(R.raw.lys_eng)
                         .workType(WorkInfo.WorkType.PROSE)
                         .build());
-
-        Log.i("GreekReaderManifest", "workInfos.size() = " + workInfos.size());
 
         /*
         // TODO: Fix Herodotus transcription.

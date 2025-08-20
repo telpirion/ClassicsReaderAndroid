@@ -2,16 +2,16 @@ apply plugin: 'com.android.application'
 
 android {
     namespace("com.ericmschmidt.latinreader")
-    compileSdk(35)
+    compileSdk(36)
     dataBinding {
         enabled = true
     }
     defaultConfig {
-        applicationId "com.ericmschmidt.latinreader"
-        minSdkVersion 21
-        targetSdkVersion(35)
-        versionCode 15
-        versionName "1.8.0"
+        applicationId("com.ericmschmidt.latinreader")
+        minSdkVersion(23)
+        targetSdkVersion(36)
+        versionCode(15)
+        versionName("1.8.0")
 
     }
     buildTypes {
