@@ -58,8 +58,9 @@ fun PrettyCardLazyListPreview(
 
 @Composable
 fun PrettyCardLazyList(
+    library: Library,
     modifier: Modifier = Modifier,
-    library: Library
+    onRowClick: (WorkInfo) -> Unit = {},
 ) {
     val works = library.getWorks()
     LazyColumn(
@@ -68,9 +69,9 @@ fun PrettyCardLazyList(
     ) {
         items(
             items = works,
-            key = { work -> work.id }
+            key = { work -> work.id },
         ) {
-            PrettyRow(workInfo = it)
+            PrettyRow(workInfo = it, onClick = onRowClick)
         }
     }
 }

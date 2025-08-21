@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.ericmschmidt.classicsreader.R;
+import com.ericmschmidt.classicsreader.activities.MainActivity;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
 import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 

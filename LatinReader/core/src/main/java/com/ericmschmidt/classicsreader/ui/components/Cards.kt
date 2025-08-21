@@ -2,6 +2,7 @@ package com.ericmschmidt.classicsreader.ui.components
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -97,11 +98,13 @@ fun PrettyCard(workInfo: WorkInfo) {
 
 @Composable
 fun PrettyRow(
-    workInfo: WorkInfo
+    workInfo: WorkInfo,
+    onClick: (WorkInfo) -> Unit = {}
 ) {
     Card(
         modifier = Modifier.fillMaxWidth()
-            .padding(4.dp),
+            .padding(4.dp)
+            .clickable { onClick(workInfo) },
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent,
         ),

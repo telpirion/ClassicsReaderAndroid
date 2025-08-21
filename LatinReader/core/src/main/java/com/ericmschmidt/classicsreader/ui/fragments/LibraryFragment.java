@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
+import com.ericmschmidt.classicsreader.activities.MainActivity;
 import com.ericmschmidt.classicsreader.datamodel.Library;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
@@ -72,7 +73,8 @@ public class LibraryFragment extends Fragment
             works = library.getWorks();
 
             ComposeView composeView = (ComposeView) findViewById(R.id.compose_view);
-            ComposeViewAdapter.setContentToLazyList(composeView, library);
+            ComposeViewAdapter.setContentToLazyList(composeView, library,
+                    this.isTranslation, (MainActivity) this.getActivity());
 
         } catch (Exception ex) {
             MyApplication.logError(this.getClass(), ex.getMessage());
