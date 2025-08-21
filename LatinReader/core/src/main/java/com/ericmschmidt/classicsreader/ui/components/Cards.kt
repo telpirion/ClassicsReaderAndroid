@@ -3,32 +3,68 @@ package com.ericmschmidt.classicsreader.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ericmschmidt.classicsreader.R;
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo
 
+// Use this class for previewing WorkInfo & Card objects
+class WorkInfoPreviewProvider : PreviewParameterProvider<WorkInfo> {
+    override val values = sequenceOf(
+        WorkInfo.Builder("test")
+            .author("testAuthor")
+            .title("testTitle")
+            .englishTitle("testTitle")
+            .englishAuthor("testAuthor")
+            .location(1)
+            .englishLocation(1)
+            .image(R.drawable.work_default_1)
+            .build(),
+        WorkInfo.Builder("test2")
+            .author("Very very super long never-ending author name")
+            .title("Very very long title that could go on forever")
+            .englishTitle("testTitle")
+            .englishAuthor("testAuthor")
+            .image(R.drawable.work_default_2)
+            .location(1)
+            .build(),
+        WorkInfo.Builder("test3")
+            .author("Ξενοφῶν")
+            .title("Ἀνάβασις")
+            .englishTitle("Anabasis")
+            .englishAuthor("Xenophon")
+            .image(R.drawable.work_default_3)
+            .location(1)
+            .build()
+    )
+}
 
-@Preview(showBackground = true)
 @Composable
-fun PrettyCard() {
+fun PrettyCard(workInfo: WorkInfo) {
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.size(150.dp, 300.dp)
             .padding(4.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            containerColor = Color.Transparent,
         ),
     ) {
         Row(
@@ -36,21 +72,83 @@ fun PrettyCard() {
         ) {
             Box {
                 Image(
-                    painter = painterResource(R.drawable.work_default_1),
+                    modifier = Modifier.requiredSize(width = 130.dp, height = 130.dp),
+                    painter = painterResource(workInfo.image),
                     contentDescription = "test image",
                 )
             }
         }
-        Row(
+        Column(
             modifier = Modifier.padding(8.dp)
         ) {
             Text(
-                modifier = Modifier.weight(1f),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                text = "On the Gallic War",
+                text = workInfo.title,
+                textAlign = TextAlign.Left
+            )
+            Text(
+                fontSize = 16.sp,
+                text = workInfo.author,
                 textAlign = TextAlign.Left
             )
         }
     }
+}
+
+@Composable
+fun PrettyRow(
+    workInfo: WorkInfo
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+            .padding(4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.Transparent,
+        ),
+    ) {
+        Row(
+            modifier = Modifier.padding(8.dp)
+        ) {
+
+            Box {
+                Image(
+                    modifier = Modifier.requiredSize(width = 100.dp, height = 100.dp),
+                    painter = painterResource(workInfo.image),
+                    contentDescription = workInfo.title,
+                )
+            }
+            Column(
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Text(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    text = workInfo.title,
+                    textAlign = TextAlign.Left
+                )
+                Text(
+                    fontSize = 16.sp,
+                    text = workInfo.author,
+                    textAlign = TextAlign.Left
+                )
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PrettyRowPreview(
+    @PreviewParameter(WorkInfoPreviewProvider::class) workInfo : WorkInfo
+) {
+    PrettyRow(workInfo)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PrettyCardPreview(
+    @PreviewParameter(WorkInfoPreviewProvider::class) workInfo : WorkInfo
+) {
+    PrettyCard(workInfo)
 }

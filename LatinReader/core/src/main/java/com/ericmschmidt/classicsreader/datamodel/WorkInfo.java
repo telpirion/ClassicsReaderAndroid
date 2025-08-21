@@ -122,6 +122,8 @@ public class WorkInfo {
         return this._englishLocation;
     }
 
+    public int getImage() { return this.image; }
+
     /**
      * Override the toString method for this class to provide
      * a formatted string
