@@ -1,7 +1,6 @@
 package com.ericmschmidt.classicsreader.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -35,6 +34,14 @@ class LibraryPreviewProvider : PreviewParameterProvider<Library> {
                     .image(R.drawable.work_default_2)
                     .location(1)
                     .build(),
+                WorkInfo.Builder("test3")
+                    .author("Ξενοφῶν")
+                    .title("Ἀνάβασις")
+                    .englishTitle("Anabasis")
+                    .englishAuthor("Xenophon")
+                    .image(R.drawable.work_default_3)
+                    .location(1)
+                    .build(),
             )
         )
     )
@@ -61,7 +68,7 @@ fun PrettyCardLazyList(
     ) {
         items(
             items = works,
-            key = { work -> work.getId() }
+            key = { work -> work.id }
         ) {
             PrettyRow(workInfo = it)
         }

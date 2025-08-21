@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,7 +23,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ericmschmidt.classicsreader.R;
+import com.ericmschmidt.classicsreader.R
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo
 
 // Use this class for previewing WorkInfo & Card objects
@@ -82,13 +81,13 @@ fun PrettyCard(workInfo: WorkInfo) {
             modifier = Modifier.padding(8.dp)
         ) {
             Text(
-                fontSize = 20.sp,
+                //fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 text = workInfo.title,
                 textAlign = TextAlign.Left
             )
             Text(
-                fontSize = 16.sp,
+                //fontSize = 16.sp,
                 text = workInfo.author,
                 textAlign = TextAlign.Left
             )
