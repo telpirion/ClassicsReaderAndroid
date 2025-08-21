@@ -5,17 +5,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.compose.ui.platform.ComposeView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.datamodel.Library;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
+import com.ericmschmidt.classicsreader.ui.interop.ComposeViewAdapter;
 import com.ericmschmidt.classicsreader.ui.layouts.LibraryRecyclerViewAdapter;
 
 /** Displays works (books) in a RecyclerView.
@@ -27,7 +27,7 @@ import com.ericmschmidt.classicsreader.ui.layouts.LibraryRecyclerViewAdapter;
  *  - res/layout/cardviewitem_libraryrecyclerview.xml
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
@@ -37,7 +37,6 @@ public class LibraryFragment extends Fragment
     private static final String TAG = "LibraryFragment";
 
     private boolean isTranslation;
-    private Library library;
     private WorkInfo[] works;
 
     /**
@@ -68,23 +67,12 @@ public class LibraryFragment extends Fragment
             // Retrieve the manifest from the package using config settings.
             Manifest manifest = MyApplication.getManifest();
 
-            library = new Library(manifest.getCollection());
+            Library library = new Library(manifest.getCollection());
             Log.i("LibraryFragment", "library length = " + library.getWorks().length);
             works = library.getWorks();
 
-            // Create and populate the RecyclerView.
-            RecyclerView recyclerView =
-                    (RecyclerView) findViewById(R.id.recyclerview);
-            recyclerView.setHasFixedSize(true);
-
-            LinearLayoutManager manager = new LinearLayoutManager(getContext());
-            recyclerView.setLayoutManager(manager);
-
-            LibraryRecyclerViewAdapter adapter =
-                    new LibraryRecyclerViewAdapter(works, this.isTranslation);
-
-            adapter.setListener(this);
-            recyclerView.setAdapter(adapter);
+            ComposeView composeView = (ComposeView) findViewById(R.id.compose_view);
+            ComposeViewAdapter.setContentToLazyList(composeView, library);
 
         } catch (Exception ex) {
             MyApplication.logError(this.getClass(), ex.getMessage());
