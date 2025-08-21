@@ -179,6 +179,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public NavController getNavController() {
+        FragmentManager supportFragmentManager = this.getSupportFragmentManager();
+        NavHostFragment navHostFragment = (NavHostFragment)supportFragmentManager.findFragmentById(
+                R.id.nav_host_fragment);
+        assert navHostFragment != null;
+        return navHostFragment.getNavController();
+    }
+
     private String getRecentlyRead() {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         return sharedPrefs.getString(ReadingFragment.RECENTLY_READ, "");

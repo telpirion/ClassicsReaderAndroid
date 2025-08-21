@@ -84,8 +84,6 @@ public class LibraryFragment extends Fragment
     @Override
     public void onLibraryRecyclerViewClick(int position) {
         WorkInfo clickedWork = works[position];
-
-        // Navigate to the ReadingFragment based upon clicks on the RecyclerView.
         NavController navController = NavHostFragment.findNavController(this);
         LibraryFragmentDirections.ActionLibraryFragmentToReadingDest action =
                 LibraryFragmentDirections.actionLibraryFragmentToReadingDest(clickedWork.getId());
