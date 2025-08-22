@@ -16,7 +16,7 @@ import com.ericmschmidt.classicsreader.R;
  *  - res/xml/settings.xml
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.2
  */
@@ -29,6 +29,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
     public static final String POEM_LINES_DEFAULT = "5";
     public static final String SHOW_PAGE_CONTROLS = "showPageControls";
     public static final boolean SHOW_PAGE_CONTROLS_DEFAULT = true;
+    public static final String DISPLAY_TYPE = "displayType";
+    public static final String DISPLAY_TYPE_DEFAULT= "List";
 
     public void onCreatePreferences(Bundle bundle, String settings) {
         addPreferencesFromResource(R.xml.settings);
@@ -39,6 +41,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         onSharedPreferenceChanged(sharedPrefs, TEXT_SIZE);
         onSharedPreferenceChanged(sharedPrefs, POEM_LINES);
         onSharedPreferenceChanged(sharedPrefs, SHOW_PAGE_CONTROLS);
+        onSharedPreferenceChanged(sharedPrefs, DISPLAY_TYPE);
     }
 
     @Override
@@ -59,6 +62,10 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 .getBoolean(SHOW_PAGE_CONTROLS, SHOW_PAGE_CONTROLS_DEFAULT);
             CheckBoxPreference chxPref = (CheckBoxPreference) pref;
             chxPref.setChecked(showPageControls);
+        } else if ((key.equals(DISPLAY_TYPE)) && (pref instanceof ListPreference)){
+            String displayType = sharedPreferences.getString(DISPLAY_TYPE, DISPLAY_TYPE_DEFAULT);
+            ListPreference listPref = (ListPreference)pref;
+            listPref.setValue(displayType);
         }
     }
 }

@@ -68,16 +68,18 @@ public class LatinReaderManifest extends Manifest {
                 .location(R.raw.lucretius_lat)
                 .englishLocation(R.raw.lucretius_eng)
                 .workType(WorkInfo.WorkType.POEM)
+                .image(R.drawable.work_de_rerum_natura)
                 .build());
 
         workInfos.add(new WorkInfo.Builder("OvidM")
-                .title("Metamorphosis")
+                .title("Metamorphoses")
                 .author("P. Ovidius Naso")
-                .englishTitle("Metamorphosis")
+                .englishTitle("Metamorphoses")
                 .englishAuthor("Ovid")
                 .location(R.raw.ovid_met_lat)
                 .englishLocation(R.raw.ovid_met_eng)
                 .workType(WorkInfo.WorkType.POEM)
+                .image(R.drawable.work_metamorphoses)
                 .build());
 
         workInfos.add(new WorkInfo.Builder("Petronius")
@@ -88,6 +90,7 @@ public class LatinReaderManifest extends Manifest {
                 .location(R.raw.petr_lat)
                 .englishLocation(R.raw.petr_eng)
                 .workType(WorkInfo.WorkType.PROSE)
+                .image(R.drawable.work_satyricon)
                 .build());
 
         workInfos.add(new WorkInfo.Builder("SalJug")
@@ -98,6 +101,7 @@ public class LatinReaderManifest extends Manifest {
                 .location(R.raw.sallust_jugur_lat)
                 .englishLocation(R.raw.sallust_jugur_eng)
                 .workType(WorkInfo.WorkType.PROSE)
+                .image(R.drawable.work_de_bellum_jugurthinum)
                 .build());
 
         workInfos.add(new WorkInfo.Builder("SenApoc")
@@ -108,6 +112,7 @@ public class LatinReaderManifest extends Manifest {
                 .location(R.raw.sen_apoc_lat)
                 .englishLocation(R.raw.sen_apoc_eng)
                 .workType(WorkInfo.WorkType.PROSE)
+                .image(R.drawable.work_apocolocyntosis)
                 .build());
 
         workInfos.add(new WorkInfo.Builder("VirgA")
@@ -118,6 +123,7 @@ public class LatinReaderManifest extends Manifest {
                 .location(R.raw.verg_a_lat)
                 .englishLocation(R.raw.verg_a_eng)
                 .workType(WorkInfo.WorkType.POEM)
+                .image(R.drawable.work_aeneid)
                 .build());
 
         workInfos.add(new WorkInfo.Builder("Livy1")
@@ -128,6 +134,7 @@ public class LatinReaderManifest extends Manifest {
                 .location(R.raw.livy_01_02_lat)
                 .englishLocation(R.raw.livy_01_02_eng)
                 .workType(WorkInfo.WorkType.PROSE)
+                .image(R.drawable.work_ab_urbe_condita)
                 .build());
 
         return workInfos;

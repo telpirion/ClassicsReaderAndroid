@@ -1,7 +1,10 @@
 package com.ericmschmidt.classicsreader.ui.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,20 +28,17 @@ import com.ericmschmidt.classicsreader.ui.layouts.LibraryRecyclerViewAdapter;
  *
  *  Layout files:
  *  - res/layout/fragment_library.xml
- *  - res/layout/cardviewitem_libraryrecyclerview.xml
  *
  * @author Eric Schmidt
  * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
-public class LibraryFragment extends Fragment
-        implements LibraryRecyclerViewAdapter.Listener {
+public class LibraryFragment extends Fragment {
 
     private static final String TAG = "LibraryFragment";
 
     private boolean isTranslation;
-    private WorkInfo[] works;
 
     /**
      * Required empty public constructor
@@ -69,30 +69,26 @@ public class LibraryFragment extends Fragment
             Manifest manifest = MyApplication.getManifest();
 
             Library library = new Library(manifest.getCollection());
-            Log.i("LibraryFragment", "library length = " + library.getWorks().length);
-            works = library.getWorks();
+            Log.i(TAG, "library length = " + library.getWorks().length);
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String displayType = sharedPreferences.getString(SettingsFragment.DISPLAY_TYPE,
+                    SettingsFragment.DISPLAY_TYPE_DEFAULT);
+
+            Log.i(TAG, "displayType = " + displayType);
 
             ComposeView composeView = (ComposeView) findViewById(R.id.compose_view);
-            ComposeViewAdapter.setContentToLazyGrid(composeView, library,
-                    this.isTranslation, (MainActivity) this.getActivity());
+            if (displayType.equals("Grid")) {
+                ComposeViewAdapter.setContentToLazyGrid(composeView, library,
+                        this.isTranslation, (MainActivity) this.getActivity());
+            } else {
+                ComposeViewAdapter.setContentToLazyList(composeView, library,
+                        this.isTranslation, (MainActivity) this.getActivity());
+            }
 
         } catch (Exception ex) {
             MyApplication.logError(this.getClass(), ex.getMessage());
         }
-    }
-
-    @Override
-    /**
-     * Called when a work in the RecyclerView is clicked.
-     * @deprecated
-     */
-    public void onLibraryRecyclerViewClick(int position) {
-        WorkInfo clickedWork = works[position];
-        NavController navController = NavHostFragment.findNavController(this);
-        LibraryFragmentDirections.ActionLibraryFragmentToReadingDest action =
-                LibraryFragmentDirections.actionLibraryFragmentToReadingDest(clickedWork.getId());
-        action.setIsTranslation(isTranslation);
-        navController.navigate(action);
     }
 
     private View findViewById(int id) {

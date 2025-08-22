@@ -1,7 +1,5 @@
 package com.ericmschmidt.greekreader.datamodel;
 
-import android.util.Log;
-
 import com.ericmschmidt.greekreader.R;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
@@ -33,6 +31,7 @@ public class GreekReaderManifest extends Manifest {
                         .location(R.raw.gk_aristot_pol_gk)
                         .englishLocation(R.raw.aristot_pol_eng)
                         .workType(WorkInfo.WorkType.PROSE)
+                        .image(R.drawable.work_politics)
                         .build());
 
         workInfos.add(new WorkInfo.Builder("HomerIliad")
@@ -44,6 +43,7 @@ public class GreekReaderManifest extends Manifest {
                         .englishLocation(R.raw.hom_il_eng)
                         .workType(WorkInfo.WorkType.POEM)
                         .offset(1, 5)
+                        .image(R.drawable.work_iliad)
                         .build());
 
         workInfos.add(new WorkInfo.Builder("HomerOdyssey")
@@ -55,6 +55,7 @@ public class GreekReaderManifest extends Manifest {
                         .englishLocation(R.raw.hom_od_eng)
                         .workType(WorkInfo.WorkType.POEM)
                         .offset(1, 5)
+                        .image(R.drawable.work_odyssey)
                         .build());
 
         workInfos.add(new WorkInfo.Builder("XenophonAn")
@@ -65,6 +66,7 @@ public class GreekReaderManifest extends Manifest {
                         .location(R.raw.gk_xen_anab_gk)
                         .englishLocation(R.raw.xen_anab_eng)
                         .workType(WorkInfo.WorkType.PROSE)
+                        .image(R.drawable.work_anabasis)
                         .build());
 
         workInfos.add(new WorkInfo.Builder("Lysias")
@@ -75,6 +77,7 @@ public class GreekReaderManifest extends Manifest {
                         .location(R.raw.gk_lys_gk)
                         .englishLocation(R.raw.lys_eng)
                         .workType(WorkInfo.WorkType.PROSE)
+                        .image(R.drawable.work_speeches)
                         .build());
 
         /*

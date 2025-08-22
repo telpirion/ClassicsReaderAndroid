@@ -23,5 +23,13 @@
         android:summary="@string/pref_show_page_controls_summary"
         android:defaultValue="true"
         app:iconSpaceReserved="false"/>
+    <ListPreference
+        android:key="displayType"
+        android:title="@string/action_display"
+        android:summary="@string/action_display_description"
+        android:defaultValue="@string/action_display_row"
+        android:entryValues="@array/display_array"
+        android:entries="@array/display_array"
+        app:iconSpaceReserved="false"/>
 
 </PreferenceScreen>

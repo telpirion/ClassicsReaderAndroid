@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity
         SearchView searchView = (SearchView) menu.findItem(R.id.action_dictionary).getActionView();
 
         String queryHint = getString(R.string.dictionary_query_hint_short);
+        assert searchView != null;
         searchView.setQueryHint(queryHint);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_recent) {
             // Remember to store recently read as workId;isTranslation.
             String workId = getRecentlyRead();
-            if (!workId.equals("")) {
+            if (!workId.isEmpty()) {
                 String[] workIdData = workId.split(";");
                 boolean isTranslation = Boolean.getBoolean(workIdData[1]);
 
