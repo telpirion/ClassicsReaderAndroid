@@ -59,10 +59,15 @@ class WorkInfoPreviewProvider : PreviewParameterProvider<WorkInfo> {
 }
 
 @Composable
-fun PrettyCard(workInfo: WorkInfo) {
+fun PrettyCard(
+    workInfo: WorkInfo,
+    modifier: Modifier = Modifier,
+    onCardClick: (WorkInfo) -> Unit = {}
+) {
     Card(
         modifier = Modifier.size(150.dp, 300.dp)
-            .padding(4.dp),
+            .padding(4.dp)
+            .clickable(onClick = { onCardClick(workInfo) }),
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent,
         ),

@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.ericmschmidt.classicsreader.datamodel.Library
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo
 
 
 @Preview(showBackground = true)
@@ -24,6 +25,7 @@ fun PrettyCardLazyGridPreview(
 fun PrettyCardLazyVerticalGrid(
     library: Library,
     modifier: Modifier = Modifier,
+    onCardClick : (WorkInfo) -> Unit = {}
 ) {
     val works = library.works
 
@@ -36,7 +38,7 @@ fun PrettyCardLazyVerticalGrid(
             items = works,
             key = { work -> work.id }
         ) {
-            PrettyCard(workInfo = it)
+            PrettyCard(workInfo = it, onCardClick = onCardClick)
         }
     }
 }

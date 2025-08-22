@@ -73,7 +73,7 @@ public class LibraryFragment extends Fragment
             works = library.getWorks();
 
             ComposeView composeView = (ComposeView) findViewById(R.id.compose_view);
-            ComposeViewAdapter.setContentToLazyList(composeView, library,
+            ComposeViewAdapter.setContentToLazyGrid(composeView, library,
                     this.isTranslation, (MainActivity) this.getActivity());
 
         } catch (Exception ex) {
@@ -82,6 +82,10 @@ public class LibraryFragment extends Fragment
     }
 
     @Override
+    /**
+     * Called when a work in the RecyclerView is clicked.
+     * @deprecated
+     */
     public void onLibraryRecyclerViewClick(int position) {
         WorkInfo clickedWork = works[position];
         NavController navController = NavHostFragment.findNavController(this);
