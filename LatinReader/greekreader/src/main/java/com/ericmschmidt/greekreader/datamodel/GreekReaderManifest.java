@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /** Contains the resource manifest for the Greek Reader app.
  *
  * @author Eric Schmidt
- * @author https://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 0.1
  */
 public class GreekReaderManifest extends Manifest {
