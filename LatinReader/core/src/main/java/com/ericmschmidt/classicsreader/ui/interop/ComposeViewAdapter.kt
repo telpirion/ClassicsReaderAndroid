@@ -15,7 +15,7 @@ import com.ericmschmidt.classicsreader.ui.fragments.LibraryFragmentDirections
  */
 fun setContentToLazyList(composeView: ComposeView, library: Library, isTranslation: Boolean, activity: MainActivity) {
     composeView.setContent {
-        PrettyCardLazyList(library = library, onRowClick = { selectedWork ->
+        PrettyCardLazyList(library = library, isTranslation = isTranslation, onRowClick = { selectedWork ->
             navigateToReadingFragment(activity, selectedWork.id, isTranslation)
         })
     }
@@ -26,7 +26,7 @@ fun setContentToLazyList(composeView: ComposeView, library: Library, isTranslati
  */
 fun setContentToLazyGrid(composeView: ComposeView, library: Library, isTranslation: Boolean, activity: MainActivity) {
     composeView.setContent {
-        PrettyCardLazyVerticalGrid(library = library, onCardClick = { selectedWork ->
+        PrettyCardLazyVerticalGrid(library = library, isTranslation = isTranslation, onCardClick = { selectedWork ->
             navigateToReadingFragment(activity, selectedWork.id, isTranslation)
         })
     }

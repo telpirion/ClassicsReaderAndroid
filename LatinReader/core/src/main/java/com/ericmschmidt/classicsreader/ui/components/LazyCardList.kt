@@ -60,6 +60,7 @@ fun PrettyCardLazyListPreview(
 fun PrettyCardLazyList(
     library: Library,
     modifier: Modifier = Modifier,
+    isTranslation: Boolean = false,
     onRowClick: (WorkInfo) -> Unit = {},
 ) {
     val works = library.getWorks()
@@ -71,7 +72,7 @@ fun PrettyCardLazyList(
             items = works,
             key = { work -> work.id },
         ) {
-            PrettyRow(workInfo = it, onClick = onRowClick)
+            PrettyRow(workInfo = it, onClick = onRowClick, isTranslation = isTranslation)
         }
     }
 }

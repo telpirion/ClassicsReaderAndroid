@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /** Contains the resource manifest for the Latin Reader app.
  *
  * @author Eric Schmidt
- * @author https://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.1
  */
@@ -26,7 +26,7 @@ public class LatinReaderManifest extends Manifest {
      */
     @Override
     public ArrayList<WorkInfo> getCollection() {
-        ArrayList<WorkInfo> workInfos = new ArrayList<WorkInfo>();
+        ArrayList<WorkInfo> workInfos = new ArrayList<>();
 
         workInfos.add(new WorkInfo.Builder("CaesarBG")
                 .author("C. Julius Caesar")

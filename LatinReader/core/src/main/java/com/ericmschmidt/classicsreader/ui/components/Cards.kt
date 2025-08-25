@@ -62,10 +62,11 @@ class WorkInfoPreviewProvider : PreviewParameterProvider<WorkInfo> {
 fun PrettyCard(
     workInfo: WorkInfo,
     modifier: Modifier = Modifier,
+    isTranslation: Boolean = false,
     onCardClick: (WorkInfo) -> Unit = {}
 ) {
     Card(
-        modifier = Modifier.size(150.dp, 300.dp)
+        modifier = modifier.size(150.dp, 300.dp)
             .padding(4.dp)
             .clickable(onClick = { onCardClick(workInfo) }),
         colors = CardDefaults.cardColors(
@@ -87,14 +88,12 @@ fun PrettyCard(
             modifier = Modifier.padding(8.dp)
         ) {
             Text(
-                //fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                text = workInfo.title,
+                text = if (!isTranslation) workInfo.title else workInfo.englishTitle,
                 textAlign = TextAlign.Left
             )
             Text(
-                //fontSize = 16.sp,
-                text = workInfo.author,
+                text = if (!isTranslation) workInfo.author else workInfo.englishAuthor,
                 textAlign = TextAlign.Left
             )
         }
@@ -104,10 +103,12 @@ fun PrettyCard(
 @Composable
 fun PrettyRow(
     workInfo: WorkInfo,
+    modifier: Modifier = Modifier,
+    isTranslation: Boolean = false,
     onClick: (WorkInfo) -> Unit = {}
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
             .padding(4.dp)
             .clickable { onClick(workInfo) },
         colors = CardDefaults.cardColors(
@@ -131,12 +132,12 @@ fun PrettyRow(
                 Text(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    text = workInfo.title,
+                    text = if (!isTranslation) workInfo.title else workInfo.englishTitle,
                     textAlign = TextAlign.Left
                 )
                 Text(
                     fontSize = 16.sp,
-                    text = workInfo.author,
+                    text = if(!isTranslation) workInfo.author else workInfo.englishAuthor,
                     textAlign = TextAlign.Left
                 )
             }

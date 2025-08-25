@@ -1,6 +1,7 @@
 package com.ericmschmidt.classicsreader.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -25,12 +26,14 @@ fun PrettyCardLazyGridPreview(
 fun PrettyCardLazyVerticalGrid(
     library: Library,
     modifier: Modifier = Modifier,
+    isTranslation: Boolean = false,
     onCardClick : (WorkInfo) -> Unit = {}
 ) {
     val works = library.works
 
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 100.dp),
+        modifier = modifier.padding(8.dp),
+        columns = GridCells.Adaptive(minSize = 150.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -38,7 +41,7 @@ fun PrettyCardLazyVerticalGrid(
             items = works,
             key = { work -> work.id }
         ) {
-            PrettyCard(workInfo = it, onCardClick = onCardClick)
+            PrettyCard(workInfo = it, onCardClick = onCardClick, isTranslation = isTranslation)
         }
     }
 }
