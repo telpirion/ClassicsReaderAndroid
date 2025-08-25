@@ -4,23 +4,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.compose.ui.platform.ComposeView;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.activities.MainActivity;
 import com.ericmschmidt.classicsreader.datamodel.Library;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
 import com.ericmschmidt.classicsreader.ui.interop.ComposeViewAdapter;
-import com.ericmschmidt.classicsreader.ui.layouts.LibraryRecyclerViewAdapter;
 
 /** Displays works (books) in a RecyclerView.
  *
