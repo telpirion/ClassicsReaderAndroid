@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Greek Reader</string>
+    <string name="app_description">
+        The Greek Reader provides a selection of famous classical texts in both
+        Ancient Greek and English. This app includes an integrated dictionary and vocabulary
+        builder functions. The app is available for use without any fees or ads.
+      </string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
