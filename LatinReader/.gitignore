@@ -11,3 +11,4 @@ gradlew.bat
 latinreader/release/
 /.idea
 *.hprof
+.kotlin
