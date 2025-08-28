@@ -14,7 +14,7 @@ import java.lang.reflect.Constructor;
 /** A subclass of the Application class to help get the app context.
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */

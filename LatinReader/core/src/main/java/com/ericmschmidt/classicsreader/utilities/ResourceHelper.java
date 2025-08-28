@@ -10,7 +10,7 @@ import java.io.InputStream;
 /** A static class to help parse XML resources.
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
@@ -24,8 +24,7 @@ public class ResourceHelper {
     public static InputStream getResourceStream(int resourceID) {
         Context context = MyApplication.getContext();
         Resources resources = context.getResources();
-        InputStream inputStream = resources.openRawResource(resourceID);
 
-        return inputStream;
+        return resources.openRawResource(resourceID);
     }
 }

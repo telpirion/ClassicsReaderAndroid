@@ -18,7 +18,7 @@ import java.util.Random;
 public class Dictionary  {
 
     private ArrayList<String>  _entryHeaders;
-    private WorkInfo dictionaryInfo;
+    private final WorkInfo dictionaryInfo;
     private ITextConverter _converter;
 
     /**

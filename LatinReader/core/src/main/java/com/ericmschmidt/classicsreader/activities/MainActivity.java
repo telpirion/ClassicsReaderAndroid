@@ -28,6 +28,8 @@ import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment;
 import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragmentArgs;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 /** Base activity for this app.
  * @author Eric Schmidt
  * @author http://telpirion.com
@@ -182,8 +184,8 @@ public class MainActivity extends AppCompatActivity
 
     public NavController getNavController() {
         FragmentManager supportFragmentManager = this.getSupportFragmentManager();
-        NavHostFragment navHostFragment = (NavHostFragment)supportFragmentManager.findFragmentById(
-                R.id.nav_host_fragment);
+        NavHostFragment navHostFragment = (NavHostFragment)supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
         return navHostFragment.getNavController();
     }
@@ -198,7 +200,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager supportFragmentManager = this.getSupportFragmentManager();
         NavHostFragment navHostFragment =
                 (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
+        NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         NavOptions defaultNavOptions = new NavOptions.Builder()
                 .build();

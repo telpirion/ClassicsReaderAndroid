@@ -18,10 +18,12 @@ import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.datamodel.Dictionary;
 import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 
+import java.util.Objects;
+
 /** Displays the dictionary page.
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="http://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
@@ -63,9 +65,11 @@ public class DictionaryFragment extends Fragment {
         super.onActivityCreated(onSavedInstanceState);
 
         // Hide progress bar.
-        getActivity().findViewById(R.id.dictionary_progress).setVisibility(View.INVISIBLE);
+        requireActivity().findViewById(R.id.dictionary_progress)
+                .setVisibility(View.INVISIBLE);
 
-        EditText searchQuery = (EditText)getActivity().findViewById(R.id.search_query);
+        EditText searchQuery = (EditText) requireActivity()
+                .findViewById(R.id.search_query);
 
         // Convert text as user types.
         if (MyApplication.isNonRomanChar()) {
@@ -78,7 +82,6 @@ public class DictionaryFragment extends Fragment {
         searchQuery.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
                 String searchQueryText = v.getText().toString();
                 submitSearchQuery(searchQueryText);
                 return false;
@@ -86,7 +89,7 @@ public class DictionaryFragment extends Fragment {
         });
 
         if (query != null) {
-            searchQuery.setText(query);
+            //searchQuery.setText(query);
             submitSearchQuery(query);
         }
     }
@@ -95,7 +98,8 @@ public class DictionaryFragment extends Fragment {
     private void submitSearchQuery(String query) {
 
         // Show the indefinite progress indicator.
-        ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.dictionary_progress);
+        ProgressBar progress = (ProgressBar) requireActivity()
+                .findViewById(R.id.dictionary_progress);
         progress.setVisibility(View.VISIBLE);
 
         // To improve fragment UI responsiveness, submit query
@@ -107,12 +111,12 @@ public class DictionaryFragment extends Fragment {
     private class SearchDictionaryTask extends AsyncTask<String, Integer, Long> {
 
         protected String queryResults = "";
-        private Dictionary dictionary;
 
         protected Long doInBackground(String... query) {
 
             String transcribedQuery = query[0];
 
+            Dictionary dictionary;
             if (MyApplication.isNonRomanChar()) {
                 transcribedQuery = converter.convertTargetToSourceCharacters(transcribedQuery);
                 dictionary = new Dictionary(converter);
@@ -127,14 +131,16 @@ public class DictionaryFragment extends Fragment {
                 queryResults = resources.getString(R.string.dictionary_query_no_results);
             }
 
-            return  new Long(1);
+            return 1L;
         }
 
         protected void onPostExecute(Long result){
-            TextView resultsField = (TextView)getActivity().findViewById(R.id.dictionary_result);
+            TextView resultsField = (TextView) requireActivity()
+                    .findViewById(R.id.dictionary_result);
             resultsField.setText(queryResults);
 
-            ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.dictionary_progress);
+            ProgressBar progress = (ProgressBar) requireActivity()
+                    .findViewById(R.id.dictionary_progress);
             progress.setVisibility(View.INVISIBLE);
         }
     }
