@@ -32,15 +32,17 @@ import kotlinx.parcelize.Parcelize
 fun NavigableListDetailPaneScaffoldFullPreview(
     @PreviewParameter(LibraryPreviewProvider::class) library: Library
 )  {
-    NavigableListDetailPaneScaffoldFull(library = library)
+    NavigableListDetailPaneScaffoldFull()
 }
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun NavigableListDetailPaneScaffoldFull(
-    library: Library,
     modifier: Modifier = Modifier,
 ) {
+    // TODO(telpirion): replace PseudoManifest with ViewModel
+    val pseudoManifest = PseudoManifest()
+    val library = Library(pseudoManifest.collection)
     val scaffoldNavigator = rememberListDetailPaneScaffoldNavigator<SelectedItem>()
     val scope = rememberCoroutineScope()
     val works = library.getWorks()
