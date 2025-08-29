@@ -24,38 +24,16 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ericmschmidt.classicsreader.R
 import com.ericmschmidt.classicsreader.data.WorkInfo
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
+import kotlin.collections.asSequence
 
 // Use this class for previewing WorkInfo & Card objects
 class WorkInfoPreviewProvider : PreviewParameterProvider<WorkInfo> {
-    override val values = sequenceOf(
-        WorkInfo.Builder("test")
-            .author("testAuthor")
-            .title("testTitle")
-            .englishTitle("testTitle")
-            .englishAuthor("testAuthor")
-            .location(1)
-            .englishLocation(1)
-            .image(R.drawable.work_default_1)
-            .build(),
-        WorkInfo.Builder("test2")
-            .author("Very very super long never-ending author name")
-            .title("Very very long title that could go on forever")
-            .englishTitle("testTitle")
-            .englishAuthor("testAuthor")
-            .image(R.drawable.work_default_2)
-            .location(1)
-            .build(),
-        WorkInfo.Builder("test3")
-            .author("Ξενοφῶν")
-            .title("Ἀνάβασις")
-            .englishTitle("Anabasis")
-            .englishAuthor("Xenophon")
-            .image(R.drawable.work_default_3)
-            .location(1)
-            .build()
-    )
+    val pseudoManifest = PseudoManifest()
+
+    override val values: Sequence<WorkInfo> =
+        pseudoManifest.getCollection()?.asSequence() ?: emptySequence()
 }
 
 @Composable

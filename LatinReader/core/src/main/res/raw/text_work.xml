@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<work>
+<header type="text" status="new">
+<fileDesc>
+<titleStmt>
+<title type="work" n="test">Test work</title>
+<title type="sub">Machine readable text</title>
+<author n="test.">Test author</author>
+</titleStmt>
+
+<sourceDesc>
+<biblStruct>
+<monogr>
+<author>test</author>
+<title>Test Work</title>
+<editor role="editor">Test Editor</editor>
+<imprint>
+<pubPlace>test place</pubPlace>
+<publisher>test publisher</publisher>
+<date>2025</date>
+</imprint>
+</monogr>
+<series>
+<title>test series name</title>
+</series>
+</biblStruct>
+</sourceDesc>
+</fileDesc>
+</header>
+<text>
+<body>
+<div1 type="Book" n="1">
+<head>Test book head</head>
+<p>
+    <milestone n="1" unit="chapter"/><milestone n="1" unit="section"/>This is some text in between milestones.<milestone n="2" unit="section"/>More text in between milestones
+</p>
+<p>
+    <milestone n="1" unit="chapter"/><milestone n="1" unit="section"/>This is some text in between milestones.<milestone n="2" unit="section"/>More text in between milestones
+</p>
+</div1>
+    <div1 type="Book" n="2">
+        <head>Test book head 2</head>
+        <p>
+            <milestone n="1" unit="chapter"/><milestone n="1" unit="section"/>This is some text in between milestones.<milestone n="2" unit="section"/>More text in between milestones
+        </p>
+        <p>
+            <milestone n="1" unit="chapter"/><milestone n="1" unit="section"/>This is some text in between milestones.<milestone n="2" unit="section"/>More text in between milestones
+        </p>
+    </div1>
+</body></text></work>
