@@ -32,7 +32,7 @@ import java.util.Objects;
 
 /** Base activity for this app.
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */

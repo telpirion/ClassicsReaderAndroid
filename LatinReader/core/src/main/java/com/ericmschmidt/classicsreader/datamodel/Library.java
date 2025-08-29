@@ -20,6 +20,13 @@ public class Library {
     }
 
     /**
+     * Creates an instance of the Library class.
+     */
+    public Library() {
+        this._workInfos = new ArrayList<>();
+    }
+
+    /**
      * Gets the WorkInfo for the specified work.
      * @param id the ID of the work to get.
      * @return WorkInfo object.
