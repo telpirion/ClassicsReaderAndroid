@@ -1,21 +1,25 @@
 package com.telpirion.compose.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -27,20 +31,16 @@ import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -49,21 +49,44 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.telpirion.compose.R
+import com.ericmschmidt.classicsreader.R as CoreResources
 import kotlinx.coroutines.launch
 
 /**
  * Defines the primary navigation destinations in the app.
  */
 private sealed class Screen(val route: String, val label: Int, val icon: ImageVector) {
-    object Library : Screen("library", R.string.screen_library, Icons.Default.Book)
-    object Recent : Screen("recent", R.string.screen_recent, Icons.Default.Bookmark)
-    object Settings : Screen("settings", R.string.screen_settings, Icons.Default.Settings)
+    object Library : Screen("library",
+        CoreResources.string.nav_drawer_library, Icons.Default.Book)
+    object Recent : Screen("recent",
+        CoreResources.string.nav_drawer_recent, Icons.Default.Bookmark)
+    object Translation : Screen("translation",
+        CoreResources.string.nav_drawer_translations, Icons.Default.Description)
+    object Vocab : Screen("vocab",
+        CoreResources.string.nav_drawer_vocab, Icons.Default.School)
+    object Settings : Screen("settings",
+        CoreResources.string.action_settings, Icons.Default.Settings)
+    object Help : Screen("help",
+        CoreResources.string.nav_drawer_help, Icons.AutoMirrored.Filled.Help
+    )
+    object Info : Screen("info",
+        CoreResources.string.nav_drawer_info, Icons.Default.Info)
 }
+
+private val bottomNavigationItems = listOf(
+    Screen.Library,
+    Screen.Recent,
+    Screen.Settings
+)
 
 private val navigationItems = listOf(
     Screen.Library,
     Screen.Recent,
-    Screen.Settings
+    Screen.Translation,
+    Screen.Vocab,
+    Screen.Help,
+    Screen.Info,
+    Screen.Settings,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -109,17 +132,8 @@ fun ReaderApp(
     ) {
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = { Text(stringResource(id = R.string.app_name)) },
-                    navigationIcon = {
-                        // Show the hamburger menu to open the drawer
-                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(
-                                imageVector = Icons.Default.Menu,
-                                contentDescription = stringResource(R.string.cd_open_navigation_drawer)
-                            )
-                        }
-                    }
+                ReaderTopAppBar(
+                    onMenuClick = { scope.launch { drawerState.open() } }
                 )
             },
             bottomBar = {
@@ -180,7 +194,7 @@ fun ReaderApp(
                             modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text("Recents Screen")
+                            Text("Recent Screen")
                         }
                     }
                     composable(Screen.Settings.route) {
@@ -221,19 +235,20 @@ private fun NavDrawerContent(
 
 @Composable
 private fun NavigationHeader(modifier: Modifier = Modifier) {
-    var searchText by remember { mutableStateOf("") }
     Column(modifier = modifier) {
-        Text(
-            text = stringResource(id = R.string.app_name),
-            style = MaterialTheme.typography.titleMedium
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        TextField(
-            value = searchText,
-            onValueChange = { searchText = it },
-            label = { Text(stringResource(R.string.search_label)) },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) }
-        )
+        // A Row to neatly arrange the logo and app name side-by-side.
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = null,
+                modifier = Modifier.size(40.dp)
+            )
+            Spacer(Modifier.width(16.dp))
+            Text(
+                text = stringResource(id = R.string.app_name),
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
     }
 }
 
@@ -243,7 +258,7 @@ private fun ReaderBottomNavigationBar(
     onNavigate: (String) -> Unit
 ) {
     NavigationBar {
-        navigationItems.forEach { screen ->
+        bottomNavigationItems.forEach { screen ->
             NavigationBarItem(
                 icon = { Icon(screen.icon, contentDescription = null) },
                 label = { Text(stringResource(screen.label)) },
