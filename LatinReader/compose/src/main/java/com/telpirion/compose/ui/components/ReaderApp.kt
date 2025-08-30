@@ -9,14 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Help
-import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material.icons.filled.Description
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.School
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -39,39 +31,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.telpirion.compose.R
-import com.ericmschmidt.classicsreader.R as CoreResources
-import kotlinx.coroutines.launch
 
-/**
- * Defines the primary navigation destinations in the app.
- */
-private sealed class Screen(val route: String, val label: Int, val icon: ImageVector) {
-    object Library : Screen("library",
-        CoreResources.string.nav_drawer_library, Icons.Default.Book)
-    object Recent : Screen("recent",
-        CoreResources.string.nav_drawer_recent, Icons.Default.Bookmark)
-    object Translation : Screen("translation",
-        CoreResources.string.nav_drawer_translations, Icons.Default.Description)
-    object Vocab : Screen("vocab",
-        CoreResources.string.nav_drawer_vocab, Icons.Default.School)
-    object Settings : Screen("settings",
-        CoreResources.string.action_settings, Icons.Default.Settings)
-    object Help : Screen("help",
-        CoreResources.string.nav_drawer_help, Icons.AutoMirrored.Filled.Help
-    )
-    object Info : Screen("info",
-        CoreResources.string.nav_drawer_info, Icons.Default.Info)
-}
+import kotlinx.coroutines.launch
 
 private val bottomNavigationItems = listOf(
     Screen.Library,
@@ -107,22 +75,16 @@ fun ReaderApp(
 
     ModalNavigationDrawer(
         drawerState = drawerState,
-        gesturesEnabled = isCompact, // Only allow gesture opening on compact screens
+        gesturesEnabled = isCompact,
         drawerContent = {
             NavDrawerContent(
                 currentRoute = currentRoute,
                 onNavigate = { route ->
                     navController.navigate(route) {
-                        // Pop up to the start destination of the graph to
-                        // avoid building up a large stack of destinations
-                        // on the back stack as users select items
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
-                        // Avoid multiple copies of the same destination when
-                        // re-selecting the same item
                         launchSingleTop = true
-                        // Restore state when re-selecting a previously selected item
                         restoreState = true
                     }
                     scope.launch { drawerState.close() }
@@ -159,7 +121,6 @@ fun ReaderApp(
                     .fillMaxSize()
                     .padding(innerPadding)
             ) {
-                // Show navigation rail on non-compact screens
                 if (!isCompact) {
                     ReaderNavigationRail(
                         currentRoute = currentRoute,
@@ -174,39 +135,10 @@ fun ReaderApp(
                         }
                     )
                 }
-                NavHost(
+                ReaderAppNavHost(
                     navController = navController,
-                    startDestination = Screen.Library.route,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    composable(Screen.Library.route) {
-                        // Your Library screen content would go here
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            NavigableListDetailPaneScaffoldFull()
-                        }
-                    }
-                    composable(Screen.Recent.route) {
-                        // Your Favorites screen content would go here
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text("Recent Screen")
-                        }
-                    }
-                    composable(Screen.Settings.route) {
-                        // Your Settings screen content would go here
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text("Settings Screen")
-                        }
-                    }
-                }
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
     }
@@ -262,8 +194,24 @@ private fun ReaderBottomNavigationBar(
             NavigationBarItem(
                 icon = { Icon(screen.icon, contentDescription = null) },
                 label = { Text(stringResource(screen.label)) },
-                selected = currentRoute == screen.route,
-                onClick = { onNavigate(screen.route) }
+                selected = currentRoute?.startsWith(screen.route.substringBefore("/")) ?: false,
+                onClick = {
+                    var route = "library/someid"
+                    when (screen) {
+                        Screen.Recent -> {
+                            val recentWorkId = "recent_bottom_navigation_bar"
+                            route = (screen as Screen.Recent).createRoute(recentWorkId)
+                        }
+                        Screen.Settings -> {
+                            val settingsSource = "settings_bottom_navigation_bar"
+                            route = (screen as Screen.Settings).createRoute(settingsSource)
+                        }
+                        else -> {
+                            route = screen.route
+                        }
+                    }
+                    onNavigate(route)
+                }
             )
         }
     }
