@@ -1,6 +1,5 @@
 package com.telpirion.compose.ui.components
 
-import ReadingScreen
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.Book
@@ -9,8 +8,12 @@ import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
@@ -80,6 +83,10 @@ fun ReaderAppNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val textSize by rememberSaveable { mutableFloatStateOf(20f) }
+    val poemLines by rememberSaveable { mutableIntStateOf(5) }
+    val showPageControls by rememberSaveable { mutableStateOf(true) }
+
     NavHost(
         navController = navController,
         startDestination = Screen.Library.route,
@@ -102,32 +109,57 @@ fun ReaderAppNavHost(
             arguments = listOf(navArgument("workId") { type = NavType.StringType })
         ) { backStackEntry ->
             val workId = backStackEntry.arguments?.getString("workId")
-            if (workId != null) {
-                ReadingScreen(workId = workId)
-            } else {
-                Text("Error: Work ID not found.")
-            }
+
+            ReadingScreen(
+                workId = workId,
+                isTranslation = false,
+                navController = navController,
+                textSizeSp = textSize,
+                poemLines = poemLines,
+                showPageControls = showPageControls
+            )
         }
 
         composable (
             Screen.Vocab.route
         ) { backStackEntry ->
             val workId = "vocab"
-            ReadingScreen(workId = workId)
+            ReadingScreen(
+                workId = workId,
+                isTranslation = false,
+                navController = navController,
+                textSizeSp = textSize,
+                poemLines = poemLines,
+                showPageControls = showPageControls
+            )
         }
 
         composable (
             Screen.Help.route
         ) { backStackEntry ->
             val workId = "help"
-            ReadingScreen(workId = workId)
+            ReadingScreen(
+                workId = workId,
+                isTranslation = false,
+                navController = navController,
+                textSizeSp = textSize,
+                poemLines = poemLines,
+                showPageControls = showPageControls
+            )
         }
 
         composable (
             Screen.Info.route
         ) { backStackEntry ->
             val workId = "about"
-            ReadingScreen(workId = workId)
+            ReadingScreen(
+                workId = workId,
+                isTranslation = false,
+                navController = navController,
+                textSizeSp = textSize,
+                poemLines = poemLines,
+                showPageControls = showPageControls
+            )
         }
 
         composable(
