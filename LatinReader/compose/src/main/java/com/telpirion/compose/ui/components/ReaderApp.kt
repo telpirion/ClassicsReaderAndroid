@@ -196,14 +196,17 @@ private fun ReaderBottomNavigationBar(
                 label = { Text(stringResource(screen.label)) },
                 selected = currentRoute?.startsWith(screen.route.substringBefore("/")) ?: false,
                 onClick = {
-                    var route = "library/someid"
+                    var route = "library/"
                     when (screen) {
                         Screen.Recent -> {
                             val recentWorkId = "recent_bottom_navigation_bar"
                             route = (screen as Screen.Recent).createRoute(recentWorkId)
                         }
-                        else -> {
-                            route = screen.route
+                        Screen.Library -> {
+                            route = (screen as Screen.Library).createRoute()
+                        }
+                        Screen.Settings -> {
+                            route = (screen as Screen.Settings).createRoute()
                         }
                     }
                     onNavigate(route)

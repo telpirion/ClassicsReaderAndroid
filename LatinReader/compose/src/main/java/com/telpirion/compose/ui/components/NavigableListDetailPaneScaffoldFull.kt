@@ -1,12 +1,18 @@
 package com.telpirion.compose.ui.components
 
 import android.os.Parcelable
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
@@ -15,12 +21,15 @@ import androidx.compose.material3.adaptive.navigation.NavigableListDetailPaneSca
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
 import com.ericmschmidt.classicsreader.ui.components.LibraryPreviewProvider
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyList
@@ -32,13 +41,15 @@ import kotlinx.parcelize.Parcelize
 fun NavigableListDetailPaneScaffoldFullPreview(
     @PreviewParameter(LibraryPreviewProvider::class) library: Library
 )  {
-    NavigableListDetailPaneScaffoldFull()
+    // The preview doesn't have a NavController, so the button won't navigate.
+    NavigableListDetailPaneScaffoldFull(navController = null)
 }
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun NavigableListDetailPaneScaffoldFull(
     modifier: Modifier = Modifier,
+    navController: NavController? = null
 ) {
     // TODO(telpirion): replace PseudoManifest with ViewModel
     val pseudoManifest = PseudoManifest()
@@ -56,7 +67,7 @@ fun NavigableListDetailPaneScaffoldFull(
                     modifier = modifier,
                     onRowClick = { workInfo ->
                         // Find the index of the clicked work to maintain compatibility
-                        // with MyItem(id: Int) and MyDetails.
+                        // with SelectedItem(id: Int).
                         val index = works.indexOf(workInfo)
                         if (index != -1) {
                             // Navigate to the detail pane with the passed item
@@ -73,36 +84,20 @@ fun NavigableListDetailPaneScaffoldFull(
         },
         detailPane = {
             AnimatedPane {
-                // Show the detail pane content if selected item is available
-                scaffoldNavigator.currentDestination?.contentKey?.let {
-                    DetailsPane(item = it)
+                // Show the detail pane content if an item is selected
+                scaffoldNavigator.currentDestination?.contentKey?.let { selectedItem ->
+                    DetailsPane(
+                        item = selectedItem,
+                        works = works,
+                        onReadClick = { workId ->
+                            // Use the NavController to navigate to the ReadingScreen
+                            navController?.navigate(Screen.Recent.createRoute(workId))
+                        }
+                    )
                 }
             }
         },
     )
-}
-
-@Composable
-fun DetailsPane(item: SelectedItem) {
-    val pseudoManifest = PseudoManifest()
-    val works = pseudoManifest.collection
-    val workInfo = works?.get(item.id)
-    Card {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "Details page for ${workInfo?.title}",
-                fontSize = 24.sp,
-            )
-            Spacer(Modifier.size(16.dp))
-            Text(
-                text = "TODO: Add great details here"
-            )
-        }
-    }
 }
 
 @Parcelize

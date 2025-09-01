@@ -28,7 +28,7 @@ import com.ericmschmidt.classicsreader.R as CoreResources
  */
 open class Screen(val route: String, val label: Int, val icon: ImageVector) {
     object Library : Screen(
-        "library",
+        "library/",
         CoreResources.string.nav_drawer_library,
         Icons.Default.Book
     ) {
@@ -49,28 +49,28 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
         fun createRoute() = "translation/"
     }
     object Vocab : Screen(
-        "vocab",
+        "vocab/",
         CoreResources.string.nav_drawer_vocab,
         Icons.Default.School
     ) {
         fun createRoute(source: String) = "vocab/$source"
     }
     object Settings : Screen(
-        "settings",
+        "settings/",
         CoreResources.string.action_settings,
         Icons.Default.Settings
     ) {
-        fun createRoute(source: String) = "settings/$source"
+        fun createRoute() = "settings/"
     }
     object Help : Screen(
-        "help",
+        "help/",
         CoreResources.string.nav_drawer_help,
         Icons.AutoMirrored.Filled.Help
     ) {
         fun createRoute(source: String) = "help/$source"
     }
     object Info : Screen(
-        "info",
+        "info/",
         CoreResources.string.nav_drawer_info,
         Icons.Default.Info
     ) {
@@ -95,13 +95,15 @@ fun ReaderAppNavHost(
         composable(
             Screen.Library.route,
         ) { backStackEntry ->
-            NavigableListDetailPaneScaffoldFull()
+            // Pass the NavController here
+            NavigableListDetailPaneScaffoldFull(navController = navController)
         }
 
         composable(
             Screen.Translation.route,
         ) { backStackEntry ->
-            NavigableListDetailPaneScaffoldFull()
+            // And here as well
+            NavigableListDetailPaneScaffoldFull(navController = navController)
         }
 
         composable(
