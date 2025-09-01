@@ -1,7 +1,7 @@
 package com.ericmschmidt.classicsreader.utilities;
 
 import com.ericmschmidt.classicsreader.MyApplication;
-import com.ericmschmidt.classicsreader.datamodel.Book;
+import com.ericmschmidt.classicsreader.data.Book;
 
 import java.io.IOException;
 import java.io.InputStream;

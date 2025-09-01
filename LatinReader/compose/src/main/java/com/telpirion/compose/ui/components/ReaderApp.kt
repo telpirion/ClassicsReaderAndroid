@@ -202,10 +202,6 @@ private fun ReaderBottomNavigationBar(
                             val recentWorkId = "recent_bottom_navigation_bar"
                             route = (screen as Screen.Recent).createRoute(recentWorkId)
                         }
-                        Screen.Settings -> {
-                            val settingsSource = "settings_bottom_navigation_bar"
-                            route = (screen as Screen.Settings).createRoute(settingsSource)
-                        }
                         else -> {
                             route = screen.route
                         }

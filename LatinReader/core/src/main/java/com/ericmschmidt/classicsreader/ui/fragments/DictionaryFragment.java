@@ -15,10 +15,8 @@ import androidx.fragment.app.Fragment;
 
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
-import com.ericmschmidt.classicsreader.datamodel.Dictionary;
+import com.ericmschmidt.classicsreader.data.Dictionary;
 import com.ericmschmidt.classicsreader.utilities.ITextConverter;
-
-import java.util.Objects;
 
 /** Displays the dictionary page.
  *

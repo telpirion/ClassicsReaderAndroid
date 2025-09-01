@@ -24,8 +24,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo
-import com.ericmschmidt.classicsreader.datamodel.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.data.WorkInfo
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
 
 // Use this class for previewing WorkInfo & Card objects
 class WorkInfoPreviewProvider : PreviewParameterProvider<WorkInfo> {

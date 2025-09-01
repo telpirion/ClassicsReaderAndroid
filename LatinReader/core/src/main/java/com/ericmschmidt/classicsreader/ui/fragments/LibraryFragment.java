@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.activities.MainActivity;
-import com.ericmschmidt.classicsreader.datamodel.Library;
-import com.ericmschmidt.classicsreader.datamodel.Manifest;
+import com.ericmschmidt.classicsreader.data.Library;
+import com.ericmschmidt.classicsreader.data.Manifest;
 import com.ericmschmidt.classicsreader.ui.interop.ComposeViewAdapter;
 
 /** Displays works (books) in a RecyclerView.

@@ -1,7 +1,7 @@
 package com.ericmschmidt.latinreader.datamodel;
 
-import com.ericmschmidt.classicsreader.datamodel.Book;
-import com.ericmschmidt.classicsreader.datamodel.Work;
+import com.ericmschmidt.classicsreader.data.Book;
+import com.ericmschmidt.classicsreader.data.Work;
 import com.ericmschmidt.classicsreader.utilities.ResourceHelper;
 import com.ericmschmidt.classicsreader.utilities.WorkXMLParser;
 

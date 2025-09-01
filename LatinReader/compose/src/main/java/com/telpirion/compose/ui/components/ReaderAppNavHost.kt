@@ -1,7 +1,6 @@
 package com.telpirion.compose.ui.components
 
 import ReadingScreen
-import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.Book
@@ -40,11 +39,11 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
         fun createRoute(workId: String) = "recent/$workId"
     }
     object Translation : Screen(
-        "translation/{isTranslation}",
+        "translation/",
         CoreResources.string.nav_drawer_translations,
         Icons.Default.Description
     ) {
-        fun createRoute(source: String, isTranslation: Boolean) = "translation/$source/$isTranslation"
+        fun createRoute() = "translation/"
     }
     object Vocab : Screen(
         "vocab",
@@ -93,6 +92,12 @@ fun ReaderAppNavHost(
         }
 
         composable(
+            Screen.Translation.route,
+        ) { backStackEntry ->
+            NavigableListDetailPaneScaffoldFull()
+        }
+
+        composable(
             route = Screen.Recent.route,
             arguments = listOf(navArgument("workId") { type = NavType.StringType })
         ) { backStackEntry ->
@@ -104,15 +109,31 @@ fun ReaderAppNavHost(
             }
         }
 
+        composable (
+            Screen.Vocab.route
+        ) { backStackEntry ->
+            val workId = "vocab"
+            ReadingScreen(workId = workId)
+        }
+
+        composable (
+            Screen.Help.route
+        ) { backStackEntry ->
+            val workId = "help"
+            ReadingScreen(workId = workId)
+        }
+
+        composable (
+            Screen.Info.route
+        ) { backStackEntry ->
+            val workId = "about"
+            ReadingScreen(workId = workId)
+        }
+
         composable(
             Screen.Settings.route,
         ) { backStackEntry ->
-            val sourceTarget = "sourceTarget"
-            if (sourceTarget != null) {
-                SettingsScreen(navigationTarget = sourceTarget)
-            } else {
-                Text("Error: Work ID not found.")
-            }
+            SettingsScreen()
         }
     }
 }

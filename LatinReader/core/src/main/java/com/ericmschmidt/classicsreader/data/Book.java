@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel;
+package com.ericmschmidt.classicsreader.data;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel;
-
-import android.util.Log;
+package com.ericmschmidt.classicsreader.data;
 
 import com.ericmschmidt.classicsreader.MyApplication;
 

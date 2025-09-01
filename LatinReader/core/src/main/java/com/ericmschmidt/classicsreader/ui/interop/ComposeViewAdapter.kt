@@ -5,7 +5,7 @@ package com.ericmschmidt.classicsreader.ui.interop
 import androidx.compose.ui.platform.ComposeView
 
 import com.ericmschmidt.classicsreader.activities.MainActivity
-import com.ericmschmidt.classicsreader.datamodel.Library
+import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyList
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyVerticalGrid
 import com.ericmschmidt.classicsreader.ui.fragments.LibraryFragmentDirections

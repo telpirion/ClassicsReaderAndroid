@@ -20,10 +20,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.ericmschmidt.classicsreader.MyApplication;
-import com.ericmschmidt.classicsreader.datamodel.Library;
-import com.ericmschmidt.classicsreader.datamodel.Manifest;
-import com.ericmschmidt.classicsreader.datamodel.ReadingViewModel;
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
+import com.ericmschmidt.classicsreader.data.Library;
+import com.ericmschmidt.classicsreader.data.Manifest;
+import com.ericmschmidt.classicsreader.data.ReadingViewModel;
+import com.ericmschmidt.classicsreader.data.WorkInfo;
 import com.ericmschmidt.classicsreader.R;
 
 /** Displays the text of a work (source or translation).

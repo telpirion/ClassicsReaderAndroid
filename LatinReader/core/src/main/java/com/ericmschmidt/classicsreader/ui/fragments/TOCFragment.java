@@ -14,10 +14,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.databinding.FragmentTocBinding;
 import com.ericmschmidt.classicsreader.MyApplication;
-import com.ericmschmidt.classicsreader.datamodel.Library;
-import com.ericmschmidt.classicsreader.datamodel.Manifest;
-import com.ericmschmidt.classicsreader.datamodel.TOCEntry;
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
+import com.ericmschmidt.classicsreader.data.Library;
+import com.ericmschmidt.classicsreader.data.Manifest;
+import com.ericmschmidt.classicsreader.data.TOCEntry;
+import com.ericmschmidt.classicsreader.data.WorkInfo;
 import com.ericmschmidt.classicsreader.ui.layouts.TOCListViewAdapter;
 
 /** Displays a work's table of contents.

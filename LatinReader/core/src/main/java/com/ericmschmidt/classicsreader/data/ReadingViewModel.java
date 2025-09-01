@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel;
+package com.ericmschmidt.classicsreader.data;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -34,7 +34,7 @@ public class ReadingViewModel {
      * Creates an instance of the ReadingViewModel class with a work open.
      * @param work the work to open.
      * @param isTranslation determines whether to return the translation of this work.
-     * @param pageOffset
+     * @param pageOffset the number of pages to offset the reading position by.
      */
     public ReadingViewModel(WorkInfo work,
                             boolean isTranslation,

@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.ericmschmidt.classicsreader.R;
-import com.ericmschmidt.classicsreader.datamodel.TOCEntry;
+import com.ericmschmidt.classicsreader.data.TOCEntry;
 
 /**Subclass of ArrayAdapter.
  * Used for displaying chapters in the TOCFragment

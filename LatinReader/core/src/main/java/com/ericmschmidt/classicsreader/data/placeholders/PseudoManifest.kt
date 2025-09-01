@@ -1,8 +1,8 @@
-package com.ericmschmidt.classicsreader.datamodel.placeholders
+package com.ericmschmidt.classicsreader.data.placeholders
 
 import com.ericmschmidt.classicsreader.R
-import com.ericmschmidt.classicsreader.datamodel.Manifest
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo
+import com.ericmschmidt.classicsreader.data.Manifest
+import com.ericmschmidt.classicsreader.data.WorkInfo
 import java.util.ArrayList
 
 class PseudoManifest : Manifest() {
