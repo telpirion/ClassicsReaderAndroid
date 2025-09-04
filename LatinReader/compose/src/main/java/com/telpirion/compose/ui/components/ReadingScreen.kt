@@ -36,6 +36,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -43,12 +45,14 @@ import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.*
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import com.ericmschmidt.classicsreader.R as CoreResources
 
-// A placeholder ViewModel that mimics the logic from ReadingFragment.
-// In a real app, this would be a more robust implementation.
+
 class ReadingViewModel(
     application: Application,
     workId: String?,
@@ -129,17 +133,39 @@ fun ReadingScreen(
     workId: String?,
     isTranslation: Boolean = false,
     navController: NavController,
-    textSizeSp: Float = 20f,
-    poemLines: Int = 5,
-    showPageControls: Boolean = true,
 ) {
     val context = LocalContext.current
+
+    // Get poem lines from preferences
+    val poemLinesKey = intPreferencesKey(POEM_LINES)
+    val poemLines: Flow<Int> = context.dataStore.data
+        .map { preferences ->
+            // No type safety.
+            preferences[poemLinesKey] ?: (POEM_LINES_DEFAULT).toInt()
+        }
+
+    // Get text size from preferences
+    val textSizeKey = intPreferencesKey(TEXT_SIZE)
+    val textSize: Flow<Int> = context.dataStore.data
+        .map { preferences ->
+            // No type safety.
+            preferences[textSizeKey] ?: TEXT_SIZE_DEFAULT.toInt()
+        }
+    val textSizeSp = textSize.collectAsState(
+        initial = TEXT_SIZE_DEFAULT.toInt()).value.toFloat()
+
+    // Get show page controls from preferences
+    val showPageControlsKey = booleanPreferencesKey(SHOW_PAGE_CONTROLS)
+    val showPageControls: Flow<Boolean> = context.dataStore.data
+        .map { preferences -> preferences[showPageControlsKey] ?: true }
+
     val viewModel: ReadingViewModel = viewModel(
         factory = ReadingViewModel.Factory(
             application = context.applicationContext as Application,
             workId = workId,
             isTranslation = isTranslation,
-            poemLines = poemLines
+            poemLines = poemLines.collectAsState(
+                initial = POEM_LINES_DEFAULT.toInt()).value
         )
     )
 
@@ -183,7 +209,7 @@ fun ReadingScreen(
                 .padding(top = 16.dp)
         )
 
-        if (showPageControls) {
+        if (showPageControls.collectAsState(initial = true).value) {
             PageControls(
                 onPrev = { viewModel.goToPage(false) },
                 onNext = { viewModel.goToPage(true) },

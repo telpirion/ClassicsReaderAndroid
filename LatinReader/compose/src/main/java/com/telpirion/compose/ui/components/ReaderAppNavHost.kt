@@ -116,9 +116,6 @@ fun ReaderAppNavHost(
                 workId = workId,
                 isTranslation = false,
                 navController = navController,
-                textSizeSp = textSize,
-                poemLines = poemLines,
-                showPageControls = showPageControls
             )
         }
 
@@ -130,9 +127,6 @@ fun ReaderAppNavHost(
                 workId = workId,
                 isTranslation = false,
                 navController = navController,
-                textSizeSp = textSize,
-                poemLines = poemLines,
-                showPageControls = showPageControls
             )
         }
 
@@ -144,9 +138,6 @@ fun ReaderAppNavHost(
                 workId = workId,
                 isTranslation = false,
                 navController = navController,
-                textSizeSp = textSize,
-                poemLines = poemLines,
-                showPageControls = showPageControls
             )
         }
 
@@ -158,9 +149,6 @@ fun ReaderAppNavHost(
                 workId = workId,
                 isTranslation = false,
                 navController = navController,
-                textSizeSp = textSize,
-                poemLines = poemLines,
-                showPageControls = showPageControls
             )
         }
 
