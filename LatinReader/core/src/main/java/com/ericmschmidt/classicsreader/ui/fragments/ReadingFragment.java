@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -14,11 +15,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.data.Library;
 import com.ericmschmidt.classicsreader.data.Manifest;
@@ -26,15 +28,17 @@ import com.ericmschmidt.classicsreader.data.ReadingViewModel;
 import com.ericmschmidt.classicsreader.data.WorkInfo;
 import com.ericmschmidt.classicsreader.R;
 
+import java.util.Objects;
+
 /** Displays the text of a work (source or translation).
- *
+ *  <br/>
  *  This class is used for presenting both foreign language and English texts.
- *
+ *  <br/>
  *  Layout files:
  *  - res/layout/fragment_reading.xml
- *
+ *  <br/>
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
@@ -42,7 +46,6 @@ public class ReadingFragment extends Fragment {
     public static final int HIT_AREA_RATIO = 4;
     public static final String RECENTLY_READ = "recently_read";
     public static final String TAG = "ReadingFragment";
-
     private final int MENU_SWITCH_VIEW = 0;
     private final int MENU_VIEW_TOC = 1;
 
@@ -51,7 +54,6 @@ public class ReadingFragment extends Fragment {
     private ReadingViewModel viewModel;
     private int bookNum;
     private int lineNum;
-    private OnClickListener mOnPrevNextClickListener;
 
     /**
      * Required empty public constructor
@@ -61,6 +63,8 @@ public class ReadingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG, "onCreate");
 
         // Use safeArgs.
         if (getArguments() != null) {
@@ -87,9 +91,10 @@ public class ReadingFragment extends Fragment {
 
         super.onActivityCreated(onSavedInstanceState);
 
+        assert getView() != null;
         final TextView readingPane = (TextView)getView().findViewById(R.id.reading_surface);
 
-        if (workToGetId == null || workToGetId.equals("")) {
+        if (workToGetId == null || workToGetId.isEmpty()) {
             readingPane.setText(getResources().getString(R.string.reading_no_book_open));
             return;
         }
@@ -123,7 +128,8 @@ public class ReadingFragment extends Fragment {
             numLines = Integer.parseInt(linesPerPage);
         }
 
-        viewModel = new ReadingViewModel(work, isTranslation, numLines);
+        viewModel = new ReadingViewModel(work, isTranslation, numLines,
+                this.requireActivity().getApplication());
 
         if (bookNum >= 0) {
             viewModel.setCurrentBook(bookNum);
@@ -142,7 +148,8 @@ public class ReadingFragment extends Fragment {
             ImageButton prevButton = getView().findViewById(R.id.btn_prev_page);
             ImageButton nextButton = getView().findViewById(R.id.btn_next_page);
 
-            mOnPrevNextClickListener = new OnClickListener() {
+            // Just in case the viewModel isn't populated yet.
+            OnClickListener mOnPrevNextClickListener = new OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -151,11 +158,7 @@ public class ReadingFragment extends Fragment {
                         return;
                     }
 
-                    if (view.getId() == R.id.btn_prev_page) {
-                        viewModel.goToPage(false);
-                    } else {
-                        viewModel.goToPage(true);
-                    }
+                    viewModel.goToPage(view.getId() != R.id.btn_prev_page);
 
                     updateReadingSurface();
                 }
@@ -185,9 +188,7 @@ public class ReadingFragment extends Fragment {
                     if ((eventX < hitArea) ||
                             (eventX > viewWidth - hitArea)) {
 
-                        if (eventX > viewWidth / 2) {
-                            viewModel.goToPage(true);
-                        } else viewModel.goToPage(false);
+                        viewModel.goToPage(eventX > (float) viewWidth / 2);
 
                         updateReadingSurface();
                     } else { // The user touched the middle of the screen.
@@ -203,14 +204,15 @@ public class ReadingFragment extends Fragment {
         readingPane.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().openContextMenu(v);
+                requireActivity().openContextMenu(v);
             }
         });
 
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
+    public void onCreateContextMenu(@NonNull ContextMenu menu,
+                                    @NonNull View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
@@ -256,6 +258,7 @@ public class ReadingFragment extends Fragment {
     // Change the text on the page by advancing the reading position.
     private void updateReadingSurface() {
 
+        assert this.getView() != null;
         TextView readingPane = (TextView)this.getView()
                 .findViewById(R.id.reading_surface);
         TextView readingInfo = (TextView)this.getView()

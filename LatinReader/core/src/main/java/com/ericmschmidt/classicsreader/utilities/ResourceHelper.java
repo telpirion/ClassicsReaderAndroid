@@ -2,9 +2,7 @@ package com.ericmschmidt.classicsreader.utilities;
 
 import android.content.res.Resources;
 import android.content.Context;
-
 import com.ericmschmidt.classicsreader.MyApplication;
-
 import java.io.InputStream;
 
 /** A static class to help parse XML resources.

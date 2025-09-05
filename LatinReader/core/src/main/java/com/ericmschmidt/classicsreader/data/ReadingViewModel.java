@@ -1,12 +1,11 @@
 package com.ericmschmidt.classicsreader.data;
 
+import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
+import android.util.Log;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter;
-
 import java.util.Locale;
 
 /** A ViewModel that maps reading behaviors to a view.
@@ -17,18 +16,17 @@ import java.util.Locale;
  */
 public class ReadingViewModel {
 
-    private String DEFAULT_READING_POSITION="0,0";
-
-    private WorkInfo _currentWorkInfo;
-    private Work _currentWork;
+    private final WorkInfo _currentWorkInfo;
+    private final Work _currentWork;
     private Book _currentBook;
     private int _currentLineIndex;
     private int _currentBookIndex;
-    private int _pageOffset;
-    private String _author;
-    private String _title;
-    private boolean _isTranslation;
-    private ITextConverter converter;
+    private final int _pageOffset;
+    private final String _author;
+    private final String _title;
+    private final boolean _isTranslation;
+
+    private final Application application;
 
     /**
      * Creates an instance of the ReadingViewModel class with a work open.
@@ -38,12 +36,12 @@ public class ReadingViewModel {
      */
     public ReadingViewModel(WorkInfo work,
                             boolean isTranslation,
-                            int pageOffset) {
+                            int pageOffset,
+                            Application application) {
         this._currentWorkInfo = work;
         this._pageOffset = (pageOffset > -1) ? pageOffset : 1;
         this._isTranslation = isTranslation;
-        this.converter = MyApplication.isNonRomanChar() ?
-            MyApplication.getTextConverter() : null;
+        this.application = application;
 
         if (!loadLastReadingPosition()) { // This work hasn't been read yet.
             this._currentLineIndex = 0;
@@ -72,7 +70,8 @@ public class ReadingViewModel {
         int projectedIndex;
 
         if (_isTranslation){
-            projectedIndex = (int)Math.floor(this._pageOffset / this._currentWorkInfo.getEnglishOffset());
+            projectedIndex = (int)Math.floor(
+                    (double) this._pageOffset / this._currentWorkInfo.getEnglishOffset());
         } else {
             projectedIndex = this._pageOffset;
         }
@@ -81,7 +80,7 @@ public class ReadingViewModel {
 
     /**
      * Scans the position in the book forwards or backwards.
-     *
+     * <br/>
      * If the value goes beyond the end of the current book, it goes to the next book.
      * If the value goes beyond the beginning of the current book, it goes to the previous book.
      * If the value goes beyond the end of the work, it goes to the end of the work and stays there.
@@ -245,7 +244,8 @@ public class ReadingViewModel {
     private void updatePage() {
 
         // Store the current reading position in SharedPreferences.
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+                this.application.getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         String currentPosition = String.format(Locale.US, "%d,%d", this._currentBookIndex, this._currentLineIndex);
@@ -287,8 +287,10 @@ public class ReadingViewModel {
 
     // Gets the user's last reading position from device storage or cloud storage.
     private boolean loadLastReadingPosition() {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
+        Log.i("ReadingViewModel", "loadLastReadingPosition" + this._currentWorkInfo);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+                this.application.getApplicationContext());
+        String DEFAULT_READING_POSITION = "0,0";
         String prefs = sharedPreferences.getString(_currentWorkInfo.getId(), DEFAULT_READING_POSITION);
 
         if (!prefs.contains(DEFAULT_READING_POSITION)) {
