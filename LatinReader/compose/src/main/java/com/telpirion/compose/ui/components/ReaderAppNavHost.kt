@@ -2,6 +2,7 @@
 
 package com.telpirion.compose.ui.components
 
+import androidx.annotation.NonNull
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.Book
@@ -19,6 +20,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
@@ -78,6 +80,18 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
     ) {
         fun createRoute(source: String) = "info/$source"
     }
+}
+
+// NavOptions builder function
+val navOptionsBuilder:  NavOptionsBuilder.() -> Unit = {
+    /* This is empty, but previously contained the following AI-generated code:
+
+    popUpTo(navController.graph.findStartDestination().id) {
+        saveState = true
+    }
+    launchSingleTop = true
+    restoreState = true
+    */
 }
 
 @Composable

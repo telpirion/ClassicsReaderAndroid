@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.telpirion.compose.R
@@ -85,13 +84,7 @@ fun ReaderApp(
             NavDrawerContent(
                 currentRoute = currentRoute,
                 onNavigate = { route ->
-                    navController.navigate(route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
+                    navController.navigate(route, navOptionsBuilder)
                     scope.launch { drawerState.close() }
                 }
             )
@@ -109,13 +102,7 @@ fun ReaderApp(
                     ReaderBottomNavigationBar(
                         currentRoute = currentRoute,
                         onNavigate = { route ->
-                            navController.navigate(route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
+                            navController.navigate(route, navOptionsBuilder)
                         }
                     )
                 }
@@ -130,13 +117,7 @@ fun ReaderApp(
                     ReaderNavigationRail(
                         currentRoute = currentRoute,
                         onNavigate = { route ->
-                            navController.navigate(route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
+                            navController.navigate(route, navOptionsBuilder)
                         }
                     )
                 }
@@ -201,17 +182,17 @@ private fun ReaderBottomNavigationBar(
                 label = { Text(stringResource(screen.label)) },
                 selected = currentRoute?.startsWith(screen.route.substringBefore("/")) ?: false,
                 onClick = {
-                    var route = "library/"
-                    when (screen) {
-                        Screen.Recent -> {
-                            route = (screen as Screen.Recent).createRoute("test")
+                    // The 'when' expression now correctly handles each navigation case.
+                    val route = when (screen) {
+                        is Screen.Recent -> {
+                            // In a real app, you would get the last-read work ID from a ViewModel.
+                            val recentWorkId = "test" // Placeholder ID
+                            screen.createRoute(recentWorkId)
                         }
-                        Screen.Library -> {
-                            route = (screen as Screen.Library).createRoute()
-                        }
-                        Screen.Settings -> {
-                            route = (screen as Screen.Settings).createRoute()
-                        }
+                        is Screen.Library -> screen.createRoute()
+                        is Screen.Settings -> screen.createRoute()
+                        // Add any other specific cases from bottomNavigationItems here.
+                        else -> Screen.Library.createRoute()
                     }
                     onNavigate(route)
                 }
