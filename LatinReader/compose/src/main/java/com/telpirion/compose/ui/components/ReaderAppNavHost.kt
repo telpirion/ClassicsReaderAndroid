@@ -24,6 +24,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.telpirion.compose.ui.screens.MarkdownScreen
 import com.telpirion.compose.ui.screens.ReadingScreen
 import com.telpirion.compose.ui.screens.SettingsScreen
 import com.ericmschmidt.classicsreader.R as CoreResources
@@ -72,14 +73,14 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
         CoreResources.string.nav_drawer_help,
         Icons.AutoMirrored.Filled.Help
     ) {
-        fun createRoute(source: String) = "help/$source"
+        fun createRoute() = "help/"
     }
     object Info : Screen(
         "info/",
         CoreResources.string.nav_drawer_info,
         Icons.Default.Info
     ) {
-        fun createRoute(source: String) = "info/$source"
+        fun createRoute() = "info/"
     }
 }
 
@@ -150,23 +151,13 @@ fun ReaderAppNavHost(
         composable (
             Screen.Help.route
         ) { backStackEntry ->
-            val workId = "help"
-            ReadingScreen(
-                workId = workId,
-                isTranslation = false,
-                navController = navController,
-            )
+            MarkdownScreen(screen = Screen.Help)
         }
 
         composable (
             Screen.Info.route
         ) { backStackEntry ->
-            val workId = "about"
-            ReadingScreen(
-                workId = workId,
-                isTranslation = false,
-                navController = navController,
-            )
+            MarkdownScreen(screen = Screen.Info)
         }
 
         composable(

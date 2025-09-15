@@ -1,5 +1,6 @@
 package com.ericmschmidt.classicsreader.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,15 +25,20 @@ class HelpFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    var markdownView = view.findViewById<MarkdownView>(R.id.help_markdown_view)
-
-    // Open the help.md file from the resources
-    var context = MyApplication.getContext()
-    var resources = context.resources
-    var inputStream = resources.openRawResource(R.raw.help);
-    val helpString = inputStream.bufferedReader().use(BufferedReader::readText)
-
+    val markdownView = view.findViewById<MarkdownView>(R.id.help_markdown_view)
+    val helpString = buildHelpString(view.context)
     markdownView.setMarkDownText(helpString)
+  }
+
+  /**
+   * Builds the help string from the raw resource file.
+   */
+  companion object HelpFragmentBuilder {
+    fun buildHelpString(context: Context): String {
+      val resources = context.resources
+      val inputStream = resources.openRawResource(R.raw.help);
+      val helpString = inputStream.bufferedReader().use(BufferedReader::readText)
+      return helpString
+    }
   }
 }
