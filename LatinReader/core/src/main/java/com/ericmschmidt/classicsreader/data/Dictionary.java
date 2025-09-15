@@ -11,7 +11,7 @@ import java.util.Random;
 
 /** Contains the data and methods for getting dictionary entries.
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="http://telpirion.com">...</a>
  * @version 1.5
  * @since 1.1
  */

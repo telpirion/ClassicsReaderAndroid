@@ -26,21 +26,35 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.telpirion.compose.R
 
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
+import com.telpirion.compose.viewmodels.DictionaryViewModel
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReaderTopAppBar(
     onMenuClick: () -> Unit,
+    searchText: String,
+    onSearchTextChange: (String) -> Unit,
+    onSearch: () -> Unit,
+    onClearSearch: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // The search text state is still needed to hold the query.
-    var searchText by remember { mutableStateOf("") }
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     // A single TopAppBar that always shows the search bar.
     TopAppBar(
         title = {
             TextField(
                 value = searchText,
-                onValueChange = { searchText = it },
+                onValueChange = onSearchTextChange,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                keyboardActions = KeyboardActions(onSearch = {
+                    onSearch()
+                    keyboardController?.hide() // Hide keyboard on search
+                }),
                 placeholder = { Text(stringResource(R.string.search_label)) },
                 leadingIcon = {
                     Icon(
@@ -72,9 +86,8 @@ fun ReaderTopAppBar(
             }
         },
         actions = {
-            // Show a clear button only if there is text in the search bar
             if (searchText.isNotEmpty()) {
-                IconButton(onClick = { searchText = "" }) {
+                IconButton(onClick = onClearSearch) { // Use the new callback
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = stringResource(R.string.cd_clear_search)

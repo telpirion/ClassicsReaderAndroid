@@ -39,11 +39,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.*
 import com.telpirion.compose.ui.components.Screen
 import com.telpirion.compose.ui.dataStore
+import com.telpirion.compose.viewmodels.DictionaryViewModel
 import com.telpirion.compose.viewmodels.ReadingViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -55,6 +57,7 @@ import com.ericmschmidt.classicsreader.R as CoreResources
 fun ReadingScreen(
     workId: String? = "test",
     isTranslation: Boolean = false,
+    dictionaryViewModel: DictionaryViewModel,
     navController: NavController,
 ) {
     val context = LocalContext.current
@@ -100,8 +103,11 @@ fun ReadingScreen(
                 initial = POEM_LINES_DEFAULT.toInt()).value
         )
     )
-
     val uiState by viewModel.uiState.collectAsState()
+
+
+    val dictionaryUiState = dictionaryViewModel.uiState.collectAsStateWithLifecycle()
+    val searchQuery = dictionaryUiState.value.searchQuery
 
     if (workId == null) {
         Column(
@@ -250,10 +256,15 @@ private fun PageControls(
 @Composable
 fun ReadingScreenPreview() {
     MaterialTheme {
-        // This preview shows the "no book open" state.
+
+        val dictionaryViewModel: DictionaryViewModel = viewModel(
+            factory = DictionaryViewModel.Factory
+        )
         ReadingScreen(
             workId = null,
-            navController = NavController(LocalContext.current)
+            navController = NavController(LocalContext.current),
+            dictionaryViewModel = dictionaryViewModel,
+            isTranslation = false
         )
     }
 }

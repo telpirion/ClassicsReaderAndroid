@@ -27,6 +27,7 @@ import androidx.navigation.compose.composable
 import com.telpirion.compose.ui.screens.MarkdownScreen
 import com.telpirion.compose.ui.screens.ReadingScreen
 import com.telpirion.compose.ui.screens.SettingsScreen
+import com.telpirion.compose.viewmodels.DictionaryViewModel
 import com.ericmschmidt.classicsreader.R as CoreResources
 
 /**
@@ -61,6 +62,15 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
     ) {
         fun createRoute(source: String) = "vocab/$source"
     }
+
+    object Dictionary : Screen(
+        "dictionary/",
+        CoreResources.string.nav_drawer_dictionary,
+        Icons.Default.Description
+    ) {
+        fun createRoute() = "dictionary/"
+    }
+
     object Settings : Screen(
         "settings/",
         CoreResources.string.action_settings,
@@ -98,6 +108,7 @@ val navOptionsBuilder:  NavOptionsBuilder.() -> Unit = {
 
 @Composable
 fun ReaderAppNavHost(
+    dictionaryViewModel: DictionaryViewModel,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -133,6 +144,7 @@ fun ReaderAppNavHost(
             ReadingScreen(
                 workId = workId,
                 isTranslation = false,
+                dictionaryViewModel,
                 navController = navController,
             )
         }
@@ -144,8 +156,21 @@ fun ReaderAppNavHost(
             ReadingScreen(
                 workId = workId,
                 isTranslation = false,
+                dictionaryViewModel = dictionaryViewModel,
                 navController = navController,
             )
+        }
+
+        composable (
+            Screen.Dictionary.route
+        ) { backStackEntry ->
+            ReadingScreen(
+                workId = "test",
+                isTranslation = false,
+                dictionaryViewModel,
+                navController = navController,
+            )
+
         }
 
         composable (
