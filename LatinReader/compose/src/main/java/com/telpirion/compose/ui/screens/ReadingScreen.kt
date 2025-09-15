@@ -1,6 +1,7 @@
 package com.telpirion.compose.ui.screens
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -43,6 +44,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.*
+import com.telpirion.compose.MainActivity
 import com.telpirion.compose.ui.components.Screen
 import com.telpirion.compose.ui.dataStore
 import com.telpirion.compose.viewmodels.DictionaryViewModel
@@ -51,16 +53,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import com.ericmschmidt.classicsreader.R as CoreResources
 
-
 @Suppress("unused")
 @Composable
 fun ReadingScreen(
     workId: String? = "test",
+    context: Context = LocalContext.current,
     isTranslation: Boolean = false,
-    dictionaryViewModel: DictionaryViewModel,
+    dictionaryViewModel: DictionaryViewModel = viewModel(
+        viewModelStoreOwner = (context as MainActivity)
+    ),
     navController: NavController,
 ) {
-    val context = LocalContext.current
 
     // Get poem lines from preferences
     val poemLinesKey = intPreferencesKey(POEM_LINES)

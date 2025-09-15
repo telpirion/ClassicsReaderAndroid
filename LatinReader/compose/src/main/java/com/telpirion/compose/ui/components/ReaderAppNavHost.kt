@@ -2,6 +2,7 @@
 
 package com.telpirion.compose.ui.components
 
+import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.Book
@@ -18,12 +19,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.telpirion.compose.MainActivity
 import com.telpirion.compose.ui.screens.MarkdownScreen
 import com.telpirion.compose.ui.screens.ReadingScreen
 import com.telpirion.compose.ui.screens.SettingsScreen
@@ -108,9 +112,12 @@ val navOptionsBuilder:  NavOptionsBuilder.() -> Unit = {
 
 @Composable
 fun ReaderAppNavHost(
-    dictionaryViewModel: DictionaryViewModel,
+    modifier: Modifier = Modifier,
+    context: Context = LocalContext.current,
+    dictionaryViewModel: DictionaryViewModel = viewModel(
+        viewModelStoreOwner = (context as MainActivity)
+    ),
     navController: NavHostController,
-    modifier: Modifier = Modifier
 ) {
     val textSize by rememberSaveable { mutableFloatStateOf(20f) }
     val poemLines by rememberSaveable { mutableIntStateOf(5) }
@@ -144,7 +151,6 @@ fun ReaderAppNavHost(
             ReadingScreen(
                 workId = workId,
                 isTranslation = false,
-                dictionaryViewModel,
                 navController = navController,
             )
         }
@@ -156,7 +162,6 @@ fun ReaderAppNavHost(
             ReadingScreen(
                 workId = workId,
                 isTranslation = false,
-                dictionaryViewModel = dictionaryViewModel,
                 navController = navController,
             )
         }
@@ -167,7 +172,6 @@ fun ReaderAppNavHost(
             ReadingScreen(
                 workId = "test",
                 isTranslation = false,
-                dictionaryViewModel,
                 navController = navController,
             )
 
