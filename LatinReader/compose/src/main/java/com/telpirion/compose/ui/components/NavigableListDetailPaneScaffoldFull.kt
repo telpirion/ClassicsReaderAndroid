@@ -21,6 +21,7 @@ import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyList
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyVerticalGrid
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE_DEFAULT
+import com.telpirion.compose.ui.dataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch

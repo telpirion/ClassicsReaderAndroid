@@ -1,4 +1,4 @@
-package com.telpirion.compose.ui.components
+package com.telpirion.compose.ui
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -41,6 +41,10 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.telpirion.compose.R
+import com.telpirion.compose.ui.components.ReaderAppNavHost
+import com.telpirion.compose.ui.components.ReaderTopAppBar
+import com.telpirion.compose.ui.components.Screen
+import com.telpirion.compose.ui.components.navOptionsBuilder
 import kotlinx.coroutines.launch
 
 private val bottomNavigationItems = listOf(

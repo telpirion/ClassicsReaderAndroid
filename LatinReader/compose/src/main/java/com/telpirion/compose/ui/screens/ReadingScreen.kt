@@ -1,4 +1,4 @@
-package com.telpirion.compose.ui.components
+package com.telpirion.compose.ui.screens
 
 import android.app.Application
 import android.util.Log
@@ -42,20 +42,13 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.*
+import com.telpirion.compose.ui.components.Screen
+import com.telpirion.compose.ui.dataStore
 import com.telpirion.compose.viewmodels.ReadingViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import com.ericmschmidt.classicsreader.R as CoreResources
 
-
-enum class ReadingScreenState {
-    Source,
-    Translation,
-    Vocab,
-    Dictionary,
-    Help,
-    Info
-}
 
 @Suppress("unused")
 @Composable

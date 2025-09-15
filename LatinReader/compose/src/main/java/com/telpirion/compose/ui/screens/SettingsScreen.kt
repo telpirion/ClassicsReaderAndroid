@@ -1,4 +1,4 @@
-package com.telpirion.compose.ui.components
+package com.telpirion.compose.ui.screens
 
 import android.util.Log
 import androidx.compose.foundation.clickable
@@ -41,6 +41,7 @@ import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE_DEFAULT
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE_DEFAULT
+import com.telpirion.compose.ui.dataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -154,6 +155,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
         }
 
         item {
+            @Suppress("KotlinConstantConditions")
             SettingsSwitchPreference(
                 title = stringResource(CoreResources.string.pref_show_page_controls),
                 summary = stringResource(CoreResources.string.pref_show_page_controls_summary),
