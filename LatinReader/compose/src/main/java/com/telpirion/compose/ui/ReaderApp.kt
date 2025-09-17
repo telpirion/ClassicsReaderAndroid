@@ -179,7 +179,7 @@ private fun NavigationHeader(modifier: Modifier = Modifier) {
         // A Row to neatly arrange the logo and app name side-by-side.
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.mipmap.ic_launcher),
                 contentDescription = null,
                 modifier = Modifier.size(40.dp)
             )

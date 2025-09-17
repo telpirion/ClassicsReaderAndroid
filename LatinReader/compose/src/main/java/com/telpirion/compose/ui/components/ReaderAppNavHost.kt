@@ -139,7 +139,8 @@ fun ReaderAppNavHost(
             Screen.Translation.route,
         ) { backStackEntry ->
             // And here as well
-            NavigableListDetailPaneScaffoldFull(navController = navController, screen = Screen.Translation)
+            NavigableListDetailPaneScaffoldFull(navController = navController,
+                screen = Screen.Translation)
         }
 
         composable(

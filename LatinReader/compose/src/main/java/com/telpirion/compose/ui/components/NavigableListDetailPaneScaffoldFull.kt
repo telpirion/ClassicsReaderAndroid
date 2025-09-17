@@ -49,6 +49,7 @@ fun NavigableListDetailPaneScaffoldFull(
     val scaffoldNavigator = rememberListDetailPaneScaffoldNavigator<SelectedItem>()
     val scope = rememberCoroutineScope()
     val works = library.getWorks()
+    val isTranslation = screen == Screen.Translation
 
     // Get display type from preferences
     val displayTypeKey = stringPreferencesKey(DISPLAY_TYPE)
@@ -79,13 +80,15 @@ fun NavigableListDetailPaneScaffoldFull(
                     PrettyCardLazyVerticalGrid(
                         library = library,
                         modifier = modifier,
-                        onCardClick = onItemClick
+                        onCardClick = onItemClick,
+                        isTranslation = isTranslation
                     )
                 } else {
                     PrettyCardLazyList(
                         library = library,
                         modifier = modifier,
-                        onRowClick = onItemClick
+                        onRowClick = onItemClick,
+                        isTranslation = isTranslation
                     )
                 }
             }
