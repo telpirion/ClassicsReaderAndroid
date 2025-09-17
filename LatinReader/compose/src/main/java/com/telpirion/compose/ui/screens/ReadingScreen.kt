@@ -106,7 +106,7 @@ fun ReadingScreen(
                 initial = POEM_LINES_DEFAULT.toInt()).value
         )
     )
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
 
     val dictionaryUiState = dictionaryViewModel.uiState.collectAsStateWithLifecycle()
@@ -136,11 +136,15 @@ fun ReadingScreen(
         ReadingContent(
             text = uiState.content,
             textSizeSp = textSizeSp,
-            onPageTurn = { isNext -> viewModel.goToPage(isNext) },
+            onPageTurn = {
+                isNext -> viewModel.goToPage(isNext)
+                         },
+            onSwitchView = {
+                navController.navigate(Screen.Recent.createRoute(workId, !isTranslation))
+            },
             onShowMenu = { /* Logic to show menu will be here */ },
             modifier = Modifier.weight(1f),
-            lineHeight = lineSpacing,
-            navController = navController
+            lineHeight = lineSpacing
         )
 
         Text(
@@ -167,10 +171,12 @@ private fun ReadingContent(
     text: String,
     textSizeSp: Float,
     onPageTurn: (isNext: Boolean) -> Unit,
+    onSwitchView: () -> Unit,
     @Suppress("unused") onShowMenu: () -> Unit,
     modifier: Modifier = Modifier,
+    switchText: String = "Switch View",
     lineHeight: Float = 1.2f,
-    navController: NavController
+
 ) {
     BoxWithConstraints(
         modifier = modifier
@@ -213,11 +219,8 @@ private fun ReadingContent(
             offset = contextMenuOffset
         ) {
             DropdownMenuItem(
-                text = { Text("Switch View") }, // Placeholder
-                onClick = {
-                    navController.navigate(Screen.Settings.route)
-                    showContextMenu = false
-                }
+                text = { Text(switchText) }, // Placeholder
+                onClick = onSwitchView
             )
             DropdownMenuItem(
                 text = { Text("Table of Contents") }, // Placeholder
@@ -244,6 +247,7 @@ private fun PageControls(
             Icon(
                 Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = stringResource(CoreResources.string.reading_btn_prev)
+
             )
         }
         IconButton(onClick = onNext, modifier = Modifier.weight(1f)) {

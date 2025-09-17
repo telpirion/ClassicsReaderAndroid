@@ -46,11 +46,11 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
         fun createRoute() = "library/"
     }
     object Recent : Screen(
-        "recent/{workId}",
+        "recent/{workId}/{isTranslation}",
         CoreResources.string.nav_drawer_recent,
         Icons.Default.Bookmark
     ) {
-        fun createRoute(workId: String?) = "recent/$workId"
+        fun createRoute(workId: String?, isTranslation: Boolean?) = "recent/$workId/$isTranslation"
     }
     object Translation : Screen(
         "translation/",
@@ -139,18 +139,20 @@ fun ReaderAppNavHost(
             Screen.Translation.route,
         ) { backStackEntry ->
             // And here as well
-            NavigableListDetailPaneScaffoldFull(navController = navController)
+            NavigableListDetailPaneScaffoldFull(navController = navController, screen = Screen.Translation)
         }
 
         composable(
             route = Screen.Recent.route,
-            arguments = listOf(navArgument("workId") { type = NavType.StringType })
+            arguments = listOf(
+                navArgument("workId") { type = NavType.StringType },
+                navArgument("isTranslation") { type = NavType.BoolType })
         ) { backStackEntry ->
             val workId = backStackEntry.arguments?.getString("workId")
-
+            val isTranslation = backStackEntry.arguments?.getBoolean("isTranslation")
             ReadingScreen(
                 workId = workId,
-                isTranslation = false,
+                isTranslation = isTranslation ?: false,
                 navController = navController,
             )
         }

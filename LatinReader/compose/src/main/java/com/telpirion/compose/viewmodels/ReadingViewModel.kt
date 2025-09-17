@@ -3,6 +3,7 @@ package com.telpirion.compose.viewmodels
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.R as CoreResources
 import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
@@ -32,21 +33,20 @@ class ReadingViewModel(
 
     private var workInfo: WorkInfo? = null
     private var contentLines: List<String> = emptyList()
-    private var currentPageIndex = 0
-    private val linesPerPage = if (poemLines > 0) poemLines else 5
+
+    private var content: RVM? = null
 
     init {
         if (workId != null) {
-            val manifest = PseudoManifest()
+            val manifest = MyApplication.getManifest()
             val library = Library(manifest.collection)
             workInfo = library.getWorkInfoByID(workId)
-            // In a real app, you would parse the XML file from work.location
-            // For this example, we'll use placeholder content.
 
             // TODO(telpirion): integrate old ReaderViewModel with new one
-            val content = RVM(workInfo, isTranslation, poemLines, application)
+            content = RVM(workInfo, isTranslation, poemLines, application)
 
-            contentLines = listOf(content.currentPage)
+            @Suppress("UNCHECKED_CAST")
+            contentLines = listOf(content?.currentPage) as List<*> as List<String>
 
             updateState()
         } else {
@@ -57,23 +57,16 @@ class ReadingViewModel(
     }
 
     fun goToPage(isNext: Boolean) {
-        val newIndex = if (isNext) currentPageIndex + 1 else currentPageIndex - 1
-        val totalPages = (contentLines.size + linesPerPage - 1) / linesPerPage
-        if (newIndex in 0 until totalPages) {
-            currentPageIndex = newIndex
-            updateState()
-        }
+        this.content?.goToPage(isNext)
+        updateState()
     }
 
     private fun updateState() {
-        val start = currentPageIndex * linesPerPage
-        val end = (start + linesPerPage).coerceAtMost(contentLines.size)
-        val totalPages = (contentLines.size + linesPerPage - 1) / linesPerPage
-
+        contentLines = listOf(content?.currentPage) as List<*> as List<String>
         _uiState.value = ReadingUiState(
-            content = contentLines.subList(start, end).joinToString("\n"),
+            content = contentLines.joinToString("\n"),
             info = workInfo?.title ?: "Unknown Work",
-            position = "Page ${currentPageIndex + 1} of $totalPages",
+            position = content?.readingPositionString as String,
             tocAvailable = workInfo?.tocEntries?.isNotEmpty() ?: false,
             isTranslation = isTranslation
         )

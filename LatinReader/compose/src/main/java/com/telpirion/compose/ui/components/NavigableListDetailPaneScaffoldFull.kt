@@ -39,7 +39,8 @@ fun NavigableListDetailPaneScaffoldFullPreview(
 @Composable
 fun NavigableListDetailPaneScaffoldFull(
     modifier: Modifier = Modifier,
-    navController: NavController? = null
+    navController: NavController? = null,
+    screen: Screen = Screen.Library,
 ) {
 
     val context : Context = MyApplication.getContext()
@@ -97,8 +98,11 @@ fun NavigableListDetailPaneScaffoldFull(
                         item = selectedItem,
                         works = works,
                         onReadClick = { workId ->
-                            // Use the NavController to navigate to the ReadingScreen
-                            navController?.navigate(Screen.Recent.createRoute(workId))
+                            when (screen) {
+                                Screen.Translation -> navController?.navigate(Screen.Recent.createRoute(workId, true))
+                                else -> navController?.navigate(Screen.Recent.createRoute(workId, false))
+                            }
+
                         }
                     )
                 }
