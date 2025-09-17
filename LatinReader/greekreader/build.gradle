@@ -8,7 +8,7 @@ android {
     }
     defaultConfig {
         applicationId("com.telpirion.greekreader")
-        minSdkVersion(23)
+        minSdkVersion(24)
         targetSdk(36)
         versionCode(1)
         versionName("1.0")
@@ -22,5 +22,6 @@ android {
 
 dependencies {
     implementation project(':core')
+    implementation project(':compose')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
