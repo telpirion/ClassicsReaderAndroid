@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
     id("kotlin-parcelize")
@@ -10,7 +10,6 @@ android {
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.telpirion.compose"
         minSdk 24
         targetSdk 36
         versionCode 1

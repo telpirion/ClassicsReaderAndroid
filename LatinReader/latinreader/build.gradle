@@ -8,7 +8,7 @@ android {
     }
     defaultConfig {
         applicationId("com.ericmschmidt.latinreader")
-        minSdkVersion(23)
+        minSdkVersion(24)
         targetSdkVersion(36)
         versionCode(15)
         versionName("1.8.0")
@@ -30,6 +30,7 @@ android {
 }
 
 dependencies {
+    implementation project(':compose')
     implementation project(':core')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
