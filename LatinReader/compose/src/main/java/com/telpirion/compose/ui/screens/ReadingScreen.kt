@@ -40,9 +40,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.*
 import com.telpirion.compose.MainActivity
 import com.telpirion.compose.ui.components.Screen
@@ -58,7 +60,7 @@ import com.ericmschmidt.classicsreader.R as CoreResources
 @Composable
 fun ReadingScreen(
     navController: NavController,
-    workId: String? = "test",
+    workId: String? = "",
     context: Context = LocalContext.current,
     isTranslation: Boolean = false,
     dictionaryViewModel: DictionaryViewModel = viewModel(
@@ -67,8 +69,22 @@ fun ReadingScreen(
     screen: Screen = Screen.Recent
 ) {
 
-    // Get poem lines from preferences
+    // Get recently read from preferences
+    val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
+    val recentlyRead: Flow<String> = context.dataStore.data
+        .map {
+            preferences ->
+            preferences[recentlyReadKey] ?: ""
+        }
+    var currentWorkId: String? = workId
+    if (screen == Screen.Recent) {
+        val tmpRecentWorkId = recentlyRead.collectAsState(initial = "").value
+        if (tmpRecentWorkId.isNotEmpty()) {
+            currentWorkId = tmpRecentWorkId
+        }
+    }
 
+    // Get poem lines from preferences
     val poemLinesKey = intPreferencesKey(POEM_LINES)
     val poemLines: Flow<Int> = context.dataStore.data
         .map { preferences ->
@@ -103,7 +119,7 @@ fun ReadingScreen(
     var onPrev: () -> Unit
     var onNext: () -> Unit
 
-    Log.i("ReadingScreen", "workId: $workId, isTranslation: $isTranslation")
+    Log.i("ReadingScreen", "workId: $currentWorkId, isTranslation: $isTranslation")
     if (screen == Screen.Vocab || screen == Screen.Dictionary){
         val dictionaryUiState = dictionaryViewModel.readingUiState.collectAsStateWithLifecycle()
         uiState = dictionaryUiState.value
@@ -117,7 +133,7 @@ fun ReadingScreen(
             dictionaryViewModel.clearSearch()
         }
     } else {
-        if (workId == null) {
+        if (currentWorkId.isNullOrEmpty()) {
             Column(
                 modifier = Modifier.fillMaxSize().padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -131,7 +147,7 @@ fun ReadingScreen(
         val viewModel: ReadingViewModel = viewModel(
             factory = ReadingViewModel.Factory(
                 application = context.applicationContext as Application,
-                workId = workId,
+                workId = currentWorkId,
                 isTranslation = isTranslation,
                 poemLines = poemLines.collectAsState(
                     initial = POEM_LINES_DEFAULT.toInt()
@@ -168,7 +184,7 @@ fun ReadingScreen(
             textSizeSp = textSizeSp,
             onPageTurn = onPageTurn,
             onSwitchView = {
-                navController.navigate(Screen.Recent.createRoute(workId, !isTranslation))
+                navController.navigate(Screen.Recent.createRoute(currentWorkId, !isTranslation))
             },
             onShowMenu = { /* Logic to show menu will be here */ },
             modifier = Modifier.weight(1f),

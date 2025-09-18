@@ -149,6 +149,8 @@ fun ReaderAppNavHost(
                 navArgument("workId") { type = NavType.StringType },
                 navArgument("isTranslation") { type = NavType.BoolType })
         ) { backStackEntry ->
+
+            // TODO: Pull from PreferencesDataStore?
             val workId = backStackEntry.arguments?.getString("workId")
             val isTranslation = backStackEntry.arguments?.getBoolean("isTranslation")
             ReadingScreen(

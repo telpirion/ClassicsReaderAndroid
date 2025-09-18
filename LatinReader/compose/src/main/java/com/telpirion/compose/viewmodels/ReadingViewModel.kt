@@ -1,6 +1,11 @@
 package com.telpirion.compose.viewmodels
 
 import android.app.Application
+import android.content.Context
+import android.util.Log
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ericmschmidt.classicsreader.MyApplication
@@ -8,10 +13,12 @@ import com.ericmschmidt.classicsreader.R as CoreResources
 import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
 import com.ericmschmidt.classicsreader.data.WorkInfo
-import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
+import com.telpirion.compose.ui.dataStore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 data class ReadingUiState(
     val content: String = "",
@@ -36,8 +43,10 @@ class ReadingViewModel(
 
     private var content: RVM? = null
 
+    val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
+
     init {
-        if (workId != null) {
+        if (!workId.isNullOrEmpty()) {
             val manifest = MyApplication.getManifest()
             val library = Library(manifest.collection)
             workInfo = library.getWorkInfoByID(workId)
@@ -49,6 +58,16 @@ class ReadingViewModel(
             contentLines = listOf(content?.currentPage) as List<*> as List<String>
 
             updateState()
+
+            // Update the recently read
+            runBlocking {
+                launch {
+                    writeStringSetting(
+                        context = application.baseContext,
+                        recentlyReadKey,
+                        newValue = workId)
+                }
+            }
         } else {
             _uiState.value = ReadingUiState(
                 content = application.getString(CoreResources.string.reading_no_book_open)
@@ -59,6 +78,14 @@ class ReadingViewModel(
     fun goToPage(isNext: Boolean) {
         this.content?.goToPage(isNext)
         updateState()
+    }
+
+    // Store recently read in preferences here
+    suspend fun writeStringSetting(context: Context, key: Preferences.Key<String>, newValue: String) {
+        Log.d("writeStringSetting", "writeStringSetting: $newValue")
+        context.dataStore.edit { settings ->
+            settings[key] = newValue
+        }
     }
 
     private fun updateState() {

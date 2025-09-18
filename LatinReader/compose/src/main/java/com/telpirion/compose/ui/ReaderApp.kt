@@ -208,7 +208,7 @@ private fun ReaderBottomNavigationBar(
                     val route = when (screen) {
                         is Screen.Recent -> {
                             // In a real app, you would get the last-read work ID from a ViewModel.
-                            val recentWorkId = "test" // Placeholder ID
+                            val recentWorkId = "" // Placeholder ID
                             screen.createRoute(recentWorkId, false)
                         }
                         is Screen.Library -> screen.createRoute()
