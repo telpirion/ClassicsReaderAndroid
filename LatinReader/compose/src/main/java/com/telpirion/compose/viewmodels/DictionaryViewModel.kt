@@ -28,11 +28,23 @@ class DictionaryViewModel(application: Application) : AndroidViewModel(applicati
     private val _uiState = MutableStateFlow(DictionaryUiState())
     val uiState = _uiState.asStateFlow()
 
+    // We use a second UIState field to expose values to the ReadingScreen.
+    private val _readingUiState = MutableStateFlow(ReadingUiState())
+    val readingUiState = _readingUiState.asStateFlow()
+
+
     init {
         // Observe the search history from the repository
         viewModelScope.launch {
             dictionaryRepository.searchHistoryFlow.collect { history ->
                 _uiState.update { it.copy(searchHistory = history) }
+                if (history.isNotEmpty()){
+                    _readingUiState.update {it.copy(
+                        info = "",
+                        content = "",
+                        position = "",
+                    )}
+                }
             }
         }
     }
@@ -41,6 +53,12 @@ class DictionaryViewModel(application: Application) : AndroidViewModel(applicati
     fun onQueryChange(query: String) {
         _uiState.update {
             currentState -> currentState.copy(searchQuery = query)
+        }
+        _readingUiState.update {
+            currentState -> currentState.copy(
+                info = query,
+                content = "",
+            )
         }
     }
 
@@ -61,17 +79,36 @@ class DictionaryViewModel(application: Application) : AndroidViewModel(applicati
                     isResultVisible = true
                 )
             }
+            _readingUiState.update {
+                it.copy(
+                    content = definition ?: "",
+                    info = trimmedQuery,
+                    position = dictionaryRepository.getDictionaryInfo()
+                    )
+            }
         }
     }
 
     /** Clears the search query text. */
     fun clearSearch() {
         _uiState.update { it.copy(searchQuery = "") }
+        _readingUiState.update { it.copy(
+            content = "",
+            info = "",
+            position = "",
+        ) }
+
     }
 
     /** Hides the search result dialog. */
+    @Suppress("unused")
     fun dismissResult() {
         _uiState.update { it.copy(isResultVisible = false, searchResult = null) }
+        _readingUiState.update { it.copy(
+            content = "",
+            info = "",
+            position = "",
+        ) }
     }
 
     // A companion object for the factory is a common pattern for easy access.

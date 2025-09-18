@@ -166,6 +166,7 @@ fun ReaderAppNavHost(
                 workId = workId,
                 isTranslation = false,
                 navController = navController,
+                screen = Screen.Vocab
             )
         }
 
@@ -176,6 +177,7 @@ fun ReaderAppNavHost(
                 workId = "test",
                 isTranslation = false,
                 navController = navController,
+                screen = Screen.Dictionary
             )
 
         }

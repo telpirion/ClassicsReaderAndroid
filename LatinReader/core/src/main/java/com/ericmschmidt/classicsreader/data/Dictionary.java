@@ -88,6 +88,14 @@ public class Dictionary  {
         return getEntry(randomEntryKey);
     }
 
+    /**
+     * Gets the dictionary info.
+     * @return WorkInfo
+     */
+    public WorkInfo getDictionaryInfo() {
+        return this.dictionaryInfo;
+    }
+
     // Gets the number of alphabet chapters in dictionary.
     private void initEntries() {
         try {
