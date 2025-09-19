@@ -119,7 +119,7 @@ fun ReadingScreen(
     var onPrev: () -> Unit
     var onNext: () -> Unit
 
-    Log.i("ReadingScreen", "workId: $currentWorkId, isTranslation: $isTranslation")
+    Log.i("ReadingScreen", "screen: $screen")
     if (screen == Screen.Vocab || screen == Screen.Dictionary){
         val dictionaryUiState = dictionaryViewModel.readingUiState.collectAsStateWithLifecycle()
         uiState = dictionaryUiState.value

@@ -28,15 +28,18 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -48,7 +51,10 @@ import com.telpirion.compose.ui.components.navOptionsBuilder
 import kotlinx.coroutines.launch
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
 import com.telpirion.compose.viewmodels.DictionaryViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 private val bottomNavigationItems = listOf(
     Screen.Library,
@@ -91,6 +97,27 @@ fun ReaderApp(
     )
     val dictionaryUiState by dictionaryViewModel.uiState.collectAsStateWithLifecycle()
 
+    // Get recently read from preferences
+    val context = LocalContext.current
+    val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
+    val recentlyRead: Flow<String> = context.dataStore.data
+        .map {
+                preferences ->
+            preferences[recentlyReadKey] ?: ""
+        }
+    var currentWorkId: String? = recentlyRead.collectAsState(initial = "").value
+
+    val navigationFunc : (String) -> Unit = { route ->
+        when (route){
+            Screen.Recent.route -> {
+                navController.navigate(
+                    route = Screen.Recent.createRoute(currentWorkId, false),
+                    builder = navOptionsBuilder(navController))
+            }
+            else -> navController.navigate(route, navOptionsBuilder(navController))
+        }
+    }
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         gesturesEnabled = isCompact,
@@ -98,7 +125,7 @@ fun ReaderApp(
             NavDrawerContent(
                 currentRoute = currentRoute,
                 onNavigate = { route ->
-                    navController.navigate(route, navOptionsBuilder)
+                    navigationFunc(route)
                     scope.launch { drawerState.close() }
                 }
             )
@@ -122,8 +149,10 @@ fun ReaderApp(
                 if (isCompact) {
                     ReaderBottomNavigationBar(
                         currentRoute = currentRoute,
-                        onNavigate = { route ->
-                            navController.navigate(route, navOptionsBuilder)
+                        onNavigate = {route ->
+                            if (drawerState.isClosed) {
+                                navigationFunc(route)
+                            }
                         }
                     )
                 }
@@ -138,7 +167,9 @@ fun ReaderApp(
                     ReaderNavigationRail(
                         currentRoute = currentRoute,
                         onNavigate = { route ->
-                            navController.navigate(route, navOptionsBuilder)
+                            if (drawerState.isClosed) {
+                                navigationFunc(route)
+                            }
                         }
                     )
                 }

@@ -80,12 +80,20 @@ public class Dictionary  {
      * @return String randomly selected dictionary entry.
      */
     public String getRandomEntry() {
+        String randomEntryKey = getRandomEntryKey();
+        return getEntry(randomEntryKey);
+    }
+
+    /**
+     * Gets a random dictionary entry entry key/head.
+     * @return String randomly selected dictionary
+     */
+    public String getRandomEntryKey() {
         Random random = new Random();
         int numberOfEntries = this.getEntryCount();
 
         int randomNumber = random.nextInt(numberOfEntries + 1);
-        String randomEntryKey = this._entryHeaders.get(randomNumber);
-        return getEntry(randomEntryKey);
+        return this._entryHeaders.get(randomNumber);
     }
 
     /**

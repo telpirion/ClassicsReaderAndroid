@@ -10,8 +10,10 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.ericmschmidt.classicsreader.data.DictionaryRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 // Represents the state of the dictionary UI
 data class DictionaryUiState(
@@ -70,8 +72,10 @@ class DictionaryViewModel(application: Application) : AndroidViewModel(applicati
         viewModelScope.launch {
             // Get definition from the repository
             val definition = dictionaryRepository.getDefinition(trimmedQuery)
-            // Persist the search term
-            dictionaryRepository.addSearchTerm(trimmedQuery)
+
+            if (!definition.isNullOrEmpty()) {
+                dictionaryRepository.addSearchTerm(trimmedQuery)
+            }
 
             _uiState.update {
                 it.copy(
@@ -81,7 +85,7 @@ class DictionaryViewModel(application: Application) : AndroidViewModel(applicati
             }
             _readingUiState.update {
                 it.copy(
-                    content = definition ?: "",
+                    content = definition ?: "Entry not found",
                     info = trimmedQuery,
                     position = dictionaryRepository.getDictionaryInfo()
                     )
@@ -109,6 +113,28 @@ class DictionaryViewModel(application: Application) : AndroidViewModel(applicati
             info = "",
             position = "",
         ) }
+    }
+
+    fun getVocab() {
+        // Use a randomly generated term as a fallback if there is no search history to pull from
+        var vocabTerm = dictionaryRepository.getRandom()
+        val vocabList = uiState.value.searchHistory.toMutableList()
+        val vocabTermSize = vocabList.size
+        if (vocabTermSize > 0) {
+            val random = Random.Default
+            vocabTerm = vocabList[random.nextInt(until = vocabTermSize)]
+        }
+        viewModelScope.launch {
+            val definition = dictionaryRepository.getDefinition(vocabTerm)
+            _readingUiState.update {
+
+                it.copy(
+                    content = definition ?: "Entry not found",
+                    info = vocabTerm,
+                    position = dictionaryRepository.getDictionaryInfo()
+                )
+            }
+        }
     }
 
     // A companion object for the factory is a common pattern for easy access.

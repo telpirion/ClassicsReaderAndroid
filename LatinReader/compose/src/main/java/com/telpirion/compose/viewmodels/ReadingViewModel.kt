@@ -1,10 +1,6 @@
 package com.telpirion.compose.viewmodels
 
 import android.app.Application
-import android.content.Context
-import android.util.Log
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +10,7 @@ import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
-import com.telpirion.compose.ui.dataStore
+import com.telpirion.compose.utils.writeStringSetting
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -78,14 +74,6 @@ class ReadingViewModel(
     fun goToPage(isNext: Boolean) {
         this.content?.goToPage(isNext)
         updateState()
-    }
-
-    // Store recently read in preferences here
-    suspend fun writeStringSetting(context: Context, key: Preferences.Key<String>, newValue: String) {
-        Log.d("writeStringSetting", "writeStringSetting: $newValue")
-        context.dataStore.edit { settings ->
-            settings[key] = newValue
-        }
     }
 
     private fun updateState() {

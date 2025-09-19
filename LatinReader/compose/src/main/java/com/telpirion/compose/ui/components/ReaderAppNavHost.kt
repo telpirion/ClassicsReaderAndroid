@@ -12,15 +12,12 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.NavType
@@ -64,7 +61,7 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
         CoreResources.string.nav_drawer_vocab,
         Icons.Default.School
     ) {
-        fun createRoute(source: String) = "vocab/$source"
+        fun createRoute() = "vocab/"
     }
 
     object Dictionary : Screen(
@@ -99,15 +96,16 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
 }
 
 // NavOptions builder function
-val navOptionsBuilder:  NavOptionsBuilder.() -> Unit = {
-    /* This is empty, but previously contained the following AI-generated code:
+fun navOptionsBuilder(navController: NavHostController):  NavOptionsBuilder.() -> Unit {
+    //This is empty, but previously contained the following AI-generated code:
 
-    popUpTo(navController.graph.findStartDestination().id) {
-        saveState = true
+    return {
+        popUpTo(navController.graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
     }
-    launchSingleTop = true
-    restoreState = true
-    */
 }
 
 @Composable
@@ -119,9 +117,6 @@ fun ReaderAppNavHost(
     ),
     navController: NavHostController,
 ) {
-    val textSize by rememberSaveable { mutableFloatStateOf(20f) }
-    val poemLines by rememberSaveable { mutableIntStateOf(5) }
-    val showPageControls by rememberSaveable { mutableStateOf(true) }
 
     NavHost(
         navController = navController,
@@ -163,9 +158,11 @@ fun ReaderAppNavHost(
         composable (
             Screen.Vocab.route
         ) { backStackEntry ->
-            val workId = "vocab"
+            LaunchedEffect(Unit) {
+                dictionaryViewModel.getVocab()
+            }
             ReadingScreen(
-                workId = workId,
+                workId = "",
                 isTranslation = false,
                 navController = navController,
                 screen = Screen.Vocab
@@ -195,6 +192,8 @@ fun ReaderAppNavHost(
         ) { backStackEntry ->
             MarkdownScreen(screen = Screen.Info)
         }
+
+
 
         composable(
             Screen.Settings.route,
