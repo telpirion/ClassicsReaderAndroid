@@ -105,7 +105,7 @@ fun ReaderApp(
                 preferences ->
             preferences[recentlyReadKey] ?: ""
         }
-    var currentWorkId: String? = recentlyRead.collectAsState(initial = "").value
+    val currentWorkId: String? = recentlyRead.collectAsState(initial = "").value
 
     val navigationFunc : (String) -> Unit = { route ->
         when (route){

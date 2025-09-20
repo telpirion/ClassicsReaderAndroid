@@ -24,15 +24,15 @@ import java.util.Locale;
  * location: encodeURI(_dataURI + "caes_bg_lat.xml"),
  * translation: encodeURI(_dataURI + "caes_bg_eng.xml")
  * workType: prose || poem
- *
+ * <p>
  * @author Eric Schmidt
- * @author https://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
 public class WorkInfo {
 
-    // TODO(telpirion): Add translater info
+    // TODO(telpirion): Add translator info
     private String _id;
     private String _author;
     private String _title;
@@ -43,7 +43,6 @@ public class WorkInfo {
     private int _workType;
     private ArrayList<TOCEntry> tocEntries;
     private Integer image;
-    private Integer descriptionLocation;
 
     // Unless specified otherwise, assume a 1-to-1 relationship
     // between line numbers in the English and source language
@@ -80,7 +79,7 @@ public class WorkInfo {
     /**
      * Gets this work's title in source language.
      *
-     * @return
+     * @return title as string
      */
     public String getTitle() {
         return this._title;
@@ -128,7 +127,7 @@ public class WorkInfo {
      * Override the toString method for this class to provide
      * a formatted string
      *
-     * @return
+     * @return a formatted string
      */
     @NonNull
     @Override
@@ -181,18 +180,18 @@ public class WorkInfo {
         return tocEntries.toArray(entries);
     }
 
+    /**
+     * Gets the number of table of content entries
+     * @return the number of table of content entries
+     */
     public int getTOCCount() {
         return this.tocEntries.size();
-    }
-
-    public void addTOCEntry(TOCEntry entry) {
-        this.tocEntries.add(entry);
     }
 
     /**
      * Specifies the type of work, poem or prose.
      */
-    public class WorkType {
+    public static class WorkType {
         public static final int PROSE = 1;
         public static final int POEM = 2;
     }
@@ -261,11 +260,6 @@ public class WorkInfo {
 
         public Builder image(Integer drawable) {
             this.workInfo.image = drawable;
-            return this;
-        }
-
-        public Builder descriptionLocation(Integer description) {
-            this.workInfo.descriptionLocation = description;
             return this;
         }
 

@@ -97,8 +97,6 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
 
 // NavOptions builder function
 fun navOptionsBuilder(navController: NavHostController):  NavOptionsBuilder.() -> Unit {
-    //This is empty, but previously contained the following AI-generated code:
-
     return {
         popUpTo(navController.graph.findStartDestination().id) {
             saveState = true
