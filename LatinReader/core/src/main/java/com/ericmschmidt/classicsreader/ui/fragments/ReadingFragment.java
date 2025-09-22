@@ -25,10 +25,8 @@ import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.data.Library;
 import com.ericmschmidt.classicsreader.data.Manifest;
 import com.ericmschmidt.classicsreader.data.ReadingViewModel;
-import com.ericmschmidt.classicsreader.data.WorkInfo;
 import com.ericmschmidt.classicsreader.R;
-
-import java.util.Objects;
+import com.ericmschmidt.classicsreader.data.WorkInfo;
 
 /** Displays the text of a work (source or translation).
  *  <br/>

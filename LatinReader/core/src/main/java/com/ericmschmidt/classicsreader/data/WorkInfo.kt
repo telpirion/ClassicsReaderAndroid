@@ -1,14 +1,9 @@
-package com.ericmschmidt.classicsreader.data;
+package com.ericmschmidt.classicsreader.data
 
-import androidx.annotation.NonNull;
-
-import com.ericmschmidt.classicsreader.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Locale;
+import com.ericmschmidt.classicsreader.R
+import java.util.Formatter
+import java.util.Locale
+import kotlin.collections.ArrayList
 
 /**
  * Contains the data for a work contained in the app.
@@ -27,101 +22,64 @@ import java.util.Locale;
  * <p>
  * @author Eric Schmidt
  * @author <a href="https://telpirion.com">...</a>
- * @version 1.5
+ * @version 2.0
  * @since 1.0
  */
-public class WorkInfo {
+class WorkInfo private constructor() {
 
-    // TODO(telpirion): Add translator info
-    private String _id;
-    private String _author;
-    private String _title;
-    private String _englishTitle;
-    private String _englishAuthor;
-    private int _location;
-    private int _englishLocation;
-    private int _workType;
-    private ArrayList<TOCEntry> tocEntries;
-    private Integer image;
+    var id: String? = null
+        private set
+    var author: String? = null
+        private set
+    var title: String? = null
+        private set
+    var englishTitle: String? = null
+        private set
+    var englishAuthor: String? = null
+        private set
+    var location: Int = 0
+        private set
+    var englishLocation: Int = 0
+        private set
+    var workType: Int = 0
+        private set
+    private var tocEntries: ArrayList<TOCEntry> = ArrayList()
+    var image: Int? = null
+        private set
+    var description: String? = null
+    var translator: String? = null
+    var editor: String? = null
 
     // Unless specified otherwise, assume a 1-to-1 relationship
     // between line numbers in the English and source language
-    private int _offset = 1;
-    private int _englishOffset = 1;
+    var offset: Int = 1
+        private set
+    var englishOffset: Int = 1
+        private set
 
-    private static final List<Integer> defaultImages = Arrays.asList(
+    companion object {
+        private val defaultImages = listOf(
             R.drawable.work_default_1,
             R.drawable.work_default_2,
             R.drawable.work_default_3
-    );
-
-    // Private default constructor.
-    private WorkInfo() {}
-
-    /**
-     * Gets this work's ID.
-     *
-     * @return ID as string
-     */
-    public String getId() {
-        return this._id;
+        )
     }
 
     /**
-     * Gets this work's author in source language.
+     * Gets the table of content entries
      *
-     * @return author name as string
+     * @return Array of TOCEntry
      */
-    public String getAuthor() {
-        return this._author;
+    fun getTocEntries(): Array<TOCEntry> {
+        return tocEntries.toTypedArray()
     }
 
     /**
-     * Gets this work's title in source language.
-     *
-     * @return title as string
+     * Gets the number of table of content entries
+     * @return the number of table of content entries
      */
-    public String getTitle() {
-        return this._title;
-    }
-
-    /**
-     * Gets this work's title in English.
-     *
-     * @return title in English.
-     */
-    public String getEnglishTitle() {
-        return this._englishTitle;
-    }
-
-    /**
-     * Gets this work's author's name in English.
-     *
-     * @return author's name as a string.
-     */
-    public String getEnglishAuthor() {
-        return this._englishAuthor;
-    }
-
-    /**
-     * Gets the location of the file for this work.
-     *
-     * @return the file location as a string.
-     */
-    public int getLocation() {
-        return this._location;
-    }
-
-    /**
-     * Gets the location of the file for the English translation.
-     *
-     * @return the location of the file of the English translation.
-     */
-    public int getEnglishLocation() {
-        return this._englishLocation;
-    }
-
-    public int getImage() { return this.image; }
+    val tocCount: Int
+        get() = this.tocEntries.size
 
     /**
      * Override the toString method for this class to provide
@@ -129,142 +87,72 @@ public class WorkInfo {
      *
      * @return a formatted string
      */
-    @NonNull
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Formatter formatter = new Formatter(sb, Locale.US);
-        return formatter.format("%s %s %s %s %s %s",
-                this._id,
-                this._title,
-                this._author,
-                this._englishTitle,
-                this._englishAuthor,
-                this._location).toString();
-    }
-
-    /**
-     * Gets the type of text that this info represents.
-     *
-     * @return the WorkType for this work.
-     */
-    public int getWorkType() {
-        return this._workType;
-    }
-
-    /**
-     * Gets the number of lines offset in the source text
-     *
-     * @return int lines offset
-     */
-    public int getOffset() {
-        return this._offset;
-    }
-
-    /**
-     * Gets the number of lines offset in the English translation
-     *
-     * @return int lines offset
-     */
-    public int getEnglishOffset() {
-        return this._englishOffset;
-    }
-
-    /**
-     * Gets the table of content entries
-     *
-     * @return ArrayList
-     */
-    public TOCEntry[] getTocEntries() {
-        TOCEntry[] entries = new TOCEntry[tocEntries.size()];
-        return tocEntries.toArray(entries);
-    }
-
-    /**
-     * Gets the number of table of content entries
-     * @return the number of table of content entries
-     */
-    public int getTOCCount() {
-        return this.tocEntries.size();
+    override fun toString(): String {
+        val sb = StringBuilder()
+        val formatter = Formatter(sb, Locale.US)
+        return formatter.format(
+            "%s %s %s %s %s %s",
+            this.id,
+            this.title,
+            this.author,
+            this.englishTitle,
+            this.englishAuthor,
+            this.location
+        ).toString()
     }
 
     /**
      * Specifies the type of work, poem or prose.
      */
-    public static class WorkType {
-        public static final int PROSE = 1;
-        public static final int POEM = 2;
+    object WorkType {
+        const val PROSE = 1
+        const val POEM = 2
     }
 
     /**
      * Builder class for generating new WorkInfo objects.
      */
-    public static class Builder {
+    class Builder(id: String) {
 
-        private final WorkInfo workInfo;
+        private val workInfo: WorkInfo = WorkInfo()
 
-        public Builder(String id) {
-            this.workInfo = new WorkInfo();
-            this.workInfo._id = id;
-            this.workInfo.tocEntries = new ArrayList<>();
+        init {
+            workInfo.id = id
+            workInfo.tocEntries = ArrayList()
 
-            int idHash = Math.abs(id.hashCode());
-            this.workInfo.image = defaultImages.get(idHash % defaultImages.size());
+            val idHash = kotlin.math.abs(id.hashCode())
+            workInfo.image = defaultImages[idHash % defaultImages.size]
         }
 
-        public Builder author(String author) {
-            this.workInfo._author = author;
-            return this;
+        fun author(author: String) = apply { this.workInfo.author = author }
+
+        fun title(title: String) = apply { this.workInfo.title = title }
+
+        fun englishTitle(englishTitle: String) = apply { this.workInfo.englishTitle = englishTitle }
+
+        fun englishAuthor(englishAuthor: String) = apply { this.workInfo.englishAuthor = englishAuthor }
+
+        fun location(location: Int) = apply { this.workInfo.location = location }
+
+        fun englishLocation(englishLocation: Int) = apply { this.workInfo.englishLocation = englishLocation }
+
+        fun workType(workType: Int) = apply { this.workInfo.workType = workType }
+
+        fun offset(offset: Int, englishOffset: Int) = apply {
+            this.workInfo.offset = offset
+            this.workInfo.englishOffset = englishOffset
         }
 
-        public Builder title(String title) {
-            this.workInfo._title = title;
-            return this;
-        }
+        fun tocEntry(entry: TOCEntry) = apply { this.workInfo.tocEntries.add(entry) }
 
-        public Builder englishTitle(String englishTitle) {
-            this.workInfo._englishTitle = englishTitle;
-            return this;
-        }
+        fun image(drawable: Int?) = apply { this.workInfo.image = drawable }
+        
+        fun description(description: String?) = apply { this.workInfo.description = description}
 
-        public Builder englishAuthor(String englishAuthor) {
-            this.workInfo._englishAuthor = englishAuthor;
-            return this;
-        }
+        fun translator(translator: String?) = apply { this.workInfo.translator = translator}
 
-        public Builder location(int location) {
-            this.workInfo._location = location;
-            return this;
-        }
+        fun editor(editor: String?) = apply { this.workInfo.editor = editor}
 
-        public Builder englishLocation(int englishLocation) {
-            this.workInfo._englishLocation = englishLocation;
-            return this;
-        }
-
-        public Builder workType(int workType) {
-            this.workInfo._workType = workType;
-            return this;
-        }
-
-        public Builder offset(int offset, int englishOffset) {
-            this.workInfo._offset = offset;
-            this.workInfo._englishOffset = englishOffset;
-            return this;
-        }
-
-        public Builder TOCEntry(TOCEntry entry) {
-            this.workInfo.tocEntries.add(entry);
-            return this;
-        }
-
-        public Builder image(Integer drawable) {
-            this.workInfo.image = drawable;
-            return this;
-        }
-
-        public WorkInfo build() {
-            return this.workInfo;
-        }
+        fun build(): WorkInfo = this.workInfo
     }
 }
