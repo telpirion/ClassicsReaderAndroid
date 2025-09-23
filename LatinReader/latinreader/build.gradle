@@ -24,13 +24,10 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_24 // Be sure to verify Java version
+        targetCompatibility = JavaVersion.VERSION_24
     }
-    //compileOptions {
-    //    sourceCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
-    //    targetCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
-    //}
 }
 
 dependencies {
@@ -38,4 +35,9 @@ dependencies {
     implementation project(':core')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.core:core-ktx:1.17.0'
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
 }
