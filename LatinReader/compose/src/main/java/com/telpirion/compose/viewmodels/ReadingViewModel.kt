@@ -5,9 +5,8 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.R as CoreResources
 import com.ericmschmidt.classicsreader.data.Library
-import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
+import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
 import com.telpirion.compose.utils.writeStringSetting
@@ -15,15 +14,17 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import com.ericmschmidt.classicsreader.R as CoreResources
+import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
 
 data class ReadingUiState(
     val content: String = "",
     val info: String = "",
     val position: String = "",
     val tocAvailable: Boolean = false,
-    val isTranslation: Boolean = false
+    val isTranslation: Boolean = false,
+    val toc: Array<TOCEntry>? = emptyList<TOCEntry>().toTypedArray(),
 )
-
 class ReadingViewModel(
     application: Application,
     workId: String?,
@@ -76,6 +77,14 @@ class ReadingViewModel(
         updateState()
     }
 
+    fun goToChapter(entry: TOCEntry){
+        val book = entry.book
+        val page = entry.line
+        this.content?.setCurrentBook(book)
+        this.content?.setCurrentLine(page)
+        updateState()
+    }
+
     @Suppress("UNCHECKED_CAST")
     private fun updateState() {
         contentLines = listOf(content?.currentPage) as List<*> as List<String>
@@ -84,7 +93,8 @@ class ReadingViewModel(
             info = workInfo?.title ?: "Unknown Work",
             position = content?.readingPositionString as String,
             tocAvailable = workInfo?.getTocEntries()?.isNotEmpty() ?: false,
-            isTranslation = isTranslation
+            isTranslation = isTranslation,
+            toc = workInfo?.getTocEntries()
         )
     }
 
