@@ -28,6 +28,9 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Devices.PIXEL
+import androidx.compose.ui.tooling.preview.Devices.TABLET
+import androidx.compose.ui.tooling.preview.Devices.TV_1080p
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -38,9 +41,29 @@ import com.telpirion.compose.ui.theme.Purple40
 import com.telpirion.compose.ui.theme.PurpleGrey80
 
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, device = PIXEL)
 @Composable
-fun DetailsPanePreview(
+fun DetailsPanePreviewPixel(
+    @PreviewParameter(LibraryPreviewProvider::class) library: Library
+) {
+    val works = library.works
+    val selectedItem = SelectedItem(0)
+    DetailsPane(item = selectedItem, works = works, onReadClick = {})
+}
+
+@Preview(showBackground = true, device = TABLET)
+@Composable
+fun DetailsPanePreviewTablet(
+    @PreviewParameter(LibraryPreviewProvider::class) library: Library
+) {
+    val works = library.works
+    val selectedItem = SelectedItem(0)
+    DetailsPane(item = selectedItem, works = works, onReadClick = {})
+}
+
+@Preview(showBackground = true, device = TV_1080p)
+@Composable
+fun DetailsPanePreviewTV(
     @PreviewParameter(LibraryPreviewProvider::class) library: Library
 ) {
     val works = library.works
