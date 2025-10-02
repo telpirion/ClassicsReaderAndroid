@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.NavType
@@ -98,11 +97,12 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
 // NavOptions builder function
 fun navOptionsBuilder(navController: NavHostController):  NavOptionsBuilder.() -> Unit {
     return {
-        popUpTo(navController.graph.findStartDestination().id) {
+        /*popUpTo(navController.graph.findStartDestination().id) {
             saveState = true
         }
         launchSingleTop = true
         restoreState = true
+        */
     }
 }
 
@@ -125,14 +125,14 @@ fun ReaderAppNavHost(
             Screen.Library.route,
         ) { backStackEntry ->
             // Pass the NavController here
-            NavigableListDetailPaneScaffoldFull(navController = navController)
+            ListDetailPane(navController = navController)
         }
 
         composable(
             Screen.Translation.route,
         ) { backStackEntry ->
             // And here as well
-            NavigableListDetailPaneScaffoldFull(navController = navController,
+            ListDetailPane(navController = navController,
                 screen = Screen.Translation)
         }
 

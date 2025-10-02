@@ -2,6 +2,12 @@ package com.telpirion.compose.ui.components
 
 import android.content.Context
 import android.os.Parcelable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
@@ -10,6 +16,7 @@ import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaf
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -32,15 +39,16 @@ import kotlinx.parcelize.Parcelize
 fun NavigableListDetailPaneScaffoldFullPreview(
 )  {
     // The preview doesn't have a NavController, so the button won't navigate.
-    NavigableListDetailPaneScaffoldFull(navController = null)
+    ListDetailPane(navController = null)
 }
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-fun NavigableListDetailPaneScaffoldFull(
+fun ListDetailPane(
     modifier: Modifier = Modifier,
     navController: NavController? = null,
     screen: Screen = Screen.Library,
+    onDismiss: () -> Unit = {}
 ) {
 
     val context : Context = MyApplication.getContext()
@@ -106,6 +114,12 @@ fun NavigableListDetailPaneScaffoldFull(
                                 else -> navController?.navigate(Screen.Recent.createRoute(workId, false))
                             }
 
+                        },
+                        onDismiss = {
+                            scope.launch {
+                                scaffoldNavigator.navigateBack()
+                                onDismiss()
+                            }
                         }
                     )
                 }

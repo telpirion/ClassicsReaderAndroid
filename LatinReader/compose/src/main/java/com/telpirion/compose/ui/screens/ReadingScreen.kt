@@ -3,7 +3,6 @@ package com.telpirion.compose.ui.screens
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -12,8 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -27,6 +24,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.SupportingPaneScaffoldRole
+import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
 import androidx.compose.material3.adaptive.navigation.NavigableSupportingPaneScaffold
 import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
@@ -52,19 +50,24 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.*
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES_DEFAULT
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.SHOW_PAGE_CONTROLS
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE_DEFAULT
 import com.telpirion.compose.MainActivity
 import com.telpirion.compose.ui.components.Screen
+import com.telpirion.compose.ui.components.TableOfContentsPane
+import com.telpirion.compose.ui.components.TranslationPane
 import com.telpirion.compose.ui.dataStore
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import com.telpirion.compose.viewmodels.ReadingUiState
 import com.telpirion.compose.viewmodels.ReadingViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import com.ericmschmidt.classicsreader.R as CoreResources
 import kotlinx.coroutines.launch
+import com.ericmschmidt.classicsreader.R as CoreResources
 
 private sealed class SupportingPaneContent {
     object Hidden : SupportingPaneContent()
@@ -254,21 +257,33 @@ fun ReadingScreen(
                 SupportingPaneContent.Translation -> {
                     if (currentWorkId != null) {
                         TranslationPane(
-                            workId = currentWorkId,
                             poemLines = poemLines.collectAsState(initial = POEM_LINES_DEFAULT.toInt()).value,
                             textSizeSp = textSizeSp,
-                            lineHeight = lineSpacing
+                            lineHeight = lineSpacing,
+                            onClose = {
+                                scope.launch {
+                                    supportingPaneContent = SupportingPaneContent.Hidden
+                                    scaffoldNavigator.navigateBack(
+                                        backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
+                                }
+                            }
                         )
                     }
                 }
                 SupportingPaneContent.TableOfContents -> {
                     if (viewModel != null) {
                         TableOfContentsPane(
-                            toc = uiState.toc,
                             onTocEntryClick = { index ->
                                 viewModel.goToChapter(index)
                                 scope.launch {
-                                    scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Supporting)
+                                    supportingPaneContent = SupportingPaneContent.Hidden
+                                    scaffoldNavigator.navigateBack(
+                                        backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
+                                }
+                            },
+                            onClose = {
+                                scope.launch {
+                                    scaffoldNavigator.navigateBack()
                                 }
                             }
                         )
@@ -352,64 +367,8 @@ private fun ReadingContent(
     }
 }
 
-@Composable
-private fun TableOfContentsPane(
-    toc: Array<TOCEntry>?,
-    onTocEntryClick: (TOCEntry) -> Unit
-) {
-    if (toc == null) {
-        return
-    }
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(toc) { entry ->
-            Text(
-                text = entry.title,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onTocEntryClick(entry) }
-                    .padding(16.dp)
-            )
-        }
-    }
-}
 
-@Composable
-private fun TranslationPane(
-    workId: String,
-    poemLines: Int,
-    textSizeSp: Float,
-    lineHeight: Float,
-    context: Context = LocalContext.current
-) {
-    val viewModel: ReadingViewModel = viewModel(
-        key = "translation_$workId", // Unique key for the translation VM
-        factory = ReadingViewModel.Factory(
-            application = context.applicationContext as Application,
-            workId = workId,
-            isTranslation = true,
-            poemLines = poemLines
-        )
-    )
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
-    ) {
-        Text(
-            text = uiState.info,
-            style = MaterialTheme.typography.titleMedium
-        )
-        Text(
-            text = uiState.content,
-            fontSize = textSizeSp.sp,
-            lineHeight = lineHeight.sp,
-            modifier = Modifier.padding(top = 16.dp)
-        )
-    }
-}
 
 @Composable
 private fun PageControls(

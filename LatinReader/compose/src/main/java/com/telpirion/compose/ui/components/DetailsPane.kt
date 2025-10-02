@@ -2,6 +2,7 @@ package com.telpirion.compose.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,11 +12,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ButtonDefaults.buttonColors
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.lightColorScheme
@@ -48,7 +53,7 @@ fun DetailsPanePreviewPixel(
 ) {
     val works = library.works
     val selectedItem = SelectedItem(0)
-    DetailsPane(item = selectedItem, works = works, onReadClick = {})
+    DetailsPane(item = selectedItem, works = works, onReadClick = {}, onDismiss = {})
 }
 
 @Preview(showBackground = true, device = TABLET)
@@ -58,7 +63,7 @@ fun DetailsPanePreviewTablet(
 ) {
     val works = library.works
     val selectedItem = SelectedItem(0)
-    DetailsPane(item = selectedItem, works = works, onReadClick = {})
+    DetailsPane(item = selectedItem, works = works, onReadClick = {}, onDismiss = {})
 }
 
 @Preview(showBackground = true, device = TV_1080p)
@@ -68,7 +73,7 @@ fun DetailsPanePreviewTV(
 ) {
     val works = library.works
     val selectedItem = SelectedItem(0)
-    DetailsPane(item = selectedItem, works = works, onReadClick = {})
+    DetailsPane(item = selectedItem, works = works, onReadClick = {}, onDismiss = {})
 }
 
 @Composable
@@ -88,96 +93,105 @@ fun BoldedText(boldText: String, normalText: String) {
 fun DetailsPane(
     item: SelectedItem,
     works: Array<WorkInfo>,
-    onReadClick: (String) -> Unit
+    onReadClick: (String) -> Unit,
+    onDismiss: () -> Unit
 ) {
     val workInfo = works.getOrNull(item.id)
 
-    Card(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        colors = CardColors(
-            containerColor = PurpleGrey80,
-            contentColor = lightColorScheme().onSurface,
-            disabledContainerColor = lightColorScheme().onSurface.copy(alpha = 0.12f),
-            disabledContentColor = lightColorScheme().onSurface.copy(alpha = 0.38f)
-        )
-    ) {
-        if (workInfo != null) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(24.dp), // Inner padding for the content
-                horizontalAlignment = Alignment.Start
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Start
+    Box(modifier = Modifier.fillMaxSize()) {
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            colors = CardColors(
+                containerColor = PurpleGrey80,
+                contentColor = lightColorScheme().onSurface,
+                disabledContainerColor = lightColorScheme().onSurface.copy(alpha = 0.12f),
+                disabledContentColor = lightColorScheme().onSurface.copy(alpha = 0.38f)
+            )
+        ) {
+            if (workInfo != null) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(24.dp), // Inner padding for the content
+                    horizontalAlignment = Alignment.Start
                 ) {
-                    Image(
-                        painter = painterResource(id = workInfo.image as Int),
-                        contentDescription = "${workInfo.title} cover art",
-                        modifier = Modifier.size(120.dp)
-                    )
-                    Column(
-                        modifier = Modifier.padding(start = 16.dp)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start
                     ) {
-                        // 2. Title
-                        Text(
-                            text = workInfo.title as String,
-                            style = MaterialTheme.typography.headlineSmall
+                        Image(
+                            painter = painterResource(id = workInfo.image as Int),
+                            contentDescription = "${workInfo.title} cover art",
+                            modifier = Modifier.size(120.dp)
                         )
+                        Column(
+                            modifier = Modifier.padding(start = 16.dp)
+                        ) {
+                            // 2. Title
+                            Text(
+                                text = workInfo.title as String,
+                                style = MaterialTheme.typography.headlineSmall
+                            )
 
-                        Spacer(Modifier.height(8.dp))
+                            Spacer(Modifier.height(8.dp))
 
-                        // 3. Author
-                        Text(
-                            text = workInfo.author as String,
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+                            // 3. Author
+                            Text(
+                                text = workInfo.author as String,
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+
                     }
 
-                }
-
-                Spacer(Modifier.height(24.dp))
-                Button(
-                    onClick = { onReadClick(workInfo.id as String) },
-                    modifier = Modifier
-                        .width(120.dp),
-                    colors = buttonColors(
-                        containerColor = Purple40,
-                        contentColor = Color.White
+                    Spacer(Modifier.height(24.dp))
+                    Button(
+                        onClick = { onReadClick(workInfo.id as String) },
+                        modifier = Modifier
+                            .width(120.dp),
+                        colors = buttonColors(
+                            containerColor = Purple40,
+                            contentColor = Color.White
+                        )
+                    ) {
+                        Text("Read")
+                    }
+                    Spacer(Modifier.height(24.dp))
+                    HorizontalDivider(
+                        thickness = 2.dp,
+                        color = MaterialTheme.colorScheme.onBackground
                     )
-                ) {
-                    Text("Read")
+                    Spacer(Modifier.height(24.dp))
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        BoldedText("Translator",
+                            workInfo.translator as String)
+                        BoldedText("Editor",
+                            workInfo.editor as String)
+                        BoldedText("Description",
+                            workInfo.description as String)
+                    }
                 }
-                Spacer(Modifier.height(24.dp))
-                HorizontalDivider(
-                    thickness = 2.dp,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-                Spacer(Modifier.height(24.dp))
+            } else {
+                // A placeholder view for when no item is selected.
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    BoldedText("Translator",
-                        workInfo.translator as String)
-                    BoldedText("Editor",
-                        workInfo.editor as String)
-                    BoldedText("Description",
-                        workInfo.description as String)
+                    Text("Select a work from the list.")
                 }
             }
-        } else {
-            // A placeholder view for when no item is selected.
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text("Select a work from the list.")
-            }
+        }
+        IconButton(
+            onClick = onDismiss,
+            modifier = Modifier.align(Alignment.TopEnd).padding(16.dp)
+        ) {
+            Icon(Icons.Default.Close, contentDescription = "Close")
         }
     }
 }

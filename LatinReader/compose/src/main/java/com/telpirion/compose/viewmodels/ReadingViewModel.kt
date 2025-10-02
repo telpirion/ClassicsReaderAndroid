@@ -24,7 +24,34 @@ data class ReadingUiState(
     val tocAvailable: Boolean = false,
     val isTranslation: Boolean = false,
     val toc: Array<TOCEntry>? = emptyList<TOCEntry>().toTypedArray(),
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ReadingUiState
+
+        if (tocAvailable != other.tocAvailable) return false
+        if (isTranslation != other.isTranslation) return false
+        if (content != other.content) return false
+        if (info != other.info) return false
+        if (position != other.position) return false
+        if (!toc.contentEquals(other.toc)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = tocAvailable.hashCode()
+        result = 31 * result + isTranslation.hashCode()
+        result = 31 * result + content.hashCode()
+        result = 31 * result + info.hashCode()
+        result = 31 * result + position.hashCode()
+        result = 31 * result + (toc?.contentHashCode() ?: 0)
+        return result
+    }
+}
+
 class ReadingViewModel(
     application: Application,
     workId: String?,
