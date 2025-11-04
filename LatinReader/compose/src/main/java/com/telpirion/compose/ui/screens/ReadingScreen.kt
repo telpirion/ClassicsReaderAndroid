@@ -262,7 +262,6 @@ fun ReadingScreen(
                             lineHeight = lineSpacing,
                             onClose = {
                                 scope.launch {
-                                    supportingPaneContent = SupportingPaneContent.Hidden
                                     scaffoldNavigator.navigateBack(
                                         backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
                                 }
@@ -276,7 +275,6 @@ fun ReadingScreen(
                             onTocEntryClick = { index ->
                                 viewModel.goToChapter(index)
                                 scope.launch {
-                                    supportingPaneContent = SupportingPaneContent.Hidden
                                     scaffoldNavigator.navigateBack(
                                         backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
                                 }

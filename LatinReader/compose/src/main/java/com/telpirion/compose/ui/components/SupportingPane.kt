@@ -112,7 +112,7 @@ fun TranslationPane(
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = uiState.content,
+                    text = uiState.translationContent,
                     fontSize = textSizeSp.sp,
                     lineHeight = lineHeight.sp,
                     modifier = Modifier.padding(top = 16.dp)

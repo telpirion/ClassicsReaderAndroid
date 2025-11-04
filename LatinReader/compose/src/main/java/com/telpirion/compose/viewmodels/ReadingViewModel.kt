@@ -19,6 +19,7 @@ import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
 
 data class ReadingUiState(
     val content: String = "",
+    val translationContent: String = "",
     val info: String = "",
     val position: String = "",
     val tocAvailable: Boolean = false,
@@ -65,7 +66,10 @@ class ReadingViewModel(
     private var workInfo: WorkInfo? = null
     private var contentLines: List<String> = emptyList()
 
+    private var translationContentLines: List<String> = emptyList()
+
     private var content: RVM? = null
+    private var translationContent: RVM? = null
 
     val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
 
@@ -77,9 +81,12 @@ class ReadingViewModel(
 
             // TODO(telpirion): integrate old ReaderViewModel with new one
             content = RVM(workInfo, isTranslation, poemLines, application)
+            translationContent = RVM(workInfo, !isTranslation, poemLines, application)
 
             @Suppress("UNCHECKED_CAST")
             contentLines = listOf(content?.currentPage) as List<*> as List<String>
+            @Suppress("UNCHECKED_CAST")
+            translationContentLines = listOf(translationContent?.currentPage) as List<*> as List<String>
 
             updateState()
 
@@ -115,8 +122,10 @@ class ReadingViewModel(
     @Suppress("UNCHECKED_CAST")
     private fun updateState() {
         contentLines = listOf(content?.currentPage) as List<*> as List<String>
+        translationContentLines = listOf(translationContent?.currentPage) as List<*> as List<String>
         _uiState.value = ReadingUiState(
             content = contentLines.joinToString("\n"),
+            translationContent = translationContentLines.joinToString("\n"),
             info = workInfo?.title ?: "Unknown Work",
             position = content?.readingPositionString as String,
             tocAvailable = workInfo?.getTocEntries()?.isNotEmpty() ?: false,
