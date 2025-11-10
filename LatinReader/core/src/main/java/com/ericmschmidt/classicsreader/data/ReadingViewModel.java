@@ -43,7 +43,7 @@ public class ReadingViewModel {
         this._isTranslation = isTranslation;
         this.application = application;
 
-        if (!loadLastReadingPosition()) { // This work hasn't been read yet.
+        if (!loadLastReadingPosition()) {
             this._currentLineIndex = 0;
             this._currentBookIndex = 0;
         }

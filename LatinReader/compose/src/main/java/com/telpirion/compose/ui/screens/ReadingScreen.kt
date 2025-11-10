@@ -257,7 +257,7 @@ fun ReadingScreen(
                 SupportingPaneContent.Translation -> {
                     if (currentWorkId != null) {
                         TranslationPane(
-                            poemLines = poemLines.collectAsState(initial = POEM_LINES_DEFAULT.toInt()).value,
+                            isTranslation = isTranslation,
                             textSizeSp = textSizeSp,
                             lineHeight = lineSpacing,
                             onClose = {
