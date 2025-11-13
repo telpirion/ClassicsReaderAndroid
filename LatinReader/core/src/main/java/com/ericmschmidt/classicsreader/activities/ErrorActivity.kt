@@ -1,41 +1,34 @@
-package com.ericmschmidt.classicsreader.activities;
+package com.ericmschmidt.classicsreader.activities
 
-import android.os.Bundle;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.ericmschmidt.classicsreader.R
+import com.ericmschmidt.classicsreader.databinding.ActivityErrorBinding
 
-import com.ericmschmidt.classicsreader.R;
-
-/** Error message activity for this app.
+/**
+ * Error message activity for this app.
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.1
  */
-public class ErrorActivity extends AppCompatActivity {
+class ErrorActivity : AppCompatActivity() {
 
-    public final static String ERROR_KEY = "com.ericmschmidt.latinreader.ERROR";
+    private lateinit var binding: ActivityErrorBinding
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityErrorBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setContentView(R.layout.activity_error);
-        TextView errorMessageText = findViewById(R.id.error_activity_content);
-        String errorMessage = getString(R.string.default_error_message);
+        val errorMessage = savedInstanceState?.getString(ERROR_KEY)
+            ?: intent.extras?.getString(ERROR_KEY)
+            ?: getString(R.string.default_error_message)
 
-        Bundle extras = getIntent().getExtras();
+        binding.errorActivityContent.text = errorMessage
+    }
 
-        if ((savedInstanceState != null) &&
-                savedInstanceState.containsKey(ERROR_KEY)) {
-            errorMessage = savedInstanceState.getString(ERROR_KEY);
-
-        } else if (extras != null) {
-            errorMessage = extras.getString(ERROR_KEY);
-
-        }
-
-        errorMessageText.setText(errorMessage);
+    companion object {
+        const val ERROR_KEY = "com.ericmschmidt.latinreader.ERROR"
     }
 }
-
