@@ -20,7 +20,8 @@ public class ResourceHelper {
      * @return an InputStream from the specified resource.
      */
     public static InputStream getResourceStream(int resourceID) {
-        Context context = MyApplication.getContext();
+        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
+        Context context = applicationInstance.getContext();
         Resources resources = context.getResources();
 
         return resources.openRawResource(resourceID);

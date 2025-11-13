@@ -24,10 +24,10 @@ class HelpFragment : Fragment() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    val markdownView = view.findViewById<MarkdownView>(R.id.help_markdown_view)
-    val helpString = buildHelpString(view.context)
-    markdownView.setMarkDownText(helpString)
+      super.onViewCreated(view, savedInstanceState)
+      val markdownView = view.findViewById<MarkdownView>(R.id.help_markdown_view)
+      val helpString = buildHelpString(view.context)
+      markdownView.setMarkDownText(helpString)
   }
 
   /**

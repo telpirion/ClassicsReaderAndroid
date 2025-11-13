@@ -1,6 +1,6 @@
 package com.ericmschmidt.classicsreader.utilities;
 
-import com.ericmschmidt.classicsreader.MyApplication;
+import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class DictionaryXMLHelper extends XmlParserHelper {
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
-            MyApplication.logError(errorMessage);
+            logError(errorMessage);
         } finally {
             stream.close();
         }
@@ -114,7 +114,7 @@ public class DictionaryXMLHelper extends XmlParserHelper {
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
-            MyApplication.logError(errorMessage);
+            logError(errorMessage);
         } finally {
             stream.close();
         }

@@ -1,8 +1,9 @@
 package com.ericmschmidt.classicsreader.data;
 
+import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+
 import java.io.InputStream;
 
-import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.utilities.ResourceHelper;
 import com.ericmschmidt.classicsreader.utilities.WorkXMLParser;
 
@@ -67,7 +68,7 @@ public class Work {
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
-            MyApplication.logError(errorMessage);
+            logError(errorMessage);
         }
     }
 
@@ -87,7 +88,7 @@ public class Work {
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
-            MyApplication.logError(errorMessage);
+            logError(errorMessage);
         }
 
         return book;

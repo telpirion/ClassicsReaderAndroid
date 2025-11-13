@@ -7,7 +7,6 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.ericmschmidt.greekreader.R;
-import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 import com.ericmschmidt.classicsreader.utilities.ResourceHelper;
 
