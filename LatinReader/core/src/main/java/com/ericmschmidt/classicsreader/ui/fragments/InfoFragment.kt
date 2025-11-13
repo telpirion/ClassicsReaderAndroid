@@ -16,48 +16,49 @@ import java.io.BufferedReader
  */
 class InfoFragment : Fragment() {
 
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?,
-  ): View? {
-    return inflater.inflate(R.layout.fragment_info, container, false)
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    val markdownView = view.findViewById<MarkdownView>(R.id.info_markdown_view)
-
-    // Get the app context
-    val context = MyApplication.getContext()
-    val resources = context.resources
-    val packageManager = context.packageManager
-    val packageName = context.packageName
-
-    // Open the info.md file from the resources
-    val inputStream = resources.openRawResource(R.raw.info)
-    var infoString = inputStream.bufferedReader().use(BufferedReader::readText)
-
-    // Get the app name, version name, and version number info
-    val appName = context.getString(R.string.app_name)
-    val appDescription = context.getString(R.string.app_description)
-    val versionInfo = packageManager.getPackageInfo(packageName, 0)
-    val versionName = versionInfo.versionName
-
-    // longVersionCode is an Android Pie feature
-    val versionNumber = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-      versionInfo.longVersionCode
-    } else {
-      versionInfo.versionCode
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        return inflater.inflate(R.layout.fragment_info, container, false)
     }
 
-    // Build the Markdown-formatted information screen
-    // It would be SO NICE to have a templating engine for this
-    infoString = infoString.replace("{{appName}}", appName)
-    infoString = infoString.replace("{{appDescription}}", appDescription)
-    infoString = infoString.replace("{{versionName}}", versionName.toString())
-    infoString = infoString.replace("{{versionCode}}", versionNumber.toString())
-    
-    markdownView.setMarkDownText(infoString)
-  }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val markdownView = view.findViewById<MarkdownView>(R.id.info_markdown_view)
+        val applicationInstance = MyApplication.applicationInstance()
+
+        // Get the app context
+        val context = applicationInstance.context
+        val resources = context.resources
+        val packageManager = context.packageManager
+        val packageName = context.packageName
+
+        // Open the info.md file from the resources
+        val inputStream = resources.openRawResource(R.raw.info)
+        var infoString = inputStream.bufferedReader().use(BufferedReader::readText)
+
+        // Get the app name, version name, and version number info
+        val appName = context.getString(R.string.app_name)
+        val appDescription = context.getString(R.string.app_description)
+        val versionInfo = packageManager.getPackageInfo(packageName, 0)
+        val versionName = versionInfo.versionName
+
+        // longVersionCode is an Android Pie feature
+        val versionNumber = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            versionInfo.longVersionCode
+        } else {
+            versionInfo.versionCode
+        }
+
+        // Build the Markdown-formatted information screen
+        // It would be SO NICE to have a templating engine for this
+        infoString = infoString.replace("{{appName}}", appName)
+        infoString = infoString.replace("{{appDescription}}", appDescription)
+        infoString = infoString.replace("{{versionName}}", versionName.toString())
+        infoString = infoString.replace("{{versionCode}}", versionNumber.toString())
+
+        markdownView.setMarkDownText(infoString)
+    }
 }

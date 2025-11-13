@@ -3,8 +3,8 @@ package com.ericmschmidt.classicsreader.datamodel;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
+import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 
 import java.util.Locale;
@@ -19,6 +19,7 @@ public class ReadingViewModel {
 
     private String DEFAULT_READING_POSITION="0,0";
 
+    private final Manifest manifest;
     private WorkInfo _currentWorkInfo;
     private Work _currentWork;
     private Book _currentBook;
@@ -34,7 +35,7 @@ public class ReadingViewModel {
      * Creates an instance of the ReadingViewModel class with a work open.
      * @param work the work to open.
      * @param isTranslation determines whether to return the translation of this work.
-     * @param pageOffset
+     * @param pageOffset number of page difference between source and translation
      */
     public ReadingViewModel(WorkInfo work,
                             boolean isTranslation,
@@ -42,8 +43,10 @@ public class ReadingViewModel {
         this._currentWorkInfo = work;
         this._pageOffset = (pageOffset > -1) ? pageOffset : 1;
         this._isTranslation = isTranslation;
-        this.converter = MyApplication.isNonRomanChar() ?
-            MyApplication.getTextConverter() : null;
+        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
+        this.manifest = applicationInstance.getManifest();
+        this.converter = applicationInstance.isNonRomanChar() ?
+                applicationInstance.getTextConverter() : null;
 
         if (!loadLastReadingPosition()) { // This work hasn't been read yet.
             this._currentLineIndex = 0;
@@ -128,15 +131,15 @@ public class ReadingViewModel {
      * @return String
      */
     public String getReadingPositionString() {
-
+        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
         if (this._currentWork.getBookCount() == 1) {
-            return MyApplication.getContext()
+            return applicationInstance.getContext()
                     .getResources()
                     .getString(R.string.reading_page_of_pages,
                             this._currentLineIndex + 1,
                             this._currentBook.getLineCount());
         }
-        return MyApplication.getContext()
+        return applicationInstance.getContext()
                         .getResources()
                         .getString(R.string.reading_book_page_of_pages,
                                 this._currentBookIndex + 1,
@@ -243,9 +246,9 @@ public class ReadingViewModel {
 
     // Updates the current reading page.
     private void updatePage() {
-
+        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
         // Store the current reading position in SharedPreferences.
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationInstance.getContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         String currentPosition = String.format(Locale.US, "%d,%d", this._currentBookIndex, this._currentLineIndex);
@@ -287,8 +290,8 @@ public class ReadingViewModel {
 
     // Gets the user's last reading position from device storage or cloud storage.
     private boolean loadLastReadingPosition() {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
+        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationInstance.getContext());
         String prefs = sharedPreferences.getString(_currentWorkInfo.getId(), DEFAULT_READING_POSITION);
 
         if (!prefs.contains(DEFAULT_READING_POSITION)) {

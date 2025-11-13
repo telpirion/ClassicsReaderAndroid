@@ -1,7 +1,9 @@
 package com.ericmschmidt.classicsreader.datamodel;
 
-import com.ericmschmidt.classicsreader.utilities.DictionaryXMLHelper;
+import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+
 import com.ericmschmidt.classicsreader.MyApplication;
+import com.ericmschmidt.classicsreader.utilities.DictionaryXMLHelper;
 import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 import com.ericmschmidt.classicsreader.utilities.ResourceHelper;
 
@@ -11,21 +13,26 @@ import java.util.Random;
 
 /** Contains the data and methods for getting dictionary entries.
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.1
  */
 public class Dictionary  {
 
     private ArrayList<String>  _entryHeaders;
-    private WorkInfo dictionaryInfo;
+    private final WorkInfo dictionaryInfo;
     private ITextConverter _converter;
+
+    private final Manifest manifest;
 
     /**
      * Creates a new instance of the dictionary class.
      */
     public Dictionary() {
-        this.dictionaryInfo = MyApplication.getManifest().getDictionaryInfo();
+        this.manifest = MyApplication.Factory
+                .applicationInstance()
+                .getManifest();
+        this.dictionaryInfo = manifest.getDictionaryInfo();
         initEntries();
     }
 
@@ -70,7 +77,7 @@ public class Dictionary  {
             }
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
-            MyApplication.logError(errorMessage);
+            logError(errorMessage);
         }
         return definition;
     }
@@ -91,13 +98,12 @@ public class Dictionary  {
     // Gets the number of alphabet chapters in dictionary.
     private void initEntries() {
         try {
-            Manifest manifest = MyApplication.getManifest();
             InputStream stream = ResourceHelper.getResourceStream(manifest.getDictionaryEntryResource());
             this._entryHeaders = DictionaryXMLHelper.getEntryHeaders(stream);
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
-            MyApplication.logError(errorMessage);
+            logError(errorMessage);
         }
     }
 }

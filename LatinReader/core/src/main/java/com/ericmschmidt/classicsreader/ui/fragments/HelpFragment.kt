@@ -25,12 +25,13 @@ class HelpFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    var markdownView = view.findViewById<MarkdownView>(R.id.help_markdown_view)
+    val markdownView = view.findViewById<MarkdownView>(R.id.help_markdown_view)
+    val applicationInstance = MyApplication.applicationInstance()
 
     // Open the help.md file from the resources
-    var context = MyApplication.getContext()
-    var resources = context.resources
-    var inputStream = resources.openRawResource(R.raw.help);
+    val context = applicationInstance.context
+    val resources = context.resources
+    val inputStream = resources.openRawResource(R.raw.help);
     val helpString = inputStream.bufferedReader().use(BufferedReader::readText)
 
     markdownView.setMarkDownText(helpString)

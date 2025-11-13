@@ -1,8 +1,6 @@
 package com.ericmschmidt.classicsreader.datamodel;
 
-import android.util.Log;
-
-import com.ericmschmidt.classicsreader.MyApplication;
+import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -38,7 +36,7 @@ public class Manifest {
             Constructor<?>[] constructors = manifestClass.getConstructors();
             manifest = (Manifest) constructors[0].newInstance();
         } catch (Exception ex) {
-            MyApplication.logError(Manifest.class, ex.getMessage());
+            logError(Manifest.class, ex.getMessage());
         }
         return manifest;
     }

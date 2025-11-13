@@ -1,88 +1,76 @@
-package com.ericmschmidt.classicsreader;
+package com.ericmschmidt.classicsreader
 
-import android.app.Application;
-import android.content.Context;
-import android.util.Log;
+import android.app.Application
+import android.content.Context
+import android.util.Log
+import com.ericmschmidt.classicsreader.datamodel.Manifest
+import com.ericmschmidt.classicsreader.utilities.ITextConverter
 
-import com.ericmschmidt.classicsreader.R;
-import com.ericmschmidt.classicsreader.activities.MainActivity;
-import com.ericmschmidt.classicsreader.datamodel.Manifest;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 
-import java.lang.reflect.Constructor;
-
-/** A subclass of the Application class to help get the app context.
+/**
+ * A subclass of the Application class to help get the app context.
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
-public class MyApplication extends Application {
+class MyApplication : Application() {
 
-    public static MyApplication instance;
+    data class ApplicationInstance(
+        val context: Context,
+        val manifest: Manifest,
+        val isNonRomanChar: Boolean,
+        val textConverter: ITextConverter?,
+    )
 
-    /**
-     * Creates an instance of the MyApplication class.
-     */
-    public MyApplication() {
-        instance = this;
+    init {
+        instance = this
     }
 
-    /**
-     * Get the context of the current running app.
-     * @return Context
-     */
-    public static Context getContext() {
-        return instance;
-    }
+    companion object Factory {
+        lateinit var instance: MyApplication
+            private set
 
-    /**
-     * Get the manifest of texts for this app.
-     * @return Manifest
-     */
-    public static Manifest getManifest() {
-        String manifestName = MyApplication.getContext().getResources().getString(R.string.manifest);
-        Log.i("MyApplication", "manifestName = " + manifestName);
-        return Manifest.getManifest(manifestName);
-    }
-
-    public static boolean isNonRomanChar() {
-        return getContext().getResources().getBoolean(R.bool.non_roman_char);
-    }
-
-    public static ITextConverter getTextConverter() {
-        ITextConverter converter = null;
-
-        if (isNonRomanChar()) {
-            String className = getContext().getResources().getString(R.string.text_converter);
-
-            try {
-                Class<?> manifestClass = Class.forName(className);
-                Constructor<?>[] constructors = manifestClass.getConstructors();
-                converter = (ITextConverter) constructors[0].newInstance();
-            } catch (Exception ex) {
-                MyApplication.logError(Manifest.class, ex.getMessage());
-            }
+        /**
+         * Get the manifest of texts for this app.
+         * @return Manifest
+         */
+        private fun getManifest(): Manifest {
+            val manifestName =
+                instance.resources.getString(R.string.manifest)
+            Log.i("MyApplication", "manifestName = $manifestName")
+            return Manifest.getManifest(manifestName)
         }
-        return converter;
-    }
 
-    /**
-     * Log an error message.
-     * @param message the message to log.
-     */
-    public static void logError(String message) {
-        logError(Exception.class, message);
-    }
+        private fun isNonRomanChar(): Boolean {
+            return instance.resources.getBoolean(R.bool.non_roman_char)
+        }
 
-    /**
-     * Log an error message and the type that raised it.
-     * @param type the type that raised the error.
-     * @param message the message to write.
-     */
-    public static void logError(Class type, String message) {
-        // TODO: add Crash analytics
-        Log.e(type.getName(), message);
+        private fun getTextConverter(): ITextConverter? {
+            var converter: ITextConverter? = null
+
+            if (isNonRomanChar()) {
+                val className = instance.resources.getString(R.string.text_converter)
+
+                try {
+                    val manifestClass = Class.forName(className)
+                    val constructors = manifestClass.constructors
+                    converter = constructors[0].newInstance() as ITextConverter
+                } catch (ex: Exception) {
+                    Log.e(Manifest::class.java.name, ex.message as String)
+                }
+            }
+            return converter
+        }
+
+        fun applicationInstance(): ApplicationInstance {
+            return ApplicationInstance(
+                context = instance,
+                manifest = getManifest(),
+                isNonRomanChar = isNonRomanChar(),
+                textConverter = getTextConverter()
+            )
+        }
     }
 }

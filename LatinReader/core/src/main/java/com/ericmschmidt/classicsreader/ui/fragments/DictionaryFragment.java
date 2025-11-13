@@ -13,10 +13,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
-import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
+import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.datamodel.Dictionary;
 import com.ericmschmidt.classicsreader.utilities.ITextConverter;
+
+import java.util.Objects;
 
 /** Displays the dictionary page.
  *
@@ -28,6 +30,8 @@ import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 public class DictionaryFragment extends Fragment {
     private String query;
     private ITextConverter converter;
+
+    private boolean isNonRomanChar;
 
     /**
      * Required empty public constructor
@@ -43,8 +47,10 @@ public class DictionaryFragment extends Fragment {
         DictionaryFragmentArgs args = DictionaryFragmentArgs.fromBundle(getArguments());
         this.query = args.getDictionaryQuery();
 
-        if (MyApplication.isNonRomanChar()) {
-            converter = MyApplication.getTextConverter();
+        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
+        this.isNonRomanChar = applicationInstance.isNonRomanChar();
+        if (this.isNonRomanChar) {
+            converter = applicationInstance.getTextConverter();
         }
     }
 
@@ -68,10 +74,14 @@ public class DictionaryFragment extends Fragment {
         EditText searchQuery = (EditText)getActivity().findViewById(R.id.search_query);
 
         // Convert text as user types.
-        if (MyApplication.isNonRomanChar()) {
+        if (this.isNonRomanChar) {
+
             TextWatcher watcher = converter != null ?
                     converter.getTextWatcher(searchQuery) :
-                    MyApplication.getTextConverter().getTextWatcher(searchQuery);
+                    Objects.requireNonNull(MyApplication.Factory
+                                    .applicationInstance()
+                                    .getTextConverter())
+                            .getTextWatcher(searchQuery);
             searchQuery.addTextChangedListener(watcher);
         }
 
@@ -113,7 +123,7 @@ public class DictionaryFragment extends Fragment {
 
             String transcribedQuery = query[0];
 
-            if (MyApplication.isNonRomanChar()) {
+            if (isNonRomanChar) {
                 transcribedQuery = converter.convertTargetToSourceCharacters(transcribedQuery);
                 dictionary = new Dictionary(converter);
             } else {

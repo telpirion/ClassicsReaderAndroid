@@ -27,14 +27,14 @@ import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
 import com.ericmschmidt.classicsreader.R;
 
 /** Displays the text of a work (source or translation).
- *
+ *  <br>
  *  This class is used for presenting both foreign language and English texts.
- *
+ *  <br>
  *  Layout files:
  *  - res/layout/fragment_reading.xml
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
@@ -84,17 +84,18 @@ public class ReadingFragment extends Fragment {
      */
     @SuppressLint("ClickableViewAccessibility")
     public void onActivityCreated(Bundle onSavedInstanceState) {
-
         super.onActivityCreated(onSavedInstanceState);
 
         final TextView readingPane = (TextView)getView().findViewById(R.id.reading_surface);
 
-        if (workToGetId == null || workToGetId.equals("")) {
+        if (workToGetId == null || workToGetId.isEmpty()) {
             readingPane.setText(getResources().getString(R.string.reading_no_book_open));
             return;
         }
 
-        Manifest manifest = MyApplication.getManifest();
+        Manifest manifest = MyApplication.Factory
+                .applicationInstance()
+                .getManifest();
         Library library = new Library(manifest.getCollection());
         WorkInfo work = library.getWorkInfoByID(workToGetId);
         int numLines = 1;

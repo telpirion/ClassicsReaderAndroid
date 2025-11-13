@@ -1,11 +1,12 @@
 package com.ericmschmidt.classicsreader.exceptions;
 
+import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+
 import android.app.Activity;
 import android.os.Build;
 import android.content.Intent;
 
 import com.ericmschmidt.classicsreader.activities.ErrorActivity;
-import com.ericmschmidt.classicsreader.MyApplication;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -61,7 +62,7 @@ public class ForceCloseHandler implements Thread.UncaughtExceptionHandler {
         errorReport.append(stackTrace.toString());
 
         // Alert app logging system.
-        MyApplication.logError(errorReport.toString());
+        logError(errorReport.toString());
 
         Intent intent = new Intent(_context, ErrorActivity.class);
         intent.putExtra(ErrorActivity.ERROR_KEY, errorReport.toString());

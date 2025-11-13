@@ -1,5 +1,7 @@
 package com.ericmschmidt.classicsreader.ui.fragments;
 
+import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,8 +12,8 @@ import android.view.ViewGroup;
 import androidx.compose.ui.platform.ComposeView;
 import androidx.fragment.app.Fragment;
 
-import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
+import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.activities.MainActivity;
 import com.ericmschmidt.classicsreader.datamodel.Library;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
@@ -61,7 +63,8 @@ public class LibraryFragment extends Fragment {
 
         try {
             // Retrieve the manifest from the package using config settings.
-            Manifest manifest = MyApplication.getManifest();
+            Manifest manifest = MyApplication.Factory
+                    .applicationInstance().getManifest();
 
             Library library = new Library(manifest.getCollection());
             Log.i(TAG, "library length = " + library.getWorks().length);
@@ -82,7 +85,7 @@ public class LibraryFragment extends Fragment {
             }
 
         } catch (Exception ex) {
-            MyApplication.logError(this.getClass(), ex.getMessage());
+            logError(this.getClass(), ex.getMessage());
         }
     }
 

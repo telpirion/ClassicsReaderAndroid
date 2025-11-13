@@ -1,5 +1,7 @@
 package com.ericmschmidt.classicsreader.activities;
 
+import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,7 +21,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.exceptions.ForceCloseHandler;
 import com.ericmschmidt.classicsreader.ui.fragments.DictionaryFragmentArgs;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity
             String applicationName = getApplicationContext().getPackageName();
             Drawable icon = getPackageManager().getApplicationIcon(applicationName);
         } catch (Exception e) {
-            MyApplication.logError(this.getClass(), e.getMessage());
+            logError(this.getClass(), e.getMessage());
         }
     }
 

@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.databinding.FragmentTocBinding;
-import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.datamodel.Library;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
 import com.ericmschmidt.classicsreader.datamodel.TOCEntry;
@@ -53,7 +53,7 @@ public class TOCFragment extends Fragment {
         this.workId = args.getWorkId();
         this.isTranslation = args.getIsTranslation();
 
-        Manifest manifest = MyApplication.getManifest();
+        Manifest manifest = MyApplication.Factory.applicationInstance().getManifest();
         Library library = new Library(manifest.getCollection());
         this.work = library.getWorkInfoByID(workId);
     }

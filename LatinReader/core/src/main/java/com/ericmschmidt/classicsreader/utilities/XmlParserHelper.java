@@ -1,6 +1,7 @@
 package com.ericmschmidt.classicsreader.utilities;
 
-import com.ericmschmidt.classicsreader.MyApplication;
+import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+
 import com.ericmschmidt.classicsreader.datamodel.Book;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class XmlParserHelper {
 
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
-            MyApplication.logError(errorMessage);
+            logError(errorMessage);
         }
         return count;
     }

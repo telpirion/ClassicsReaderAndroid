@@ -9,8 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
-import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.MyApplication;
+import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.datamodel.Dictionary;
 import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 
@@ -55,8 +55,10 @@ public class VocabularyFragment extends Fragment {
 
         protected Long doInBackground(String... query) {
 
-            ITextConverter converter = MyApplication.isNonRomanChar() ?
-                    MyApplication.getTextConverter() : null;
+            MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
+
+            ITextConverter converter = applicationInstance.isNonRomanChar() ?
+                    applicationInstance.getTextConverter() : null;
 
             // Get a random entry from the dictionary to sow.
             Dictionary dictionary = new Dictionary(converter);
