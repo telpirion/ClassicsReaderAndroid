@@ -1,217 +1,131 @@
-package com.ericmschmidt.classicsreader.activities;
+package com.ericmschmidt.classicsreader.activities
 
-import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.GravityCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.ericmschmidt.classicsreader.R
+import com.ericmschmidt.classicsreader.databinding.ActivityMainBinding
+import com.ericmschmidt.classicsreader.exceptions.ForceCloseHandler
+import com.ericmschmidt.classicsreader.logError
+import com.ericmschmidt.classicsreader.ui.fragments.DictionaryFragmentArgs
+import com.ericmschmidt.classicsreader.ui.fragments.LibraryFragmentArgs
+import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment
 
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.ericmschmidt.classicsreader.R;
-import com.ericmschmidt.classicsreader.exceptions.ForceCloseHandler;
-import com.ericmschmidt.classicsreader.ui.fragments.DictionaryFragmentArgs;
-import com.ericmschmidt.classicsreader.ui.fragments.LibraryFragmentArgs;
-import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment;
-import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragmentArgs;
-import com.google.android.material.navigation.NavigationView;
-
-/** Base activity for this app.
+/**
+ * Base activity for this app.
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="http://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private lateinit var binding: ActivityMainBinding
+    lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
-        Thread.setDefaultUncaughtExceptionHandler(new ForceCloseHandler(this));
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main);
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        setSupportActionBar(binding.toolbar)
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.libraryFragment, R.id.reading_dest, R.id.dictionary_dest,
+                R.id.vocab_dest, R.id.settings_dest, R.id.help_dest, R.id.info_dest
+            ), binding.drawerLayout
+        )
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.navView.setupWithNavController(navController)
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                } else {
+                    // If we are not in the start destination, we let the NavController handle it.
+                    if (navController.currentDestination?.id != R.id.libraryFragment) {
+                        navController.popBackStack()
+                    } else {
+                        // Otherwise, we finish the activity.
+                        finish()
+                    }
+                }
+            }
+        })
 
         // Apply the current icon to the nav bar.
         try {
-            String applicationName = getApplicationContext().getPackageName();
-            Drawable icon = getPackageManager().getApplicationIcon(applicationName);
-        } catch (Exception e) {
-            logError(this.getClass(), e.getMessage());
+            packageManager.getApplicationIcon(applicationContext.packageName)
+        } catch (e: Exception) {
+            logError(this.javaClass, e.message)
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
 
-        // Get the SearchView and set the searchable configuration
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_dictionary).getActionView();
+        val searchItem = menu.findItem(R.id.action_dictionary)
+        val searchView = searchItem.actionView as SearchView
 
-        String queryHint = getString(R.string.dictionary_query_hint_short);
-        assert searchView != null;
-        searchView.setQueryHint(queryHint);
+        searchView.queryHint = getString(R.string.dictionary_query_hint_short)
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                DictionaryFragmentArgs args = new DictionaryFragmentArgs.Builder()
-                        .setDictionaryQuery(query)
-                        .build();
-                swapFragments(R.id.dictionary_dest, args.toBundle(), true);
-                return false;
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                val args = DictionaryFragmentArgs.Builder()
+                    .setDictionaryQuery(query)
+                    .build()
+                navController.navigate(R.id.dictionary_dest, args.toBundle())
+                searchItem.collapseActionView()
+                return true
             }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
             }
-        });
+        })
 
-        return true;
+        return true
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            swapFragments(R.id.settings_dest, null, true);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-
-        // Close drawer animation.
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_recent) {
-            // Remember to store recently read as workId;isTranslation.
-            String workId = getRecentlyRead();
-            if (!workId.isEmpty()) {
-                String[] workIdData = workId.split(";");
-                boolean isTranslation = Boolean.getBoolean(workIdData[1]);
-
-                ReadingFragmentArgs args = new ReadingFragmentArgs.Builder()
-                        .setIsTranslation(isTranslation)
-                        .setWorkId(workIdData[0])
-                        .build();
-
-                swapFragments(R.id.reading_dest, args.toBundle(), false);
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                navController.navigate(R.id.settings_dest)
+                true
             }
-            else {
-                swapFragments(R.id.reading_dest, null, false);
-            }
-        } else if (id == R.id.nav_library) {
-            swapFragments(R.id.libraryFragment, null, false);
-
-        } else if (id == R.id.nav_translation) {
-
-            // Pass a flag to the library Fragment to let it
-            // know that we want to show the translations.
-            LibraryFragmentArgs args = new LibraryFragmentArgs.Builder()
-                    .setIsTranslations(true)
-                    .build();
-
-            swapFragments(R.id.libraryFragment, args.toBundle(), false);
-
-        } else if (id == R.id.nav_dictionary) {
-            swapFragments(R.id.dictionary_dest, null, true);
-
-        } else if (id == R.id.nav_vocab) {
-            swapFragments(R.id.vocab_dest, null, true);
-
-        } else if (id == R.id.nav_settings) {
-            swapFragments(R.id.settings_dest, null, true);
-
-        } else if (id == R.id.nav_help) {
-            swapFragments(R.id.help_dest, null, true);
-        } else if (id == R.id.nav_info) {
-            swapFragments(R.id.info_dest, null, true);
+            else -> super.onOptionsItemSelected(item)
         }
-
-        return true;
     }
 
-    public NavController getNavController() {
-        FragmentManager supportFragmentManager = this.getSupportFragmentManager();
-        NavHostFragment navHostFragment = (NavHostFragment)supportFragmentManager.findFragmentById(
-                R.id.nav_host_fragment);
-        assert navHostFragment != null;
-        return navHostFragment.getNavController();
-    }
 
-    private String getRecentlyRead() {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        return sharedPrefs.getString(ReadingFragment.RECENTLY_READ, "");
-    }
 
-    // Use nav controller and nav graph to navigate to different fragments.
-    private void swapFragments(int resourceId, @Nullable Bundle args, boolean useDefaultAnim) {
-        FragmentManager supportFragmentManager = this.getSupportFragmentManager();
-        NavHostFragment navHostFragment =
-                (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
-
-        NavOptions defaultNavOptions = new NavOptions.Builder()
-                .build();
-
-        if ((args != null) && useDefaultAnim) {
-            navController.navigate(resourceId, args, defaultNavOptions);
-        } else if (args != null) {
-            navController.navigate(resourceId, args);
-        } else if (useDefaultAnim){
-            navController.navigate(resourceId, null, defaultNavOptions);
-        } else {
-            navController.navigate(resourceId);
-        }
+    private fun getRecentlyRead(): String {
+        val sharedPrefs = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE)
+        return sharedPrefs.getString(ReadingFragment.RECENTLY_READ, "") ?: ""
     }
 }

@@ -10,7 +10,7 @@ import java.io.InputStream;
 /** A static class to help parse XML resources.
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 1.5
  * @since 1.0
  */
