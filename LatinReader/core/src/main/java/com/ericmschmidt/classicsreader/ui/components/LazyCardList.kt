@@ -10,14 +10,40 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.ericmschmidt.classicsreader.data.Library
-import com.ericmschmidt.classicsreader.data.WorkInfo
-import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.datamodel.Library
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo
+import com.ericmschmidt.classicsreader.R
 
 class LibraryPreviewProvider : PreviewParameterProvider<Library> {
-    val pseudoManifest = PseudoManifest()
     override val values = sequenceOf(
-        Library(pseudoManifest.collection)
+        Library(
+            arrayListOf(
+                WorkInfo.Builder("test")
+                    .author("testAuthor")
+                    .title("testTitle")
+                    .englishTitle("testTitle")
+                    .englishAuthor("testAuthor")
+                    .location(1)
+                    .image(R.drawable.work_default_1)
+                    .build(),
+                WorkInfo.Builder("test2")
+                    .author("Very very super long never-ending author name")
+                    .title("Very very long title that could go on forever")
+                    .englishTitle("testTitle")
+                    .englishAuthor("testAuthor")
+                    .image(R.drawable.work_default_2)
+                    .location(1)
+                    .build(),
+                WorkInfo.Builder("test3")
+                    .author("Ξενοφῶν")
+                    .title("Ἀνάβασις")
+                    .englishTitle("Anabasis")
+                    .englishAuthor("Xenophon")
+                    .image(R.drawable.work_default_3)
+                    .location(1)
+                    .build(),
+            )
+        )
     )
 }
 
@@ -44,9 +70,9 @@ fun PrettyCardLazyList(
     ) {
         items(
             items = works,
-            key = { work -> work.id as String},
+            key = { work -> work!!.id },
         ) {
-            PrettyRow(workInfo = it, onClick = onRowClick, isTranslation = isTranslation)
+            PrettyRow(workInfo = it!!, onClick = onRowClick, isTranslation = isTranslation)
         }
     }
 }

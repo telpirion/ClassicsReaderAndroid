@@ -1,8 +1,8 @@
 package com.ericmschmidt.greekreader.datamodel;
 
-import com.ericmschmidt.classicsreader.data.WorkInfo;
+import com.ericmschmidt.classicsreader.datamodel.Manifest;
 import com.ericmschmidt.greekreader.R;
-import com.ericmschmidt.classicsreader.data.Manifest;
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * @author Eric Schmidt
  * @author <a href="https://telpirion.com">...</a>
  * @version 0.1
- * @noinspection unused
  */
 public class GreekReaderManifest extends Manifest {
 
@@ -21,7 +20,7 @@ public class GreekReaderManifest extends Manifest {
      */
     @Override
     public ArrayList<WorkInfo> getCollection() {
-        ArrayList<WorkInfo> workInfos = new ArrayList<>();
+        ArrayList<WorkInfo> workInfos = new ArrayList<WorkInfo>();
 
         // TODO: Break each chapter into separate pages.
         workInfos.add(new WorkInfo.Builder("AristotlePol")

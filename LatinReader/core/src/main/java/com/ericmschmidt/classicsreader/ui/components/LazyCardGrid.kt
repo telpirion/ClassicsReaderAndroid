@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.ericmschmidt.classicsreader.data.Library
-import com.ericmschmidt.classicsreader.data.WorkInfo
+import com.ericmschmidt.classicsreader.datamodel.Library
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo
 
 
 @Preview(showBackground = true)
@@ -29,7 +29,7 @@ fun PrettyCardLazyVerticalGrid(
     isTranslation: Boolean = false,
     onCardClick : (WorkInfo) -> Unit = {}
 ) {
-    val works = library.works
+    val works = library.getWorks()
 
     LazyVerticalGrid(
         modifier = modifier.padding(8.dp),
@@ -39,9 +39,9 @@ fun PrettyCardLazyVerticalGrid(
     ) {
         items(
             items = works,
-            key = { work -> work.id as String }
+            key = { work -> work!!.id }
         ) {
-            PrettyCard(workInfo = it, onCardClick = onCardClick, isTranslation = isTranslation)
+            PrettyCard(workInfo = it!!, onCardClick = onCardClick, isTranslation = isTranslation)
         }
     }
 }

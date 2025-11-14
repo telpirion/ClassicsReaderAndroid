@@ -1,65 +1,43 @@
-package com.ericmschmidt.classicsreader.data;
-
-import java.util.ArrayList;
+package com.ericmschmidt.classicsreader.datamodel
 
 /** Contains information about the texts included in the reader.
  * @author Eric Schmidt
- * @author http://telpirion.com
- * @version 1.5
+ * @author <a href="https://telpirion.com">...</a>
+ * @version 2.0
  * @since 1.0
  */
-public class Library {
-
-    private ArrayList<WorkInfo>  _workInfos;
+class Library(val collection: ArrayList<WorkInfo>) {
 
     /**
-     * Creates an instance of the Library class.
+     * Gets the WorkInfo for the specified work ID.
      */
-    public Library(ArrayList<WorkInfo> collection) {
-        this._workInfos = collection;
-    }
-
-    /**
-     * Creates an instance of the Library class.
-     */
-    public Library() {
-        this._workInfos = new ArrayList<>();
-    }
-
-    /**
-     * Gets the WorkInfo for the specified work.
-     * @param id the ID of the work to get.
-     * @return WorkInfo object.
-     */
-    public WorkInfo getWorkInfoByID(String id) {
-        WorkInfo workToGet = null;
-        for (WorkInfo i : _workInfos) {
-            if (i.getId().equals(id)) {
-                workToGet = i;
+    fun getWorkInfoByID(id: String?): WorkInfo? {
+        var workToGet: WorkInfo? = null
+        for (i in collection) {
+            if (i.id == id) {
+                workToGet = i
             }
         }
-        return workToGet;
+        return workToGet
     }
 
     /**
      * Gets the list of works as a series of strings.
-     * @return String[]
      */
-    public String[] getWorkList() {
-        String[] works = new String[this._workInfos.size()];
+    fun getWorkList(): Array<String?> {
+        val works = arrayOfNulls<String>(this.collection.size)
 
-        for (int i = 0; i < this._workInfos.size(); i++) {
-            works[i] = this._workInfos.get(i).getTitle();
+        for (i in this.collection.indices) {
+            works[i] = this.collection[i].title
         }
-        return works;
+        return works
     }
 
     /**
      * Gets information about all of the texts in the work.
-     * @return WorkInfo[]
      */
-    public WorkInfo[] getWorks() {
-        WorkInfo[] works = new WorkInfo[this._workInfos.size()];
-        return this._workInfos.toArray(works);
+    fun getWorks(): Array<WorkInfo?> {
+        val works = arrayOfNulls<WorkInfo>(this.collection.size)
+        return this.collection.toArray<WorkInfo?>(works)
     }
 }
