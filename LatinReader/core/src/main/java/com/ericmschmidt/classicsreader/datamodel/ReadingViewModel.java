@@ -75,7 +75,7 @@ public class ReadingViewModel {
         int projectedIndex;
 
         if (_isTranslation){
-            projectedIndex = (int)Math.floor(this._pageOffset / this._currentWorkInfo.getEnglishOffset());
+            projectedIndex = (int)Math.floor((double) this._pageOffset / this._currentWorkInfo.getEnglishOffset());
         } else {
             projectedIndex = this._pageOffset;
         }
@@ -152,7 +152,7 @@ public class ReadingViewModel {
      * @return ArrayList
      */
     public TOCEntry[] getTOC() {
-        return this._currentWorkInfo.getTocEntries();
+        return this._currentWorkInfo.getTocEntries().toArray(new TOCEntry[0]);
     }
 
     /**

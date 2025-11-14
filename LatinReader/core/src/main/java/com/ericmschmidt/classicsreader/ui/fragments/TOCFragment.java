@@ -75,7 +75,7 @@ public class TOCFragment extends Fragment {
         super.onActivityCreated(onSavedInstanceState);
 
         ArrayAdapter<TOCEntry> adapter = new TOCListViewAdapter(getActivity(),
-                        work.getTocEntries());
+                        work.getTocEntries().toArray(new TOCEntry[0]));
 
         ListView listView = (ListView)this.getView().findViewById(R.id.toc_listView);
         listView.setAdapter(adapter);
@@ -85,7 +85,7 @@ public class TOCFragment extends Fragment {
     // Create a message handling object as an anonymous class.
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
-            TOCEntry entry = work.getTocEntries()[position];
+            TOCEntry entry = work.getTocEntries().get(position);
 
             assert getParentFragment() != null;
             NavController navController = NavHostFragment.findNavController(getParentFragment());

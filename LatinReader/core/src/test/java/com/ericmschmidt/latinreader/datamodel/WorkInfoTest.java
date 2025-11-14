@@ -6,7 +6,6 @@ import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.ericmschmidt.classicsreader.datamodel.TOCEntry;
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
 
 public class WorkInfoTest {
 

@@ -41,16 +41,16 @@ class Dictionary(val converter: ITextConverter? = null) {
      * Gets a definition from the dictionary.
      */
     fun getEntry(searchEntry: String?): String? {
-        var definition: String? = null
-        try {
-            if (isInDictionary(searchEntry)) {
-                val stream = ResourceHelper.getResourceStream(this.dictionaryInfo!!.getLocation())
-                definition = DictionaryXMLHelper.getEntry(stream, searchEntry, converter)
-            }
-        } catch (ex: Exception) {
-            val errorMessage = ex.message
-            logError(errorMessage)
+        var definition: String? = ""
+
+        if (!isInDictionary(searchEntry)) {
+            return definition
         }
+
+        ResourceHelper.getResourceStream(this.dictionaryInfo?.location as Int).use { stream ->
+            definition = DictionaryXMLHelper.getEntry(stream, searchEntry, converter)
+        }
+
         return definition
     }
 

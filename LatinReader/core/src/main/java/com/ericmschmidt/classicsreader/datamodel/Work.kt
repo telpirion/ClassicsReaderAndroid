@@ -1,111 +1,87 @@
-package com.ericmschmidt.classicsreader.datamodel;
+package com.ericmschmidt.classicsreader.datamodel
 
-import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
-
-import java.io.InputStream;
-
-import com.ericmschmidt.classicsreader.utilities.ResourceHelper;
-import com.ericmschmidt.classicsreader.utilities.WorkXMLParser;
+import com.ericmschmidt.classicsreader.logError
+import com.ericmschmidt.classicsreader.utilities.ResourceHelper
+import com.ericmschmidt.classicsreader.utilities.WorkXMLParser
 
 /** Contains the data for a text ('work') contained in the reader.
  * @author Eric Schmidt
- * @author http://telpirion.com
- * @version 1.5
+ * @author <a href="https://telpirion.com">...</a>
+ * @version 2.0
  * @since 1.0
  */
-public class Work {
+class Work(val location: Int) {
 
-    private Book[] _books;
-    private int _bookCount;
-    private int _location;
+    private lateinit var _books: Array<Book?>
+    private var _bookCount = 0
 
-    /**
-     * Creates an instance of the Work class.
-     * @param location the resource location of the Work to get.
-     */
-    public Work(int location) {
-        this._location = location;
-        initBooks();
+    init {
+        initBooks()
     }
-
-    /**
-     * Default public constructor.
-     */
-    public Work() {}
 
     /**
      * Gets the specific book from the collection.
      * @param id the ID of the book to get.
      * @return Book object
      */
-    public Book getBook(int id) {
-        int indexToGet = validateBookIndex(id);
+    fun getBook(id: Int): Book? {
+        val indexToGet = validateBookIndex(id)
 
-        return this._getBook(indexToGet, this._location, this._books);
+        return this._getBook(indexToGet, this.location, this._books)
     }
 
     /**
      * Get the number of books contained in this work.
      * @return The number of books in this work.
      */
-    public int getBookCount()
-    {
-        return this._bookCount;
+    fun getBookCount(): Int {
+        return this._bookCount
     }
 
     // Initialize the array of books based upon the total number of books in the work.
-    private void initBooks() {
-
-        try { // TODO: if we update the min version to 19, we can use try() statement like C# using.
-
-            InputStream stream = ResourceHelper.getResourceStream(this._location);
-            this._bookCount = WorkXMLParser.getBookCount(stream);
-            this._books = new Book[this._bookCount];
+    private fun initBooks() {
+        ResourceHelper.getResourceStream(this.location).use { stream ->
+            val stream = ResourceHelper.getResourceStream(this.location)
+            this._bookCount = WorkXMLParser.getBookCount(stream)
+            this._books = arrayOfNulls<Book>(this._bookCount)
 
             if (this._bookCount == 0) {
-                throw new Exception("Work failed to initialize.");
+                throw java.lang.Exception("Work failed to initialize.")
             }
-
-        } catch (Exception ex) {
-            String errorMessage = ex.getMessage();
-            logError(errorMessage);
         }
     }
 
     // Retrieve a book from the internal array or get it from the app's resources.
-    private Book _getBook(int id, int location, Book[] bookCollection) {
-
-        Book book = bookCollection[id];
-
-        try { // TODO: if we update the min version to 19, we can use try() statement like C# using.
-
+    @Suppress("FunctionName")
+    private fun _getBook(id: Int, location: Int, bookCollection: Array<Book?>): Book? {
+        var book = bookCollection[id]
+        try {
             if (book == null) {
-                InputStream stream = ResourceHelper.getResourceStream(location);
-                book = WorkXMLParser.getBook(id, stream);
+                val stream = ResourceHelper.getResourceStream(location)
+                book = WorkXMLParser.getBook(id, stream)
 
-                bookCollection[id] = book;
+                bookCollection[id] = book
             }
-
-        } catch (Exception ex) {
-            String errorMessage = ex.getMessage();
-            logError(errorMessage);
+        } catch (ex: Exception) {
+            val errorMessage = ex.message
+            logError(errorMessage)
         }
 
-        return book;
+        return book
     }
 
     // Handle cases where the request is too high or too low
-    private int validateBookIndex(int index) {
-
-        int indexToGet = 0;
+    private fun validateBookIndex(index: Int): Int {
+        var indexToGet = 0
 
         if (index >= 0
-                && index < this._bookCount) {
-            indexToGet = index;
+            && index < this._bookCount
+        ) {
+            indexToGet = index
         } else if (index >= this._bookCount) { // If the request is too high, return the last book.
-            indexToGet = this._bookCount - 1;
+            indexToGet = this._bookCount - 1
         }
 
-        return indexToGet;
+        return indexToGet
     }
 }

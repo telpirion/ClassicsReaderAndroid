@@ -23,8 +23,9 @@ import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.datamodel.Library;
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
 import com.ericmschmidt.classicsreader.datamodel.ReadingViewModel;
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
 import com.ericmschmidt.classicsreader.R;
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo.WorkType;
 
 /** Displays the text of a work (source or translation).
  *  <br>
@@ -118,7 +119,7 @@ public class ReadingFragment extends Fragment {
         // After parsing the XML, the app presents poetry lines one at a time.
         // The user can override the number of lines to show per page.
         // This setting doesn't matter for prose, since one "line" equals one paragraph.
-        if (work.getWorkType() == WorkInfo.WorkType.POEM) {
+        if (work.getWorkType() == WorkType.POEM) {
             String linesPerPage = sharedPreferences.getString(SettingsFragment.POEM_LINES,
                 SettingsFragment.POEM_LINES_DEFAULT);
             numLines = Integer.parseInt(linesPerPage);
