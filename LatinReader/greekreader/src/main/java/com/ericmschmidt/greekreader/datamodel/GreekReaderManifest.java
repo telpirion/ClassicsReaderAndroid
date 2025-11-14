@@ -1,6 +1,7 @@
 package com.ericmschmidt.greekreader.datamodel;
 
 import com.ericmschmidt.classicsreader.datamodel.Manifest;
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
 import com.ericmschmidt.greekreader.R;
 
 import java.util.ArrayList;

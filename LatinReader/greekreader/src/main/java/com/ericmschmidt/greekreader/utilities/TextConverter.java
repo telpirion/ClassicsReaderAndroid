@@ -1,5 +1,7 @@
 package com.ericmschmidt.greekreader.utilities;
 
+import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.JsonReader;
@@ -44,7 +46,7 @@ public class TextConverter implements ITextConverter {
             _reverseCharacterHash = new HashMap<>();
             initCharacterHash();
         } catch (Exception ex) {
-            MyApplication.logError(this.getClass(), ex.getMessage());
+            logError(this.getClass(), ex.getMessage());
         }
     }
 
