@@ -13,7 +13,7 @@ import com.ericmschmidt.classicsreader.utilities.ITextConverter;
  *
  * @author Eric Schmidt
  * @author <a href="https://telpirion.com">...</a>
- * @version 1.5
+ * @version 2.0
  * @since 1.0
  */
 class MyApplication : Application() {
@@ -37,7 +37,7 @@ class MyApplication : Application() {
          * Get the manifest of texts for this app.
          * @return Manifest
          */
-        private fun getManifest(): Manifest {
+        private fun getManifest(): Manifest? {
             val manifestName =
                 instance.resources.getString(R.string.manifest)
             Log.i("MyApplication", "manifestName = $manifestName")
@@ -68,7 +68,7 @@ class MyApplication : Application() {
         fun applicationInstance(): ApplicationInstance {
             return ApplicationInstance(
                 context = instance,
-                manifest = getManifest(),
+                manifest = getManifest() as Manifest,
                 isNonRomanChar = isNonRomanChar(),
                 textConverter = getTextConverter()
             )
