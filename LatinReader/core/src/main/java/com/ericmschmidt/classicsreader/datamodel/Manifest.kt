@@ -5,7 +5,7 @@ import com.ericmschmidt.classicsreader.logError
 /** Contains information about the texts included in the reader.
  */
 open class Manifest {
-    open fun getCollection(): ArrayList<WorkInfo?>? {
+    open fun getCollection(): ArrayList<WorkInfo>? {
         return null
     }
 
