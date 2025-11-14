@@ -1,74 +1,63 @@
-package com.ericmschmidt.classicsreader.exceptions;
+package com.ericmschmidt.classicsreader.exceptions
 
-import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+import android.app.Activity
+import android.content.Intent
+import android.os.Build
+import com.ericmschmidt.classicsreader.logError
+import com.ericmschmidt.classicsreader.activities.ErrorActivity
+import java.io.PrintWriter
+import java.io.StringWriter
 
-import android.app.Activity;
-import android.os.Build;
-import android.content.Intent;
-
-import com.ericmschmidt.classicsreader.activities.ErrorActivity;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
-/** Base exception for uncaught exceptions in this app.
+/**
+ * Base exception for uncaught exceptions in this app.
  * @author Eric Schmidt
  * @author http://telpirion.com
  * @version 1.5
  * @since 1.1
  */
-public class ForceCloseHandler implements Thread.UncaughtExceptionHandler {
+class ForceCloseHandler(private val context: Activity) : Thread.UncaughtExceptionHandler {
 
-    private final String LINE_SEPARATOR = "\n";
-    private final Activity _context;
+    override fun uncaughtException(thread: Thread, ex: Throwable) {
+        val stackTrace = StringWriter()
+        ex.printStackTrace(PrintWriter(stackTrace))
+        val errorReport = StringBuilder()
 
-    public ForceCloseHandler(Activity context) {
-        this._context = context;
-    }
+        errorReport.append("\n************ DEVICE INFORMATION ***********\n")
+        errorReport.append("Brand: ")
+        errorReport.append(Build.BRAND)
+        errorReport.append(System.lineSeparator())
+        errorReport.append("Device: ")
+        errorReport.append(Build.DEVICE)
+        errorReport.append(System.lineSeparator())
+        errorReport.append("Model: ")
+        errorReport.append(Build.MODEL)
+        errorReport.append(System.lineSeparator())
+        errorReport.append("Id: ")
+        errorReport.append(Build.ID)
+        errorReport.append(System.lineSeparator())
+        errorReport.append("Product: ")
+        errorReport.append(Build.PRODUCT)
+        errorReport.append(System.lineSeparator())
+        errorReport.append("\n************ FIRMWARE ************\n")
+        errorReport.append(System.lineSeparator())
+        errorReport.append("Release: ")
+        errorReport.append(Build.VERSION.RELEASE)
+        errorReport.append(System.lineSeparator())
+        errorReport.append("Incremental: ")
+        errorReport.append(Build.VERSION.INCREMENTAL)
+        errorReport.append(System.lineSeparator())
 
-    @Override
-    public void uncaughtException(Thread thread, Throwable ex) {
-
-        StringWriter stackTrace = new StringWriter();
-        ex.printStackTrace(new PrintWriter(stackTrace));
-        StringBuilder errorReport = new StringBuilder();
-
-        errorReport.append("\n************ DEVICE INFORMATION ***********\n");
-        errorReport.append("Brand: ");
-        errorReport.append(Build.BRAND);
-        errorReport.append(LINE_SEPARATOR);
-        errorReport.append("Device: ");
-        errorReport.append(Build.DEVICE);
-        errorReport.append(LINE_SEPARATOR);
-        errorReport.append("Model: ");
-        errorReport.append(Build.MODEL);
-        errorReport.append(LINE_SEPARATOR);
-        errorReport.append("Id: ");
-        errorReport.append(Build.ID);
-        errorReport.append(LINE_SEPARATOR);
-        errorReport.append("Product: ");
-        errorReport.append(Build.PRODUCT);
-        errorReport.append(LINE_SEPARATOR);
-        errorReport.append("\n************ FIRMWARE ************\n");
-        errorReport.append(LINE_SEPARATOR);
-        errorReport.append("Release: ");
-        errorReport.append(Build.VERSION.RELEASE);
-        errorReport.append(LINE_SEPARATOR);
-        errorReport.append("Incremental: ");
-        errorReport.append(Build.VERSION.INCREMENTAL);
-        errorReport.append(LINE_SEPARATOR);
-
-        errorReport.append("************ CAUSE OF ERROR ************\n\n");
-        errorReport.append(stackTrace.toString());
+        errorReport.append("************ CAUSE OF ERROR ************\n\n")
+        errorReport.append(stackTrace.toString())
 
         // Alert app logging system.
-        logError(errorReport.toString());
+        logError(errorReport.toString())
 
-        Intent intent = new Intent(_context, ErrorActivity.class);
-        intent.putExtra(ErrorActivity.ERROR_KEY, errorReport.toString());
-        _context.startActivity(intent);
+        val intent = Intent(context, ErrorActivity::class.java)
+        intent.putExtra(ErrorActivity.ERROR_KEY, errorReport.toString())
+        context.startActivity(intent)
 
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(10);
+        android.os.Process.killProcess(android.os.Process.myPid())
+        System.exit(10)
     }
 }

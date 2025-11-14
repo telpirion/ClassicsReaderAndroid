@@ -58,6 +58,26 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_translation -> {
+                    val args = LibraryFragmentArgs.Builder()
+                        .setIsTranslations(true)
+                        .build()
+                    navController.navigate(R.id.libraryFragment, args.toBundle())
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    true
+                }
+                else -> {
+                    // Let the NavController handle other menu items
+                    menuItem.isChecked = true
+                    navController.navigate(menuItem.itemId)
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    true
+                }
+            }
+        }
+
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
