@@ -6,6 +6,8 @@ import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.ericmschmidt.classicsreader.datamodel.TOCEntry;
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
+
 
 public class WorkInfoTest {
 
@@ -37,10 +39,10 @@ public class WorkInfoTest {
 
     @Test
     public void testTOCEntries() {
-        int actualTOCEntriesCount = testWorkInfo.getTOCCount();
+        int actualTOCEntriesCount = testWorkInfo.getTocEntries().size();
         assertThat(actualTOCEntriesCount).isEqualTo(1);
 
-        TOCEntry actualTOCEntry = testWorkInfo.getTocEntries()[0];
+        TOCEntry actualTOCEntry = testWorkInfo.getTocEntries().get(0);
         assertThat(actualTOCEntry.getTitle()).contains("Test Entry");
     }
 }
