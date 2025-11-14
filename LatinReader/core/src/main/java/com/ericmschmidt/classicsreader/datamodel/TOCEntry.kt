@@ -1,43 +1,23 @@
-package com.ericmschmidt.classicsreader.datamodel;
+package com.ericmschmidt.classicsreader.datamodel
 
-import java.util.Formatter;
-import java.util.Locale;
+import java.util.Formatter
+import java.util.Locale
 
 /** An entry within a table of contents.
  * @author Eric Schmidt
- * @author http://telpirion.com
- * @version 1.5
+ * @author <a href="https://telpirion.com">...</a>
+ * @version 2.0
  * @since 1.4
  */
-public class TOCEntry {
-    private String title;
-    private int book;
-    private int line;
-    public TOCEntry (String title, int book, int line) {
-        this.title = title;
-        this.book = book;
-        this.line = line;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getBook() {
-        return book;
-    }
-
-    public int getLine() {
-        return line;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Formatter formatter = new Formatter(sb, Locale.US);
-        return formatter.format("Book %d.%d%s",
-                (this.book + 1),
-                this.line,
-                (this.title.isEmpty() ? "" : ": " + this.title)).toString();
+class TOCEntry(val title: String, val book: Int, val line: Int)  {
+    override fun toString(): String {
+        val sb = StringBuilder()
+        val formatter = Formatter(sb, Locale.US)
+        return formatter.format(
+            "Book %d.%d%s",
+            (this.book + 1),
+            this.line,
+            (if (this.title.isEmpty()) "" else ": " + this.title)
+        ).toString()
     }
 }
