@@ -1,43 +1,36 @@
-package com.ericmschmidt.classicsreader.datamodel;
+package com.ericmschmidt.classicsreader.datamodel
 
-import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+import com.ericmschmidt.classicsreader.logError
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-
-/** Stores information about the works (source works, translations) in this app.
- * @author Eric Schmidt
- * @author https://telpirion.com
- * @version 1.5
- * @since 1.1
- */
-public class Manifest {
-
-    public Manifest() {}
-    public ArrayList<WorkInfo> getCollection() {
-        return null;
-    }
-    public WorkInfo getDictionaryInfo() {
-        return null;
-    }
-    public int getDictionaryEntryResource() {
-        return 0;
+open class Manifest {
+    open fun getCollection(): ArrayList<WorkInfo?>? {
+        return null
     }
 
-    /**
-     * Get the manifest class out of the package using reflection.
-     * @param className the fully-qualified class name as a string.
-     * @return Manifest
-     */
-    public static Manifest getManifest(String className) {
-        Manifest manifest = null;
-        try {
-            Class<?> manifestClass = Class.forName(className);
-            Constructor<?>[] constructors = manifestClass.getConstructors();
-            manifest = (Manifest) constructors[0].newInstance();
-        } catch (Exception ex) {
-            logError(Manifest.class, ex.getMessage());
+    open fun getDictionaryInfo(): WorkInfo? {
+        return null
+    }
+
+    open fun getDictionaryEntryResource(): Int {
+        return 0
+    }
+
+    companion object {
+        /**
+         * Get the manifest class out of the package using reflection.
+         * @param className the fully-qualified class name as a string.
+         * @return Manifest
+         */
+        fun getManifest(className: String): Manifest? {
+            var manifest: Manifest? = null
+            try {
+                val manifestClass = Class.forName(className)
+                val constructors = manifestClass.constructors
+                manifest = constructors[0]!!.newInstance() as Manifest
+            } catch (ex: Exception) {
+                logError(Manifest::class.java, ex.message)
+            }
+            return manifest
         }
-        return manifest;
     }
 }

@@ -70,9 +70,9 @@ fun PrettyCardLazyList(
     ) {
         items(
             items = works,
-            key = { work -> work.id },
+            key = { work -> work!!.id },
         ) {
-            PrettyRow(workInfo = it, onClick = onRowClick, isTranslation = isTranslation)
+            PrettyRow(workInfo = it!!, onClick = onRowClick, isTranslation = isTranslation)
         }
     }
 }

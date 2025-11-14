@@ -15,9 +15,8 @@ import java.util.Random
  */
 class Dictionary(val converter: ITextConverter? = null) {
 
-    val manifest: Manifest = applicationInstance()
-        .manifest
-    val dictionaryInfo: WorkInfo = manifest.dictionaryInfo
+    val manifest: Manifest = applicationInstance().manifest
+    val dictionaryInfo: WorkInfo? = manifest.getDictionaryInfo()
     var entryHeaders: ArrayList<String> = ArrayList()
 
     init {
@@ -45,7 +44,7 @@ class Dictionary(val converter: ITextConverter? = null) {
         var definition: String? = null
         try {
             if (isInDictionary(searchEntry)) {
-                val stream = ResourceHelper.getResourceStream(this.dictionaryInfo.getLocation())
+                val stream = ResourceHelper.getResourceStream(this.dictionaryInfo!!.getLocation())
                 definition = DictionaryXMLHelper.getEntry(stream, searchEntry, converter)
             }
         } catch (ex: Exception) {
@@ -70,7 +69,7 @@ class Dictionary(val converter: ITextConverter? = null) {
     // Gets the number of alphabet chapters in dictionary.
     private fun initEntries() {
         try {
-            val stream = ResourceHelper.getResourceStream(manifest.dictionaryEntryResource)
+            val stream = ResourceHelper.getResourceStream(manifest.getDictionaryEntryResource())
             this.entryHeaders = DictionaryXMLHelper.getEntryHeaders(stream)
         } catch (ex: java.lang.Exception) {
             val errorMessage = ex.message
