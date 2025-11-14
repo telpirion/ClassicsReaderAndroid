@@ -1,90 +1,50 @@
-package com.ericmschmidt.classicsreader.utilities;
+package com.ericmschmidt.classicsreader.utilities
 
-import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+import com.ericmschmidt.classicsreader.logError
+import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserException
+import java.io.IOException
+import java.io.InputStream
+import javax.xml.parsers.DocumentBuilderFactory
 
-import java.io.*;
-import java.util.ArrayList;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.*;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-/** Gets dictionary resources out of the XML.
+/**
+ * Gets dictionary resources out of the XML.
  *
  * @author Eric Schmidt
  * @author http://telpirion.com
  * @version 1.5
  * @since 1.0
  */
-public class DictionaryXMLHelper extends XmlParserHelper {
+object DictionaryXMLHelper : XmlParserHelper() {
 
     // Overrides constants in super class.
-    private static final String LINE_TAG = "entry";
-    private static final String KEY_ATTRIBUTE = "key";
-    private static final String LANG_ATTRIBUTE = "lang";
-
-    /*
-    The XML dictionary is structured like this:
-
-    <work> <!-- This corresponds to the Work data structure -->
-      <header>
-        <!-- Stuff here ... -->
-      <header/>
-      <text>
-        <body> <!-- This is like a collection of Book objects -->
-          <div0 type="alphabetic letter" n="A"> <!-- This is a alphabetic section in the dictionary.
-          <head></head>
-            <superEntry>
-              <entry></entry> <!-- This is usually the entry for the letter itself. -->
-              <entry></entry>
-            </superEntry>
-            <entry id="n2" type="main" key="abactus"> <!-- This is the actual dictionary entry for a word. -->
-              <form><orth extent="full" lang="la">abctus</orth></form>
-              <sense id="n2.0" level="0" n="0"><etym lang="la">P. of abigo</etym>,
-                <trans><tr>driven away, driven off</tr></trans>:
-                <foreign lang="la">nox abacta</foreign>,
-                <trans><tr>driven back</tr></trans> (from the pole), i. e.
-                <trans><tr>already turned towards dawn</tr></trans>,
-                <usg>V.</usg>:
-                <foreign lang="la">abacta null conscienti</foreign>,
-                <trans><tr>restrained by</tr></trans>,
-                <usg>H.</usg>
-              </sense>
-            </entry>
-          </div0>
-        </body>
-      </text>
-    </work>
-    */
+    private const val LINE_TAG = "entry"
+    private const val KEY_ATTRIBUTE = "key"
+    private const val LANG_ATTRIBUTE = "lang"
 
     /**
      * Gets the keys of all the entries in this dictionary from an entries resource.
      * @param stream the inputStream of the dictionary.
      * @return the ArrayList of dictionary entries.
-     * @throws Exception
      */
-    public static ArrayList<String> getEntryHeaders(InputStream stream) throws Exception {
-        ArrayList<String> headers = new ArrayList<>();
+    @JvmStatic
+    fun getEntryHeaders(stream: InputStream): ArrayList<String> {
+        val headers = ArrayList<String>()
         try {
+            stream.use {
+                val factory = DocumentBuilderFactory.newInstance()
+                val builder = factory.newDocumentBuilder()
+                val dom = builder.parse(it)
+                val list = dom.getElementsByTagName("entry")
 
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-
-            Document dom = builder.parse(stream);
-            NodeList list = dom.getElementsByTagName("entry");
-
-            for (int i = 0; i < list.getLength(); i++) {
-                headers.add(list.item(i).getTextContent());
+                for (i in 0 until list.length) {
+                    headers.add(list.item(i).textContent)
+                }
             }
-
-        } catch (Exception ex) {
-            String errorMessage = ex.getMessage();
-            logError(errorMessage);
-        } finally {
-            stream.close();
+        } catch (ex: Exception) {
+            logError(ex.message)
         }
-        return headers;
+        return headers
     }
 
     /**
@@ -92,68 +52,66 @@ public class DictionaryXMLHelper extends XmlParserHelper {
      * @param stream the inputStream of the dictionary.
      * @param searchEntry the dictionary entry to search for.
      * @return the definition for the entry.
-     * @throws XmlPullParserException
-     * @throws IOException
      */
-    public static String getEntry(InputStream stream, String searchEntry, ITextConverter converter) throws XmlPullParserException, IOException {
-        String definition = null;
-
+    @JvmStatic
+    @Throws(XmlPullParserException::class, IOException::class)
+    fun getEntry(stream: InputStream, searchEntry: String, converter: ITextConverter): String? {
+        var definition: String? = null
         try {
-            XmlPullParser parser = initParser(stream);
-            while (nextSection(parser, LINE_TAG)) {
-                parser.require(XmlPullParser.START_TAG, XmlParserHelper.ns, LINE_TAG);
-
-                String keyAttributeValue = parser.getAttributeValue(XmlParserHelper.ns, KEY_ATTRIBUTE);
-                if (keyAttributeValue != null
-                        && searchEntry.equals(keyAttributeValue)) {
-                    break;
+            stream.use {
+                val parser = initParser(it)
+                while (nextSection(parser, LINE_TAG)) {
+                    parser.require(XmlPullParser.START_TAG, ns, LINE_TAG)
+                    val keyAttributeValue = parser.getAttributeValue(ns, KEY_ATTRIBUTE)
+                    if (keyAttributeValue != null && searchEntry == keyAttributeValue) {
+                        break
+                    }
                 }
+                definition = getDictionaryLine(parser, LINE_TAG, converter)
             }
-
-            definition = getDictionaryLine(parser, LINE_TAG, converter);
-
-        } catch (Exception ex) {
-            String errorMessage = ex.getMessage();
-            logError(errorMessage);
-        } finally {
-            stream.close();
+        } catch (ex: Exception) {
+            logError(ex.message)
         }
-
-        return removeExtraneousCharacters(definition);
+        return removeExtraneousCharacters(definition)
     }
 
-    private static String getDictionaryLine(XmlPullParser parser, String lineTag, ITextConverter converter) throws XmlPullParserException, IOException {
-        String line = "";
-        String currentSubLine;
-        boolean isNonLatin = false;
-        parser.require(XmlPullParser.START_TAG, ns, lineTag);
-
+    @Throws(XmlPullParserException::class, IOException::class)
+    private fun getDictionaryLine(
+        parser: XmlPullParser,
+        lineTag: String,
+        converter: ITextConverter
+    ): String {
+        var line = ""
+        var currentSubLine: String
+        var isNonLatin = false
+        parser.require(XmlPullParser.START_TAG, ns, lineTag)
         while (!checkTag(lineTag, parser, XmlPullParser.END_TAG)) {
-            parser.next();
-
-            if ((parser.getEventType() == XmlPullParser.START_TAG) &&
-                    converter != null &&
-                    hasAttribute(parser, LANG_ATTRIBUTE, converter.getLang())) {
-                isNonLatin = true;
+            parser.next()
+            if (parser.eventType == XmlPullParser.START_TAG &&
+                hasAttribute(parser, LANG_ATTRIBUTE, converter.lang)
+            ) {
+                isNonLatin = true
             }
-
-            if (parser.getEventType() == XmlPullParser.TEXT) {
+            if (parser.eventType == XmlPullParser.TEXT) {
 
                 // Check the entry for non-Latin characters and
                 // convert to the other orthography, if necessary.
-                currentSubLine = isNonLatin ?
-                        converter.convertSourceToTargetCharacters(parser.getText()):
-                        parser.getText();
-                line += removeExtraneousCharacters(currentSubLine);
-                isNonLatin = false;
+                currentSubLine = if (isNonLatin) converter.convertSourceToTargetCharacters(
+                    parser.text
+                ) else parser.text
+                line += removeExtraneousCharacters(currentSubLine)
+                isNonLatin = false
             }
         }
-
-        return line;
+        return line
     }
 
-    private static boolean hasAttribute(XmlPullParser parser, String attributeName, String languageName){
-        String attributeValue = parser.getAttributeValue(null, attributeName);
-        return ((attributeValue!= null) && (attributeValue.equals(languageName)));
+    private fun hasAttribute(
+        parser: XmlPullParser,
+        attributeName: String,
+        languageName: String
+    ): Boolean {
+        val attributeValue = parser.getAttributeValue(null, attributeName)
+        return attributeValue != null && attributeValue == languageName
     }
 }
