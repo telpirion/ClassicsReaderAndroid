@@ -5,7 +5,7 @@ import android.preference.PreferenceManager;
 
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter;
+import com.ericmschmidt.classicsreader.utilities.ITextConverter_;
 
 import java.util.Locale;
 
@@ -17,19 +17,18 @@ import java.util.Locale;
  */
 public class ReadingViewModel {
 
-    private String DEFAULT_READING_POSITION="0,0";
+    private final String DEFAULT_READING_POSITION="0,0";
 
-    private final Manifest manifest;
-    private WorkInfo _currentWorkInfo;
-    private Work _currentWork;
+    private final WorkInfo _currentWorkInfo;
+    private final Work _currentWork;
     private Book _currentBook;
     private int _currentLineIndex;
     private int _currentBookIndex;
-    private int _pageOffset;
-    private String _author;
-    private String _title;
-    private boolean _isTranslation;
-    private ITextConverter converter;
+    private final int _pageOffset;
+    private final String _author;
+    private final String _title;
+    private final boolean _isTranslation;
+    private ITextConverter_ converter;
 
     /**
      * Creates an instance of the ReadingViewModel class with a work open.
@@ -44,7 +43,6 @@ public class ReadingViewModel {
         this._pageOffset = (pageOffset > -1) ? pageOffset : 1;
         this._isTranslation = isTranslation;
         MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
-        this.manifest = applicationInstance.getManifest();
         this.converter = applicationInstance.isNonRomanChar() ?
                 applicationInstance.getTextConverter() : null;
 

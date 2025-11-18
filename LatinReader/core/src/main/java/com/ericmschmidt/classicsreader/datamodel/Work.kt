@@ -1,8 +1,9 @@
 package com.ericmschmidt.classicsreader.datamodel
 
 import com.ericmschmidt.classicsreader.logError
-import com.ericmschmidt.classicsreader.utilities.ResourceHelper
-import com.ericmschmidt.classicsreader.utilities.WorkXMLParser
+import com.ericmschmidt.classicsreader.utilities.getBook
+import com.ericmschmidt.classicsreader.utilities.getBookCount
+import com.ericmschmidt.classicsreader.utilities.getResourceStream
 
 /** Contains the data for a text ('work') contained in the reader.
  * @author Eric Schmidt
@@ -40,13 +41,12 @@ class Work(val location: Int) {
 
     // Initialize the array of books based upon the total number of books in the work.
     private fun initBooks() {
-        ResourceHelper.getResourceStream(this.location).use { stream ->
-            val stream = ResourceHelper.getResourceStream(this.location)
-            this._bookCount = WorkXMLParser.getBookCount(stream)
+        getResourceStream(this.location).use { stream ->
+            this._bookCount = getBookCount(stream)
             this._books = arrayOfNulls<Book>(this._bookCount)
 
             if (this._bookCount == 0) {
-                throw java.lang.Exception("Work failed to initialize.")
+                throw Exception("Work failed to initialize.")
             }
         }
     }
@@ -57,8 +57,8 @@ class Work(val location: Int) {
         var book = bookCollection[id]
         try {
             if (book == null) {
-                val stream = ResourceHelper.getResourceStream(location)
-                book = WorkXMLParser.getBook(id, stream)
+                val stream = getResourceStream(location)
+                book = getBook(id, stream)
 
                 bookCollection[id] = book
             }
