@@ -1,6 +1,7 @@
 package com.ericmschmidt.greekreader.utilities;
 
 import static com.ericmschmidt.classicsreader.ApplicationLoggingKt.logError;
+import static com.ericmschmidt.classicsreader.utilities.ResourceHelpersKt.getResourceStream;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,8 +9,7 @@ import android.util.JsonReader;
 import android.widget.EditText;
 
 import com.ericmschmidt.greekreader.R;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter;
-import com.ericmschmidt.classicsreader.utilities.ResourceHelper;
+import com.ericmschmidt.classicsreader.utilities.ITextConverter_;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +29,7 @@ import java.util.HashMap;
  * @author http://telpirion.com
  * @version 2.0
  */
-public class TextConverter implements ITextConverter {
+public class TextConverter implements ITextConverter_ {
 
     private HashMap<String, String> _characterHash;
     private HashMap<String, String> _reverseCharacterHash;
@@ -125,7 +125,7 @@ public class TextConverter implements ITextConverter {
 
     // Converts the JSON resource into a HashMap.
     private void initCharacterHash() throws IOException {
-        InputStream stream = ResourceHelper.getResourceStream(R.raw.latin_greek_text_conversion);
+        InputStream stream = getResourceStream(R.raw.latin_greek_text_conversion);
         JsonReader reader = new JsonReader(new InputStreamReader(stream));
 
         reader.beginObject();

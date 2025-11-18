@@ -2,14 +2,10 @@ package com.ericmschmidt.latinreader.datamodel;
 
 import com.ericmschmidt.classicsreader.datamodel.Book;
 import com.ericmschmidt.classicsreader.datamodel.Work;
-import com.ericmschmidt.classicsreader.utilities.ResourceHelper;
-import com.ericmschmidt.classicsreader.utilities.WorkXMLParser;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -17,11 +13,13 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.ericmschmidt.classicsreader.utilities.ResourceHelpersKt.getBook;
+import static com.ericmschmidt.classicsreader.utilities.ResourceHelpersKt.getResourceStream;
+import static com.ericmschmidt.classicsreader.utilities.ResourceHelpersKt.getBookCount;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ResourceHelper.class, WorkXMLParser.class})
 public class WorkTest {
 
     int testResourceID = 12345;
@@ -51,19 +49,13 @@ public class WorkTest {
 
             InputStream inputStream = new ByteArrayInputStream(sampleString.getBytes());
 
-            PowerMockito.mockStatic(ResourceHelper.class);
-            PowerMockito.mockStatic(WorkXMLParser.class);
+            when(getResourceStream(testResourceID)).thenReturn(inputStream);
+            when(getBookCount(inputStream)).thenReturn(1);
+            when(getBook(0, inputStream)).thenReturn(testBook);
 
-            when(ResourceHelper.getResourceStream(testResourceID)).thenReturn(inputStream);
-            when(WorkXMLParser.getBookCount(inputStream)).thenReturn(1);
-            when(WorkXMLParser.getBook(0, inputStream)).thenReturn(testBook);
-
-        } catch (XmlPullParserException ex){
-            System.out.println(ex.getMessage());
-        } catch (IOException ex) {
+        } catch (XmlPullParserException | IOException ex){
             System.out.println(ex.getMessage());
         }
-
     }
 
     @Test

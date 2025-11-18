@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.datamodel.Dictionary;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter;
+import com.ericmschmidt.classicsreader.utilities.ITextConverter_;
 
 import java.util.Objects;
 
@@ -29,7 +29,7 @@ import java.util.Objects;
  */
 public class DictionaryFragment extends Fragment {
     private String query;
-    private ITextConverter converter;
+    private ITextConverter_ converter;
 
     private boolean isNonRomanChar;
 

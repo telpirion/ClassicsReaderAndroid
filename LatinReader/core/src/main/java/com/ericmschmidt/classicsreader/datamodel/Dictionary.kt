@@ -2,9 +2,10 @@ package com.ericmschmidt.classicsreader.datamodel
 
 import com.ericmschmidt.classicsreader.MyApplication.Factory.applicationInstance
 import com.ericmschmidt.classicsreader.logError
-import com.ericmschmidt.classicsreader.utilities.DictionaryXMLHelper
-import com.ericmschmidt.classicsreader.utilities.ITextConverter
-import com.ericmschmidt.classicsreader.utilities.ResourceHelper
+import com.ericmschmidt.classicsreader.utilities.ITextConverter_
+import com.ericmschmidt.classicsreader.utilities.getEntry
+import com.ericmschmidt.classicsreader.utilities.getEntryHeaders
+import com.ericmschmidt.classicsreader.utilities.getResourceStream
 import java.util.Random
 
 /** Contains the data and methods for getting dictionary entries.
@@ -13,7 +14,7 @@ import java.util.Random
  * @version 1.5
  * @since 1.1
  */
-class Dictionary(val converter: ITextConverter? = null) {
+class Dictionary(val converter: ITextConverter_? = null) {
 
     val manifest: Manifest = applicationInstance().manifest
     val dictionaryInfo: WorkInfo? = manifest.getDictionaryInfo()
@@ -47,8 +48,12 @@ class Dictionary(val converter: ITextConverter? = null) {
             return definition
         }
 
-        ResourceHelper.getResourceStream(this.dictionaryInfo?.location as Int).use { stream ->
-            definition = DictionaryXMLHelper.getEntry(stream, searchEntry, converter)
+        getResourceStream(this.dictionaryInfo?.location as Int).use { stream ->
+            definition = getEntry(
+                stream,
+                searchEntry as String,
+                converter as ITextConverter_
+            )
         }
 
         return definition
@@ -69,8 +74,8 @@ class Dictionary(val converter: ITextConverter? = null) {
     // Gets the number of alphabet chapters in dictionary.
     private fun initEntries() {
         try {
-            val stream = ResourceHelper.getResourceStream(manifest.getDictionaryEntryResource())
-            this.entryHeaders = DictionaryXMLHelper.getEntryHeaders(stream)
+            val stream = getResourceStream(manifest.getDictionaryEntryResource())
+            this.entryHeaders = getEntryHeaders(stream)
         } catch (ex: java.lang.Exception) {
             val errorMessage = ex.message
             logError(errorMessage)
