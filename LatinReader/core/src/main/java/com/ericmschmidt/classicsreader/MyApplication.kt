@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import com.ericmschmidt.classicsreader.datamodel.Manifest
-import com.ericmschmidt.classicsreader.utilities.ITextConverter_
+import com.ericmschmidt.classicsreader.utilities.ITextConverter
 
 
 /**
@@ -21,7 +21,7 @@ class MyApplication : Application() {
         val context: Context,
         val manifest: Manifest,
         val isNonRomanChar: Boolean,
-        val textConverter: ITextConverter_?,
+        val textConverter: ITextConverter?,
     )
 
     init {
@@ -47,8 +47,8 @@ class MyApplication : Application() {
             return instance.resources.getBoolean(R.bool.non_roman_char)
         }
 
-        private fun getTextConverter(): ITextConverter_? {
-            var converter: ITextConverter_? = null
+        private fun getTextConverter(): ITextConverter? {
+            var converter: ITextConverter? = null
 
             if (isNonRomanChar()) {
                 val className = instance.resources.getString(R.string.text_converter)
@@ -56,7 +56,7 @@ class MyApplication : Application() {
                 try {
                     val manifestClass = Class.forName(className)
                     val constructors = manifestClass.constructors
-                    converter = constructors[0].newInstance() as ITextConverter_
+                    converter = constructors[0].newInstance() as ITextConverter
                 } catch (ex: Exception) {
                     Log.e(Manifest::class.java.name, ex.message as String)
                 }

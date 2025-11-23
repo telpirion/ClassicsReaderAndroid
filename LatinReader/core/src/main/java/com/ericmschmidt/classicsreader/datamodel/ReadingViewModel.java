@@ -5,7 +5,7 @@ import android.preference.PreferenceManager;
 
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter_;
+import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 
 import java.util.Locale;
 
@@ -28,7 +28,7 @@ public class ReadingViewModel {
     private final String _author;
     private final String _title;
     private final boolean _isTranslation;
-    private ITextConverter_ converter;
+    private ITextConverter converter;
 
     /**
      * Creates an instance of the ReadingViewModel class with a work open.

@@ -8,8 +8,8 @@ import android.text.TextWatcher;
 import android.util.JsonReader;
 import android.widget.EditText;
 
+import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 import com.ericmschmidt.greekreader.R;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter_;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,17 +19,17 @@ import java.util.HashMap;
 /**
  * A Latin character to Greek polytonic converter.
  * Copyright 2015, Eric Schmidt. All rights reserved.
- *
- * http://www.unicode.org/charts/PDF/U1F00.pdf
- * http://www.fileformat.info/search/google.htm
- *
+ * <br/>
+ * <a href="http://www.unicode.org/charts/PDF/U1F00.pdf">...</a>
+ * <a href="http://www.fileformat.info/search/google.htm">...</a>
+ * <br/>
  * Last updated: 2017-02-03
- *
+ * <br/>
  * @author Eric SChmidt
- * @author http://telpirion.com
+ * @author <a href="http://telpirion.com">...</a>
  * @version 2.0
  */
-public class TextConverter implements ITextConverter_ {
+public class TextConverter implements ITextConverter {
 
     private HashMap<String, String> _characterHash;
     private HashMap<String, String> _reverseCharacterHash;
