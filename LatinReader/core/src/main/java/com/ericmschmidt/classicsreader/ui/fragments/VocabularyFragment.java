@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.datamodel.Dictionary;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter_;
+import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 
 /** Displays the vocabulary word-builder page.
  *
@@ -57,7 +57,7 @@ public class VocabularyFragment extends Fragment {
 
             MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
 
-            ITextConverter_ converter = applicationInstance.isNonRomanChar() ?
+            ITextConverter converter = applicationInstance.isNonRomanChar() ?
                     applicationInstance.getTextConverter() : null;
 
             // Get a random entry from the dictionary to sow.

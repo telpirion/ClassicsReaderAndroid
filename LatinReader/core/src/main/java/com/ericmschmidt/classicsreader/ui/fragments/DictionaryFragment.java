@@ -16,20 +16,20 @@ import androidx.fragment.app.Fragment;
 import com.ericmschmidt.classicsreader.MyApplication;
 import com.ericmschmidt.classicsreader.R;
 import com.ericmschmidt.classicsreader.datamodel.Dictionary;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter_;
+import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 
 import java.util.Objects;
 
 /** Displays the dictionary page.
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
- * @version 1.5
+ * @author <a href="https://telpirion.com">...</a>
+ * @version 2.0
  * @since 1.0
  */
 public class DictionaryFragment extends Fragment {
     private String query;
-    private ITextConverter_ converter;
+    private ITextConverter converter;
 
     private boolean isNonRomanChar;
 

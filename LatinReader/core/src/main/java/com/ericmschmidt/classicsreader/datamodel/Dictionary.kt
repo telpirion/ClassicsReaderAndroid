@@ -2,7 +2,7 @@ package com.ericmschmidt.classicsreader.datamodel
 
 import com.ericmschmidt.classicsreader.MyApplication.Factory.applicationInstance
 import com.ericmschmidt.classicsreader.logError
-import com.ericmschmidt.classicsreader.utilities.ITextConverter_
+import com.ericmschmidt.classicsreader.utilities.ITextConverter
 import com.ericmschmidt.classicsreader.utilities.getEntry
 import com.ericmschmidt.classicsreader.utilities.getEntryHeaders
 import com.ericmschmidt.classicsreader.utilities.getResourceStream
@@ -14,7 +14,7 @@ import java.util.Random
  * @version 1.5
  * @since 1.1
  */
-class Dictionary(val converter: ITextConverter_? = null) {
+class Dictionary(val converter: ITextConverter? = null) {
 
     val manifest: Manifest = applicationInstance().manifest
     val dictionaryInfo: WorkInfo? = manifest.getDictionaryInfo()
@@ -52,7 +52,7 @@ class Dictionary(val converter: ITextConverter_? = null) {
             definition = getEntry(
                 stream,
                 searchEntry as String,
-                converter as ITextConverter_
+                converter as ITextConverter
             )
         }
 

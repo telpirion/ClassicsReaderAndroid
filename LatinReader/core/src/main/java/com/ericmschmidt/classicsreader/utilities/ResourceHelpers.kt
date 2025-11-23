@@ -234,7 +234,7 @@ fun getEntryHeaders(stream: InputStream): ArrayList<String> {
     return headers
 }
 
-fun getEntry(stream: InputStream, searchEntry: String, converter: ITextConverter_): String {
+fun getEntry(stream: InputStream, searchEntry: String, converter: ITextConverter): String {
     var definition: String? = null
     try {
         stream.use {
@@ -258,7 +258,7 @@ fun getEntry(stream: InputStream, searchEntry: String, converter: ITextConverter
 fun getDictionaryLine(
     parser: XmlPullParser,
     lineTag: String,
-    converter: ITextConverter_
+    converter: ITextConverter
 ): String {
     var line = ""
     var currentSubLine: String
@@ -275,9 +275,9 @@ fun getDictionaryLine(
 
             // Check the entry for non-Latin characters and
             // convert to the other orthography, if necessary.
-            currentSubLine = if (isNonLatin) converter.convertSourceToTargetCharacters(
+            currentSubLine = (if (isNonLatin) converter.convertSourceToTargetCharacters(
                 parser.text
-            ) else parser.text
+            ) else parser.text)!!
             line += removeExtraneousCharacters(currentSubLine)
             isNonLatin = false
         }

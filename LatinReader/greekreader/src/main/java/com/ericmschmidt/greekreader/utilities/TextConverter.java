@@ -6,11 +6,10 @@ import static com.ericmschmidt.classicsreader.utilities.ResourceHelpersKt.getRes
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.JsonReader;
-import android.util.Log;
 import android.widget.EditText;
 
+import com.ericmschmidt.classicsreader.utilities.ITextConverter;
 import com.ericmschmidt.greekreader.R;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter_;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,13 +23,13 @@ import java.util.HashMap;
  * <a href="http://www.unicode.org/charts/PDF/U1F00.pdf">...</a>
  * <a href="http://www.fileformat.info/search/google.htm">...</a>
  * <br/>
- * Last updated: 2025-08-27
+ * Last updated: 2017-02-03
  * <br/>
  * @author Eric SChmidt
  * @author <a href="http://telpirion.com">...</a>
  * @version 2.0
  */
-public class TextConverter implements ITextConverter_ {
+public class TextConverter implements ITextConverter {
 
     private HashMap<String, String> _characterHash;
     private HashMap<String, String> _reverseCharacterHash;
@@ -53,7 +52,7 @@ public class TextConverter implements ITextConverter_ {
     /**
      * Get a string indicating the target language of the text converter,
      * in this case Greek polyonic.
-     * @return String the language of the text converter.
+     * @return
      */
     @Override
     public String getLang() {
@@ -67,24 +66,19 @@ public class TextConverter implements ITextConverter_ {
      */
     @Override
     public String convertSourceToTargetCharacters(String source) {
-        try {
-            String[] paraArray = source.split("\n");
-            StringBuilder convertedString = new StringBuilder();
+        String[] paraArray = source.split("\n");
+        String convertedString = "";
 
-            for (String para : paraArray) {
+        for (String para : paraArray) {
 
-                String[] wordArray = para.split(" ");
+            String[] wordArray = para.split(" ");
 
-                for (String word : wordArray) {
-                    convertedString.append(convertWord(word)).append(" ");
-                }
-                convertedString.append("\n");
+            for (String word : wordArray) {
+                convertedString += convertWord(word) + " ";
             }
-            return convertedString.toString();
-        } catch (Exception ex) {
-            MyApplication.logError(ex.getMessage());
+            convertedString += "\n";
         }
-        return "";
+        return convertedString;
     }
 
     /**
@@ -95,12 +89,12 @@ public class TextConverter implements ITextConverter_ {
     @Override
     public String convertTargetToSourceCharacters(String target) {
         String [] wordArray = target.split(" ");
-        StringBuilder convertedString = new StringBuilder();
+        String convertedString = "";
 
         for (String word : wordArray)
-            convertedString.append(revertWord(word));
+            convertedString += revertWord(word);
 
-        return convertedString.toString();
+        return convertedString;
     }
 
     @Override
@@ -114,10 +108,9 @@ public class TextConverter implements ITextConverter_ {
 
             }
 
-            //@Override
+            @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!isCanceled) {
-                    Log.i("TextConverter", "onTextChanged");
                     isCanceled = true;
                     convertText(editText);
                 }
@@ -164,74 +157,70 @@ public class TextConverter implements ITextConverter_ {
     // Converts a single word of Latin characters into
     //a Greek polytonic-formatted Greek word (string).
     private String convertWord(String word) {
-        try {
-            StringBuilder convertedWord = new StringBuilder();
-            String holdVowelChar = "";
-            String holdCapital = "";
 
-            for (int i = 0; i < word.length(); i++) {
-                String currChar = Character.toString(word.charAt(i));
-                if (this._characterHash.containsKey(currChar)) {
-                    if (!holdCapital.isEmpty()) {
-                        holdCapital += currChar;
-                        convertedWord.append(resolveDiacriticals(holdVowelChar));
-                        convertedWord.append(resolveDiacriticals(holdCapital));
-                    } else {
-                        convertedWord.append(resolveDiacriticals(holdVowelChar));
-                        convertedWord.append(resolveDiacriticals(holdCapital));
-                        convertedWord.append(this._characterHash.get(currChar));
-                    }
-                    holdCapital = "";
-                    holdVowelChar = "";
-                } else if (String.valueOf(currChar).equals(("*"))) {
-                    holdCapital += "*";
-                } else if (isDiacritical(currChar)) {
+        String convertedWord = "";
+        String holdVowelChar = "";
+        String holdCapital = "";
 
-                    // If this is a diacritical, build the diacritical and vowel.
-                    // A vowel can have two or three diacriticals (a breathing mark, accent, iota subscript),
-                    // most will only have one.
-                    if (!holdCapital.isEmpty()) {
-                        holdCapital += currChar;
-                    } else if (!holdVowelChar.isEmpty()) {
-                        holdVowelChar += currChar;
-                    } else {
-                        holdVowelChar += word.charAt(i - 1) + currChar;
-                        convertedWord = new StringBuilder(convertedWord.substring(0, convertedWord.length() - 1));
-                    }
+        for (int i = 0; i < word.length(); i++) {
+            String currChar = Character.toString(word.charAt(i));
+            if (this._characterHash.containsKey(currChar)) {
+                if (!holdCapital.isEmpty()) {
+                    holdCapital += currChar;
+                    convertedWord += resolveDiacriticals(holdVowelChar);
+                    convertedWord += resolveDiacriticals(holdCapital);
                 } else {
-                    convertedWord.append(currChar);
+                    convertedWord += resolveDiacriticals(holdVowelChar);
+                    convertedWord += resolveDiacriticals(holdCapital);
+                    convertedWord += this._characterHash.get(currChar);
                 }
+                holdCapital = "";
+                holdVowelChar = "";
+            } else if (String.valueOf(currChar).equals(("*"))) {
+                holdCapital += "*";
+            } else if (isDiacritical(currChar)) {
+
+                // If this is a diacritical, build the diacritical and vowel.
+                // A vowel can have two or three diacriticals (a breathing mark, accent, iota subscript),
+                // most will only have one.
+                if (!holdCapital.isEmpty()) {
+                    holdCapital += currChar;
+                } else if (!holdVowelChar.isEmpty()) {
+                    holdVowelChar += currChar;
+                } else {
+                    holdVowelChar += word.charAt(i - 1) + currChar;
+                    convertedWord = convertedWord.substring(0, convertedWord.length() - 1);
+                }
+            } else {
+                convertedWord += currChar;
             }
-
-            // Resolve any remaining vowel plus diacriticals.
-            convertedWord.append(resolveDiacriticals(holdVowelChar));
-            convertedWord.append(resolveDiacriticals(holdCapital));
-
-            // Replace any final sigmas with the ending sigma.
-            if (convertedWord.toString().contains("σ")) {
-                convertedWord = new StringBuilder(convertFinalSigma(convertedWord.toString()));
-            }
-
-            return convertedWord.toString();
-        } catch (Exception ex) {
-            MyApplication.logError(this.getClass(), ex.getMessage());
         }
-        return "";
+
+        // Resolve any remaining vowel plus diacriticals.
+        convertedWord += resolveDiacriticals(holdVowelChar);
+        convertedWord += resolveDiacriticals(holdCapital);
+
+        // Replace any final sigmas with the ending sigma.
+        if (convertedWord.contains("σ")) {
+            convertedWord = convertFinalSigma(convertedWord);
+        }
+
+        return convertedWord;
     }
 
     // Convert a word in polytonic-formatted Greek characters
     // to Latin characters with diacritical marks.
     private String revertWord(String word){
-        StringBuilder revertedWord = new StringBuilder();
+        String revertedWord = "";
         for (int i = 0; i < word.length(); i++) {
             String currChar = Character.toString(word.charAt(i));
             if (this._reverseCharacterHash.containsKey(currChar)) {
-                revertedWord.append(this._reverseCharacterHash.get(currChar));
+                revertedWord += this._reverseCharacterHash.get(currChar);
             } else {
-                revertedWord.append(currChar);
+                revertedWord += currChar;
             }
         }
-        return revertedWord.toString();
+        return revertedWord;
     }
 
     // Convert final sigma.
