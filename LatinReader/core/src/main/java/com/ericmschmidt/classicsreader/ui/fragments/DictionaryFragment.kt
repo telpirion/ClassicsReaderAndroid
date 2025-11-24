@@ -41,7 +41,7 @@ class DictionaryFragment : Fragment() {
             query = args.dictionaryQuery
         }
 
-        val applicationInstance = MyApplication.Factory.applicationInstance()
+        val applicationInstance = MyApplication.applicationInstance()
         isNonRomanChar = applicationInstance.isNonRomanChar
         if (isNonRomanChar) {
             converter = applicationInstance.textConverter
@@ -66,11 +66,7 @@ class DictionaryFragment : Fragment() {
         // Convert text as user types.
         if (isNonRomanChar) {
             val watcher: TextWatcher? = converter?.getTextWatcher(searchQuery)
-                ?: Objects.requireNonNull(
-                    MyApplication.Factory
-                        .applicationInstance()
-                        .textConverter
-                )
+                ?: Objects.requireNonNull(MyApplication.applicationInstance().textConverter)
                     ?.getTextWatcher(searchQuery)
             searchQuery.addTextChangedListener(watcher)
         }

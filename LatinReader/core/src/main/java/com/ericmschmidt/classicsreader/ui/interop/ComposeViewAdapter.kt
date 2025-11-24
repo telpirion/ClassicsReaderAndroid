@@ -1,5 +1,3 @@
-@file:JvmName("ComposeViewAdapter")
-
 package com.ericmschmidt.classicsreader.ui.interop
 
 import androidx.compose.ui.platform.ComposeView
