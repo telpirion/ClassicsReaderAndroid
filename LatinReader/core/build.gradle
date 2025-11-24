@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.compose.ui:ui-tooling:1.9.4'
     def nav_version = '2.9.0'
     def lifecycle_version = rootProject.extensions["ext"]["lifecycle_version"]
     implementation(fileTree(dir: 'libs', include: ['*.jar']))
