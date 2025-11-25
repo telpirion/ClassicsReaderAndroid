@@ -1,45 +1,37 @@
-package com.ericmschmidt.classicsreader.ui.layouts;
+package com.ericmschmidt.classicsreader.ui.layouts
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import com.ericmschmidt.classicsreader.databinding.TocListviewitemBinding
+import com.ericmschmidt.classicsreader.datamodel.TOCEntry
 
-import com.ericmschmidt.classicsreader.R;
-import com.ericmschmidt.classicsreader.data.TOCEntry;
-
-/**Subclass of ArrayAdapter.
- * Used for displaying chapters in the TOCFragment
+/**
+ * Subclass of ArrayAdapter, used for displaying chapters in the TOCFragment.
  *
  * Layout files:
  * - res/layout/toc_item.xml
  *
  * @author Eric Schmidt
- * @author http://telpirion.com
- * @version 1.5
+ * @author <a href="http://telpirion.com">...</a>
+ * @version 2.0
  * @since 1.4
  */
-public class TOCListViewAdapter extends ArrayAdapter<TOCEntry> {
-    protected final Context context;
-    protected final TOCEntry[] values;
+class TOCListViewAdapter(context: Context, private val values: Array<TOCEntry>) :
+    ArrayAdapter<TOCEntry>(context, -1, values) {
 
-    public TOCListViewAdapter(Context context, TOCEntry[] values) {
-        super(context, -1, values);
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val binding = if (convertView == null) {
+            val inflater = LayoutInflater.from(context)
+            TocListviewitemBinding.inflate(inflater, parent, false)
+        } else {
+            TocListviewitemBinding.bind(convertView)
+        }
 
-        this.context = context;
-        this.values = values;
-    }
+        binding.tocitemEntry.text = values[position].toString()
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.toc_listviewitem, parent, false);
-
-        TextView entry = (TextView) rowView.findViewById(R.id.tocitem_entry);
-        entry.setText(values[position].toString());
-
-        return rowView;
+        return binding.root
     }
 }
