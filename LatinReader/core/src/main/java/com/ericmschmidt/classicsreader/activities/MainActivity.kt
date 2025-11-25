@@ -20,12 +20,14 @@ import com.ericmschmidt.classicsreader.logError
 import com.ericmschmidt.classicsreader.ui.fragments.DictionaryFragmentArgs
 import com.ericmschmidt.classicsreader.ui.fragments.LibraryFragmentArgs
 import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment
+import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragmentArgs
+
 
 /**
  * Base activity for this app.
  * @author Eric Schmidt
  * @author <a href="http://telpirion.com">...</a>
- * @version 1.5
+ * @version 2.0
  * @since 1.0
  */
 class MainActivity : AppCompatActivity() {
@@ -60,6 +62,29 @@ class MainActivity : AppCompatActivity() {
 
         binding.navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+
+                R.id.reading_dest -> {
+                    // Remember to store recently read as workId;isTranslation.
+                    val workId = getRecentlyRead()
+                    if (workId.isNotEmpty()) {
+                        val workIdParts = workId.split(';')
+                        val workIdVal = workIdParts[0]
+                        val isTranslation = workIdParts.size > 1 && workIdParts[1].toBoolean()
+
+                        val args = ReadingFragmentArgs.Builder()
+                            .setIsTranslation(isTranslation)
+                            .setWorkId(workIdVal)
+                            .build()
+                        navController.navigate(R.id.reading_dest, args.toBundle())
+                    } else {
+                        val args = LibraryFragmentArgs.Builder()
+                            .setIsTranslations(false)
+                            .build()
+                        navController.navigate(R.id.reading_dest, args.toBundle())
+                    }
+                    true
+                }
+
                 R.id.nav_translation -> {
                     val args = LibraryFragmentArgs.Builder()
                         .setIsTranslations(true)

@@ -147,7 +147,6 @@ class ReadingFragment : Fragment() {
             nextButton.setOnClickListener(onPrevNextClickListener)
         }
 
-
         /*
             Set touch responses:
             - touch the left side of the reading area, go back a page.
