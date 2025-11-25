@@ -27,7 +27,7 @@ class Book(val id: Int) {
     fun getLine(position: Int): String? {
         return if (position >= 0 && position < _lines.size) {
             _lines[position]
-        } else if (position > _lines.size) {
+        } else if (position >= _lines.size) {
             null
         } else {
             _lines.firstOrNull() // Default is to return the first line of the book.
