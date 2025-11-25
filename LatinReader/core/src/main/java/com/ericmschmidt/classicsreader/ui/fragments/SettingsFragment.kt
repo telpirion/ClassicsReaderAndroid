@@ -6,7 +6,6 @@ import androidx.preference.CheckBoxPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import com.ericmschmidt.classicsreader.R
 
 /**
@@ -37,7 +36,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
         }
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key == null || sharedPreferences == null) {
+            return
+        }
+
         val pref = findPreference<Preference>(key)
 
         // TODO: Make this more elegant ...

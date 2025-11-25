@@ -1,102 +1,85 @@
-package com.ericmschmidt.classicsreader.ui.fragments;
+package com.ericmschmidt.classicsreader.ui.fragments
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.navArgs
+import com.ericmschmidt.classicsreader.MyApplication
+import com.ericmschmidt.classicsreader.R
+import com.ericmschmidt.classicsreader.databinding.FragmentTocBinding
+import com.ericmschmidt.classicsreader.datamodel.Library
+import com.ericmschmidt.classicsreader.datamodel.TOCEntry
+import com.ericmschmidt.classicsreader.datamodel.WorkInfo
+import com.ericmschmidt.classicsreader.ui.layouts.TOCListViewAdapter
 
-import com.ericmschmidt.classicsreader.MyApplication;
-import com.ericmschmidt.classicsreader.R;
-import com.ericmschmidt.classicsreader.databinding.FragmentTocBinding;
-import com.ericmschmidt.classicsreader.datamodel.Library;
-import com.ericmschmidt.classicsreader.datamodel.Manifest;
-import com.ericmschmidt.classicsreader.datamodel.TOCEntry;
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo;
-import com.ericmschmidt.classicsreader.ui.layouts.TOCListViewAdapter;
-
-/** Displays a work's table of contents.
- *
- *  Source files:
- *  - res/layout/fragment_toc.xml
- *
+/**
+ * Displays a work's table of contents.
+ * <br/>
+ * Source files:
+ * - res/layout/fragment_toc.xml
+ * <br/>
  * @author Eric Schmidt
- * @author http://telpirion.com
- * @version 1.5
+ * @author <a href="https://telpirion.com">...</a>
+ * @version 2.0
  * @since 1.4
  */
-public class TOCFragment extends Fragment {
-    public static final String TAG = "TOCFragment";
+class TOCFragment : Fragment() {
 
-    private String workId;
-    private boolean isTranslation;
-    private WorkInfo work;
-    private FragmentTocBinding binding;
+    private var work: WorkInfo? = null
+    private lateinit var binding: FragmentTocBinding
+    private val args: TOCFragmentArgs by navArgs()
 
-    /**
-     * Required empty constructor.
-     */
-    public TOCFragment() {}
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // Use safeArgs to extract data from bundle.
-        assert getArguments() != null;
-        TOCFragmentArgs args = TOCFragmentArgs.fromBundle(getArguments());
-        this.workId = args.getWorkId();
-        this.isTranslation = args.getIsTranslation();
-
-        Manifest manifest = MyApplication.Factory.applicationInstance().getManifest();
-        Library library = new Library(manifest.getCollection());
-        this.work = library.getWorkInfoByID(workId);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        this.binding = FragmentTocBinding.inflate(inflater,container, false);
-        this.binding.setWork(this.work);
-        return this.binding.getRoot();
-    }
-
-    /**
-     * Loads the fragment and the associated ReadingViewModel.
-     * @param onSavedInstanceState Bundle
-     */
-    public void onActivityCreated(Bundle onSavedInstanceState) {
-        super.onActivityCreated(onSavedInstanceState);
-
-        ArrayAdapter<TOCEntry> adapter = new TOCListViewAdapter(getActivity(),
-                        work.getTocEntries().toArray(new TOCEntry[0]));
-
-        ListView listView = (ListView)this.getView().findViewById(R.id.toc_listView);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(onItemClickListener);
-    }
-
-    // Create a message handling object as an anonymous class.
-    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView parent, View v, int position, long id) {
-            TOCEntry entry = work.getTocEntries().get(position);
-
-            assert getParentFragment() != null;
-            NavController navController = NavHostFragment.findNavController(getParentFragment());
-
-            TOCFragmentDirections.ActionTocDestToReadingDest action =
-                    TOCFragmentDirections.actionTocDestToReadingDest(work.getId());
-            action.setBook(entry.getBook());
-            action.setLine(entry.getLine());
-            action.setIsTranslation(isTranslation);
-
-            navController.navigate(action);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val manifest = MyApplication.Factory.applicationInstance().manifest
+        val collection = manifest.getCollection()
+        if (collection != null) {
+            val library = Library(collection)
+            work = library.getWorkInfoByID(args.workId)
         }
-    };
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentTocBinding.inflate(inflater, container, false)
+        binding.work = work
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val adapter: ArrayAdapter<TOCEntry> = TOCListViewAdapter(
+            requireActivity(),
+            work?.tocEntries?.toTypedArray() ?: arrayOf()
+        )
+
+        val listView = view.findViewById<ListView>(R.id.toc_listView)
+        listView.adapter = adapter
+        listView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                val entry = work?.tocEntries?.get(position)
+                val navController = NavHostFragment.findNavController(this)
+                val action =
+                    work?.id?.let { TOCFragmentDirections.actionTocDestToReadingDest(it) }
+                if (action != null && entry != null) {
+                    action.book = entry.book
+                    action.line = entry.line
+                    action.isTranslation = args.isTranslation
+                    navController.navigate(action)
+                }
+            }
+    }
+
+    companion object {
+        const val TAG = "TOCFragment"
+    }
 }
