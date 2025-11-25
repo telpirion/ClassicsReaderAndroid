@@ -9,7 +9,7 @@ android {
     }
     defaultConfig {
         applicationId("com.ericmschmidt.latinreader")
-        minSdkVersion(24)
+        minSdkVersion(23)
         targetSdkVersion(36)
         versionCode(15)
         versionName("1.8.0")
@@ -24,20 +24,17 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_24 // Be sure to verify Java version
-        targetCompatibility = JavaVersion.VERSION_24
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
+    //compileOptions {
+    //    sourceCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
+    //    targetCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
+    //}
 }
 
 dependencies {
-    implementation project(':compose')
     implementation project(':core')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.core:core-ktx:1.17.0'
-}
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(24)
-    }
 }
