@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/libraryFragment"
         android:name="com.ericmschmidt.classicsreader.ui.fragments.LibraryFragment"
-        android:label="LibraryFragment" >
+        android:label="Library" >
         <action
             android:id="@+id/action_libraryFragment_to_reading_dest"
             app:destination="@id/reading_dest"
@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/reading_dest"
         android:name="com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment"
-        android:label="ReadingFragment">
+        android:label="Reading">
         <argument android:name="isTranslation"
             app:argType="boolean"
             android:defaultValue="false"/>
@@ -65,7 +65,7 @@
     <fragment
         android:id="@+id/dictionary_dest"
         android:name="com.ericmschmidt.classicsreader.ui.fragments.DictionaryFragment"
-        android:label="fragment_dictionary"
+        android:label="Dictionary"
         tools:layout="@layout/fragment_dictionary">
         <argument
             android:name="dictionaryQuery"
@@ -75,16 +75,16 @@
     <fragment
         android:id="@+id/settings_dest"
         android:name="com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="Settings" />
     <fragment
         android:id="@+id/vocab_dest"
         android:name="com.ericmschmidt.classicsreader.ui.fragments.VocabularyFragment"
-        android:label="fragment_vocabulary"
+        android:label="Vocabulary"
         tools:layout="@layout/fragment_vocabulary" />
     <fragment
         android:id="@+id/toc_dest"
         android:name="com.ericmschmidt.classicsreader.ui.fragments.TOCFragment"
-        android:label="TOCFragment">
+        android:label="Table of Contents">
         <argument
             android:name="workId"
             app:argType="string"/>
@@ -119,11 +119,11 @@
     <fragment
         android:id="@+id/help_dest"
         android:name="com.ericmschmidt.classicsreader.ui.fragments.HelpFragment"
-        android:label="fragment_help"
+        android:label="Help"
         tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/info_dest"
         android:name="com.ericmschmidt.classicsreader.ui.fragments.InfoFragment"
-        android:label="fragment_info"
+        android:label="About"
         tools:layout="@layout/fragment_info" />
 </navigation>
