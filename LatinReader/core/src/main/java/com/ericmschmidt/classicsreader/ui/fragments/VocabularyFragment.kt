@@ -1,78 +1,59 @@
-package com.ericmschmidt.classicsreader.ui.fragments;
+package com.ericmschmidt.classicsreader.ui.fragments
 
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import androidx.fragment.app.Fragment;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.ericmschmidt.classicsreader.MyApplication
+import com.ericmschmidt.classicsreader.databinding.FragmentVocabularyBinding
+import com.ericmschmidt.classicsreader.datamodel.Dictionary
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-import com.ericmschmidt.classicsreader.MyApplication;
-import com.ericmschmidt.classicsreader.R;
-import com.ericmschmidt.classicsreader.datamodel.Dictionary;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter;
-
-/** Displays the vocabulary word-builder page.
- *
- *  Source files:
- *  - res/layout/fragment_vocabulary.xml
- *
+/**
+ * Displays the vocabulary word-builder page.
+ * <br/>
+ * Source files:
+ * - res/layout/fragment_vocabulary.xml
+ * <br/>
  * @author Eric Schmidt
- * @author http://telpirion.com
- * @version 1.5
+ * @author <a href="https://telpirion.com">...</a>
+ * @version 2.0
  * @since 1.0
  */
-public class VocabularyFragment extends Fragment {
+class VocabularyFragment : Fragment() {
 
-    /**
-     * Required empty public constructor
-     */
-    public VocabularyFragment() { }
+    private lateinit var binding: FragmentVocabularyBinding
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentVocabularyBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_vocabulary, container, false);
-    }
-
-    public void onActivityCreated(Bundle onSavedInstanceState) {
-
-        super.onActivityCreated(onSavedInstanceState);
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Get the random entry from the dictionary.
-        new VocabDictionaryTask().execute();
-    }
+        lifecycleScope.launch {
+            val vocabEntry = withContext(Dispatchers.IO) {
+                val applicationInstance = MyApplication.Factory.applicationInstance()
+                val converter = if (applicationInstance.isNonRomanChar) {
+                    applicationInstance.textConverter
+                } else {
+                    null
+                }
+                val dictionary = Dictionary(converter)
+                dictionary.getRandomEntry()
+            }
 
-    private class VocabDictionaryTask extends AsyncTask<String, Integer, Long>{
-        protected String vocabEntry = "";
-
-        protected Long doInBackground(String... query) {
-
-            MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
-
-            ITextConverter converter = applicationInstance.isNonRomanChar() ?
-                    applicationInstance.getTextConverter() : null;
-
-            // Get a random entry from the dictionary to sow.
-            Dictionary dictionary = new Dictionary(converter);
-            vocabEntry = dictionary.getRandomEntry();
-
-            return new Long(1);
-        }
-
-        protected void onPostExecute(Long result){
-            TextView vocabTextView = (TextView)getActivity().findViewById(R.id.vocab_result);
-            vocabTextView.setText(vocabEntry);
-
-            ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.vocab_progress);
-            progress.setVisibility(View.INVISIBLE);
+            binding.vocabResult.text = vocabEntry
+            binding.vocabProgress.visibility = View.INVISIBLE
         }
     }
 }
