@@ -9,16 +9,15 @@ import android.view.View.OnClickListener
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.R
 import com.ericmschmidt.classicsreader.datamodel.Library
-import com.ericmschmidt.classicsreader.datamodel.Manifest
 import com.ericmschmidt.classicsreader.datamodel.ReadingViewModel
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo.WorkType
-import androidx.core.content.edit
 
 /**
  * Displays the text of a work (source or translation).
@@ -77,9 +76,7 @@ class ReadingFragment : Fragment() {
             return
         }
 
-        val manifest: Manifest = MyApplication
-            .applicationInstance()
-            .manifest
+        val manifest = MyApplication.applicationInstance().manifest
         val library = Library(manifest.getCollection() as ArrayList<WorkInfo>)
         val work = library.getWorkInfoByID(workToGetId)
         var numLines = 1
@@ -114,7 +111,9 @@ class ReadingFragment : Fragment() {
             numLines = linesPerPage!!.toInt()
         }
 
-        viewModel = ReadingViewModel(work, isTranslation, numLines)
+        if (work != null) {
+            viewModel = ReadingViewModel(work, isTranslation, numLines)
+        }
 
         if (bookNum >= 0) {
             viewModel.setCurrentBook(bookNum)
@@ -231,8 +230,8 @@ class ReadingFragment : Fragment() {
         val readingInfo = view?.findViewById<TextView>(R.id.reading_info)
         val readingPosition = view?.findViewById<TextView>(R.id.reading_position)
 
-        readingPane?.text = viewModel.currentPage
-        readingInfo?.text = viewModel.readingInfo
+        readingPane?.text = viewModel.getCurrentPage()
+        readingInfo?.text = viewModel.getReadingInfo()
         readingPosition?.text = viewModel.getReadingPositionString()
     }
 

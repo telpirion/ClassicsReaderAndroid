@@ -1,83 +1,80 @@
-package com.ericmschmidt.classicsreader.datamodel;
+package com.ericmschmidt.classicsreader.datamodel
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.content.SharedPreferences
+import androidx.core.content.edit
+import androidx.preference.PreferenceManager
+import com.ericmschmidt.classicsreader.MyApplication
+import com.ericmschmidt.classicsreader.R
+import com.ericmschmidt.classicsreader.utilities.ITextConverter
+import java.util.Locale
+import kotlin.math.floor
 
-import com.ericmschmidt.classicsreader.MyApplication;
-import com.ericmschmidt.classicsreader.R;
-import com.ericmschmidt.classicsreader.utilities.ITextConverter;
-
-import java.util.Locale;
-
-/** A ViewModel that maps reading behaviors to a view.
+/**
+ * A ViewModel that maps reading behaviors to a view.
  * @author Eric Schmidt
  * @author <a href="https://telpirion.com">...</a>
- * @version 1.5
+ * @version 2.0
  * @since 1.1
  */
-public class ReadingViewModel {
+class ReadingViewModel(
+    private val workInfo: WorkInfo,
+    private val isTranslation: Boolean,
+    private val pageOffset: Int
+) {
 
-    private final String DEFAULT_READING_POSITION="0,0";
+    private val defaultReadingPosition = "0,0"
+    private val currentWork: Work
+    private var currentBook: Book?
+    var currentLineIndex: Int = 0
+        private set
+    var currentBookIndex: Int = 0
+        private set
 
-    private final WorkInfo _currentWorkInfo;
-    private final Work _currentWork;
-    private Book _currentBook;
-    private int _currentLineIndex;
-    private int _currentBookIndex;
-    private final int _pageOffset;
-    private final String _author;
-    private final String _title;
-    private final boolean _isTranslation;
-    private ITextConverter converter;
+    val author: String
+    val title: String
+    val toc: Array<TOCEntry>
+        get() = workInfo.tocEntries.toTypedArray()
 
-    /**
-     * Creates an instance of the ReadingViewModel class with a work open.
-     * @param work the work to open.
-     * @param isTranslation determines whether to return the translation of this work.
-     * @param pageOffset number of page difference between source and translation
-     */
-    public ReadingViewModel(WorkInfo work,
-                            boolean isTranslation,
-                            int pageOffset) {
-        this._currentWorkInfo = work;
-        this._pageOffset = (pageOffset > -1) ? pageOffset : 1;
-        this._isTranslation = isTranslation;
-        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
-        this.converter = applicationInstance.isNonRomanChar() ?
-                applicationInstance.getTextConverter() : null;
+    private var converter: ITextConverter? = null
+
+    init {
+        val applicationInstance = MyApplication.Factory.applicationInstance()
+        converter = if (applicationInstance.isNonRomanChar) {
+            applicationInstance.textConverter
+        } else {
+            null
+        }
 
         if (!loadLastReadingPosition()) { // This work hasn't been read yet.
-            this._currentLineIndex = 0;
-            this._currentBookIndex = 0;
+            currentLineIndex = 0
+            currentBookIndex = 0
         }
 
-        if (this._isTranslation) {
-            this._currentWork = new Work(work.getEnglishLocation());
-            this._author = work.getEnglishAuthor();
-            this._title = work.getEnglishTitle();
+        if (isTranslation) {
+            currentWork = Work(workInfo.englishLocation)
+            author = workInfo.englishAuthor
+            title = workInfo.englishTitle
         } else {
-            this._currentWork = new Work(work.getLocation());
-            this._author = work.getAuthor();
-            this._title = work.getTitle();
+            currentWork = Work(workInfo.location)
+            author = workInfo.author
+            title = workInfo.title
         }
 
-        this._currentBook = this._currentWork.getBook(this._currentBookIndex);
-        updatePage();
+        currentBook = currentWork.getBook(currentBookIndex)
+        updatePage()
     }
 
     /**
      * Gets the text for the reader's current position in the work.
      * @return String the text to read.
      */
-    public String getCurrentPage() {
-        int projectedIndex;
-
-        if (_isTranslation){
-            projectedIndex = (int)Math.floor((double) this._pageOffset / this._currentWorkInfo.getEnglishOffset());
+    fun getCurrentPage(): String {
+        val projectedIndex = if (isTranslation) {
+            floor(pageOffset.toDouble() / workInfo.englishOffset).toInt()
         } else {
-            projectedIndex = this._pageOffset;
+            pageOffset
         }
-        return this._currentBook.getLines(this._currentLineIndex, projectedIndex);
+        return currentBook?.getLines(currentLineIndex, projectedIndex) ?: ""
     }
 
     /**
@@ -89,26 +86,24 @@ public class ReadingViewModel {
      * If the value goes beyond the beginning of the work, it goes to the first page.
      * @param numberOfPages the number of pages to update the reading position by
      */
-    public void goToPage(int numberOfPages) {
-
-        if (numberOfPages > 0){
-            advancePages(numberOfPages);
+    fun goToPage(numberOfPages: Int) {
+        if (numberOfPages > 0) {
+            advancePages(numberOfPages)
         } else {
-            decreasePages(numberOfPages);
+            decreasePages(numberOfPages)
         }
-
-        updatePage();
+        updatePage()
     }
 
     /**
      * Flips the page forwards or backwards one page.
      * @param isForward whether the user is flipping forwards or backwards.
      */
-    public void goToPage(boolean isForward) {
+    fun goToPage(isForward: Boolean) {
         if (isForward) {
-            goToPage(this._pageOffset);
+            goToPage(pageOffset)
         } else {
-            goToPage(-1 * this._pageOffset);
+            goToPage(-1 * pageOffset)
         }
     }
 
@@ -116,11 +111,8 @@ public class ReadingViewModel {
      * Gets a formatted string that specifies the current work and reader's position.
      * @return String
      */
-    public String getReadingInfo() {
-
-         return String.format(Locale.US, "%s, %s",
-                 this._author,
-                 this._title);
+    fun getReadingInfo(): String {
+        return String.format(Locale.US, "%s, %s", author, title)
     }
 
     /**
@@ -128,180 +120,119 @@ public class ReadingViewModel {
      * string.
      * @return String
      */
-    public String getReadingPositionString() {
-        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
-        if (this._currentWork.getBookCount() == 1) {
-            return applicationInstance.getContext()
-                    .getResources()
-                    .getString(R.string.reading_page_of_pages,
-                            this._currentLineIndex + 1,
-                            this._currentBook.getLineCount());
-        }
-        return applicationInstance.getContext()
-                        .getResources()
-                        .getString(R.string.reading_book_page_of_pages,
-                                this._currentBookIndex + 1,
-                                this._currentLineIndex + 1,
-                                this._currentBook.getLineCount());
-    }
-
-    /**
-     * Gets the table of contents for the work.
-     * @return ArrayList
-     */
-    public TOCEntry[] getTOC() {
-        return this._currentWorkInfo.getTocEntries().toArray(new TOCEntry[0]);
+    fun getReadingPositionString(): String {
+        val applicationInstance = MyApplication.Factory.applicationInstance()
+        val lineCount = currentBook?.getLineCount() ?: 0
+        return if (currentWork.getBookCount() == 1) {
+            applicationInstance.context
+                .resources
+                .getString(
+                    R.string.reading_page_of_pages,
+                    currentLineIndex + 1,
+                    lineCount
+                )
+        } else applicationInstance.context
+            .resources
+            .getString(
+                R.string.reading_book_page_of_pages,
+                currentBookIndex + 1,
+                currentLineIndex + 1,
+                lineCount
+            )
     }
 
     /**
      * Sets the current book for reading.
      * @param currentBook the book to set as current
      */
-    public void setCurrentBook(int currentBook) {
-        this._currentBookIndex = currentBook;
-        this._currentBook = this._currentWork.getBook(currentBook);
-        updatePage();
+    fun setCurrentBook(currentBook: Int) {
+        currentBookIndex = currentBook
+        this.currentBook = this.currentWork.getBook(currentBook)
+        updatePage()
     }
 
     /**
      * Sets the current line for reading
      * @param currentLine the current line to set as current
      */
-    public void setCurrentLine(int currentLine) {
-        this._currentLineIndex = currentLine;
-        updatePage();
-    }
-
-    /**
-     * Access the currently viewed book.
-     * @return int
-     */
-    public int getCurrentBookIndex() {
-        return this._currentBookIndex;
-    }
-
-    /**
-     * Access the currently viewed line.
-     * @return int
-     */
-    public int getCurrentLineIndex() {
-        return this._currentLineIndex;
-    }
-
-    // Determines the line to get given the page offset
-    // of the work and its translation
-    private int resolvePageIndex() {
-        return 0;
+    fun setCurrentLine(currentLine: Int) {
+        currentLineIndex = currentLine
+        updatePage()
     }
 
     // Increase the reading position.
-    private void advancePages(int offset) {
-        int count = 0;
-        int bookLineCount = this._currentBook.getLineCount() - 1;
-        int bookCount = this._currentWork.getBookCount() - 1;
+    private fun advancePages(offset: Int) {
+        var count = 0
+        val bookLineCount = currentBook?.getLineCount()?.minus(1) ?: 0
+        val bookCount = currentWork.getBookCount() - 1
 
         while (count < offset) {
-            if (this._currentLineIndex < bookLineCount) {
-                this._currentLineIndex++;
-            } else if (this._currentBookIndex == bookCount){
-                this._currentLineIndex = this._currentBook.getLineCount() - 1;
-            }else {
-                this._currentBookIndex++;
-                this._currentBook = this._currentWork.getBook(this._currentBookIndex);
-                this._currentLineIndex = 0;
-                break;
+            if (currentLineIndex < bookLineCount) {
+                currentLineIndex++
+            } else if (currentBookIndex == bookCount) {
+                currentLineIndex = currentBook?.getLineCount()?.minus(1) ?: 0
+            } else {
+                currentBookIndex++
+                currentBook = currentWork.getBook(currentBookIndex)
+                currentLineIndex = 0
+                break
             }
-            count++;
+            count++
         }
     }
 
     // Decrease the reading position.
-    private void decreasePages(int offset) {
-        int count = 0;
+    private fun decreasePages(offset: Int) {
+        var count = 0
 
         while (count > offset) {
 
             // The page is still within this book, keep going.
-            if (this._currentLineIndex > 0){
-                this._currentLineIndex--;
+            if (currentLineIndex > 0) {
+                currentLineIndex--
 
-             // The user is on the first book; keep the book here.
-            } else if (this._currentBookIndex == 0) {
-                this._currentLineIndex = 0;
+                // The user is on the first book; keep the book here.
+            } else if (currentBookIndex == 0) {
+                currentLineIndex = 0
 
-            // The user flips to the previous book
+                // The user flips to the previous book
             } else {
-                this._currentBookIndex--;
-                this._currentBook = this._currentWork.getBook(this._currentBookIndex);
-                this._currentLineIndex = this._currentBook.getLineCount() - 1;
+                currentBookIndex--
+                currentBook = currentWork.getBook(currentBookIndex)
+                currentLineIndex = currentBook?.getLineCount()?.minus(1) ?: 0
             }
 
-            count--;
+            count--
         }
     }
-
-    // Gets the specified work from the Library.
 
     // Updates the current reading page.
-    private void updatePage() {
-        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
+    private fun updatePage() {
+        val applicationInstance = MyApplication.Factory.applicationInstance()
         // Store the current reading position in SharedPreferences.
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationInstance.getContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        String currentPosition = String.format(Locale.US, "%d,%d", this._currentBookIndex, this._currentLineIndex);
-
-        editor.putString(_currentWorkInfo.getId(), currentPosition);
-        editor.apply();
-    }
-
-    // Open up the next book.
-    private void advanceBook(int deltaPages) {
-        this._currentBookIndex++;
-
-        // This feels like code smell ...
-        if (this._currentBookIndex < this._currentWork.getBookCount()) {
-            this._currentBook = this._currentWork.getBook(this._currentBookIndex);
-            this._currentLineIndex = 0;
-
-            goToPage(deltaPages);
-        } else {
-            this._currentBookIndex = this._currentWork.getBookCount() - 1;
-            this._currentLineIndex = this._currentBook.getLineCount() - 1;
-        }
-    }
-
-    // Go to the previous book.
-    private void decreaseBook(int deltaPages) {
-        this._currentBookIndex--;
-
-        if (this._currentBookIndex >= 0) {
-            this._currentBook = this._currentWork.getBook(this._currentBookIndex);
-            this._currentLineIndex = this._currentBook.getLineCount();
-
-            goToPage(deltaPages);
-        } else {
-            this._currentBookIndex = 0;
-            this._currentLineIndex = 0;
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationInstance.context)
+        sharedPreferences.edit {
+            val currentPosition = String.format(Locale.US, "%d,%d", currentBookIndex, currentLineIndex)
+            putString(workInfo.id, currentPosition)
         }
     }
 
     // Gets the user's last reading position from device storage or cloud storage.
-    private boolean loadLastReadingPosition() {
-        MyApplication.ApplicationInstance applicationInstance = MyApplication.Factory.applicationInstance();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationInstance.getContext());
-        String prefs = sharedPreferences.getString(_currentWorkInfo.getId(), DEFAULT_READING_POSITION);
+    private fun loadLastReadingPosition(): Boolean {
+        val applicationInstance = MyApplication.Factory.applicationInstance()
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationInstance.context)
+        val prefs = sharedPreferences.getString(workInfo.id, defaultReadingPosition)
 
-        if (!prefs.contains(DEFAULT_READING_POSITION)) {
-            String[] readingPosition = prefs.split(",");
+        if (prefs != null && !prefs.contains(defaultReadingPosition)) {
+            val readingPosition = prefs.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
             // Need to store reading position as bookIndex,lineIndex
-            this._currentBookIndex = Integer.parseInt(readingPosition[0]);
-            this._currentLineIndex = Integer.parseInt(readingPosition[1]);
+            currentBookIndex = readingPosition[0].toInt()
+            currentLineIndex = readingPosition[1].toInt()
 
-            return true;
+            return true
         }
 
-        return false;
+        return false
     }
 }
