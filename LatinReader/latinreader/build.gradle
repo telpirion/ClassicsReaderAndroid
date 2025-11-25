@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace("com.ericmschmidt.latinreader")
@@ -23,6 +24,9 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
     //compileOptions {
     //    sourceCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
     //    targetCompatibility = JavaVersion.VERSION_24 // Or your desired Java version
@@ -32,4 +36,5 @@ android {
 dependencies {
     implementation project(':core')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.core:core-ktx:1.17.0'
 }
