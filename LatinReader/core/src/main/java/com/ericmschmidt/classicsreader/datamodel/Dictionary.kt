@@ -11,7 +11,7 @@ import java.util.Random
 /** Contains the data and methods for getting dictionary entries.
  * @author Eric Schmidt
  * @author <a href="https://telpirion.com">...</a>
- * @version 1.5
+ * @version 2.0
  * @since 1.1
  */
 class Dictionary(val converter: ITextConverter? = null) {
@@ -52,7 +52,7 @@ class Dictionary(val converter: ITextConverter? = null) {
             definition = getEntry(
                 stream,
                 searchEntry as String,
-                converter as ITextConverter
+                converter
             )
         }
 
