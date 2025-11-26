@@ -1,13 +1,14 @@
 package com.ericmschmidt.classicsreader.ui.fragments
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ericmschmidt.classicsreader.R
+import com.ericmschmidt.classicsreader.R as CoreR
+import com.ericmschmidt.classicsreader.views.R
+import com.ericmschmidt.classicsreader.MyApplication
 import com.mukesh.MarkdownView
 import java.io.BufferedReader
 
@@ -16,44 +17,40 @@ import java.io.BufferedReader
  */
 class InfoFragment : Fragment() {
 
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?,
-  ): View? {
-    return inflater.inflate(R.layout.fragment_info, container, false)
-  }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        return inflater.inflate(R.layout.fragment_info, container, false)
+    }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    val markdownView = view.findViewById<MarkdownView>(R.id.info_markdown_view)
-    val infoString = buildInfoString(requireContext())
-    markdownView.setMarkDownText(infoString)
-  }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-  companion object InfoStringBuilder {
-      fun buildInfoString(context: Context): String {
+        val markdownView = view.findViewById<MarkdownView>(R.id.info_markdown_view)
+        val applicationInstance = MyApplication.applicationInstance()
 
         // Get the app context
+        val context = applicationInstance.context
         val resources = context.resources
         val packageManager = context.packageManager
         val packageName = context.packageName
 
         // Open the info.md file from the resources
-        val inputStream = resources.openRawResource(R.raw.info)
+        val inputStream = resources.openRawResource(CoreR.raw.info)
         var infoString = inputStream.bufferedReader().use(BufferedReader::readText)
 
         // Get the app name, version name, and version number info
-        val appName = context.getString(R.string.app_name)
-        val appDescription = context.getString(R.string.app_description)
+        val appName = context.getString(CoreR.string.app_name)
+        val appDescription = context.getString(CoreR.string.app_description)
         val versionInfo = packageManager.getPackageInfo(packageName, 0)
         val versionName = versionInfo.versionName
 
         // longVersionCode is an Android Pie feature
         val versionNumber = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-          versionInfo.longVersionCode
+            versionInfo.longVersionCode
         } else {
-          @Suppress("DEPRECATION")
-          versionInfo.versionCode
+            versionInfo.versionCode
         }
 
         // Build the Markdown-formatted information screen
@@ -63,7 +60,6 @@ class InfoFragment : Fragment() {
         infoString = infoString.replace("{{versionName}}", versionName.toString())
         infoString = infoString.replace("{{versionCode}}", versionNumber.toString())
 
-        return infoString
-      }
-  }
+        markdownView.setMarkDownText(infoString)
+    }
 }

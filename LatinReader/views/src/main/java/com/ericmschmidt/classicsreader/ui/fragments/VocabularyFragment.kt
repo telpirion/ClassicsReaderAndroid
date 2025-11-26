@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.databinding.FragmentVocabularyBinding
+import com.ericmschmidt.classicsreader.views.databinding.FragmentVocabularyBinding
 import com.ericmschmidt.classicsreader.datamodel.Dictionary
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

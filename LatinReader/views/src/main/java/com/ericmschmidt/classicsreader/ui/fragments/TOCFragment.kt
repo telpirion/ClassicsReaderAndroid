@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.R
-import com.ericmschmidt.classicsreader.databinding.FragmentTocBinding
+import com.ericmschmidt.classicsreader.views.R
+import com.ericmschmidt.classicsreader.views.databinding.FragmentTocBinding
 import com.ericmschmidt.classicsreader.datamodel.Library
 import com.ericmschmidt.classicsreader.datamodel.TOCEntry
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo
@@ -68,13 +68,17 @@ class TOCFragment : Fragment() {
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 val entry = work?.tocEntries?.get(position)
                 val navController = NavHostFragment.findNavController(this)
-                val action =
-                    work?.id?.let { TOCFragmentDirections.actionTocDestToReadingDest(it) }
-                if (action != null && entry != null) {
-                    action.book = entry.book
-                    action.line = entry.line
-                    action.isTranslation = args.isTranslation
-                    navController.navigate(action)
+                if (entry != null) {
+                    work?.id?.let { workId ->
+                        val action =
+                            TOCFragmentDirections.actionTocDestToReadingDest(
+                                workId = workId,
+                                book = entry.book,
+                                line = entry.line,
+                                isTranslation = args.isTranslation
+                            )
+                        navController.navigate(action)
+                    }
                 }
             }
     }

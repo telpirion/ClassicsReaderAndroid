@@ -11,7 +11,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.R
+import com.ericmschmidt.classicsreader.R as CoreR
+import com.ericmschmidt.classicsreader.views.R
 import com.ericmschmidt.classicsreader.datamodel.Dictionary
 import com.ericmschmidt.classicsreader.utilities.ITextConverter
 import kotlinx.coroutines.Dispatchers
@@ -112,7 +113,7 @@ class DictionaryFragment : Fragment() {
             if (dictionary.isInDictionary(transcribedQuery)) {
                 dictionary.getEntry(transcribedQuery)
             } else {
-                resources.getString(R.string.dictionary_query_no_results)
+                resources.getString(CoreR.string.dictionary_query_no_results)
             }
         }
 

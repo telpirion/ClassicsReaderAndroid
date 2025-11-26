@@ -13,7 +13,8 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.R
+import com.ericmschmidt.classicsreader.R as CoreR
+import com.ericmschmidt.classicsreader.views.R
 import com.ericmschmidt.classicsreader.datamodel.Library
 import com.ericmschmidt.classicsreader.datamodel.ReadingViewModel
 import com.ericmschmidt.classicsreader.datamodel.WorkInfo
@@ -72,7 +73,7 @@ class ReadingFragment : Fragment() {
         val readingPane = view.findViewById<TextView>(R.id.reading_surface)
 
         if (workToGetId.isNullOrEmpty()) {
-            readingPane.text = resources.getString(R.string.reading_no_book_open)
+            readingPane.text = resources.getString(CoreR.string.reading_no_book_open)
             return
         }
 
@@ -184,14 +185,14 @@ class ReadingFragment : Fragment() {
         super.onCreateContextMenu(menu, v, menuInfo)
 
         val menuLabel = if (isTranslation)
-            R.string.context_menu_source
+            CoreR.string.context_menu_source
         else
-            R.string.context_menu_translation
+            CoreR.string.context_menu_translation
 
         menu.add(0, MENU_SWITCH_VIEW, 0, menuLabel)
 
         if (this.viewModel.toc.isNotEmpty())
-            menu.add(0, MENU_VIEW_TOC, 1, R.string.context_menu_toc)
+            menu.add(0, MENU_VIEW_TOC, 1, CoreR.string.context_menu_toc)
     }
 
     // Switch views, translation to/from source
@@ -203,19 +204,19 @@ class ReadingFragment : Fragment() {
         when (id) {
             // In this case, the fragment navigates to itself
             MENU_SWITCH_VIEW -> {
-                val args = ReadingFragmentArgs.Builder()
-                    .setWorkId(workToGetId as String)
-                    .setIsTranslation(!isTranslation)
-                    .setBook(viewModel.currentBookIndex)
-                    .setLine(viewModel.currentLineIndex)
-                    .build()
+                val args = ReadingFragmentArgs(
+                    workId = workToGetId as String,
+                    isTranslation = !isTranslation,
+                    book = viewModel.currentBookIndex,
+                    line = viewModel.currentLineIndex)
                 navController.navigate(R.id.reading_dest, args.toBundle())
                 return true
             }
             MENU_VIEW_TOC -> {
                 val action =
-                    ReadingFragmentDirections.actionReadingDestToTocDest(this.workToGetId!!)
-                action.isTranslation = this.isTranslation
+                    ReadingFragmentDirections.actionReadingDestToTocDest(
+                        workId = this.workToGetId!!,
+                        isTranslation = this.isTranslation)
                 navController.navigate(action)
                 return true
             }
