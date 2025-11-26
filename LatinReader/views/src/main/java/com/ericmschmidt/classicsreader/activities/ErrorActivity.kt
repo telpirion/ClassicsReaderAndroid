@@ -3,7 +3,7 @@ package com.ericmschmidt.classicsreader.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ericmschmidt.classicsreader.R
-import com.ericmschmidt.classicsreader.databinding.ActivityErrorBinding
+import com.ericmschmidt.classicsreader.views.databinding.ActivityErrorBinding
 
 /**
  * Error message activity for this app.

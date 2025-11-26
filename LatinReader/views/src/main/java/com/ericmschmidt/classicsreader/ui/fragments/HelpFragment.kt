@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ericmschmidt.classicsreader.R
+import com.ericmschmidt.classicsreader.R as CoreR
+import com.ericmschmidt.classicsreader.views.R
 import com.ericmschmidt.classicsreader.MyApplication
 import com.mukesh.MarkdownView
 import java.io.BufferedReader
@@ -31,7 +32,7 @@ class HelpFragment : Fragment() {
     // Open the help.md file from the resources
     val context = applicationInstance.context
     val resources = context.resources
-    val inputStream = resources.openRawResource(R.raw.help);
+    val inputStream = resources.openRawResource(CoreR.raw.help);
     val helpString = inputStream.bufferedReader().use(BufferedReader::readText)
 
     markdownView.setMarkDownText(helpString)

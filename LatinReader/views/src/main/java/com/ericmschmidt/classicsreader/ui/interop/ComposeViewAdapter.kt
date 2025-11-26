@@ -32,8 +32,9 @@ fun setContentToLazyGrid(composeView: ComposeView, library: Library, isTranslati
 
 fun navigateToReadingFragment(activity: MainActivity, workId: String, isTranslation: Boolean) {
     val navController = activity.navController
-    val action: LibraryFragmentDirections.ActionLibraryFragmentToReadingDest =
-        LibraryFragmentDirections.actionLibraryFragmentToReadingDest(workId)
-    action.setIsTranslation(isTranslation)
+    val action = LibraryFragmentDirections.actionLibraryFragmentToReadingDest(
+        workId = workId,
+        isTranslation = isTranslation
+    )
     navController.navigate(action)
 }

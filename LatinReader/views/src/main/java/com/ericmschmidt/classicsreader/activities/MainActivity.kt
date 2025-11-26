@@ -13,8 +13,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.ericmschmidt.classicsreader.R
-import com.ericmschmidt.classicsreader.databinding.ActivityMainBinding
+import com.ericmschmidt.classicsreader.views.R
+import com.ericmschmidt.classicsreader.R as CoreR
+import com.ericmschmidt.classicsreader.views.databinding.ActivityMainBinding
 import com.ericmschmidt.classicsreader.exceptions.ForceCloseHandler
 import com.ericmschmidt.classicsreader.logError
 import com.ericmschmidt.classicsreader.ui.fragments.DictionaryFragmentArgs
@@ -71,24 +72,19 @@ class MainActivity : AppCompatActivity() {
                         val workIdVal = workIdParts[0]
                         val isTranslation = workIdParts.size > 1 && workIdParts[1].toBoolean()
 
-                        val args = ReadingFragmentArgs.Builder()
-                            .setIsTranslation(isTranslation)
-                            .setWorkId(workIdVal)
-                            .build()
+                        val args = ReadingFragmentArgs(
+                            workId = workIdVal,
+                            isTranslation = isTranslation)
                         navController.navigate(R.id.reading_dest, args.toBundle())
                     } else {
-                        val args = LibraryFragmentArgs.Builder()
-                            .setIsTranslations(false)
-                            .build()
+                        val args = ReadingFragmentArgs()
                         navController.navigate(R.id.reading_dest, args.toBundle())
                     }
                     true
                 }
 
                 R.id.nav_translation -> {
-                    val args = LibraryFragmentArgs.Builder()
-                        .setIsTranslations(true)
-                        .build()
+                    val args = LibraryFragmentArgs(isTranslations = true)
                     navController.navigate(R.id.libraryFragment, args.toBundle())
                     binding.drawerLayout.closeDrawer(GravityCompat.START)
                     true
@@ -137,13 +133,11 @@ class MainActivity : AppCompatActivity() {
         val searchItem = menu.findItem(R.id.action_dictionary)
         val searchView = searchItem.actionView as SearchView
 
-        searchView.queryHint = getString(R.string.dictionary_query_hint_short)
+        searchView.queryHint = getString(CoreR.string.dictionary_query_hint_short)
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                val args = DictionaryFragmentArgs.Builder()
-                    .setDictionaryQuery(query)
-                    .build()
+                val args = DictionaryFragmentArgs(query)
                 navController.navigate(R.id.dictionary_dest, args.toBundle())
                 searchItem.collapseActionView()
                 return true
