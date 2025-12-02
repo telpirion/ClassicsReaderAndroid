@@ -24,10 +24,18 @@ class MyApplication : Application() {
         val textConverter: ITextConverter?,
     )
 
-    var manifest: Manifest? = null
-        private set
-    var isNonRomanChar: Boolean? = null
-        private set
+    val manifest: Manifest by lazy {
+        val manifestName =
+            instance.resources.getString(R.string.manifest)
+        Log.i("MyApplication", "manifest = $manifestName")
+        Manifest.getManifest(manifestName)!!
+
+    }
+    val isNonRomanChar: Boolean by lazy {
+        val isIt = instance.resources.getBoolean(R.bool.non_roman_char)
+        Log.i("MyApplication", "isNonRomanChar = $isIt")
+        isIt
+    }
     var converter: ITextConverter? = null
         private set
 
@@ -51,22 +59,12 @@ class MyApplication : Application() {
     }
 
     fun populateFields() {
-        Log.i("MyApplication", "populating Application fields")
-        if (manifest == null) {
-            val manifestName =
-                instance.resources.getString(R.string.manifest)
-            manifest = Manifest.getManifest(manifestName)!!
-        }
-        if (isNonRomanChar == null) {
-            isNonRomanChar = instance.resources.getBoolean(R.bool.non_roman_char)
-        }
-        if (converter == null) {
-            if (getTextConverter(isNonRomanChar as Boolean) != null) {
-                converter = getTextConverter(isNonRomanChar as Boolean)
+        if (converter == null && isNonRomanChar) {
+            if (getTextConverter(isNonRomanChar) != null) {
+                converter = getTextConverter(isNonRomanChar)
             }
         }
     }
-
 
     companion object Factory {
         lateinit var instance: MyApplication
@@ -76,8 +74,8 @@ class MyApplication : Application() {
             instance.populateFields()
             return ApplicationInstance(
                 context = instance,
-                manifest = instance.manifest as Manifest,
-                isNonRomanChar = instance.isNonRomanChar as Boolean,
+                manifest = instance.manifest,
+                isNonRomanChar = instance.isNonRomanChar,
                 textConverter = instance.converter
             )
         }
