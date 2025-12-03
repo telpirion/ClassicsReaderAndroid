@@ -6,8 +6,6 @@
 .DS_Store
 /build
 /captures
-gradlew
-gradlew.bat
 latinreader/release/
 /.idea
 *.hprof
