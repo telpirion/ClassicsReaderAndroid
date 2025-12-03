@@ -1,10 +1,5 @@
 package com.ericmschmidt.classicsreader.utilities
 
-import android.util.Log
-import com.ericmschmidt.classicsreader.dictionaryXmlString
-import com.ericmschmidt.classicsreader.xmlString
-import io.mockk.every
-import io.mockk.mockkStatic
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
