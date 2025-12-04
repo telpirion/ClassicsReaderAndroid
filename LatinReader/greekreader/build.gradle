@@ -3,7 +3,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace("com.ericmschmidt.greekreader")
-    compileSdk(36)
+    compileSdkVersion(36)
     dataBinding {
         enabled = true
     }
@@ -11,8 +11,8 @@ android {
         applicationId("com.telpirion.greekreader")
         minSdkVersion(23)
         targetSdk(36)
-        versionCode(1)
-        versionName("1.0")
+        versionCode(3)
+        versionName("2.1")
     }
     buildTypes {
         release {
