@@ -44,7 +44,7 @@ fun PrettyCardLazyList(
     ) {
         items(
             items = works,
-            key = { work -> work!!.id },
+            key = { work -> work.id as String},
         ) {
             PrettyRow(workInfo = it!!, onClick = onRowClick, isTranslation = isTranslation)
         }

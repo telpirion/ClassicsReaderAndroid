@@ -66,11 +66,11 @@ fun PrettyCard(
         ) {
             Text(
                 fontWeight = FontWeight.Bold,
-                text = if (!isTranslation) workInfo.title else workInfo.englishTitle,
+                text = if (!isTranslation) workInfo.title as String else workInfo.englishTitle as String,
                 textAlign = TextAlign.Left
             )
             Text(
-                text = if (!isTranslation) workInfo.author else workInfo.englishAuthor,
+                text = if (!isTranslation) workInfo.author as String else workInfo.englishAuthor as String,
                 textAlign = TextAlign.Left
             )
         }
@@ -109,12 +109,12 @@ fun PrettyRow(
                 Text(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    text = if (!isTranslation) workInfo.title else workInfo.englishTitle,
+                    text = if (!isTranslation) workInfo.title as String else workInfo.englishTitle as String,
                     textAlign = TextAlign.Left
                 )
                 Text(
                     fontSize = 16.sp,
-                    text = if(!isTranslation) workInfo.author else workInfo.englishAuthor,
+                    text = if(!isTranslation) workInfo.author as String else workInfo.englishAuthor as String,
                     textAlign = TextAlign.Left
                 )
             }

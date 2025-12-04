@@ -21,43 +21,25 @@ val lucretiusDescription = """
 """.trimIndent().replace("\n", " ")
 
 val ovidDescription = """
-    The Metamorphoses is a Latin narrative poem by the Roman poet Ovid, considered his magnum opus.
-    Comprising 11,995 lines, 15 books and over 250 myths, the poem chronicles the history of the
-    world from its creation to the deification of Julius Caesar within a loose mythico-historical
-    framework.
+    Ovid description
 """.trimIndent().replace("\n", " ")
 
 val petroniusDescription = """
-    The Satyricon is a work of fiction believed to have been written by Gaius Petronius Arbiter
-    during the Neronian era. The work is a mixture of prose and verse, and it tells the story of
-    the narrator, Encolpius, and his lover, a handsome young boy named Giton. It is a classic
-    example of Menippean satire.
+    Petronius description
 """.trimIndent().replace("\n", " ")
 
 val livyDescription = """
-    The History of Rome (in Latin, Ab Urbe Condita Libri) is a monumental history of ancient Rome,
-    written in Latin between 27 and 9 BC by the historian Titus Livius, or "Livy". The work covers
-    the period from the legends concerning the arrival of Aeneas and the refugees from the fall of
-    Troy, to the death of the emperor Augustus in AD 14.
-""".trimIndent().replace("\n", " ")
+    Livy description
+""".trimIndent()
 
 val senecaDescription = """
-    The Apocolocyntosis (literally "The Pumpkinification") of the Divine Claudius is a political
-    satire on the Roman emperor Claudius, probably written by Seneca the Younger. It is a classic
-    example of Menippean satire, a genre that mixes prose and verse. The work is a witty and
-    scathing attack on the deified emperor.
+    Seneca description
 """.trimIndent().replace("\n", " ")
 
 val sallustDescription = """
-    The Jugurthine War is a historical monograph by the Roman historian Sallust that details the
-    war between Rome and King Jugurtha of Numidia. The work is a valuable source for understanding
-    Roman politics and warfare in the late 2nd century BC. It is also a work of considerable
-    literary merit.
+    Sallust description
 """.trimIndent().replace("\n", " ")
 
 val vergilDescription = """
-    The Aeneid is a Latin epic poem, written by Virgil between 29 and 19 BC, that tells the
-    legendary story of Aeneas, a Trojan who travelled to Italy, where he became the ancestor of the
-    Romans. It is composed of 9,896 lines in dactylic hexameter. The Aeneid is considered one of
-    the most important works of Roman literature.
+    Virgil description
 """.trimIndent().replace("\n", " ")

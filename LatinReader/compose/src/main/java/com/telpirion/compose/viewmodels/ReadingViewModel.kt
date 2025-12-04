@@ -76,13 +76,14 @@ class ReadingViewModel(
         updateState()
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun updateState() {
         contentLines = listOf(content?.currentPage) as List<*> as List<String>
         _uiState.value = ReadingUiState(
             content = contentLines.joinToString("\n"),
             info = workInfo?.title ?: "Unknown Work",
             position = content?.readingPositionString as String,
-            tocAvailable = workInfo?.tocEntries?.isNotEmpty() ?: false,
+            tocAvailable = workInfo?.getTocEntries()?.isNotEmpty() ?: false,
             isTranslation = isTranslation
         )
     }

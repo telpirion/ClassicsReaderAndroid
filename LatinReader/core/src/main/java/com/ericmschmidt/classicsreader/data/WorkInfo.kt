@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel
+package com.ericmschmidt.classicsreader.data
 
 import com.ericmschmidt.classicsreader.R
 import java.util.Formatter
@@ -7,10 +7,10 @@ import kotlin.math.abs
 
 /**
  * Contains the data for a work contained in the app.
- *
+ * <p>
  * It includes the relevant bibliographical info (author, translator)
  * and the locations of the text in the app.
- *
+ * <p>
  * Example:
  *
  * id: "CaesarBG",
@@ -19,9 +19,9 @@ import kotlin.math.abs
  * location: encodeURI(_dataURI + "caes_bg_lat.xml"),
  * translation: encodeURI(_dataURI + "caes_bg_eng.xml")
  * workType: prose || poem
- *
+ * <p>
  * @author Eric Schmidt
- * @author https://telpirion.com
+ * @author <a href="https://telpirion.com">...</a>
  * @version 2.0
  * @since 1.0
  */

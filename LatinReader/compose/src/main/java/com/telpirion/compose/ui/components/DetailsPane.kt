@@ -15,6 +15,7 @@ import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.lightColorScheme
@@ -23,6 +24,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -41,6 +46,19 @@ fun DetailsPanePreview(
     val works = library.works
     val selectedItem = SelectedItem(0)
     DetailsPane(item = selectedItem, works = works, onReadClick = {})
+}
+
+@Composable
+fun BoldedText(boldText: String, normalText: String) {
+    Text(
+        buildAnnotatedString {
+            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                append(boldText)
+            }
+            append(": ")
+            append(normalText)
+        }
+    )
 }
 
 @Composable
@@ -74,7 +92,7 @@ fun DetailsPane(
                     horizontalArrangement = Arrangement.Start
                 ) {
                     Image(
-                        painter = painterResource(id = workInfo.image),
+                        painter = painterResource(id = workInfo.image as Int),
                         contentDescription = "${workInfo.title} cover art",
                         modifier = Modifier.size(120.dp)
                     )
@@ -83,7 +101,7 @@ fun DetailsPane(
                     ) {
                         // 2. Title
                         Text(
-                            text = workInfo.title,
+                            text = workInfo.title as String,
                             style = MaterialTheme.typography.headlineSmall
                         )
 
@@ -91,7 +109,7 @@ fun DetailsPane(
 
                         // 3. Author
                         Text(
-                            text = workInfo.author,
+                            text = workInfo.author as String,
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -101,7 +119,7 @@ fun DetailsPane(
 
                 Spacer(Modifier.height(24.dp))
                 Button(
-                    onClick = { onReadClick(workInfo.id) },
+                    onClick = { onReadClick(workInfo.id as String) },
                     modifier = Modifier
                         .width(120.dp),
                     colors = buttonColors(
@@ -111,7 +129,22 @@ fun DetailsPane(
                 ) {
                     Text("Read")
                 }
-
+                Spacer(Modifier.height(24.dp))
+                HorizontalDivider(
+                    thickness = 2.dp,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                Spacer(Modifier.height(24.dp))
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    BoldedText("Translator",
+                        workInfo.translator as String)
+                    BoldedText("Editor",
+                        workInfo.editor as String)
+                    BoldedText("Description",
+                        workInfo.description as String)
+                }
             }
         } else {
             // A placeholder view for when no item is selected.
