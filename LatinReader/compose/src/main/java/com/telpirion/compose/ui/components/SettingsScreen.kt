@@ -1,5 +1,7 @@
 package com.telpirion.compose.ui.components
 
+
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,44 +17,99 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES_DEFAULT
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.SHOW_PAGE_CONTROLS
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.SHOW_PAGE_CONTROLS_DEFAULT
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE_DEFAULT
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE_DEFAULT
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import com.ericmschmidt.classicsreader.R as CoreResources
 
 /**
  * The main composable for the settings screen, which displays a list of preferences.
  *
  * In a production app, the state for these settings would typically be hoisted to a
- * ViewModel and persisted using DataStore. For this example, we use `rememberSaveable`
+ * ViewModel and persisted using DataStore. For this example, we use `rememberSavable`
  * to maintain state across configuration changes.
  */
 @Composable
 fun SettingsScreen(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
 
     // Placeholder data for ListPreferences, as these are defined in XML arrays.
-    val textSizeOptions = listOf("16", "18", "20", "22", "24")
-    val poemLinesOptions = listOf("3", "4", "5", "6", "7")
+    val textSizeOptions = stringArrayResource(CoreResources.array.pref_array)
+    val poemLinesOptions = stringArrayResource(CoreResources.array.poem_lines_array)
     val displayTypeOptions = listOf(
         stringResource(CoreResources.string.action_display_row),
-        "Grid" // Assuming "Grid" is the other option.
+        "Grid"
     )
 
-    val displayTypeRow = stringResource(CoreResources.string.action_display_row)
+    // Get poem lines from preferences
+    val poemLinesKey = intPreferencesKey(POEM_LINES)
+    val poemLines: Flow<Int> = context.dataStore.data
+        .map { preferences ->
+            preferences[poemLinesKey] ?: (POEM_LINES_DEFAULT).toInt()
+        }
 
-    // State for each preference, using `rememberSaveable` to survive configuration changes.
-    var textSize by rememberSaveable { mutableStateOf("20") }
-    var poemLines by rememberSaveable { mutableStateOf("5") }
-    var showPageControls by rememberSaveable { mutableStateOf(true) }
-    var displayType by rememberSaveable {
-        mutableStateOf(displayTypeRow)
+    // Get text size from preferences
+    val textSizeKey = intPreferencesKey(TEXT_SIZE)
+    val textSize: Flow<Int> = context.dataStore.data
+        .map { preferences ->
+            preferences[textSizeKey] ?: TEXT_SIZE_DEFAULT.toInt()
+        }
+
+    // Get show page controls from preferences
+    val showPageControlsKey = booleanPreferencesKey(SHOW_PAGE_CONTROLS)
+    val showPageControls: Flow<Boolean> = context.dataStore.data
+        .map { preferences -> preferences[showPageControlsKey] ?: true }
+
+    // Get display type from preferences
+    val displayTypeKey = stringPreferencesKey(DISPLAY_TYPE)
+    val displayTypeValue: Flow<String> = context.dataStore.data
+        .map { preferences -> preferences[displayTypeKey] ?: DISPLAY_TYPE_DEFAULT }
+
+    suspend fun writeIntSetting(key: Preferences.Key<Int>, newValue: Int) {
+        Log.d("writeIntSetting", "writeIntSetting: $newValue")
+        context.dataStore.edit { settings ->
+            settings[key] = newValue
+        }
+    }
+
+    suspend fun writeStringSetting(key: Preferences.Key<String>, newValue: String) {
+        Log.d("writeStringSetting", "writeStringSetting: $newValue")
+        context.dataStore.edit { settings ->
+            settings[key] = newValue
+        }
+    }
+
+    suspend fun writeBoolSetting(key: Preferences.Key<Boolean>, newValue: Boolean) {
+        Log.d("writeBoolSetting", "writeBoolSetting: $newValue")
+        context.dataStore.edit { settings ->
+            settings[key] = newValue
+        }
     }
 
     LazyColumn(
@@ -73,9 +130,13 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
             SettingsListPreference(
                 title = stringResource(CoreResources.string.pref_text_size),
                 summary = stringResource(CoreResources.string.pref_text_size_summary),
-                currentValue = textSize,
-                options = textSizeOptions,
-                onValueChange = { textSize = it }
+                currentValue = textSize.collectAsState(initial = TEXT_SIZE_DEFAULT.toInt()).value.toString(),
+                options = textSizeOptions.toList(),
+                onValueChange = {
+                    runBlocking {
+                        launch { writeIntSetting(textSizeKey, newValue = it.toInt()) }
+                    }
+                }
             )
         }
 
@@ -83,9 +144,13 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
             SettingsListPreference(
                 title = stringResource(CoreResources.string.pref_poem_lines),
                 summary = stringResource(CoreResources.string.pref_poem_lines_summary),
-                currentValue = poemLines,
-                options = poemLinesOptions,
-                onValueChange = { poemLines = it }
+                currentValue = poemLines.collectAsState(initial = CoreResources.string.pref_poem_lines_default).value.toString(),
+                options = poemLinesOptions.toList(),
+                onValueChange = {
+                    runBlocking {
+                        launch { writeIntSetting(poemLinesKey, newValue = it.toInt()) }
+                    }
+                }
             )
         }
 
@@ -93,8 +158,12 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
             SettingsSwitchPreference(
                 title = stringResource(CoreResources.string.pref_show_page_controls),
                 summary = stringResource(CoreResources.string.pref_show_page_controls_summary),
-                isChecked = showPageControls,
-                onCheckedChange = { showPageControls = it }
+                isChecked = showPageControls.collectAsState(initial = SHOW_PAGE_CONTROLS_DEFAULT).value,
+                onCheckedChange = {
+                    runBlocking {
+                        launch { writeBoolSetting(showPageControlsKey, newValue = it) }
+                    }
+                }
             )
         }
 
@@ -102,9 +171,13 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
             SettingsListPreference(
                 title = stringResource(CoreResources.string.action_display),
                 summary = stringResource(CoreResources.string.action_display_description),
-                currentValue = displayType,
+                currentValue = displayTypeValue.collectAsState(initial = DISPLAY_TYPE_DEFAULT).value,
                 options = displayTypeOptions,
-                onValueChange = { displayType = it }
+                onValueChange = {
+                    runBlocking {
+                        launch { writeStringSetting(displayTypeKey, newValue = it) }
+                    }
+                }
             )
         }
     }

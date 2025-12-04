@@ -1,5 +1,6 @@
 package com.telpirion.compose.ui.components
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,6 +35,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -57,6 +61,8 @@ private val navigationItems = listOf(
     Screen.Settings,
 )
 
+// Global declaration for user settings preferences
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReaderApp(
