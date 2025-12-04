@@ -145,6 +145,7 @@ fun ReaderAppNavHost(
                 isTranslation = false,
                 dictionaryViewModel = dictionaryViewModel,
                 navController = navController,
+                screen = Screen.Vocab
             )
         }
 
@@ -156,6 +157,7 @@ fun ReaderAppNavHost(
                 isTranslation = false,
                 dictionaryViewModel,
                 navController = navController,
+                screen = Screen.Dictionary
             )
 
         }

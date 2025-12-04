@@ -1,6 +1,7 @@
 package com.telpirion.compose.ui.screens
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -43,26 +44,31 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.*
+import com.telpirion.compose.MainActivity
 import com.telpirion.compose.ui.components.Screen
 import com.telpirion.compose.ui.dataStore
 import com.telpirion.compose.viewmodels.DictionaryViewModel
+import com.telpirion.compose.viewmodels.ReadingUiState
 import com.telpirion.compose.viewmodels.ReadingViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import com.ericmschmidt.classicsreader.R as CoreResources
 
-
 @Suppress("unused")
 @Composable
 fun ReadingScreen(
-    workId: String? = "test",
-    isTranslation: Boolean = false,
-    dictionaryViewModel: DictionaryViewModel,
     navController: NavController,
+    workId: String? = "test",
+    context: Context = LocalContext.current,
+    isTranslation: Boolean = false,
+    dictionaryViewModel: DictionaryViewModel = viewModel(
+        viewModelStoreOwner = (context as MainActivity)
+    ),
+    screen: Screen = Screen.Recent
 ) {
-    val context = LocalContext.current
 
     // Get poem lines from preferences
+
     val poemLinesKey = intPreferencesKey(POEM_LINES)
     val poemLines: Flow<Int> = context.dataStore.data
         .map { preferences ->
@@ -92,34 +98,61 @@ fun ReadingScreen(
     val showPageControls: Flow<Boolean> = context.dataStore.data
         .map { preferences -> preferences[showPageControlsKey] ?: true }
 
+    var uiState: ReadingUiState
+    var onPageTurn: (Boolean) -> Unit
+    var onPrev: () -> Unit
+    var onNext: () -> Unit
+
     Log.i("ReadingScreen", "workId: $workId, isTranslation: $isTranslation")
-
-    val viewModel: ReadingViewModel = viewModel(
-        factory = ReadingViewModel.Factory(
-            application = context.applicationContext as Application,
-            workId = workId,
-            isTranslation = isTranslation,
-            poemLines = poemLines.collectAsState(
-                initial = POEM_LINES_DEFAULT.toInt()).value
-        )
-    )
-    val uiState by viewModel.uiState.collectAsState()
-
-
-    val dictionaryUiState = dictionaryViewModel.uiState.collectAsStateWithLifecycle()
-    val searchQuery = dictionaryUiState.value.searchQuery
-
-    if (workId == null) {
-        Column(
-            modifier = Modifier.fillMaxSize().padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(stringResource(CoreResources.string.reading_no_book_open))
+    if (screen == Screen.Vocab || screen == Screen.Dictionary){
+        val dictionaryUiState = dictionaryViewModel.readingUiState.collectAsStateWithLifecycle()
+        uiState = dictionaryUiState.value
+        onPageTurn = {
+            dictionaryViewModel.clearSearch()
         }
-        return
-    }
+        onPrev = {
+            dictionaryViewModel.clearSearch()
+        }
+        onNext = {
+            dictionaryViewModel.clearSearch()
+        }
+    } else {
+        if (workId == null) {
+            Column(
+                modifier = Modifier.fillMaxSize().padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(stringResource(CoreResources.string.reading_no_book_open))
+            }
+            return
+        }
 
+        val viewModel: ReadingViewModel = viewModel(
+            factory = ReadingViewModel.Factory(
+                application = context.applicationContext as Application,
+                workId = workId,
+                isTranslation = isTranslation,
+                poemLines = poemLines.collectAsState(
+                    initial = POEM_LINES_DEFAULT.toInt()
+                ).value
+            )
+        )
+        val readingUiState by viewModel.uiState.collectAsStateWithLifecycle()
+        uiState = readingUiState
+
+        onPageTurn = {
+                isNext -> viewModel.goToPage(isNext)
+        }
+
+        onPrev = {
+            viewModel.goToPage(false)
+        }
+
+        onNext = {
+            viewModel.goToPage(true)
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -133,11 +166,13 @@ fun ReadingScreen(
         ReadingContent(
             text = uiState.content,
             textSizeSp = textSizeSp,
-            onPageTurn = { isNext -> viewModel.goToPage(isNext) },
+            onPageTurn = onPageTurn,
+            onSwitchView = {
+                navController.navigate(Screen.Recent.createRoute(workId, !isTranslation))
+            },
             onShowMenu = { /* Logic to show menu will be here */ },
             modifier = Modifier.weight(1f),
-            lineHeight = lineSpacing,
-            navController = navController
+            lineHeight = lineSpacing
         )
 
         Text(
@@ -149,10 +184,12 @@ fun ReadingScreen(
                 .padding(top = 16.dp)
         )
 
-        if (showPageControls.collectAsState(initial = true).value) {
+        if ((showPageControls.collectAsState(initial = true).value)
+            && (screen != Screen.Vocab)
+            && (screen != Screen.Dictionary)){
             PageControls(
-                onPrev = { viewModel.goToPage(false) },
-                onNext = { viewModel.goToPage(true) },
+                onPrev = onPrev,
+                onNext = onNext,
                 modifier = Modifier.padding(top = 8.dp)
             )
         }
@@ -164,10 +201,12 @@ private fun ReadingContent(
     text: String,
     textSizeSp: Float,
     onPageTurn: (isNext: Boolean) -> Unit,
+    onSwitchView: () -> Unit,
     @Suppress("unused") onShowMenu: () -> Unit,
     modifier: Modifier = Modifier,
+    switchText: String = "Switch View",
     lineHeight: Float = 1.2f,
-    navController: NavController
+
 ) {
     BoxWithConstraints(
         modifier = modifier
@@ -210,11 +249,8 @@ private fun ReadingContent(
             offset = contextMenuOffset
         ) {
             DropdownMenuItem(
-                text = { Text("Switch View") }, // Placeholder
-                onClick = {
-                    navController.navigate(Screen.Settings.route)
-                    showContextMenu = false
-                }
+                text = { Text(switchText) }, // Placeholder
+                onClick = onSwitchView
             )
             DropdownMenuItem(
                 text = { Text("Table of Contents") }, // Placeholder
@@ -241,6 +277,7 @@ private fun PageControls(
             Icon(
                 Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = stringResource(CoreResources.string.reading_btn_prev)
+
             )
         }
         IconButton(onClick = onNext, modifier = Modifier.weight(1f)) {

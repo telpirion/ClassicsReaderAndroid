@@ -62,4 +62,8 @@ class DictionaryRepository(context: Context) {
     suspend fun getDefinition(entry: String): String? = withContext(Dispatchers.IO) {
         dictionary.getEntry(entry)
     }
+
+    suspend fun getDictionaryInfo(): String {
+        return dictionary.dictionaryInfo.title
+    }
 }
