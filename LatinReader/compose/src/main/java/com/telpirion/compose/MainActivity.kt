@@ -16,10 +16,11 @@ import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYP
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.SHOW_PAGE_CONTROLS
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE
-import com.telpirion.compose.ui.components.ReaderApp
+import com.telpirion.compose.ui.ReaderApp
 import com.telpirion.compose.ui.theme.LatinReaderTheme
 import com.telpirion.compose.viewmodels.SharedPreferencesMigration
 
+@Suppress("unused")
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)

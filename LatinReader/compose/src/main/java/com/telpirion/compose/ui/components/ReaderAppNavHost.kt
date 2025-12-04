@@ -23,6 +23,8 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.telpirion.compose.ui.screens.ReadingScreen
+import com.telpirion.compose.ui.screens.SettingsScreen
 import com.ericmschmidt.classicsreader.R as CoreResources
 
 /**

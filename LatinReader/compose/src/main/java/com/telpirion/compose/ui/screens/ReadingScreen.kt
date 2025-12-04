@@ -1,7 +1,6 @@
 package com.telpirion.compose.ui.screens
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -22,17 +21,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
-import androidx.compose.material3.adaptive.layout.SupportingPaneScaffoldRole
-import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
-import androidx.compose.material3.adaptive.navigation.NavigableSupportingPaneScaffold
-import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,63 +39,118 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES_DEFAULT
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.SHOW_PAGE_CONTROLS
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE_DEFAULT
-import com.telpirion.compose.MainActivity
+import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.WorkInfo
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.*
+<<<<<<<< HEAD:LatinReader/compose/src/main/java/com/telpirion/compose/ui/components/ReadingScreen.kt
+========
 import com.telpirion.compose.ui.components.Screen
-import com.telpirion.compose.ui.components.TableOfContentsPane
-import com.telpirion.compose.ui.components.TranslationPane
 import com.telpirion.compose.ui.dataStore
-import com.telpirion.compose.viewmodels.DictionaryViewModel
-import com.telpirion.compose.viewmodels.ReadingUiState
 import com.telpirion.compose.viewmodels.ReadingViewModel
+>>>>>>>> a6672c6 (chore: refactoring packages, removing unused imports):LatinReader/compose/src/main/java/com/telpirion/compose/ui/screens/ReadingScreen.kt
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import com.ericmschmidt.classicsreader.R as CoreResources
+import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
 
-private sealed class SupportingPaneContent {
-    object Hidden : SupportingPaneContent()
-    object Translation : SupportingPaneContent()
-    object TableOfContents : SupportingPaneContent()
+class ReadingViewModel(
+    application: Application,
+    workId: String?,
+    private val isTranslation: Boolean,
+    poemLines: Int
+) : ViewModel() {
+
+<<<<<<<< HEAD:LatinReader/compose/src/main/java/com/telpirion/compose/ui/components/ReadingScreen.kt
+    private val _uiState = MutableStateFlow(ReadingUiState())
+    val uiState: StateFlow<ReadingUiState> = _uiState
+
+    private var workInfo: WorkInfo? = null
+    private var contentLines: List<String> = emptyList()
+    private var currentPageIndex = 0
+    private val linesPerPage = if (poemLines > 0) poemLines else 5
+
+    init {
+        if (workId != null) {
+            val manifest = PseudoManifest()
+            val library = Library(manifest.collection)
+            workInfo = library.getWorkInfoByID(workId)
+            // In a real app, you would parse the XML file from work.location
+            // For this example, we'll use placeholder content.
+
+            // TODO(telpirion): integrate old ReaderViewModel with new one
+            val content = RVM(workInfo, isTranslation, poemLines, application)
+
+            contentLines = listOf(content.currentPage)
+
+            updateState()
+        } else {
+            _uiState.value = ReadingUiState(
+                content = application.getString(CoreResources.string.reading_no_book_open)
+            )
+        }
+    }
+
+    fun goToPage(isNext: Boolean) {
+        val newIndex = if (isNext) currentPageIndex + 1 else currentPageIndex - 1
+        val totalPages = (contentLines.size + linesPerPage - 1) / linesPerPage
+        if (newIndex in 0 until totalPages) {
+            currentPageIndex = newIndex
+            updateState()
+        }
+    }
+
+    private fun updateState() {
+        val start = currentPageIndex * linesPerPage
+        val end = (start + linesPerPage).coerceAtMost(contentLines.size)
+        val totalPages = (contentLines.size + linesPerPage - 1) / linesPerPage
+
+        _uiState.value = ReadingUiState(
+            content = contentLines.subList(start, end).joinToString("\n"),
+            info = workInfo?.title ?: "Unknown Work",
+            position = "Page ${currentPageIndex + 1} of $totalPages",
+            tocAvailable = workInfo?.tocEntries?.isNotEmpty() ?: false,
+            isTranslation = isTranslation
+        )
+    }
+
+    data class ReadingUiState(
+        val content: String = "",
+        val info: String = "",
+        val position: String = "",
+        val tocAvailable: Boolean = false,
+        val isTranslation: Boolean = false
+    )
+
+    @Suppress("UNCHECKED_CAST")
+    class Factory(
+        private val application: Application,
+        private val workId: String?,
+        private val isTranslation: Boolean,
+        private val poemLines: Int
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return ReadingViewModel(application, workId, isTranslation, poemLines) as T
+        }
+    }
 }
 
-@OptIn(ExperimentalMaterial3AdaptiveApi::class)
+========
+>>>>>>>> a6672c6 (chore: refactoring packages, removing unused imports):LatinReader/compose/src/main/java/com/telpirion/compose/ui/screens/ReadingScreen.kt
 @Suppress("unused")
 @Composable
 fun ReadingScreen(
-    navController: NavController,
-    workId: String? = "",
-    context: Context = LocalContext.current,
+    workId: String? = "test",
     isTranslation: Boolean = false,
-    dictionaryViewModel: DictionaryViewModel = viewModel(
-        viewModelStoreOwner = (context as MainActivity)
-    ),
-    screen: Screen = Screen.Recent
+    navController: NavController,
 ) {
-
-    // Get recently read from preferences
-    val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
-    val recentlyRead: Flow<String> = context.dataStore.data
-        .map {
-                preferences ->
-            preferences[recentlyReadKey] ?: ""
-        }
-    var currentWorkId: String? = workId
-    if (screen == Screen.Recent) {
-        val tmpRecentWorkId = recentlyRead.collectAsState(initial = "").value
-        if (tmpRecentWorkId.isNotEmpty()) {
-            currentWorkId = tmpRecentWorkId
-        }
-    }
+    val context = LocalContext.current
 
     // Get poem lines from preferences
     val poemLinesKey = intPreferencesKey(POEM_LINES)
@@ -134,165 +182,67 @@ fun ReadingScreen(
     val showPageControls: Flow<Boolean> = context.dataStore.data
         .map { preferences -> preferences[showPageControlsKey] ?: true }
 
-    var uiState: ReadingUiState
-    var onPageTurn: (Boolean) -> Unit
-    var onPrev: () -> Unit
-    var onNext: () -> Unit
-    val viewModel: ReadingViewModel?
+    Log.i("ReadingScreen", "workId: $workId, isTranslation: $isTranslation")
 
-    Log.i("ReadingScreen", "screen: $screen")
-    if (screen == Screen.Vocab || screen == Screen.Dictionary){
-        val dictionaryUiState = dictionaryViewModel.readingUiState.collectAsStateWithLifecycle()
-        uiState = dictionaryUiState.value
-        viewModel = null
-        onPageTurn = {
-            dictionaryViewModel.clearSearch()
-        }
-        onPrev = {
-            dictionaryViewModel.clearSearch()
-        }
-        onNext = {
-            dictionaryViewModel.clearSearch()
-        }
-    } else {
-        if (currentWorkId.isNullOrEmpty()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(stringResource(CoreResources.string.reading_no_book_open))
-            }
-            return
-        }
-
-        val readingViewModel: ReadingViewModel = viewModel(
-            factory = ReadingViewModel.Factory(
-                application = context.applicationContext as Application,
-                workId = currentWorkId,
-                isTranslation = isTranslation,
-                poemLines = poemLines.collectAsState(
-                    initial = POEM_LINES_DEFAULT.toInt()
-                ).value
-            )
+    val viewModel: ReadingViewModel = viewModel(
+        factory = ReadingViewModel.Factory(
+            application = context.applicationContext as Application,
+            workId = workId,
+            isTranslation = isTranslation,
+            poemLines = poemLines.collectAsState(
+                initial = POEM_LINES_DEFAULT.toInt()).value
         )
-        viewModel = readingViewModel
-        val readingUiState by viewModel.uiState.collectAsStateWithLifecycle()
-        uiState = readingUiState
+    )
 
-        onPageTurn = {
-                isNext -> viewModel.goToPage(isNext)
-        }
+    val uiState by viewModel.uiState.collectAsState()
 
-        onPrev = {
-            viewModel.goToPage(false)
+    if (workId == null) {
+        Column(
+            modifier = Modifier.fillMaxSize().padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(stringResource(CoreResources.string.reading_no_book_open))
         }
-
-        onNext = {
-            viewModel.goToPage(true)
-        }
+        return
     }
 
-    val scaffoldNavigator = rememberSupportingPaneScaffoldNavigator()
-    val scope = rememberCoroutineScope()
-    var supportingPaneContent by remember { mutableStateOf<SupportingPaneContent>(SupportingPaneContent.Hidden) }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = uiState.info,
+            style = MaterialTheme.typography.titleMedium
+        )
 
-    NavigableSupportingPaneScaffold(
-        navigator = scaffoldNavigator,
-        mainPane = {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ) {
-                Text(
-                    text = uiState.info,
-                    style = MaterialTheme.typography.titleMedium
-                )
+        ReadingContent(
+            text = uiState.content,
+            textSizeSp = textSizeSp,
+            onPageTurn = { isNext -> viewModel.goToPage(isNext) },
+            onShowMenu = { /* Logic to show menu will be here */ },
+            modifier = Modifier.weight(1f),
+            lineHeight = lineSpacing
+        )
 
-                ReadingContent(
-                    text = uiState.content,
-                    textSizeSp = textSizeSp,
-                    onPageTurn = onPageTurn,
-                    onSwitchView = {
-                        supportingPaneContent = SupportingPaneContent.Translation
-                        scope.launch {
-                            scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Supporting)
-                        }
-                    },
-                    onShowToc = {
-                        supportingPaneContent = SupportingPaneContent.TableOfContents
-                        scope.launch {
-                            scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Supporting)
-                        }
-                    },
-                    modifier = Modifier.weight(1f),
-                    lineHeight = lineSpacing
-                )
+        Text(
+            text = uiState.position,
+            style = MaterialTheme.typography.bodySmall,
+            textAlign = TextAlign.End,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)
+        )
 
-                Text(
-                    text = uiState.position,
-                    style = MaterialTheme.typography.bodySmall,
-                    textAlign = TextAlign.End,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                )
-
-                if ((showPageControls.collectAsState(initial = true).value)
-                    && (screen != Screen.Vocab)
-                    && (screen != Screen.Dictionary)) {
-                    PageControls(
-                        onPrev = onPrev,
-                        onNext = onNext,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-                }
-            }
-        },
-        supportingPane = {
-            when (supportingPaneContent) {
-                SupportingPaneContent.Translation -> {
-                    if (currentWorkId != null) {
-                        TranslationPane(
-                            isTranslation = isTranslation,
-                            textSizeSp = textSizeSp,
-                            lineHeight = lineSpacing,
-                            onClose = {
-                                scope.launch {
-                                    scaffoldNavigator.navigateBack(
-                                        backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
-                                }
-                            }
-                        )
-                    }
-                }
-                SupportingPaneContent.TableOfContents -> {
-                    if (viewModel != null) {
-                        TableOfContentsPane(
-                            onTocEntryClick = { index ->
-                                viewModel.goToChapter(index)
-                                scope.launch {
-                                    scaffoldNavigator.navigateBack(
-                                        backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
-                                }
-                            },
-                            onClose = {
-                                scope.launch {
-                                    scaffoldNavigator.navigateBack()
-                                }
-                            }
-                        )
-                    }
-                }
-                SupportingPaneContent.Hidden -> {
-                    // Empty pane
-                }
-            }
+        if (showPageControls.collectAsState(initial = true).value) {
+            PageControls(
+                onPrev = { viewModel.goToPage(false) },
+                onNext = { viewModel.goToPage(true) },
+                modifier = Modifier.padding(top = 8.dp)
+            )
         }
-    )
+    }
 }
 
 @Composable
@@ -300,13 +250,10 @@ private fun ReadingContent(
     text: String,
     textSizeSp: Float,
     onPageTurn: (isNext: Boolean) -> Unit,
-    onSwitchView: () -> Unit,
-    onShowToc: () -> Unit,
+    @Suppress("unused") onShowMenu: () -> Unit,
     modifier: Modifier = Modifier,
-    switchText: String = "Switch View",
-    lineHeight: Float = 1.2f,
-
-    ) {
+    lineHeight: Float = 1.2f
+) {
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
@@ -348,25 +295,22 @@ private fun ReadingContent(
             offset = contextMenuOffset
         ) {
             DropdownMenuItem(
-                text = { Text(switchText) },
+                text = { Text("Switch View") }, // Placeholder
                 onClick = {
-                    onSwitchView()
+                    /* TODO: navController.navigate(...) */
                     showContextMenu = false
                 }
             )
             DropdownMenuItem(
-                text = { Text("Table of Contents") },
+                text = { Text("Table of Contents") }, // Placeholder
                 onClick = {
-                    onShowToc()
+                    /* TODO: navController.navigate(...) */
                     showContextMenu = false
                 }
             )
         }
     }
 }
-
-
-
 
 @Composable
 private fun PageControls(
@@ -382,7 +326,6 @@ private fun PageControls(
             Icon(
                 Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = stringResource(CoreResources.string.reading_btn_prev)
-
             )
         }
         IconButton(onClick = onNext, modifier = Modifier.weight(1f)) {
@@ -398,15 +341,10 @@ private fun PageControls(
 @Composable
 fun ReadingScreenPreview() {
     MaterialTheme {
-
-        val dictionaryViewModel: DictionaryViewModel = viewModel(
-            factory = DictionaryViewModel.Factory
-        )
+        // This preview shows the "no book open" state.
         ReadingScreen(
             workId = null,
-            navController = NavController(LocalContext.current),
-            dictionaryViewModel = dictionaryViewModel,
-            isTranslation = false
+            navController = NavController(LocalContext.current)
         )
     }
 }
