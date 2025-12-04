@@ -6,6 +6,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
+        classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.21')
         classpath 'org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.1.21'
         def nav_version = "2.7.7"
         classpath('com.android.tools.build:gradle:8.13.1')
@@ -28,8 +29,7 @@ allprojects {
         maven {
             url = "https://jitpack.io"
         }
-        mavenCentral()
-        //here
+        jcenter() //here
     }
 }
 
