@@ -43,7 +43,7 @@ class PseudoManifest : Manifest() {
             .author("Dictionary author")
             .title("Dictionary name")
             .englishTitle("test dictionary")
-            .englishAuthor("dictinary author")
+            .englishAuthor("dictionary author")
             .image(R.drawable.work_default_2)
             .location(R.raw.text_work)
             .englishLocation(R.raw.text_work)

@@ -47,6 +47,9 @@ import com.telpirion.compose.ui.components.ReaderTopAppBar
 import com.telpirion.compose.ui.components.Screen
 import com.telpirion.compose.ui.components.navOptionsBuilder
 import kotlinx.coroutines.launch
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.telpirion.compose.viewmodels.DictionaryViewModel
 
 private val bottomNavigationItems = listOf(
     Screen.Library,
@@ -70,7 +73,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 @Composable
 fun ReaderApp(
     windowSizeClass: WindowSizeClass
-) {
+)  {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -81,6 +84,13 @@ fun ReaderApp(
     // Get the current back stack entry to determine the selected route.
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+
+    // Instantiate the activity-scoped ViewModel
+    val dictionaryViewModel: DictionaryViewModel = viewModel(
+        factory = DictionaryViewModel.Factory
+        // I think I need to set the viewModelStoreOwner here ... ?
+    )
+    val dictionaryUiState by dictionaryViewModel.uiState.collectAsStateWithLifecycle()
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -104,7 +114,14 @@ fun ReaderApp(
         Scaffold(
             topBar = {
                 ReaderTopAppBar(
-                    onMenuClick = { scope.launch { drawerState.open() } }
+                    onMenuClick = { scope.launch { drawerState.open() } },
+                    searchText = dictionaryUiState.searchQuery,
+                    onSearchTextChange = {
+                        text -> dictionaryViewModel.onQueryChange(text) },
+                    onSearch = {
+                        dictionaryViewModel.search(dictionaryUiState.searchQuery)
+                        navController.navigate(Screen.Dictionary.createRoute()) },
+                    onClearSearch = dictionaryViewModel::clearSearch
                 )
             },
             bottomBar = {
@@ -146,7 +163,8 @@ fun ReaderApp(
                 }
                 ReaderAppNavHost(
                     navController = navController,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    dictionaryViewModel = dictionaryViewModel
                 )
             }
         }
