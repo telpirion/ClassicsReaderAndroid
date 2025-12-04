@@ -1,4 +1,4 @@
-# Release notes for Latin Reader app
+# Release notes for Latin Reader and Greek Reader apps
 
 ## Release 1.7 (Version 14)
 
