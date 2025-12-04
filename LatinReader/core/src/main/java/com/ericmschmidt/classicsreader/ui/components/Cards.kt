@@ -79,7 +79,7 @@ fun PrettyCard(
             Box {
                 Image(
                     modifier = Modifier.requiredSize(width = 130.dp, height = 130.dp),
-                    painter = painterResource(workInfo.image),
+                    painter = painterResource(workInfo.image as Int),
                     contentDescription = "test image",
                 )
             }
@@ -122,7 +122,7 @@ fun PrettyRow(
             Box {
                 Image(
                     modifier = Modifier.requiredSize(width = 100.dp, height = 100.dp),
-                    painter = painterResource(workInfo.image),
+                    painter = painterResource(workInfo.image as Int),
                     contentDescription = workInfo.title,
                 )
             }

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/libraryFragment">
+
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.ericmschmidt.classicsreader.ui.fragments.LibraryFragment"
+        android:label="Library" >
+        <action
+            android:id="@+id/action_libraryFragment_to_reading_dest"
+            app:destination="@id/reading_dest"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim">
+            <argument
+                android:name="workId"
+                app:argType="string" />
+            <argument
+                android:name='isTranslation'
+                android:defaultValue="false"
+                app:argType="boolean" />
+        </action>
+        <argument android:name="isTranslations"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/reading_dest"
+        android:name="com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment"
+        android:label="Reading">
+        <argument android:name="isTranslation"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <argument android:name="workId"
+            app:argType="string"
+            android:defaultValue=""/>
+        <argument
+            android:name="book"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+        <argument
+            android:name="line"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+        <action
+            android:id="@+id/action_reading_dest_to_toc_dest"
+            app:destination="@id/toc_dest"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim">
+            <argument
+                android:name="workId"
+                app:argType="string" />
+            <argument
+                android:name="isTranslation"
+                android:defaultValue="false"
+                app:argType="boolean" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/dictionary_dest"
+        android:name="com.ericmschmidt.classicsreader.ui.fragments.DictionaryFragment"
+        android:label="Dictionary"
+        tools:layout="@layout/fragment_dictionary">
+        <argument
+            android:name="dictionaryQuery"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
+    <fragment
+        android:id="@+id/settings_dest"
+        android:name="com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment"
+        android:label="Settings" />
+    <fragment
+        android:id="@+id/vocab_dest"
+        android:name="com.ericmschmidt.classicsreader.ui.fragments.VocabularyFragment"
+        android:label="Vocabulary"
+        tools:layout="@layout/fragment_vocabulary" />
+    <fragment
+        android:id="@+id/toc_dest"
+        android:name="com.ericmschmidt.classicsreader.ui.fragments.TOCFragment"
+        android:label="Table of Contents">
+        <argument
+            android:name="workId"
+            app:argType="string"/>
+        <argument
+            android:name="isTranslation"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <action
+            android:id="@+id/action_toc_dest_to_reading_dest"
+            app:destination="@id/reading_dest"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out">
+            <argument
+                android:name="workId"
+                app:argType="string" />
+            <argument
+                android:name="isTranslation"
+                android:defaultValue="false"
+                app:argType="boolean" />
+            <argument
+                android:name="book"
+                android:defaultValue="-1"
+                app:argType="integer" />
+            <argument
+                android:name="line"
+                android:defaultValue="-1"
+                app:argType="integer" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/help_dest"
+        android:name="com.ericmschmidt.classicsreader.ui.fragments.HelpFragment"
+        android:label="Help"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/info_dest"
+        android:name="com.ericmschmidt.classicsreader.ui.fragments.InfoFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_info" />
+</navigation>
