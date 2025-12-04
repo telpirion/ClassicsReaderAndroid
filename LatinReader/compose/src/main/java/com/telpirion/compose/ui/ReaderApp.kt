@@ -42,7 +42,6 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.telpirion.compose.R
-
 import kotlinx.coroutines.launch
 
 private val bottomNavigationItems = listOf(
@@ -205,8 +204,7 @@ private fun ReaderBottomNavigationBar(
                     var route = "library/someid"
                     when (screen) {
                         Screen.Recent -> {
-                            val recentWorkId = "recent_bottom_navigation_bar"
-                            route = (screen as Screen.Recent).createRoute(recentWorkId)
+                            route = (screen as Screen.Recent).createRoute("test")
                         }
                         else -> {
                             route = screen.route

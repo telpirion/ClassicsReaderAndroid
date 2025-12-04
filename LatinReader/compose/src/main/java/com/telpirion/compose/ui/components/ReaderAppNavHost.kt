@@ -1,3 +1,5 @@
+@file:Suppress("unused", "UnusedVariable")
+
 package com.telpirion.compose.ui.components
 
 import androidx.compose.material.icons.Icons
@@ -39,7 +41,7 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
         CoreResources.string.nav_drawer_recent,
         Icons.Default.Bookmark
     ) {
-        fun createRoute(workId: String) = "recent/$workId"
+        fun createRoute(workId: String?) = "recent/$workId"
     }
     object Translation : Screen(
         "translation/",

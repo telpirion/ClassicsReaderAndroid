@@ -1,6 +1,7 @@
 package com.telpirion.compose.ui.components
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -51,7 +52,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import com.ericmschmidt.classicsreader.R as CoreResources
-
+import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
 
 class ReadingViewModel(
     application: Application,
@@ -63,7 +64,7 @@ class ReadingViewModel(
     private val _uiState = MutableStateFlow(ReadingUiState())
     val uiState: StateFlow<ReadingUiState> = _uiState
 
-    private var work: WorkInfo? = null
+    private var workInfo: WorkInfo? = null
     private var contentLines: List<String> = emptyList()
     private var currentPageIndex = 0
     private val linesPerPage = if (poemLines > 0) poemLines else 5
@@ -72,10 +73,15 @@ class ReadingViewModel(
         if (workId != null) {
             val manifest = PseudoManifest()
             val library = Library(manifest.collection)
-            work = library.getWorkInfoByID(workId)
+            workInfo = library.getWorkInfoByID(workId)
             // In a real app, you would parse the XML file from work.location
             // For this example, we'll use placeholder content.
-            contentLines = List(100) { "Line ${it + 1} of the text." }
+
+            // TODO(telpirion): integrate old ReaderViewModel with new one
+            val content = RVM(workInfo, isTranslation, poemLines, application)
+
+            contentLines = listOf(content.currentPage)
+
             updateState()
         } else {
             _uiState.value = ReadingUiState(
@@ -100,9 +106,9 @@ class ReadingViewModel(
 
         _uiState.value = ReadingUiState(
             content = contentLines.subList(start, end).joinToString("\n"),
-            info = work?.title ?: "Unknown Work",
+            info = workInfo?.title ?: "Unknown Work",
             position = "Page ${currentPageIndex + 1} of $totalPages",
-            tocAvailable = work?.tocEntries?.isNotEmpty() ?: false,
+            tocAvailable = workInfo?.tocEntries?.isNotEmpty() ?: false,
             isTranslation = isTranslation
         )
     }
@@ -128,9 +134,10 @@ class ReadingViewModel(
     }
 }
 
+@Suppress("unused")
 @Composable
 fun ReadingScreen(
-    workId: String?,
+    workId: String? = "test",
     isTranslation: Boolean = false,
     navController: NavController,
 ) {
@@ -154,10 +161,19 @@ fun ReadingScreen(
     val textSizeSp = textSize.collectAsState(
         initial = TEXT_SIZE_DEFAULT.toInt()).value.toFloat()
 
+    var lineSpacing = 30.0f
+
+    // If the font size is too big, then the text gets scrunched.
+    if (textSizeSp > 28.0) {
+        lineSpacing = 50.0f
+    }
+
     // Get show page controls from preferences
     val showPageControlsKey = booleanPreferencesKey(SHOW_PAGE_CONTROLS)
     val showPageControls: Flow<Boolean> = context.dataStore.data
         .map { preferences -> preferences[showPageControlsKey] ?: true }
+
+    Log.i("ReadingScreen", "workId: $workId, isTranslation: $isTranslation")
 
     val viewModel: ReadingViewModel = viewModel(
         factory = ReadingViewModel.Factory(
@@ -197,7 +213,8 @@ fun ReadingScreen(
             textSizeSp = textSizeSp,
             onPageTurn = { isNext -> viewModel.goToPage(isNext) },
             onShowMenu = { /* Logic to show menu will be here */ },
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
+            lineHeight = lineSpacing
         )
 
         Text(
@@ -224,8 +241,9 @@ private fun ReadingContent(
     text: String,
     textSizeSp: Float,
     onPageTurn: (isNext: Boolean) -> Unit,
-    onShowMenu: () -> Unit,
-    modifier: Modifier = Modifier
+    @Suppress("unused") onShowMenu: () -> Unit,
+    modifier: Modifier = Modifier,
+    lineHeight: Float = 1.2f
 ) {
     BoxWithConstraints(
         modifier = modifier
@@ -241,6 +259,7 @@ private fun ReadingContent(
         Text(
             text = text,
             fontSize = textSizeSp.sp,
+            lineHeight = lineHeight.sp,
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
