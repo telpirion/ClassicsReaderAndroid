@@ -1,6 +1,7 @@
 package com.ericmschmidt.classicsreader.data
 
 import android.content.Context
+import androidx.compose.runtime.collectAsState
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -63,7 +64,14 @@ class DictionaryRepository(context: Context) {
         dictionary.getEntry(entry)
     }
 
-    suspend fun getDictionaryInfo(): String {
+    /**
+     * Retrieves the dictionary's title.
+     */
+    fun getDictionaryInfo(): String {
         return dictionary.dictionaryInfo.title
+    }
+
+    fun getRandom(): String {
+        return dictionary.randomEntryKey
     }
 }

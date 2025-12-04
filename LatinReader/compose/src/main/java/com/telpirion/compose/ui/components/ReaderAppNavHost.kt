@@ -2,6 +2,7 @@
 
 package com.telpirion.compose.ui.components
 
+import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.Book
@@ -11,18 +12,19 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.telpirion.compose.MainActivity
 import com.telpirion.compose.ui.screens.MarkdownScreen
 import com.telpirion.compose.ui.screens.ReadingScreen
 import com.telpirion.compose.ui.screens.SettingsScreen
@@ -41,11 +43,11 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
         fun createRoute() = "library/"
     }
     object Recent : Screen(
-        "recent/{workId}",
+        "recent/{workId}/{isTranslation}",
         CoreResources.string.nav_drawer_recent,
         Icons.Default.Bookmark
     ) {
-        fun createRoute(workId: String?) = "recent/$workId"
+        fun createRoute(workId: String?, isTranslation: Boolean?) = "recent/$workId/$isTranslation"
     }
     object Translation : Screen(
         "translation/",
@@ -59,7 +61,7 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
         CoreResources.string.nav_drawer_vocab,
         Icons.Default.School
     ) {
-        fun createRoute(source: String) = "vocab/$source"
+        fun createRoute() = "vocab/"
     }
 
     object Dictionary : Screen(
@@ -93,15 +95,28 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
     }
 }
 
+// NavOptions builder function
+fun navOptionsBuilder(navController: NavHostController):  NavOptionsBuilder.() -> Unit {
+    //This is empty, but previously contained the following AI-generated code:
+
+    return {
+        popUpTo(navController.graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
 @Composable
 fun ReaderAppNavHost(
-    dictionaryViewModel: DictionaryViewModel,
+    modifier: Modifier = Modifier,
+    context: Context = LocalContext.current,
+    dictionaryViewModel: DictionaryViewModel = viewModel(
+        viewModelStoreOwner = (context as MainActivity)
+    ),
     navController: NavHostController,
-    modifier: Modifier = Modifier
 ) {
-    val textSize by rememberSaveable { mutableFloatStateOf(20f) }
-    val poemLines by rememberSaveable { mutableIntStateOf(5) }
-    val showPageControls by rememberSaveable { mutableStateOf(true) }
 
     NavHost(
         navController = navController,
@@ -119,19 +134,23 @@ fun ReaderAppNavHost(
             Screen.Translation.route,
         ) { backStackEntry ->
             // And here as well
-            NavigableListDetailPaneScaffoldFull(navController = navController)
+            NavigableListDetailPaneScaffoldFull(navController = navController,
+                screen = Screen.Translation)
         }
 
         composable(
             route = Screen.Recent.route,
-            arguments = listOf(navArgument("workId") { type = NavType.StringType })
+            arguments = listOf(
+                navArgument("workId") { type = NavType.StringType },
+                navArgument("isTranslation") { type = NavType.BoolType })
         ) { backStackEntry ->
-            val workId = backStackEntry.arguments?.getString("workId")
 
+            // TODO: Pull from PreferencesDataStore?
+            val workId = backStackEntry.arguments?.getString("workId")
+            val isTranslation = backStackEntry.arguments?.getBoolean("isTranslation")
             ReadingScreen(
                 workId = workId,
-                isTranslation = false,
-                dictionaryViewModel,
+                isTranslation = isTranslation ?: false,
                 navController = navController,
             )
         }
@@ -139,11 +158,12 @@ fun ReaderAppNavHost(
         composable (
             Screen.Vocab.route
         ) { backStackEntry ->
-            val workId = "vocab"
+            LaunchedEffect(Unit) {
+                dictionaryViewModel.getVocab()
+            }
             ReadingScreen(
-                workId = workId,
+                workId = "",
                 isTranslation = false,
-                dictionaryViewModel = dictionaryViewModel,
                 navController = navController,
                 screen = Screen.Vocab
             )
@@ -155,7 +175,6 @@ fun ReaderAppNavHost(
             ReadingScreen(
                 workId = "test",
                 isTranslation = false,
-                dictionaryViewModel,
                 navController = navController,
                 screen = Screen.Dictionary
             )
@@ -173,6 +192,8 @@ fun ReaderAppNavHost(
         ) { backStackEntry ->
             MarkdownScreen(screen = Screen.Info)
         }
+
+
 
         composable(
             Screen.Settings.route,

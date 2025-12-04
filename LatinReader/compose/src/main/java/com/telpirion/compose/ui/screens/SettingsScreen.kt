@@ -42,6 +42,9 @@ import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE_D
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE
 import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE_DEFAULT
 import com.telpirion.compose.ui.dataStore
+import com.telpirion.compose.utils.writeBoolSetting
+import com.telpirion.compose.utils.writeIntSetting
+import com.telpirion.compose.utils.writeStringSetting
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -91,26 +94,6 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
     val displayTypeValue: Flow<String> = context.dataStore.data
         .map { preferences -> preferences[displayTypeKey] ?: DISPLAY_TYPE_DEFAULT }
 
-    suspend fun writeIntSetting(key: Preferences.Key<Int>, newValue: Int) {
-        Log.d("writeIntSetting", "writeIntSetting: $newValue")
-        context.dataStore.edit { settings ->
-            settings[key] = newValue
-        }
-    }
-
-    suspend fun writeStringSetting(key: Preferences.Key<String>, newValue: String) {
-        Log.d("writeStringSetting", "writeStringSetting: $newValue")
-        context.dataStore.edit { settings ->
-            settings[key] = newValue
-        }
-    }
-
-    suspend fun writeBoolSetting(key: Preferences.Key<Boolean>, newValue: Boolean) {
-        Log.d("writeBoolSetting", "writeBoolSetting: $newValue")
-        context.dataStore.edit { settings ->
-            settings[key] = newValue
-        }
-    }
 
     LazyColumn(
         modifier = modifier
@@ -134,7 +117,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 options = textSizeOptions.toList(),
                 onValueChange = {
                     runBlocking {
-                        launch { writeIntSetting(textSizeKey, newValue = it.toInt()) }
+                        launch { writeIntSetting(context, textSizeKey, newValue = it.toInt()) }
                     }
                 }
             )
@@ -148,7 +131,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 options = poemLinesOptions.toList(),
                 onValueChange = {
                     runBlocking {
-                        launch { writeIntSetting(poemLinesKey, newValue = it.toInt()) }
+                        launch { writeIntSetting(context, poemLinesKey, newValue = it.toInt()) }
                     }
                 }
             )
@@ -162,7 +145,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 isChecked = showPageControls.collectAsState(initial = SHOW_PAGE_CONTROLS_DEFAULT).value,
                 onCheckedChange = {
                     runBlocking {
-                        launch { writeBoolSetting(showPageControlsKey, newValue = it) }
+                        launch { writeBoolSetting(context, showPageControlsKey, newValue = it) }
                     }
                 }
             )
@@ -176,7 +159,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 options = displayTypeOptions,
                 onValueChange = {
                     runBlocking {
-                        launch { writeStringSetting(displayTypeKey, newValue = it) }
+                        launch { writeStringSetting(context, displayTypeKey, newValue = it) }
                     }
                 }
             )
