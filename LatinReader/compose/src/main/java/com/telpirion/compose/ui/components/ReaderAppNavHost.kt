@@ -1,8 +1,6 @@
-@file:Suppress("unused", "UnusedVariable")
-
 package com.telpirion.compose.ui.components
 
-import android.content.Context
+import ReadingScreen
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.Book
@@ -11,23 +9,15 @@ import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.telpirion.compose.MainActivity
-import com.telpirion.compose.ui.screens.MarkdownScreen
-import com.telpirion.compose.ui.screens.ReadingScreen
-import com.telpirion.compose.ui.screens.SettingsScreen
-import com.telpirion.compose.viewmodels.DictionaryViewModel
 import com.ericmschmidt.classicsreader.R as CoreResources
 
 /**
@@ -35,18 +25,18 @@ import com.ericmschmidt.classicsreader.R as CoreResources
  */
 open class Screen(val route: String, val label: Int, val icon: ImageVector) {
     object Library : Screen(
-        "library/",
+        "library",
         CoreResources.string.nav_drawer_library,
         Icons.Default.Book
     ) {
         fun createRoute() = "library/"
     }
     object Recent : Screen(
-        "recent/{workId}/{isTranslation}",
+        "recent/{workId}",
         CoreResources.string.nav_drawer_recent,
         Icons.Default.Bookmark
     ) {
-        fun createRoute(workId: String?, isTranslation: Boolean?) = "recent/$workId/$isTranslation"
+        fun createRoute(workId: String) = "recent/$workId"
     }
     object Translation : Screen(
         "translation/",
@@ -56,66 +46,40 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
         fun createRoute() = "translation/"
     }
     object Vocab : Screen(
-        "vocab/",
+        "vocab",
         CoreResources.string.nav_drawer_vocab,
         Icons.Default.School
     ) {
-        fun createRoute() = "vocab/"
+        fun createRoute(source: String) = "vocab/$source"
     }
-
-    object Dictionary : Screen(
-        "dictionary/",
-        CoreResources.string.nav_drawer_dictionary,
-        Icons.Default.Description
-    ) {
-        fun createRoute() = "dictionary/"
-    }
-
     object Settings : Screen(
-        "settings/",
+        "settings",
         CoreResources.string.action_settings,
         Icons.Default.Settings
     ) {
-        fun createRoute() = "settings/"
+        fun createRoute(source: String) = "settings/$source"
     }
     object Help : Screen(
-        "help/",
+        "help",
         CoreResources.string.nav_drawer_help,
         Icons.AutoMirrored.Filled.Help
     ) {
-        fun createRoute() = "help/"
+        fun createRoute(source: String) = "help/$source"
     }
     object Info : Screen(
-        "info/",
+        "info",
         CoreResources.string.nav_drawer_info,
         Icons.Default.Info
     ) {
-        fun createRoute() = "info/"
-    }
-}
-
-// NavOptions builder function
-fun navOptionsBuilder(navController: NavHostController):  NavOptionsBuilder.() -> Unit {
-    return {
-        /*popUpTo(navController.graph.findStartDestination().id) {
-            saveState = true
-        }
-        launchSingleTop = true
-        restoreState = true
-        */
+        fun createRoute(source: String) = "info/$source"
     }
 }
 
 @Composable
 fun ReaderAppNavHost(
-    modifier: Modifier = Modifier,
-    context: Context = LocalContext.current,
-    dictionaryViewModel: DictionaryViewModel = viewModel(
-        viewModelStoreOwner = (context as MainActivity)
-    ),
     navController: NavHostController,
+    modifier: Modifier = Modifier
 ) {
-
     NavHost(
         navController = navController,
         startDestination = Screen.Library.route,
@@ -124,74 +88,47 @@ fun ReaderAppNavHost(
         composable(
             Screen.Library.route,
         ) { backStackEntry ->
-            // Pass the NavController here
-            ListDetailPane(navController = navController)
+            NavigableListDetailPaneScaffoldFull()
         }
 
         composable(
             Screen.Translation.route,
         ) { backStackEntry ->
-            // And here as well
-            ListDetailPane(navController = navController,
-                screen = Screen.Translation)
+            NavigableListDetailPaneScaffoldFull()
         }
 
         composable(
             route = Screen.Recent.route,
-            arguments = listOf(
-                navArgument("workId") { type = NavType.StringType },
-                navArgument("isTranslation") { type = NavType.BoolType })
+            arguments = listOf(navArgument("workId") { type = NavType.StringType })
         ) { backStackEntry ->
-
-            // TODO: Pull from PreferencesDataStore?
             val workId = backStackEntry.arguments?.getString("workId")
-            val isTranslation = backStackEntry.arguments?.getBoolean("isTranslation")
-            ReadingScreen(
-                workId = workId,
-                isTranslation = isTranslation ?: false,
-                navController = navController,
-            )
+            if (workId != null) {
+                ReadingScreen(workId = workId)
+            } else {
+                Text("Error: Work ID not found.")
+            }
         }
 
         composable (
             Screen.Vocab.route
         ) { backStackEntry ->
-            LaunchedEffect(Unit) {
-                dictionaryViewModel.getVocab()
-            }
-            ReadingScreen(
-                workId = "",
-                isTranslation = false,
-                navController = navController,
-                screen = Screen.Vocab
-            )
-        }
-
-        composable (
-            Screen.Dictionary.route
-        ) { backStackEntry ->
-            ReadingScreen(
-                workId = "test",
-                isTranslation = false,
-                navController = navController,
-                screen = Screen.Dictionary
-            )
-
+            val workId = "vocab"
+            ReadingScreen(workId = workId)
         }
 
         composable (
             Screen.Help.route
         ) { backStackEntry ->
-            MarkdownScreen(screen = Screen.Help)
+            val workId = "help"
+            ReadingScreen(workId = workId)
         }
 
         composable (
             Screen.Info.route
         ) { backStackEntry ->
-            MarkdownScreen(screen = Screen.Info)
+            val workId = "about"
+            ReadingScreen(workId = workId)
         }
-
-
 
         composable(
             Screen.Settings.route,

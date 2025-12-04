@@ -10,10 +10,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.ericmschmidt.classicsreader.datamodel.Library
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo
-import com.ericmschmidt.classicsreader.R
-import com.ericmschmidt.classicsreader.datamodel.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.WorkInfo
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
 
 class LibraryPreviewProvider : PreviewParameterProvider<Library> {
     val pseudoManifest = PseudoManifest()

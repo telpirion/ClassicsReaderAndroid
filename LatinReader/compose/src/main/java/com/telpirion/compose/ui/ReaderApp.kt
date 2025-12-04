@@ -1,6 +1,5 @@
-package com.telpirion.compose.ui
+package com.telpirion.compose.ui.components
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,33 +27,19 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.telpirion.compose.R
-import com.telpirion.compose.ui.components.ReaderAppNavHost
-import com.telpirion.compose.ui.components.ReaderTopAppBar
-import com.telpirion.compose.ui.components.Screen
-import com.telpirion.compose.ui.components.navOptionsBuilder
+
 import kotlinx.coroutines.launch
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
-import com.telpirion.compose.viewmodels.DictionaryViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 private val bottomNavigationItems = listOf(
     Screen.Library,
@@ -72,13 +57,11 @@ private val navigationItems = listOf(
     Screen.Settings,
 )
 
-// Global declaration for user settings preferences
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReaderApp(
     windowSizeClass: WindowSizeClass
-)  {
+) {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -90,34 +73,6 @@ fun ReaderApp(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    // Instantiate the activity-scoped ViewModel
-    val dictionaryViewModel: DictionaryViewModel = viewModel(
-        factory = DictionaryViewModel.Factory
-        // I think I need to set the viewModelStoreOwner here ... ?
-    )
-    val dictionaryUiState by dictionaryViewModel.uiState.collectAsStateWithLifecycle()
-
-    // Get recently read from preferences
-    val context = LocalContext.current
-    val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
-    val recentlyRead: Flow<String> = context.dataStore.data
-        .map {
-                preferences ->
-            preferences[recentlyReadKey] ?: ""
-        }
-    val currentWorkId: String? = recentlyRead.collectAsState(initial = "").value
-
-    val navigationFunc : (String) -> Unit = { route ->
-        when (route){
-            Screen.Recent.route -> {
-                navController.navigate(
-                    route = Screen.Recent.createRoute(currentWorkId, false),
-                    builder = navOptionsBuilder(navController))
-            }
-            else -> navController.navigate(route, navOptionsBuilder(navController))
-        }
-    }
-
     ModalNavigationDrawer(
         drawerState = drawerState,
         gesturesEnabled = isCompact,
@@ -125,7 +80,13 @@ fun ReaderApp(
             NavDrawerContent(
                 currentRoute = currentRoute,
                 onNavigate = { route ->
-                    navigationFunc(route)
+                    navController.navigate(route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                     scope.launch { drawerState.close() }
                 }
             )
@@ -134,14 +95,7 @@ fun ReaderApp(
         Scaffold(
             topBar = {
                 ReaderTopAppBar(
-                    onMenuClick = { scope.launch { drawerState.open() } },
-                    searchText = dictionaryUiState.searchQuery,
-                    onSearchTextChange = {
-                        text -> dictionaryViewModel.onQueryChange(text) },
-                    onSearch = {
-                        dictionaryViewModel.search(dictionaryUiState.searchQuery)
-                        navController.navigate(Screen.Dictionary.createRoute()) },
-                    onClearSearch = dictionaryViewModel::clearSearch
+                    onMenuClick = { scope.launch { drawerState.open() } }
                 )
             },
             bottomBar = {
@@ -149,9 +103,13 @@ fun ReaderApp(
                 if (isCompact) {
                     ReaderBottomNavigationBar(
                         currentRoute = currentRoute,
-                        onNavigate = {route ->
-                            if (drawerState.isClosed) {
-                                navigationFunc(route)
+                        onNavigate = { route ->
+                            navController.navigate(route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
                             }
                         }
                     )
@@ -167,16 +125,19 @@ fun ReaderApp(
                     ReaderNavigationRail(
                         currentRoute = currentRoute,
                         onNavigate = { route ->
-                            if (drawerState.isClosed) {
-                                navigationFunc(route)
+                            navController.navigate(route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
                             }
                         }
                     )
                 }
                 ReaderAppNavHost(
                     navController = navController,
-                    modifier = Modifier.weight(1f),
-                    dictionaryViewModel = dictionaryViewModel
+                    modifier = Modifier.weight(1f)
                 )
             }
         }
@@ -210,7 +171,7 @@ private fun NavigationHeader(modifier: Modifier = Modifier) {
         // A Row to neatly arrange the logo and app name side-by-side.
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
-                painter = painterResource(id = R.mipmap.ic_launcher),
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = null,
                 modifier = Modifier.size(40.dp)
             )
@@ -235,17 +196,15 @@ private fun ReaderBottomNavigationBar(
                 label = { Text(stringResource(screen.label)) },
                 selected = currentRoute?.startsWith(screen.route.substringBefore("/")) ?: false,
                 onClick = {
-                    // The 'when' expression now correctly handles each navigation case.
-                    val route = when (screen) {
-                        is Screen.Recent -> {
-                            // In a real app, you would get the last-read work ID from a ViewModel.
-                            val recentWorkId = "" // Placeholder ID
-                            screen.createRoute(recentWorkId, false)
+                    var route = "library/someid"
+                    when (screen) {
+                        Screen.Recent -> {
+                            val recentWorkId = "recent_bottom_navigation_bar"
+                            route = (screen as Screen.Recent).createRoute(recentWorkId)
                         }
-                        is Screen.Library -> screen.createRoute()
-                        is Screen.Settings -> screen.createRoute()
-                        // Add any other specific cases from bottomNavigationItems here.
-                        else -> Screen.Library.createRoute()
+                        else -> {
+                            route = screen.route
+                        }
                     }
                     onNavigate(route)
                 }

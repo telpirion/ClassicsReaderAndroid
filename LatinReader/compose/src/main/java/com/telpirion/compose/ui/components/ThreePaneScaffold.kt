@@ -20,8 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ericmschmidt.classicsreader.datamodel.Library
-import com.ericmschmidt.classicsreader.datamodel.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
 import com.ericmschmidt.classicsreader.ui.components.LibraryPreviewProvider
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyList
 import kotlinx.coroutines.launch
