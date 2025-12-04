@@ -17,7 +17,7 @@ import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
 class LibraryPreviewProvider : PreviewParameterProvider<Library> {
     val pseudoManifest = PseudoManifest()
     override val values = sequenceOf(
-        Library(pseudoManifest.collection)
+        Library(pseudoManifest.getCollection() as ArrayList<WorkInfo>)
     )
 }
 

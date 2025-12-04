@@ -46,7 +46,7 @@ import com.telpirion.compose.ui.theme.PurpleGrey80
 fun DetailsPanePreviewPixel(
     @PreviewParameter(LibraryPreviewProvider::class) library: Library
 ) {
-    val works = library.works
+    val works = library.getWorks()
     val selectedItem = SelectedItem(0)
     DetailsPane(item = selectedItem, works = works, onReadClick = {})
 }
@@ -56,7 +56,7 @@ fun DetailsPanePreviewPixel(
 fun DetailsPanePreviewTablet(
     @PreviewParameter(LibraryPreviewProvider::class) library: Library
 ) {
-    val works = library.works
+    val works = library.getWorks()
     val selectedItem = SelectedItem(0)
     DetailsPane(item = selectedItem, works = works, onReadClick = {})
 }
@@ -66,7 +66,7 @@ fun DetailsPanePreviewTablet(
 fun DetailsPanePreviewTV(
     @PreviewParameter(LibraryPreviewProvider::class) library: Library
 ) {
-    val works = library.works
+    val works = library.getWorks()
     val selectedItem = SelectedItem(0)
     DetailsPane(item = selectedItem, works = works, onReadClick = {})
 }

@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.data;
+package com.ericmschmidt.classicsreader.data
 
 /**
  * Represents a sub-division within a larger text.
@@ -46,7 +46,7 @@ class Book(val id: Int) {
         }
 
         val toIndex = (position + offset).coerceAtMost(_lines.size)
-
+        
         if (position > toIndex) {
             return ""
         }

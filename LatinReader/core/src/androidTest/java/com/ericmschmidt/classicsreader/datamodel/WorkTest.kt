@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel
+package com.ericmschmidt.classicsreader.data
 
 import android.support.test.runner.AndroidJUnit4
 import com.ericmschmidt.classicsreader.MyApplication

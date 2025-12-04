@@ -29,7 +29,7 @@ fun PrettyCardLazyVerticalGrid(
     isTranslation: Boolean = false,
     onCardClick : (WorkInfo) -> Unit = {}
 ) {
-    val works = library.works
+    val works = library.getWorks()
 
     LazyVerticalGrid(
         modifier = modifier.padding(8.dp),

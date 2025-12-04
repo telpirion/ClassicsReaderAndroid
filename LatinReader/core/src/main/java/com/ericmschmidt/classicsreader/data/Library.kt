@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel
+package com.ericmschmidt.classicsreader.data
 
 /** Contains information about the texts included in the reader.
  * @author Eric Schmidt
@@ -18,7 +18,7 @@ class Library(val collection: ArrayList<WorkInfo>) {
     /**
      * Gets the list of works as a series of strings.
      */
-    fun getWorkList(): Array<String> {
+    fun getWorkList(): Array<String?> {
         return collection.map { it.title }.toTypedArray()
     }
 

@@ -74,6 +74,7 @@ fun TableOfContentsPane(
 
 @Composable
 fun TranslationPane(
+    isTranslation: Boolean,
     poemLines: Int,
     textSizeSp: Float,
     lineHeight: Float,

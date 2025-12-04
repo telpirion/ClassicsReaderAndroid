@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel
+package com.ericmschmidt.classicsreader.data
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
@@ -52,12 +52,12 @@ class ReadingViewModel(
 
         if (isTranslation) {
             currentWork = Work(workInfo.englishLocation)
-            author = workInfo.englishAuthor
-            title = workInfo.englishTitle
+            author = workInfo.englishAuthor as String
+            title = workInfo.englishTitle as String
         } else {
             currentWork = Work(workInfo.location)
-            author = workInfo.author
-            title = workInfo.title
+            author = workInfo.author as String
+            title = workInfo.title as String
         }
 
         currentBook = currentWork.getBook(currentBookIndex)

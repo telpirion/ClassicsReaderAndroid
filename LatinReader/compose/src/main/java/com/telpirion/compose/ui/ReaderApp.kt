@@ -51,7 +51,7 @@ import com.telpirion.compose.ui.components.navOptionsBuilder
 import kotlinx.coroutines.launch
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
+import com.ericmschmidt.classicsreader.data.RECENTLY_READ
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -32,7 +32,7 @@ class WorkInfoPreviewProvider : PreviewParameterProvider<WorkInfo> {
     val pseudoManifest = PseudoManifest()
 
     override val values: Sequence<WorkInfo> =
-        pseudoManifest.collection?.asSequence() ?: emptySequence()
+        pseudoManifest.getCollection()?.asSequence() ?: emptySequence()
 }
 
 @Composable

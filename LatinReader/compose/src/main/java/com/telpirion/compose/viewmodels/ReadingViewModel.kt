@@ -5,24 +5,53 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.R as CoreResources
 import com.ericmschmidt.classicsreader.data.Library
-import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
+import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
-import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
+import com.ericmschmidt.classicsreader.data.RECENTLY_READ
 import com.telpirion.compose.utils.writeStringSetting
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import com.ericmschmidt.classicsreader.R as CoreResources
+import com.ericmschmidt.classicsreader.data.ReadingViewModel as RVM
 
 data class ReadingUiState(
     val content: String = "",
+    val translationContent: String = "",
     val info: String = "",
     val position: String = "",
     val tocAvailable: Boolean = false,
-    val isTranslation: Boolean = false
-)
+    val isTranslation: Boolean = false,
+    val toc: Array<TOCEntry>? = emptyList<TOCEntry>().toTypedArray(),
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ReadingUiState
+
+        if (tocAvailable != other.tocAvailable) return false
+        if (isTranslation != other.isTranslation) return false
+        if (content != other.content) return false
+        if (info != other.info) return false
+        if (position != other.position) return false
+        if (!toc.contentEquals(other.toc)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = tocAvailable.hashCode()
+        result = 31 * result + isTranslation.hashCode()
+        result = 31 * result + content.hashCode()
+        result = 31 * result + info.hashCode()
+        result = 31 * result + position.hashCode()
+        result = 31 * result + (toc?.contentHashCode() ?: 0)
+        return result
+    }
+}
 
 class ReadingViewModel(
     application: Application,
@@ -37,21 +66,28 @@ class ReadingViewModel(
     private var workInfo: WorkInfo? = null
     private var contentLines: List<String> = emptyList()
 
+    private var translationContentLines: List<String> = emptyList()
+
     private var content: RVM? = null
+    private var translationContent: RVM? = null
 
     val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
 
     init {
         if (!workId.isNullOrEmpty()) {
-            val manifest = MyApplication.getManifest()
-            val library = Library(manifest.collection)
+            val application = MyApplication.applicationInstance()
+            val manifest = application.manifest
+            val library = Library(manifest.getCollection() as ArrayList<WorkInfo>)
             workInfo = library.getWorkInfoByID(workId)
 
             // TODO(telpirion): integrate old ReaderViewModel with new one
-            content = RVM(workInfo, isTranslation, poemLines, application)
+            content = RVM(workInfo as WorkInfo, isTranslation, poemLines)
+            translationContent = RVM(workInfo as WorkInfo, !isTranslation, poemLines)
 
             @Suppress("UNCHECKED_CAST")
-            contentLines = listOf(content?.currentPage) as List<*> as List<String>
+            contentLines = listOf(content?.getCurrentPage()) as List<*> as List<String>
+            @Suppress("UNCHECKED_CAST")
+            translationContentLines = listOf(translationContent?.getCurrentPage()) as List<*> as List<String>
 
             updateState()
 
@@ -59,7 +95,7 @@ class ReadingViewModel(
             runBlocking {
                 launch {
                     writeStringSetting(
-                        context = application.baseContext,
+                        context = application.context,
                         recentlyReadKey,
                         newValue = workId)
                 }
@@ -76,15 +112,26 @@ class ReadingViewModel(
         updateState()
     }
 
+    fun goToChapter(entry: TOCEntry){
+        val book = entry.book
+        val page = entry.line
+        this.content?.setCurrentBook(book)
+        this.content?.setCurrentLine(page)
+        updateState()
+    }
+
     @Suppress("UNCHECKED_CAST")
     private fun updateState() {
-        contentLines = listOf(content?.currentPage) as List<*> as List<String>
+        contentLines = listOf(content?.getCurrentPage()) as List<*> as List<String>
+        translationContentLines = listOf(translationContent?.getCurrentPage()) as List<*> as List<String>
         _uiState.value = ReadingUiState(
             content = contentLines.joinToString("\n"),
+            translationContent = translationContentLines.joinToString("\n"),
             info = workInfo?.title ?: "Unknown Work",
-            position = content?.readingPositionString as String,
+            position = content?.getReadingPositionString() as String,
             tocAvailable = workInfo?.getTocEntries()?.isNotEmpty() ?: false,
-            isTranslation = isTranslation
+            isTranslation = isTranslation,
+            toc = workInfo?.getTocEntries()
         )
     }
 

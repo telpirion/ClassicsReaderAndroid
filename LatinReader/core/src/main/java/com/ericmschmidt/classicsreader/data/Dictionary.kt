@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel
+package com.ericmschmidt.classicsreader.data
 
 import com.ericmschmidt.classicsreader.MyApplication.Factory.applicationInstance
 import com.ericmschmidt.classicsreader.logError

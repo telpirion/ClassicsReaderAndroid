@@ -26,8 +26,8 @@ import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyList
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyVerticalGrid
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE_DEFAULT
+import com.ericmschmidt.classicsreader.data.DISPLAY_TYPE
+import com.ericmschmidt.classicsreader.data.DISPLAY_TYPE_DEFAULT
 import com.telpirion.compose.ui.dataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -51,9 +51,9 @@ fun ListDetailPane(
     onDismiss: () -> Unit = {}
 ) {
 
-    val context : Context = MyApplication.getContext()
-    val manifest = MyApplication.getManifest()
-    val library = Library(manifest.collection)
+    val context : Context = MyApplication.applicationInstance().context
+    val manifest = MyApplication.applicationInstance().manifest
+    val library = Library(manifest.getCollection() as ArrayList<WorkInfo>)
     val scaffoldNavigator = rememberListDetailPaneScaffoldNavigator<SelectedItem>()
     val scope = rememberCoroutineScope()
     val works = library.getWorks()

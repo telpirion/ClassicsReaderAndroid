@@ -13,6 +13,7 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.ericmschmidt.classicsreader.MyApplication
+import com.ericmschmidt.classicsreader.data.ReadingViewModel
 import com.ericmschmidt.classicsreader.R as CoreR
 import com.ericmschmidt.classicsreader.views.R
 import com.ericmschmidt.classicsreader.datamodel.Library

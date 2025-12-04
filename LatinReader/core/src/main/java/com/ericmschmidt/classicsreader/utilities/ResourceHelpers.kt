@@ -1,7 +1,7 @@
 package com.ericmschmidt.classicsreader.utilities
 
 import com.ericmschmidt.classicsreader.MyApplication.Factory.applicationInstance
-import com.ericmschmidt.classicsreader.datamodel.Book
+import com.ericmschmidt.classicsreader.data.Book
 import com.ericmschmidt.classicsreader.logError
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException

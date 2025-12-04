@@ -11,11 +11,11 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.preference.PreferenceManager
-import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.DISPLAY_TYPE
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.SHOW_PAGE_CONTROLS
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE
+import com.ericmschmidt.classicsreader.data.DISPLAY_TYPE
+import com.ericmschmidt.classicsreader.data.POEM_LINES
+import com.ericmschmidt.classicsreader.data.RECENTLY_READ
+import com.ericmschmidt.classicsreader.data.SHOW_PAGE_CONTROLS
+import com.ericmschmidt.classicsreader.data.TEXT_SIZE
 import com.telpirion.compose.ui.ReaderApp
 import com.telpirion.compose.ui.theme.LatinReaderTheme
 import com.telpirion.compose.viewmodels.SharedPreferencesMigration

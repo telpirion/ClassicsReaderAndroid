@@ -50,12 +50,12 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.ericmschmidt.classicsreader.ui.fragments.ReadingFragment.RECENTLY_READ
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.POEM_LINES_DEFAULT
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.SHOW_PAGE_CONTROLS
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.TEXT_SIZE_DEFAULT
+import com.ericmschmidt.classicsreader.data.RECENTLY_READ
+import com.ericmschmidt.classicsreader.data.POEM_LINES
+import com.ericmschmidt.classicsreader.data.POEM_LINES_DEFAULT
+import com.ericmschmidt.classicsreader.data.SHOW_PAGE_CONTROLS
+import com.ericmschmidt.classicsreader.data.TEXT_SIZE
+import com.ericmschmidt.classicsreader.data.TEXT_SIZE_DEFAULT
 import com.telpirion.compose.MainActivity
 import com.telpirion.compose.ui.components.Screen
 import com.telpirion.compose.ui.components.TableOfContentsPane
@@ -258,6 +258,9 @@ fun ReadingScreen(
                     if (currentWorkId != null) {
                         TranslationPane(
                             isTranslation = isTranslation,
+                            poemLines = poemLines.collectAsState(
+                                initial = POEM_LINES_DEFAULT.toInt()
+                            ).value,
                             textSizeSp = textSizeSp,
                             lineHeight = lineSpacing,
                             onClose = {

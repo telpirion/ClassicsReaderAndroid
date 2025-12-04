@@ -1,7 +1,7 @@
 package com.ericmschmidt.greekreader.datamodel
 
-import com.ericmschmidt.classicsreader.datamodel.Manifest
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo
+import com.ericmschmidt.classicsreader.data.Manifest
+import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.greekreader.R
 
 /** Contains the resource manifest for the Greek Reader app.

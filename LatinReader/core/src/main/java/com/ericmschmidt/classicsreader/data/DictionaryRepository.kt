@@ -68,10 +68,10 @@ class DictionaryRepository(context: Context) {
      * Retrieves the dictionary's title.
      */
     fun getDictionaryInfo(): String {
-        return dictionary.dictionaryInfo.title as String
+        return dictionary.dictionaryInfo?.title as String
     }
 
     fun getRandom(): String {
-        return dictionary.randomEntryKey
+        return dictionary.getRandomEntry() as String
     }
 }
