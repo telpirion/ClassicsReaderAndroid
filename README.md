@@ -4,27 +4,30 @@
 
 ## Latin Reader
 
-This open source code for an Android app is available for anyone to clone, rebuild, copy, or alter for educational purposes. The app allows users to read Latin texts, to read English translations of Latin texts, and lookup Latin words in an integrated dictionary.
+This open source code for two Android apps is available for anyone to clone, rebuild, copy, or alter for educational purposes. These apps allow users to read Ancient Greek and Latin texts, to read English translations of Ancient Greek and Latin texts, and lookup Ancient Greek and Latin words in an integrated dictionary.
 
-The built app can be downloaded from the [Google Play Store](https://play.google.com/store/apps/details?id=com.ericmschmidt.latinreader).
+The Latin Reader app can be downloaded from the [Google Play Store](https://play.google.com/store/apps/details?id=com.ericmschmidt.latinreader).
 
 You can see a complete list of the releases for this app
-[here](https://github.com/telpirion/ClassicsReaderAndroid/blob/main/release-notes.md).
+[here](https://github.com/telpirion/ClassicsReaderAndroid/releases).
 
 ## Report bugs!
 
-The Latin Reader app is for Latinists by a Latinist. I not only build the app, but I use it myself to keep my Latim reading skills up to par. If you encounter a problem in the app, please file an issue here on the GitHub project home page.
+The Ancient Greek and Latin Reader apps are for Classicists by a Classicist. I not only build the app, but I use it myself to keep my Latin and Greek reading skills up to par. If you encounter a problem in the app, please file an issue here on the GitHub project home page.
 
 To log an issue, do the following:
 
   1. Go to the [issues page](https://github.com/telpirion/ClassicsReader/issues).
   1. Click the **New Issue** button.
-  1. Enter a title for your issue. Please indicate which version (Android or Windows) you are using.
+  1. Enter a title for your issue. Please indicate which app you are logging a bug for.
   1. Describe your issue in the **Write** tab.
   1. When you finish writing, click **Submit new issue**.
 
 ## Use of licensed material
 
-Texts in this app are available under the the Creative Commons ShareAlike 3.0 license.
-http://www.perseus.tufts.edu/hopper/opensource/download
-http://creativecommons.org/licenses/by-sa/3.0/us/
+Texts in these apps are available under the the Creative Commons ShareAlike 3.0 license.
+
++ http://www.perseus.tufts.edu/hopper/opensource/download
++ http://creativecommons.org/licenses/by-sa/3.0/us/
+
+Images in these apps are available under the Creative Commons ShareAlike 3.0 license or are new creations from AI.
