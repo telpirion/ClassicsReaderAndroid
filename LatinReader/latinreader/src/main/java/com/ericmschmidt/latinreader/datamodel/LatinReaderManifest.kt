@@ -15,17 +15,17 @@ import com.ericmschmidt.latinreader.R
  *
  * @author Eric Schmidt
  * @author [...](https://telpirion.com)
- * @version 1.5
+ * @version 2.0
  * @since 1.1
  * @noinspection unused
  */
+@Suppress("UNCHECKED_CAST", "SpellCheckingInspection", "unused")
 class LatinReaderManifest : Manifest() {
     /**
      * Gets the collection of works for this app.
      * @return WorkInfo the collection
      */
-    @Suppress("UNCHECKED_CAST")
-    public override fun getCollection(): ArrayList<WorkInfo> {
+    override fun getCollection(): ArrayList<WorkInfo> {
         val workInfos = ArrayList<WorkInfo?>()
 
         workInfos.add(
@@ -359,7 +359,7 @@ class LatinReaderManifest : Manifest() {
      * Gets the resource information of the dictionary file.
      * @return WorkInfo
      */
-    public override fun getDictionaryInfo(): WorkInfo? {
+     override fun getDictionaryInfo(): WorkInfo {
         return WorkInfo.Builder("dictionary")
             .title("An Elementary Latin Dictionary")
             .author("Charles Lewis")
@@ -379,9 +379,9 @@ class LatinReaderManifest : Manifest() {
     }
 
     @Composable
-    override fun GetHeaderIcon(): Unit {
+    override fun GetHeaderIcon() {
         return Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground_background),
+            painter = painterResource(id = R.drawable.ic_latinreader),
             contentDescription = null,
             modifier = Modifier.size(40.dp)
         )

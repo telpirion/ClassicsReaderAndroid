@@ -26,8 +26,5 @@
                 android:name="android.app.default_searchable"
                 android:value=".activities.SearchActivity" />
         </activity>
-        <activity
-            android:name="com.ericmschmidt.classicsreader.activities.ErrorActivity"
-            android:label="@string/error_activity" />
     </application>
 </manifest>

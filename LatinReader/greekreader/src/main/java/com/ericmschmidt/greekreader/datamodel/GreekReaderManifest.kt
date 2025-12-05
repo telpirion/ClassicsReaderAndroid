@@ -17,7 +17,7 @@ import com.ericmschmidt.greekreader.R
  * @version 3.0
  * @noinspection unused
  */
-@Suppress("unused")
+@Suppress("unused", "SpellCheckingInspection")
 class GreekReaderManifest : Manifest() {
     /**
      * Gets the collection of works for this app.
@@ -27,7 +27,6 @@ class GreekReaderManifest : Manifest() {
     override fun getCollection(): ArrayList<WorkInfo> {
         val workInfos = ArrayList<WorkInfo?>()
 
-        // TODO: Break each chapter into separate pages.
         workInfos.add(
             WorkInfo.Builder("AristotlePol")
                 .title("Politics")
@@ -95,31 +94,6 @@ class GreekReaderManifest : Manifest() {
                 .build()
         )
 
-        /*
-        // TODO: Fix Herodotus transcription.
-        // "Histories" is also a title that breaks the list ...
-        workInfos.add(new WorkInfo.Builder("Herodotus")
-                        .title("Mysteries")
-                        .author("Herodotus")
-                        .englishTitle("Histories")
-                        .englishAuthor("Herodotus")
-                        .location(R.raw.gk_hdt_gk)
-                        .englishLocation(R.raw.hdt_eng)
-                        .workType(WorkInfo.WorkType.PROSE)
-                        .build());
-
-        // TODO: Fix Plato's Republic Transcription
-        // "Republic" is also a title that breaks the list ...
-        workInfos.add(new WorkInfo.Builder("PlatoRep")
-                        .title("Republic")
-                        .author("Plato")
-                        .englishTitle("Republic")
-                        .englishAuthor("Plato")
-                        .location(R.raw.gk_plat_rep_gk)
-                        .englishLocation(R.raw.plat_rep_eng)
-                        .workType(WorkInfo.WorkType.PROSE)
-                        .build());
-        */
         return workInfos as ArrayList<WorkInfo>
     }
 
@@ -143,9 +117,9 @@ class GreekReaderManifest : Manifest() {
     }
 
     @Composable
-    override fun GetHeaderIcon(): Unit {
+    override fun GetHeaderIcon() {
         return Image(
-            painter = painterResource(id = R.drawable.ic_launcher_2_background),
+            painter = painterResource(id = R.drawable.ic_greekreader),
             contentDescription = null,
             modifier = Modifier.size(40.dp)
         )
