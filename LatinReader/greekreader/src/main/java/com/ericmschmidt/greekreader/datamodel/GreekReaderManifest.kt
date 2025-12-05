@@ -5,21 +5,24 @@ import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.greekreader.R
 
 /** Contains the resource manifest for the Greek Reader app.
- * <br/>
+ *
  * @author Eric Schmidt
- * @author <a href="https://telpirion.com">...</a>
- * @version 2.0
- * @since 0.1
+ * @author [...](https://telpirion.com)
+ * @version 0.1
+ * @noinspection unused
  */
-class GreekReaderManifest: Manifest() {
+@Suppress("unused")
+class GreekReaderManifest : Manifest() {
     /**
      * Gets the collection of works for this app.
      * @return the collection
      */
+    @Suppress("UNCHECKED_CAST")
     override fun getCollection(): ArrayList<WorkInfo> {
-        val workInfos = arrayListOf<WorkInfo>(
+        val workInfos = ArrayList<WorkInfo?>()
 
         // TODO: Break each chapter into separate pages.
+        workInfos.add(
             WorkInfo.Builder("AristotlePol")
                 .title("Politics")
                 .author("Aristotle")
@@ -29,7 +32,10 @@ class GreekReaderManifest: Manifest() {
                 .englishLocation(R.raw.aristot_pol_eng)
                 .workType(WorkInfo.WorkType.PROSE)
                 .image(R.drawable.work_politics)
-                .build(),
+                .build()
+        )
+
+        workInfos.add(
             WorkInfo.Builder("HomerIliad")
                 .author("Homer")
                 .title("Iliad")
@@ -40,7 +46,10 @@ class GreekReaderManifest: Manifest() {
                 .workType(WorkInfo.WorkType.POEM)
                 .offset(1, 5)
                 .image(R.drawable.work_iliad)
-                .build(),
+                .build()
+        )
+
+        workInfos.add(
             WorkInfo.Builder("HomerOdyssey")
                 .author("Homer")
                 .title("Odyssey")
@@ -51,7 +60,10 @@ class GreekReaderManifest: Manifest() {
                 .workType(WorkInfo.WorkType.POEM)
                 .offset(1, 5)
                 .image(R.drawable.work_odyssey)
-                .build(),
+                .build()
+        )
+
+        workInfos.add(
             WorkInfo.Builder("XenophonAn")
                 .author("Xenophon")
                 .title("Anabasis")
@@ -61,7 +73,10 @@ class GreekReaderManifest: Manifest() {
                 .englishLocation(R.raw.xen_anab_eng)
                 .workType(WorkInfo.WorkType.PROSE)
                 .image(R.drawable.work_anabasis)
-                .build(),
+                .build()
+        )
+
+        workInfos.add(
             WorkInfo.Builder("Lysias")
                 .author("Lysias")
                 .title("Speeches")
@@ -72,11 +87,12 @@ class GreekReaderManifest: Manifest() {
                 .workType(WorkInfo.WorkType.PROSE)
                 .image(R.drawable.work_speeches)
                 .build()
+        )
 
         /*
         // TODO: Fix Herodotus transcription.
         // "Histories" is also a title that breaks the list ...
-        WorkInfo.Builder("Herodotus")
+        workInfos.add(new WorkInfo.Builder("Herodotus")
                         .title("Mysteries")
                         .author("Herodotus")
                         .englishTitle("Histories")
@@ -84,11 +100,11 @@ class GreekReaderManifest: Manifest() {
                         .location(R.raw.gk_hdt_gk)
                         .englishLocation(R.raw.hdt_eng)
                         .workType(WorkInfo.WorkType.PROSE)
-                        .build()
+                        .build());
 
         // TODO: Fix Plato's Republic Transcription
         // "Republic" is also a title that breaks the list ...
-        WorkInfo.Builder("PlatoRep")
+        workInfos.add(new WorkInfo.Builder("PlatoRep")
                         .title("Republic")
                         .author("Plato")
                         .englishTitle("Republic")
@@ -96,10 +112,9 @@ class GreekReaderManifest: Manifest() {
                         .location(R.raw.gk_plat_rep_gk)
                         .englishLocation(R.raw.plat_rep_eng)
                         .workType(WorkInfo.WorkType.PROSE)
-                        .build()
+                        .build());
         */
-        )
-        return workInfos
+        return workInfos as ArrayList<WorkInfo>
     }
 
     override fun getDictionaryInfo(): WorkInfo {
