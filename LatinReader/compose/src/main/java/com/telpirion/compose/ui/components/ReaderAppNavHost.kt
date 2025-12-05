@@ -125,15 +125,14 @@ fun ReaderAppNavHost(
             Screen.Library.route,
         ) { backStackEntry ->
             // Pass the NavController here
-            NavigableListDetailPaneScaffoldFull(navController = navController)
+            ListDetailPane(navController = navController)
         }
 
         composable(
             Screen.Translation.route,
         ) { backStackEntry ->
             // And here as well
-            NavigableListDetailPaneScaffoldFull(navController = navController,
-                screen = Screen.Translation)
+            ListDetailPane(navController = navController, screen = Screen.Translation)
         }
 
         composable(

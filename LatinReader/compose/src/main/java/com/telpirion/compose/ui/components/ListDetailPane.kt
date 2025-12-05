@@ -1,13 +1,6 @@
 package com.telpirion.compose.ui.components
 
 import android.content.Context
-import android.os.Parcelable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
@@ -16,7 +9,6 @@ import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaf
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -32,7 +24,6 @@ import com.telpirion.compose.ui.dataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.parcelize.Parcelize
 
 @Preview
 @Composable
@@ -127,6 +118,3 @@ fun ListDetailPane(
         },
     )
 }
-
-@Parcelize
-class SelectedItem(val id: Int) : Parcelable

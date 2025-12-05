@@ -56,6 +56,5 @@
 
   <string name="toc_subtitle">Contents:</string>
   <string name="action_display">Library display</string>
-  <string name="action_display_row">List</string>
-    <string name="action_display_description">Switch the display of works in the library between list and grid.</string>
+  <string name="action_display_row">List</string><string name="action_display_description">Switch the display of works in the library between list and grid.</string>
 </resources>

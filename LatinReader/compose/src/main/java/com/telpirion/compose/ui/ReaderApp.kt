@@ -137,7 +137,7 @@ fun ReaderApp(
                     onMenuClick = { scope.launch { drawerState.open() } },
                     searchText = dictionaryUiState.searchQuery,
                     onSearchTextChange = {
-                        text -> dictionaryViewModel.onQueryChange(text) },
+                            text -> dictionaryViewModel.onQueryChange(text) },
                     onSearch = {
                         dictionaryViewModel.search(dictionaryUiState.searchQuery)
                         navController.navigate(Screen.Dictionary.createRoute()) },
@@ -270,4 +270,3 @@ private fun ReaderNavigationRail(
         }
     }
 }
-

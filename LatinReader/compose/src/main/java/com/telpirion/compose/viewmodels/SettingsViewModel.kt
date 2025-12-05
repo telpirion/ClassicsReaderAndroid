@@ -7,7 +7,13 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ericmschmidt.classicsreader.ui.fragments.SettingsFragment.*
+import com.ericmschmidt.classicsreader.data.DISPLAY_TYPE
+import com.ericmschmidt.classicsreader.data.DISPLAY_TYPE_DEFAULT
+import com.ericmschmidt.classicsreader.data.POEM_LINES
+import com.ericmschmidt.classicsreader.data.POEM_LINES_DEFAULT
+import com.ericmschmidt.classicsreader.data.SHOW_PAGE_CONTROLS
+import com.ericmschmidt.classicsreader.data.TEXT_SIZE
+import com.ericmschmidt.classicsreader.data.TEXT_SIZE_DEFAULT
 import com.telpirion.compose.ui.dataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

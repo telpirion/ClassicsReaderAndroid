@@ -83,7 +83,7 @@ fun NavigableListDetailPaneScaffoldFull(
 @Composable
 fun DetailsPane(item: SelectedItem) {
     val pseudoManifest = PseudoManifest()
-    val works = pseudoManifest.collection
+    val works = pseudoManifest.getCollection()
     val workInfo = works?.get(item.id)
     Card {
         Column(
