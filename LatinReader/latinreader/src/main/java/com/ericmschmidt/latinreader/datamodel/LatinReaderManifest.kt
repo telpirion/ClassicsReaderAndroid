@@ -1,5 +1,11 @@
 package com.ericmschmidt.latinreader.datamodel
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.ericmschmidt.classicsreader.data.Manifest
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
@@ -368,7 +374,16 @@ class LatinReaderManifest : Manifest() {
      * Gets the resource ID of the dictionary entry file.
      * @return int the dictionary entry file's ID.
      */
-    public override fun getDictionaryEntryResource(): Int {
+    override fun getDictionaryEntryResource(): Int {
         return R.raw.dictionary_entries
+    }
+
+    @Composable
+    override fun GetHeaderIcon(): Unit {
+        return Image(
+            painter = painterResource(id = R.drawable.ic_launcher_foreground_background),
+            contentDescription = null,
+            modifier = Modifier.size(40.dp)
+        )
     }
 }

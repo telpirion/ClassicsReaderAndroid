@@ -1,5 +1,11 @@
 package com.ericmschmidt.greekreader.datamodel
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.ericmschmidt.classicsreader.data.Manifest
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.greekreader.R
@@ -8,7 +14,7 @@ import com.ericmschmidt.greekreader.R
  *
  * @author Eric Schmidt
  * @author [...](https://telpirion.com)
- * @version 0.1
+ * @version 3.0
  * @noinspection unused
  */
 @Suppress("unused")
@@ -134,5 +140,14 @@ class GreekReaderManifest : Manifest() {
      */
     override fun getDictionaryEntryResource(): Int {
         return R.raw.dictionary_entries
+    }
+
+    @Composable
+    override fun GetHeaderIcon(): Unit {
+        return Image(
+            painter = painterResource(id = R.drawable.ic_launcher_2_background),
+            contentDescription = null,
+            modifier = Modifier.size(40.dp)
+        )
     }
 }

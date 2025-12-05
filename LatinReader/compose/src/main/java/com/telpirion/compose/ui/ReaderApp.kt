@@ -51,6 +51,7 @@ import com.telpirion.compose.ui.components.navOptionsBuilder
 import kotlinx.coroutines.launch
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.data.RECENTLY_READ
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import kotlinx.coroutines.flow.Flow
@@ -207,13 +208,11 @@ private fun NavDrawerContent(
 @Composable
 private fun NavigationHeader(modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
+        val applicationInstance = MyApplication.applicationInstance()
+        val manifest = applicationInstance.manifest
         // A Row to neatly arrange the logo and app name side-by-side.
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                painter = painterResource(id = R.mipmap.ic_launcher),
-                contentDescription = null,
-                modifier = Modifier.size(40.dp)
-            )
+            manifest.GetHeaderIcon()
             Spacer(Modifier.width(16.dp))
             Text(
                 text = stringResource(id = R.string.app_name),

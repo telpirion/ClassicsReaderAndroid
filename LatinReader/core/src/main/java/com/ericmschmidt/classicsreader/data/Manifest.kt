@@ -1,5 +1,7 @@
 package com.ericmschmidt.classicsreader.data
 
+import androidx.compose.runtime.Composable
+import androidx.compose.foundation.Image as Img
 import com.ericmschmidt.classicsreader.logError
 
 /** Contains information about the texts included in the reader.
@@ -15,6 +17,11 @@ open class Manifest {
 
     open fun getDictionaryEntryResource(): Int {
         return 0
+    }
+
+    @Composable
+    open fun GetHeaderIcon():  Unit {
+        return
     }
 
     companion object {
