@@ -2,8 +2,6 @@
 
 [![Android build](https://github.com/telpirion/ClassicsReaderAndroid/actions/workflows/android.yml/badge.svg)](https://github.com/telpirion/ClassicsReaderAndroid/actions/workflows/android.yml)
 
-## Latin Reader
-
 This open source code for two Android apps is available for anyone to clone, rebuild, copy, or alter for educational purposes. These apps allow users to read Ancient Greek and Latin texts, to read English translations of Ancient Greek and Latin texts, and lookup Ancient Greek and Latin words in an integrated dictionary.
 
 The Latin Reader app can be downloaded from the [Google Play Store](https://play.google.com/store/apps/details?id=com.ericmschmidt.latinreader).
