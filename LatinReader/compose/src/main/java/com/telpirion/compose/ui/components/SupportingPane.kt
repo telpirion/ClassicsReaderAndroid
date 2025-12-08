@@ -6,9 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -31,7 +29,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ericmschmidt.classicsreader.data.TOCEntry
@@ -39,7 +36,7 @@ import com.telpirion.compose.ui.theme.PurpleGrey80
 import com.telpirion.compose.viewmodels.ReadingViewModel
 import com.telpirion.compose.R
 
-
+@Suppress("SpellCheckingInspection")
 class TOCEntryParameterProvider : PreviewParameterProvider<List<TOCEntry>> {
     override val values = sequenceOf(
         listOf(
@@ -58,6 +55,15 @@ fun TableOfContentsPanePreview(
     TableOfContentsPane(toc, onTocEntryClick = {}, onClose = {})
 }
 
+@Preview
+@Composable
+fun TranslationPanePreview() {
+    TranslationPane(
+        onClose = {},
+        translationContent = "Content",
+        translationInfo = "Author, Title"
+    )
+}
 
 @Composable
 fun TableOfContentsPane(
@@ -76,81 +82,48 @@ fun TableOfContentsPane(
     onTocEntryClick: (TOCEntry) -> Unit,
     onClose: () -> Unit,
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Card(
-            modifier = Modifier
-                .fillMaxSize(),
-            colors = CardColors(
-                containerColor = PurpleGrey80,
-                contentColor = lightColorScheme().onSurface,
-                disabledContainerColor = lightColorScheme().onSurface.copy(alpha = 0.12f),
-                disabledContentColor = lightColorScheme().onSurface.copy(alpha = 0.38f)
+    SupportingPaneTemplate(
+        onClose
+    ) {
+        Column(
+            Modifier.padding(horizontal = 16.dp)
+        ){
+            Spacer(modifier = Modifier.padding(top = 30.dp))
+            Text(stringResource(R.string.screen_toc),
+                style = MaterialTheme.typography.titleMedium)
+            Spacer(modifier = Modifier.padding(top = 16.dp))
+            HorizontalDivider(
+                thickness = 2.dp,
+                color = MaterialTheme.colorScheme.onBackground
             )
-        ) {
-            Column(
-                Modifier.padding(horizontal = 16.dp)
-            ){
-                Spacer(modifier = Modifier.padding(top = 30.dp))
-                Text(stringResource(R.string.screen_toc),
-                    style = MaterialTheme.typography.titleMedium)
-                Spacer(modifier = Modifier.padding(top = 16.dp))
-                HorizontalDivider(
-                    thickness = 2.dp,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-                LazyColumn {
-                    items(toc) { entry ->
-                        Text(
-                            text = entry.title,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onTocEntryClick(entry) }
-                                .padding(vertical = 16.dp)
-                        )
-                    }
+            LazyColumn {
+                items(toc) { entry ->
+                    Text(
+                        text = entry.title,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onTocEntryClick(entry) }
+                            .padding(vertical = 16.dp)
+                    )
                 }
             }
-
-        }
-        IconButton(
-            onClick = onClose,
-            modifier = Modifier.align(Alignment.TopEnd).padding(16.dp)
-        ) {
-            Icon(Icons.Default.Close, contentDescription = "Close")
         }
     }
 }
 
-@Preview
-@Composable
-fun TranslationPanePreview() {
-    TranslationPane(
-        textSizeSp = 16f,
-        lineHeight = 24f,
-        onClose = {},
-        translationContent = "Content",
-        translationInfo = "Author, Title"
-    )
-}
-
-
 @Composable
 fun TranslationPane(
-    textSizeSp: Float,
-    lineHeight: Float,
     onClose: () -> Unit,
     viewModel: ReadingViewModel = viewModel(),
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     TranslationPane(
-        textSizeSp, lineHeight, onClose, uiState.translationContent, uiState.info
+        onClose, uiState.translationContent, uiState.info
     )
 }
 
 @Composable
 fun TranslationPane(
-    textSizeSp: Float,
-    lineHeight: Float,
     onClose: () -> Unit,
     translationContent: String,
     translationInfo: String,

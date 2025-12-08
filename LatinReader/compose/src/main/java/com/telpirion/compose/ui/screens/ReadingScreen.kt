@@ -257,8 +257,6 @@ fun ReadingScreen(
                 SupportingPaneContent.Translation -> {
                     if (currentWorkId != null) {
                         TranslationPane(
-                            textSizeSp = textSizeSp,
-                            lineHeight = lineSpacing,
                             onClose = {
                                 scope.launch {
                                     scaffoldNavigator.navigateBack(
@@ -280,7 +278,8 @@ fun ReadingScreen(
                             },
                             onClose = {
                                 scope.launch {
-                                    scaffoldNavigator.navigateBack()
+                                    scaffoldNavigator.navigateBack(
+                                        backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
                                 }
                             }
                         )
