@@ -27,14 +27,8 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
-    sourceSets {
-        main {
-            resources.excludes.add('**/ic_launcher_foreground.xml')
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_24 // Be sure to verify Java version
-        targetCompatibility = JavaVersion.VERSION_24
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 

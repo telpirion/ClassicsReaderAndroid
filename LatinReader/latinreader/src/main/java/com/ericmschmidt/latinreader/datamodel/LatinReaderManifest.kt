@@ -11,13 +11,13 @@ import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.latinreader.R
 
-/** Contains the resource manifest for the Latin Reader app.
+/**
+ * Contains the resource manifest for the Latin Reader app.
  *
  * @author Eric Schmidt
- * @author [...](https://telpirion.com)
+ * @author [Telpirion](https://telpirion.com)
  * @version 2.0
  * @since 1.1
- * @noinspection unused
  */
 @Suppress("UNCHECKED_CAST", "SpellCheckingInspection", "unused")
 class LatinReaderManifest : Manifest() {

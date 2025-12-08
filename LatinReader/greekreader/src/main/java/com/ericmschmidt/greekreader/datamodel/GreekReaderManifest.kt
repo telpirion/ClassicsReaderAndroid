@@ -11,7 +11,7 @@ import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.greekreader.R
 
 /** Contains the resource manifest for the Greek Reader app.
- *
+ * <br/>
  * @author Eric Schmidt
  * @author [...](https://telpirion.com)
  * @version 3.0
@@ -25,7 +25,8 @@ class GreekReaderManifest : Manifest() {
      */
     @Suppress("UNCHECKED_CAST")
     override fun getCollection(): ArrayList<WorkInfo> {
-        val workInfos = ArrayList<WorkInfo?>()
+
+        val workInfos = arrayListOf<WorkInfo>()
 
         workInfos.add(
             WorkInfo.Builder("AristotlePol")
@@ -37,10 +38,7 @@ class GreekReaderManifest : Manifest() {
                 .englishLocation(R.raw.aristot_pol_eng)
                 .workType(WorkInfo.WorkType.PROSE)
                 .image(R.drawable.work_politics)
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("HomerIliad")
                 .author("Homer")
                 .title("Iliad")
@@ -51,10 +49,7 @@ class GreekReaderManifest : Manifest() {
                 .workType(WorkInfo.WorkType.POEM)
                 .offset(1, 5)
                 .image(R.drawable.work_iliad)
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("HomerOdyssey")
                 .author("Homer")
                 .title("Odyssey")
@@ -65,10 +60,7 @@ class GreekReaderManifest : Manifest() {
                 .workType(WorkInfo.WorkType.POEM)
                 .offset(1, 5)
                 .image(R.drawable.work_odyssey)
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("XenophonAn")
                 .author("Xenophon")
                 .title("Anabasis")
@@ -78,10 +70,7 @@ class GreekReaderManifest : Manifest() {
                 .englishLocation(R.raw.xen_anab_eng)
                 .workType(WorkInfo.WorkType.PROSE)
                 .image(R.drawable.work_anabasis)
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("Lysias")
                 .author("Lysias")
                 .title("Speeches")
@@ -94,7 +83,7 @@ class GreekReaderManifest : Manifest() {
                 .build()
         )
 
-        return workInfos as ArrayList<WorkInfo>
+        return workInfos
     }
 
     override fun getDictionaryInfo(): WorkInfo {
