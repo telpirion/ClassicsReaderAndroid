@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ericmschmidt.classicsreader.R as CoreR
-import com.ericmschmidt.classicsreader.views.R
 import com.ericmschmidt.classicsreader.MyApplication
+import com.ericmschmidt.classicsreader.R
 import com.mukesh.MarkdownView
 import java.io.BufferedReader
 
@@ -28,7 +27,7 @@ class InfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val markdownView = view.findViewById<MarkdownView>(R.id.info_markdown_view)
-        val applicationInstance = MyApplication.applicationInstance()
+        val applicationInstance = MyApplication.Factory.applicationInstance()
 
         // Get the app context
         val context = applicationInstance.context
@@ -37,12 +36,12 @@ class InfoFragment : Fragment() {
         val packageName = context.packageName
 
         // Open the info.md file from the resources
-        val inputStream = resources.openRawResource(CoreR.raw.info)
+        val inputStream = resources.openRawResource(R.raw.info)
         var infoString = inputStream.bufferedReader().use(BufferedReader::readText)
 
         // Get the app name, version name, and version number info
-        val appName = context.getString(CoreR.string.app_name)
-        val appDescription = context.getString(CoreR.string.app_description)
+        val appName = context.getString(R.string.app_name)
+        val appDescription = context.getString(R.string.app_description)
         val versionInfo = packageManager.getPackageInfo(packageName, 0)
         val versionName = versionInfo.versionName
 
