@@ -39,9 +39,9 @@ fun PrettyCardLazyVerticalGrid(
     ) {
         items(
             items = works,
-            key = { work -> work!!.id }
+            key = { work -> work.id as String }
         ) {
-            PrettyCard(workInfo = it!!, onCardClick = onCardClick, isTranslation = isTranslation)
+            PrettyCard(workInfo = it, onCardClick = onCardClick, isTranslation = isTranslation)
         }
     }
 }

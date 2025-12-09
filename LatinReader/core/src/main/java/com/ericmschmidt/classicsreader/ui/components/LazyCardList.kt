@@ -10,12 +10,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.ericmschmidt.classicsreader.R
 import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
-import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
 
 class LibraryPreviewProvider : PreviewParameterProvider<Library> {
-    val pseudoManifest = PseudoManifest()
     override val values = sequenceOf(
         Library(
             arrayListOf(
@@ -73,7 +72,7 @@ fun PrettyCardLazyList(
             items = works,
             key = { work -> work.id as String},
         ) {
-            PrettyRow(workInfo = it!!, onClick = onRowClick, isTranslation = isTranslation)
+            PrettyRow(workInfo = it, onClick = onRowClick, isTranslation = isTranslation)
         }
     }
 }

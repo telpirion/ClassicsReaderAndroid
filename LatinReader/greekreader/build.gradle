@@ -1,15 +1,12 @@
 plugins {
-    id('com.android.application')
-    id('org.jetbrains.kotlin.android')
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
     namespace("com.ericmschmidt.greekreader")
     compileSdkVersion(36)
-    dataBinding {
-        enabled = true
-    }
     defaultConfig {
         applicationId("com.telpirion.greekreader")
         minSdkVersion(24)
@@ -22,18 +19,20 @@ android {
             minifyEnabled false
         }
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
+    kotlin {
+        jvmToolchain {
+            languageVersion = JavaLanguageVersion.of("24")
+        }
     }
 }
 
 dependencies {
     implementation platform("androidx.compose:compose-bom:2025.12.00")
-    implementation project(':compose')
-    implementation project(':core')
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.core:core-ktx:1.17.0'
-    implementation 'androidx.compose.foundation:foundation:1.10.0'
+    implementation project(":compose")
+    implementation project(":core")
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation("androidx.core:core-ktx:1.17.0")
+    implementation("androidx.compose.foundation:foundation:1.10.0")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
