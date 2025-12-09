@@ -28,10 +28,6 @@
                 android:name="android.app.default_searchable"
                 android:value="com.ericmschmidt.latinreader.activities.SearchActivity" />
         </activity>
-        <activity
-            android:name="com.ericmschmidt.classicsreader.activities.ErrorActivity"
-            android:exported="true"
-            android:label="@string/error_activity" />
     </application>
 
 </manifest>

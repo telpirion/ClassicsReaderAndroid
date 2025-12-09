@@ -14,6 +14,7 @@ import com.ericmschmidt.classicsreader.R
 import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
 
+@Suppress("SpellCheckingInspection")
 class LibraryPreviewProvider : PreviewParameterProvider<Library> {
     override val values = sequenceOf(
         Library(
