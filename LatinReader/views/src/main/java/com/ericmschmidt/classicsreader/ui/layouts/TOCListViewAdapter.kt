@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.ericmschmidt.classicsreader.views.databinding.TocListviewitemBinding
-import com.ericmschmidt.classicsreader.datamodel.TOCEntry
+import com.ericmschmidt.classicsreader.data.TOCEntry
 
 /**
  * Subclass of ArrayAdapter, used for displaying chapters in the TOCFragment.

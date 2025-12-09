@@ -13,9 +13,9 @@ import androidx.navigation.fragment.navArgs
 import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.views.R
 import com.ericmschmidt.classicsreader.views.databinding.FragmentTocBinding
-import com.ericmschmidt.classicsreader.datamodel.Library
-import com.ericmschmidt.classicsreader.datamodel.TOCEntry
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo
+import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.TOCEntry
+import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.ui.layouts.TOCListViewAdapter
 
 /**

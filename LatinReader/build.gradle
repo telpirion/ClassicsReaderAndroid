@@ -1,22 +1,23 @@
 buildscript {
-    ext.kotlin_version = '2.1.21'
     repositories {
         mavenCentral()
         google()
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.1.21'
-        def nav_version = "2.7.7"
-        classpath('com.android.tools.build:gradle:8.13.1')
+        def nav_version = "2.9.6"
+        classpath "org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.2.21"
+        classpath("com.android.tools.build:gradle:8.13.1")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.0")
     }
 }
 
 ext {
-    kotlin_version = '2.1.21'
-    lifecycle_version = '2.7.0'
+    kotlin_version = "2.1.21"
+    lifecycle_version = "2.10.0"
+    nav_version = "2.9.6"
+    compose_version = "1.12.1"
 }
 
 allprojects {
@@ -29,16 +30,15 @@ allprojects {
             url = "https://jitpack.io"
         }
         mavenCentral()
-        //here
     }
 }
 
-configurations.all {
+configurations.configureEach {
     resolutionStrategy {
         force("org.jetbrains:annotations:13.0")
     }
 }
 
-task clean(type: Delete) {
-    delete(rootProject.buildDir)
+tasks.register("clean", Delete) {
+    delete rootProject.layout.buildDirectory
 }

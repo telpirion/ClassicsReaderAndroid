@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel
+package com.ericmschmidt.classicsreader.data
 
 /**
  * Represents a sub-division within a larger text.

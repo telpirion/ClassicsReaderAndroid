@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.R as CoreR
 import com.ericmschmidt.classicsreader.views.R
-import com.ericmschmidt.classicsreader.datamodel.Dictionary
+import com.ericmschmidt.classicsreader.data.Dictionary
 import com.ericmschmidt.classicsreader.utilities.ITextConverter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

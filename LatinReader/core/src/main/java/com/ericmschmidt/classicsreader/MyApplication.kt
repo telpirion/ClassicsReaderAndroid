@@ -3,7 +3,7 @@ package com.ericmschmidt.classicsreader
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import com.ericmschmidt.classicsreader.datamodel.Manifest
+import com.ericmschmidt.classicsreader.data.Manifest
 import com.ericmschmidt.classicsreader.utilities.ITextConverter
 
 

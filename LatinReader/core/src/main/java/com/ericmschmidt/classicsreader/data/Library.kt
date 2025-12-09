@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel
+package com.ericmschmidt.classicsreader.data
 
 /** Contains information about the texts included in the reader.
  * @author Eric Schmidt

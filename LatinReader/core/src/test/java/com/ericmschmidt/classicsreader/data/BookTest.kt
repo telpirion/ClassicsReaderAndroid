@@ -1,4 +1,4 @@
-package com.ericmschmidt.classicsreader.datamodel
+package com.ericmschmidt.classicsreader.data
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
