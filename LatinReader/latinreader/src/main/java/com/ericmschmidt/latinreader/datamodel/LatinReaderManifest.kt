@@ -26,9 +26,7 @@ class LatinReaderManifest : Manifest() {
      * @return WorkInfo the collection
      */
     override fun getCollection(): ArrayList<WorkInfo> {
-        val workInfos = ArrayList<WorkInfo?>()
-
-        workInfos.add(
+        return arrayListOf<WorkInfo>(
             WorkInfo.Builder("CaesarBG")
                 .author("C. Julius Caesar")
                 .title("De Bello Gallico")
@@ -49,11 +47,7 @@ class LatinReaderManifest : Manifest() {
                 .description(caesarDescription)
                 .editor("T. Rice Holmes")
                 .translator("W. A. McDevitte, W. S. Bohn")
-                .build()
-        )
-
-        // TODO(telpirion): parse <div2> into poem numbers or headings?
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("Horace")
                 .title("Carmina")
                 .author("Q. Horatius Flaccus")
@@ -70,10 +64,7 @@ class LatinReaderManifest : Manifest() {
                 .description(horaceDescription)
                 .editor("Paul Shorey and Gordon J. Laing")
                 .translator("John Conington")
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("Lucretius")
                 .title("De Rerum Natura")
                 .author("T. Lucretius Caro")
@@ -92,10 +83,7 @@ class LatinReaderManifest : Manifest() {
                 .description(lucretiusDescription)
                 .editor("William Ellery Leonard")
                 .translator("William Ellery Leonard")
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("OvidM")
                 .title("Metamorphoses")
                 .author("P. Ovidius Naso")
@@ -123,10 +111,7 @@ class LatinReaderManifest : Manifest() {
                 .description(ovidDescription)
                 .editor("Hugo Magnus")
                 .translator("Brookes More")
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("Petronius")
                 .title("Satyricon, Fragmenta, and Poems")
                 .author("G. Petronius Arbiter")
@@ -142,10 +127,7 @@ class LatinReaderManifest : Manifest() {
                 .description(petroniusDescription)
                 .editor("Michael Heseltine")
                 .translator("Michael Heseltine")
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("SalJug")
                 .title("Bellum Jugurthinum")
                 .author("C. Sallusti Crispi")
@@ -272,10 +254,7 @@ class LatinReaderManifest : Manifest() {
                 .description(sallustDescription)
                 .editor("John Selby Watson")
                 .translator("John Selby Watson")
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("SenApoc")
                 .title("Apocolocyntosis")
                 .author("L. Annaeus Seneca")
@@ -303,10 +282,7 @@ class LatinReaderManifest : Manifest() {
                 .description(senecaDescription)
                 .editor("W.H.D. Rouse,  M.A. Litt. D.")
                 .translator("W.H.D. Rouse")
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("VirgA")
                 .title("Aeneid")
                 .author("P. Vergilius Maro")
@@ -331,10 +307,7 @@ class LatinReaderManifest : Manifest() {
                 .description(vergilDescription)
                 .editor("J. B. Greenough")
                 .translator("Theodore C. Williams")
-                .build()
-        )
-
-        workInfos.add(
+                .build(),
             WorkInfo.Builder("Livy1")
                 .author("Titus Livius")
                 .title("Ab Urbe Condita, liber I-II")
@@ -351,8 +324,6 @@ class LatinReaderManifest : Manifest() {
                 .translator("Benjamin Oliver Foster, Ph.D.")
                 .build()
         )
-
-        return workInfos as ArrayList<WorkInfo>
     }
 
     /**

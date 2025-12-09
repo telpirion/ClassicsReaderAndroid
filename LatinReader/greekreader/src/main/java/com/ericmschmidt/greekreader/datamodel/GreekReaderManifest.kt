@@ -25,10 +25,7 @@ class GreekReaderManifest : Manifest() {
      */
     @Suppress("UNCHECKED_CAST")
     override fun getCollection(): ArrayList<WorkInfo> {
-
-        val workInfos = arrayListOf<WorkInfo>()
-
-        workInfos.add(
+       return arrayListOf<WorkInfo>(
             WorkInfo.Builder("AristotlePol")
                 .title("Politics")
                 .author("Aristotle")
@@ -82,8 +79,6 @@ class GreekReaderManifest : Manifest() {
                 .image(R.drawable.work_speeches)
                 .build()
         )
-
-        return workInfos
     }
 
     override fun getDictionaryInfo(): WorkInfo {
