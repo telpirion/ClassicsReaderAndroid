@@ -7,7 +7,7 @@ buildscript {
     dependencies {
         def nav_version = "2.9.6"
         classpath "org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.2.21"
-        classpath("com.android.tools.build:gradle:8.13.1")
+        classpath('com.android.tools.build:gradle:8.13.2')
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.0")
     }
