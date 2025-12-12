@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
 }
@@ -8,7 +8,6 @@ android {
     namespace("com.ericmschmidt.greekreader")
     compileSdkVersion(36)
     defaultConfig {
-        applicationId("com.telpirion.greekreader")
         minSdkVersion(24)
         targetSdk(36)
         versionCode(3)
