@@ -2,6 +2,7 @@ package com.telpirion.compose.ui
 
 import android.content.Context
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -56,6 +58,12 @@ import com.ericmschmidt.classicsreader.data.RECENTLY_READ
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import com.telpirion.compose.ui.theme.LatinReaderTheme
+import androidx.navigation.NavHostController
+import com.ericmschmidt.classicsreader.data.Manifest
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
+import androidx.compose.ui.tooling.preview.Preview
+import com.telpirion.compose.viewmodels.DictionaryUiState
 
 private val bottomNavigationItems = listOf(
     Screen.Library,
@@ -75,6 +83,7 @@ private val navigationItems = listOf(
 
 // Global declaration for user settings preferences
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReaderApp(
@@ -82,7 +91,6 @@ fun ReaderApp(
 )  {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
 
     // Determine if the layout is compact. On non-compact layouts, a navigation rail is shown.
     val isCompact = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact
@@ -94,7 +102,6 @@ fun ReaderApp(
     // Instantiate the activity-scoped ViewModel
     val dictionaryViewModel: DictionaryViewModel = viewModel(
         factory = DictionaryViewModel.Factory
-        // I think I need to set the viewModelStoreOwner here ... ?
     )
     val dictionaryUiState by dictionaryViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -102,8 +109,7 @@ fun ReaderApp(
     val context = LocalContext.current
     val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
     val recentlyRead: Flow<String> = context.dataStore.data
-        .map {
-                preferences ->
+        .map { preferences ->
             preferences[recentlyReadKey] ?: ""
         }
     val currentWorkId: String? = recentlyRead.collectAsState(initial = "").value
@@ -119,66 +125,107 @@ fun ReaderApp(
         }
     }
 
-    ModalNavigationDrawer(
+    val manifest = MyApplication.applicationInstance().manifest
+
+    ReaderAppContent(
+        isCompact = isCompact,
+        navController = navController,
         drawerState = drawerState,
-        gesturesEnabled = isCompact,
-        drawerContent = {
-            NavDrawerContent(
-                currentRoute = currentRoute,
-                onNavigate = { route ->
-                    navigationFunc(route)
-                    scope.launch { drawerState.close() }
-                }
+        dictionaryUiState = dictionaryUiState,
+        onQueryChange = { text -> dictionaryViewModel.onQueryChange(text) },
+        onSearch = {
+            dictionaryViewModel.search(dictionaryUiState.searchQuery)
+            navController.navigate(Screen.Dictionary.createRoute())
+        },
+        onClearSearch = dictionaryViewModel::clearSearch,
+        currentWorkId = currentWorkId,
+        currentRoute = currentRoute,
+        manifest = manifest,
+        onNavigate = navigationFunc,
+        content = { modifier ->
+            ReaderAppNavHost(
+                navController = navController,
+                modifier = modifier,
+                dictionaryViewModel = dictionaryViewModel
             )
         }
-    ) {
-        Scaffold(
-            topBar = {
-                ReaderTopAppBar(
-                    onMenuClick = { scope.launch { drawerState.open() } },
-                    searchText = dictionaryUiState.searchQuery,
-                    onSearchTextChange = {
-                            text -> dictionaryViewModel.onQueryChange(text) },
-                    onSearch = {
-                        dictionaryViewModel.search(dictionaryUiState.searchQuery)
-                        navController.navigate(Screen.Dictionary.createRoute()) },
-                    onClearSearch = dictionaryViewModel::clearSearch
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ReaderAppContent(
+    isCompact: Boolean,
+    navController: NavHostController,
+    drawerState: DrawerState,
+    dictionaryUiState: DictionaryUiState,
+    onQueryChange: (String) -> Unit,
+    onSearch: () -> Unit,
+    onClearSearch: () -> Unit,
+    currentWorkId: String?,
+    currentRoute: String?,
+    manifest: Manifest,
+    onNavigate: (String) -> Unit,
+    content: @Composable (Modifier) -> Unit
+) {
+    LatinReaderTheme {
+        val scope = rememberCoroutineScope()
+
+        ModalNavigationDrawer(
+            drawerState = drawerState,
+            gesturesEnabled = isCompact,
+            drawerContent = {
+                NavDrawerContent(
+                    currentRoute = currentRoute,
+                    onNavigate = { route ->
+                        onNavigate(route)
+                        scope.launch { drawerState.close() }
+                    },
+                    manifest = manifest
                 )
-            },
-            bottomBar = {
-                // Show bottom navigation bar only on compact screens
-                if (isCompact) {
-                    ReaderBottomNavigationBar(
-                        currentRoute = currentRoute,
-                        onNavigate = {route ->
-                            if (drawerState.isClosed) {
-                                navigationFunc(route)
-                            }
-                        }
-                    )
-                }
             }
-        ) { innerPadding ->
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-            ) {
-                if (!isCompact) {
-                    ReaderNavigationRail(
-                        currentRoute = currentRoute,
-                        onNavigate = { route ->
-                            if (drawerState.isClosed) {
-                                navigationFunc(route)
-                            }
-                        }
+        ) {
+            Scaffold(
+                topBar = {
+                    ReaderTopAppBar(
+                        onMenuClick = { scope.launch { drawerState.open() } },
+                        searchText = dictionaryUiState.searchQuery,
+                        onSearchTextChange = onQueryChange,
+                        onSearch = onSearch,
+                        onClearSearch = onClearSearch
                     )
+                },
+                bottomBar = {
+                    // Show bottom navigation bar only on compact screens
+                    if (isCompact) {
+                        ReaderBottomNavigationBar(
+                            currentRoute = currentRoute,
+                            onNavigate = { route ->
+                                if (drawerState.isClosed) {
+                                    onNavigate(route)
+                                }
+                            }
+                        )
+                    }
                 }
-                ReaderAppNavHost(
-                    navController = navController,
-                    modifier = Modifier.weight(1f),
-                    dictionaryViewModel = dictionaryViewModel
-                )
+            ) { innerPadding ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                ) {
+                    if (!isCompact) {
+                        ReaderNavigationRail(
+                            currentRoute = currentRoute,
+                            onNavigate = { route ->
+                                if (drawerState.isClosed) {
+                                    onNavigate(route)
+                                }
+                            }
+                        )
+                    }
+                    content(Modifier.weight(1f))
+                }
             }
         }
     }
@@ -188,10 +235,11 @@ fun ReaderApp(
 private fun NavDrawerContent(
     currentRoute: String?,
     onNavigate: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    manifest: Manifest
 ) {
     ModalDrawerSheet(modifier = modifier) {
-        NavigationHeader(modifier = Modifier.padding(16.dp))
+        NavigationHeader(modifier = Modifier.padding(16.dp), manifest = manifest)
         Spacer(Modifier.height(12.dp))
         navigationItems.forEach { screen ->
             NavigationDrawerItem(
@@ -206,10 +254,11 @@ private fun NavDrawerContent(
 }
 
 @Composable
-private fun NavigationHeader(modifier: Modifier = Modifier) {
+private fun NavigationHeader(
+    modifier: Modifier = Modifier,
+    manifest: Manifest
+) {
     Column(modifier = modifier) {
-        val applicationInstance = MyApplication.applicationInstance()
-        val manifest = applicationInstance.manifest
         // A Row to neatly arrange the logo and app name side-by-side.
         Row(verticalAlignment = Alignment.CenterVertically) {
             manifest.GetHeaderIcon()
@@ -268,4 +317,60 @@ private fun ReaderNavigationRail(
             )
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true, name = "Reader App Preview Compact")
+@Composable
+fun ReaderAppPreview() {
+    val navController = rememberNavController()
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val manifest = PseudoManifest()
+    
+    ReaderAppContent(
+        isCompact = true,
+        navController = navController,
+        drawerState = drawerState,
+        dictionaryUiState = DictionaryUiState(),
+        onQueryChange = {},
+        onSearch = {},
+        onClearSearch = {},
+        currentWorkId = null,
+        currentRoute = Screen.Library.route,
+        manifest = manifest,
+        onNavigate = {},
+        content = {
+            Box(Modifier.fillMaxSize()) {
+                Text("NavHost Content")
+            }
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true, widthDp = 840, name = "Reader App Preview Expanded")
+@Composable
+fun ReaderAppExpandedPreview() {
+    val navController = rememberNavController()
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val manifest = PseudoManifest()
+
+    ReaderAppContent(
+        isCompact = false,
+        navController = navController,
+        drawerState = drawerState,
+        dictionaryUiState = DictionaryUiState(),
+        onQueryChange = {},
+        onSearch = {},
+        onClearSearch = {},
+        currentWorkId = null,
+        currentRoute = Screen.Library.route,
+        manifest = manifest,
+        onNavigate = {},
+        content = {
+            Box(Modifier.fillMaxSize()) {
+                Text("NavHost Content")
+            }
+        }
+    )
 }
