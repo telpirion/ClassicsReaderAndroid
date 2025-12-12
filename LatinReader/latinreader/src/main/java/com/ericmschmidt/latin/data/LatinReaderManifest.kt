@@ -1,4 +1,4 @@
-package com.ericmschmidt.latinreader.datamodel
+package com.ericmschmidt.latin.data
 
 import com.ericmschmidt.classicsreader.data.Manifest
 import com.ericmschmidt.classicsreader.data.TOCEntry

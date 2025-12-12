@@ -1,4 +1,4 @@
-package com.ericmschmidt.greekreader.datamodel
+package com.ericmschmidt.greekreader.data
 
 import com.ericmschmidt.classicsreader.data.Manifest
 import com.ericmschmidt.classicsreader.data.WorkInfo
