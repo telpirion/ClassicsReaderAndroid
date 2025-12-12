@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
 }
@@ -8,7 +8,6 @@ android {
     namespace("com.ericmschmidt.latinreader")
     compileSdkVersion(36)
     defaultConfig {
-        applicationId("com.ericmschmidt.latinreader")
         minSdkVersion(24)
         targetSdkVersion(36)
         versionCode(21)
