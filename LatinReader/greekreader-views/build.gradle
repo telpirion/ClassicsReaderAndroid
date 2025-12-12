@@ -4,17 +4,17 @@ plugins {
 }
 
 android {
-    namespace 'com.ericmschmidt.classicsreader.greek'
+    namespace 'com.ericmschmidt.classicsreader.greek.views'
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId "com.ericmschmidt.classicsreader.greek"
+        applicationId "com.ericmschmidt.classicsreader.greek.views"
         minSdk 24
         targetSdk 36
         versionCode(3)
-        versionName("2.1")
+        versionName("2.1.0")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
