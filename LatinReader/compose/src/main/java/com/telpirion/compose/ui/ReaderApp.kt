@@ -75,6 +75,17 @@ private val navigationItems = listOf(
 
 // Global declaration for user settings preferences
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
+/**
+ * The main entry point for the Compose UI of the Latin Reader application.
+ *
+ * This composable sets up the overall structure of the app, including navigation,
+ * responsive layout based on window size, and integration with view models and user preferences.
+ * It dynamically displays a navigation drawer, bottom navigation bar, or navigation rail
+ * depending on the screen size and state.
+ *
+ * @param windowSizeClass The [WindowSizeClass] used to determine the appropriate layout for the current screen size.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReaderApp(
@@ -106,7 +117,7 @@ fun ReaderApp(
                 preferences ->
             preferences[recentlyReadKey] ?: ""
         }
-    val currentWorkId: String? = recentlyRead.collectAsState(initial = "").value
+    val currentWorkId: String = recentlyRead.collectAsState(initial = "").value
 
     val navigationFunc : (String) -> Unit = { route ->
         when (route){
