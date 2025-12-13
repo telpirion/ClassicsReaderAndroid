@@ -15,7 +15,7 @@ import com.ericmschmidt.classicsreader.utilities.ITextConverter
  * @version 2.0
  * @since 1.0
  */
-class MyApplication : Application() {
+open class MyApplication(val manifestName: String) : Application() {
 
     data class ApplicationInstance(
         val context: Context,
@@ -25,8 +25,6 @@ class MyApplication : Application() {
     )
 
     val manifest: Manifest by lazy {
-        val manifestName =
-            instance.resources.getString(R.string.manifest)
         Log.i("MyApplication", "manifest = $manifestName")
         Manifest.getManifest(manifestName)!!
 

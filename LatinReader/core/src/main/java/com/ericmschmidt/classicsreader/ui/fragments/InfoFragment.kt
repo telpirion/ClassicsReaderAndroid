@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.R
 import com.mukesh.MarkdownView
 import java.io.BufferedReader
@@ -16,12 +17,12 @@ import java.io.BufferedReader
  */
 class InfoFragment : Fragment() {
 
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?,
-  ): View? {
-    return inflater.inflate(R.layout.fragment_info, container, false)
-  }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        return inflater.inflate(R.layout.fragment_info, container, false)
+    }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -50,7 +51,7 @@ class InfoFragment : Fragment() {
 
         // longVersionCode is an Android Pie feature
         val versionNumber = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-          versionInfo.longVersionCode
+            versionInfo.longVersionCode
         } else {
           @Suppress("DEPRECATION")
           versionInfo.versionCode

@@ -2,4 +2,7 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 rootProject.name = "ClassicsReaderAndroid"
-include ':core', ':latinreader', ':greekreader', ':views', ':compose'
+include ':core', ':latinreader', ':greekreader'
+include ':views'
+include ':latinreader-views'
+include ':greekreader-views'

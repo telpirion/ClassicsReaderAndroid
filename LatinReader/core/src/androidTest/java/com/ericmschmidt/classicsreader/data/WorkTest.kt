@@ -4,13 +4,10 @@ import android.support.test.runner.AndroidJUnit4
 import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.utilities.getResourceStream
 import com.ericmschmidt.classicsreader.xmlString
-import io.mockk.MockKAnnotations
 import io.mockk.every
-import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockkObject
 import org.junit.Assert.assertNotNull
 import java.io.ByteArrayInputStream
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 

@@ -4,6 +4,7 @@ import com.ericmschmidt.classicsreader.R
 import java.util.Formatter
 import java.util.Locale
 import kotlin.collections.ArrayList
+import kotlin.math.abs
 
 /**
  * Contains the data for a work contained in the app.
@@ -25,30 +26,21 @@ import kotlin.collections.ArrayList
  * @version 2.0
  * @since 1.0
  */
-class WorkInfo private constructor() {
-
-    var id: String? = null
-        private set
-    var author: String? = null
-        private set
-    var title: String? = null
-        private set
-    var englishTitle: String? = null
-        private set
-    var englishAuthor: String? = null
-        private set
-    var location: Int = 0
-        private set
-    var englishLocation: Int = 0
-        private set
-    var workType: Int = 0
-        private set
-    var tocEntries: ArrayList<TOCEntry> = ArrayList()
-    var image: Int? = null
-        private set
-    var description: String? = null
-    var translator: String? = null
-    var editor: String? = null
+data class WorkInfo(
+    val id: String,
+    val author: String,
+    val title: String,
+    val englishTitle: String,
+    val englishAuthor: String,
+    val location: Int,
+    val englishLocation: Int,
+    val workType: Int,
+    val tocEntries: ArrayList<TOCEntry> = ArrayList(),
+    val image: Int?,
+    val descriptionLocation: Int?,
+    val offset: Int = 1,
+    val englishOffset: Int = 1
+) {
 
     // Unless specified otherwise, assume a 1-to-1 relationship
     // between line numbers in the English and source language
@@ -109,19 +101,23 @@ class WorkInfo private constructor() {
         const val POEM = 2
     }
 
-    /**
-     * Builder class for generating new WorkInfo objects.
-     */
-    class Builder(id: String) {
-
-        private val workInfo: WorkInfo = WorkInfo()
+    class Builder(private val id: String) {
+        private var author: String = ""
+        private var title: String = ""
+        private var englishTitle: String = ""
+        private var englishAuthor: String = ""
+        private var location: Int = 0
+        private var englishLocation: Int = 0
+        private var workType: Int = 0
+        private var tocEntries: ArrayList<TOCEntry> = ArrayList()
+        private var image: Int?
+        private var descriptionLocation: Int? = null
+        private var offset: Int = 1
+        private var englishOffset: Int = 1
 
         init {
-            workInfo.id = id
-            workInfo.tocEntries = ArrayList()
-
-            val idHash = kotlin.math.abs(id.hashCode())
-            workInfo.image = defaultImages[idHash % defaultImages.size]
+            val idHash = abs(id.hashCode())
+            image = defaultImages[idHash % defaultImages.size]
         }
 
         fun author(author: String) = apply { this.workInfo.author = author }
@@ -138,21 +134,43 @@ class WorkInfo private constructor() {
 
         fun workType(workType: Int) = apply { this.workInfo.workType = workType }
 
+        fun author(author: String) = apply { this.author = author }
+        fun title(title: String) = apply { this.title = title }
+        fun englishTitle(englishTitle: String) = apply { this.englishTitle = englishTitle }
+        fun englishAuthor(englishAuthor: String) = apply { this.englishAuthor = englishAuthor }
+        fun location(location: Int) = apply { this.location = location }
+        fun englishLocation(englishLocation: Int) = apply { this.englishLocation = englishLocation }
+        fun workType(workType: Int) = apply { this.workType = workType }
         fun offset(offset: Int, englishOffset: Int) = apply {
-            this.workInfo.offset = offset
-            this.workInfo.englishOffset = englishOffset
+            this.offset = offset
+            this.englishOffset = englishOffset
         }
+        fun TOCEntry(entry: TOCEntry) = apply { this.tocEntries.add(entry) }
+        fun image(drawable: Int?) = apply { this.image = drawable }
+        fun descriptionLocation(description: Int?) = apply { this.descriptionLocation = description }
 
-        fun tocEntry(entry: TOCEntry) = apply { this.workInfo.tocEntries.add(entry) }
+        fun build() = WorkInfo(
+            id,
+            author,
+            title,
+            englishTitle,
+            englishAuthor,
+            location,
+            englishLocation,
+            workType,
+            tocEntries,
+            image,
+            descriptionLocation,
+            offset,
+            englishOffset
+        )
 
-        fun image(drawable: Int?) = apply { this.workInfo.image = drawable }
-
-        fun description(description: String?) = apply { this.workInfo.description = description}
-
-        fun translator(translator: String?) = apply { this.workInfo.translator = translator}
-
-        fun editor(editor: String?) = apply { this.workInfo.editor = editor}
-
-        fun build(): WorkInfo = this.workInfo
+        companion object {
+            private val defaultImages = listOf(
+                R.drawable.work_default_1,
+                R.drawable.work_default_2,
+                R.drawable.work_default_3
+            )
+        }
     }
 }

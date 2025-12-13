@@ -16,10 +16,10 @@ import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.data.ReadingViewModel
 import com.ericmschmidt.classicsreader.R as CoreR
 import com.ericmschmidt.classicsreader.views.R
-import com.ericmschmidt.classicsreader.datamodel.Library
-import com.ericmschmidt.classicsreader.datamodel.ReadingViewModel
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo.WorkType
+import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.ReadingViewModel
+import com.ericmschmidt.classicsreader.data.WorkInfo
+import com.ericmschmidt.classicsreader.data.WorkInfo.WorkType
 
 /**
  * Displays the text of a work (source or translation).

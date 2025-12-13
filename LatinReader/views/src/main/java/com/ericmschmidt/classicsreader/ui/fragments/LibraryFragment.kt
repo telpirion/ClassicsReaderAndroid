@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment
 import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.views.R
 import com.ericmschmidt.classicsreader.activities.MainActivity
-import com.ericmschmidt.classicsreader.datamodel.Library
-import com.ericmschmidt.classicsreader.datamodel.Manifest
-import com.ericmschmidt.classicsreader.datamodel.WorkInfo
+import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.Manifest
+import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.logError
 import com.ericmschmidt.classicsreader.ui.interop.setContentToLazyGrid
 import com.ericmschmidt.classicsreader.ui.interop.setContentToLazyList

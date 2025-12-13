@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
 }
@@ -8,7 +8,6 @@ android {
     namespace("com.ericmschmidt.latinreader")
     compileSdkVersion(36)
     defaultConfig {
-        applicationId("com.ericmschmidt.latinreader")
         minSdkVersion(24)
         targetSdkVersion(36)
         versionCode(21)
@@ -25,14 +24,14 @@ android {
     }
     kotlin {
         jvmToolchain {
-            languageVersion = JavaLanguageVersion.of(17)
+            languageVersion = JavaLanguageVersion.of("24")
         }
     }
 }
 
 dependencies {
     implementation platform("androidx.compose:compose-bom:2025.12.00")
-    implementation project(":compose")
+    implementation project(":views")
     implementation project(":core")
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation("androidx.core:core-ktx:1.17.0")
@@ -43,6 +42,6 @@ dependencies {
 }
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(24)
     }
 }
