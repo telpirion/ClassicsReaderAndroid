@@ -62,7 +62,7 @@ class LibraryFragment : Fragment() {
                 .applicationInstance().manifest
 
             val library = Library(manifest.getCollection() as ArrayList<WorkInfo>)
-            Log.i(TAG, "library length = " + library.collection.size)
+            Log.i(TAG, "library length = " + library.collection?.size)
 
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
             val displayType = sharedPreferences.getString(

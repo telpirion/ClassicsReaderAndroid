@@ -10,41 +10,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.ericmschmidt.classicsreader.R
 import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
 
 @Suppress("SpellCheckingInspection")
 class LibraryPreviewProvider : PreviewParameterProvider<Library> {
+    val pseudoManifest = PseudoManifest()
     override val values = sequenceOf(
-        Library(
-            arrayListOf(
-                WorkInfo.Builder("test")
-                    .author("testAuthor")
-                    .title("testTitle")
-                    .englishTitle("testTitle")
-                    .englishAuthor("testAuthor")
-                    .location(1)
-                    .image(R.drawable.work_default_1)
-                    .build(),
-                WorkInfo.Builder("test2")
-                    .author("Very very super long never-ending author name")
-                    .title("Very very long title that could go on forever")
-                    .englishTitle("testTitle")
-                    .englishAuthor("testAuthor")
-                    .image(R.drawable.work_default_2)
-                    .location(1)
-                    .build(),
-                WorkInfo.Builder("test3")
-                    .author("Ξενοφῶν")
-                    .title("Ἀνάβασις")
-                    .englishTitle("Anabasis")
-                    .englishAuthor("Xenophon")
-                    .image(R.drawable.work_default_3)
-                    .location(1)
-                    .build(),
-            )
-        )
+        Library(pseudoManifest.getCollection())
     )
 }
 
