@@ -2,5 +2,5 @@ package com.ericmschmidt.greekreader
 
 import com.ericmschmidt.classicsreader.MyApplication
 
-class GreekReaderApplication: MyApplication(manifestName = "com.ericmschmidt.greekreader.data.GreekReaderManifest") {
+class GreekReaderApplication: MyApplication(libraryName = "com.ericmschmidt.greekreader.data.GreekReaderLibrary") {
 }

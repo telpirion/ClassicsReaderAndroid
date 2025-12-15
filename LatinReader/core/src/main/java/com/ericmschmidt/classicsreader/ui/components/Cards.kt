@@ -25,15 +25,15 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ericmschmidt.classicsreader.data.WorkInfo
-import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoLibrary
 import kotlin.collections.asSequence
 
 // Use this class for previewing WorkInfo & Card objects
 class WorkInfoPreviewProvider : PreviewParameterProvider<WorkInfo> {
-    val pseudoManifest = PseudoManifest()
+    val pseudoLibrary = PseudoLibrary()
 
     override val values: Sequence<WorkInfo> =
-        pseudoManifest.getCollection()?.asSequence() ?: emptySequence()
+        pseudoLibrary.getCollection().asSequence()
 }
 
 @Composable
@@ -57,7 +57,7 @@ fun PrettyCard(
             Box {
                 Image(
                     modifier = Modifier.requiredSize(width = 130.dp, height = 130.dp),
-                    painter = painterResource(workInfo.image as Int),
+                    painter = painterResource(workInfo.image),
                     contentDescription = "test image",
                 )
             }
@@ -67,11 +67,11 @@ fun PrettyCard(
         ) {
             Text(
                 fontWeight = FontWeight.Bold,
-                text = if (!isTranslation) workInfo.title as String else workInfo.englishTitle as String,
+                text = if (!isTranslation) workInfo.title else workInfo.englishTitle,
                 textAlign = TextAlign.Left
             )
             Text(
-                text = if (!isTranslation) workInfo.author as String else workInfo.englishAuthor as String,
+                text = if (!isTranslation) workInfo.author  else workInfo.englishAuthor,
                 textAlign = TextAlign.Left
             )
         }
@@ -100,7 +100,7 @@ fun PrettyRow(
             Box {
                 Image(
                     modifier = Modifier.requiredSize(width = 100.dp, height = 100.dp),
-                    painter = painterResource(workInfo.image as Int),
+                    painter = painterResource(workInfo.image),
                     contentDescription = workInfo.title,
                 )
             }
@@ -110,12 +110,12 @@ fun PrettyRow(
                 Text(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    text = if (!isTranslation) workInfo.title as String else workInfo.englishTitle as String,
+                    text = if (!isTranslation) workInfo.title else workInfo.englishTitle,
                     textAlign = TextAlign.Left
                 )
                 Text(
                     fontSize = 16.sp,
-                    text = if(!isTranslation) workInfo.author as String else workInfo.englishAuthor as String,
+                    text = if(!isTranslation) workInfo.author else workInfo.englishAuthor,
                     textAlign = TextAlign.Left
                 )
             }

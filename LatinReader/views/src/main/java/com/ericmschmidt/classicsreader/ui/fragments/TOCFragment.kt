@@ -11,12 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.views.R
-import com.ericmschmidt.classicsreader.views.databinding.FragmentTocBinding
-import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.ui.layouts.TOCListViewAdapter
+import com.ericmschmidt.classicsreader.views.R
+import com.ericmschmidt.classicsreader.views.databinding.FragmentTocBinding
 
 /**
  * Displays a work's table of contents.
@@ -37,10 +36,9 @@ class TOCFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val manifest = MyApplication.Factory.applicationInstance().manifest
-        val collection = manifest.getCollection()
+        val library = MyApplication.applicationInstance().library
+        val collection = library.getCollection()
         if (collection != null) {
-            val library = Library(collection)
             work = library.getWorkInfoByID(args.workId)
         }
     }
@@ -81,9 +79,5 @@ class TOCFragment : Fragment() {
                     }
                 }
             }
-    }
-
-    companion object {
-        const val TAG = "TOCFragment"
     }
 }

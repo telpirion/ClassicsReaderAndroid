@@ -3,7 +3,7 @@ package com.ericmschmidt.classicsreader
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import com.ericmschmidt.classicsreader.data.Manifest
+import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.utilities.ITextConverter
 
 
@@ -15,18 +15,18 @@ import com.ericmschmidt.classicsreader.utilities.ITextConverter
  * @version 2.0
  * @since 1.0
  */
-open class MyApplication(val manifestName: String) : Application() {
+open class MyApplication(val libraryName: String) : Application() {
 
     data class ApplicationInstance(
         val context: Context,
-        val manifest: Manifest,
+        val library: Library,
         val isNonRomanChar: Boolean,
         val textConverter: ITextConverter?,
     )
 
-    val manifest: Manifest by lazy {
-        Log.i("MyApplication", "manifest = $manifestName")
-        Manifest.getManifest(manifestName)!!
+    val library: Library by lazy {
+        Log.i("MyApplication", "library = $libraryName")
+        Library.getLibrary(libraryName)!!
 
     }
     val isNonRomanChar: Boolean by lazy {
@@ -42,11 +42,11 @@ open class MyApplication(val manifestName: String) : Application() {
         if (isNonRomanChar) {
             val className = instance.resources.getString(R.string.text_converter)
             try {
-                val manifestClass = Class.forName(className)
-                val constructors = manifestClass.constructors
+                val libraryClass = Class.forName(className)
+                val constructors = libraryClass.constructors
                 converter = constructors[0].newInstance() as ITextConverter
             } catch (ex: Exception) {
-                Log.e(Manifest::class.java.name, ex.message as String)
+                Log.e(Library::class.java.name, ex.message as String)
             }
         }
         return converter
@@ -72,7 +72,7 @@ open class MyApplication(val manifestName: String) : Application() {
             instance.populateFields()
             return ApplicationInstance(
                 context = instance,
-                manifest = instance.manifest,
+                library = instance.library,
                 isNonRomanChar = instance.isNonRomanChar,
                 textConverter = instance.converter
             )

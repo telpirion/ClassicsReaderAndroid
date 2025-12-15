@@ -1,4 +1,6 @@
-package com.ericmschmidt.latinreader.datamodel
+@file:Suppress("unused", "SpellCheckingInspection")
+
+package com.ericmschmidt.latin.data
 
 val caesarDescription = """
     On the Gallic Wars is a first-hand account of the Gallic Wars, written by Roman general and 

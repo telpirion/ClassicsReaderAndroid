@@ -2,5 +2,5 @@ package com.ericmschmidt.latin
 
 import com.ericmschmidt.classicsreader.MyApplication
 
-class LatinReaderApplication: MyApplication(manifestName = "com.ericmschmidt.latin.data.LatinReaderManifest") {
+class LatinReaderApplication: MyApplication(libraryName = "com.ericmschmidt.latin.data.LatinReaderLibrary") {
 }
