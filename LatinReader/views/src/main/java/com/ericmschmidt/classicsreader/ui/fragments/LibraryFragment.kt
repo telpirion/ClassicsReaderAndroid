@@ -58,8 +58,7 @@ class LibraryFragment : Fragment() {
 
         try {
             // Retrieve the manifest from the package using config settings.
-            val manifest: Manifest = MyApplication.Factory
-                .applicationInstance().manifest
+            val manifest: Manifest = MyApplication.applicationInstance().manifest
 
             val library = Library(manifest.getCollection() as ArrayList<WorkInfo>)
             Log.i(TAG, "library length = " + library.collection?.size)

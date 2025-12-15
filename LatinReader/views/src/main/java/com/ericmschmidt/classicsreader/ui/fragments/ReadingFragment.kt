@@ -17,7 +17,6 @@ import com.ericmschmidt.classicsreader.data.ReadingViewModel
 import com.ericmschmidt.classicsreader.R as CoreR
 import com.ericmschmidt.classicsreader.views.R
 import com.ericmschmidt.classicsreader.data.Library
-import com.ericmschmidt.classicsreader.data.ReadingViewModel
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.data.WorkInfo.WorkType
 
