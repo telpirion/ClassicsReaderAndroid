@@ -2,7 +2,7 @@
 
 package com.ericmschmidt.latin.data
 
-import com.ericmschmidt.classicsreader.data.Manifest
+import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.latinreader.R
@@ -15,7 +15,7 @@ import com.ericmschmidt.latinreader.R
  * @version 2.0
  * @since 1.1
  */
-class LatinReaderManifest : Manifest() {
+class LatinReaderLibrary : Library() {
 
     /**
      * Gets the collection of works for this app.

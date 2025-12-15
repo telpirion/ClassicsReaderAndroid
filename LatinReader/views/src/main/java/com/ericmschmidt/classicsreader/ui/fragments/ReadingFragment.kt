@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.ericmschmidt.classicsreader.ui.fragments
 
 import android.annotation.SuppressLint
@@ -15,9 +17,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.R as CoreR
 import com.ericmschmidt.classicsreader.views.R
-import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.ReadingViewModel
-import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.data.WorkInfo.WorkType
 
 /**
@@ -33,6 +33,7 @@ import com.ericmschmidt.classicsreader.data.WorkInfo.WorkType
  * @version 2.0
  * @since 1.0
  */
+@Suppress("DEPRECATION")
 class ReadingFragment : Fragment() {
 
     private var workToGetId: String? = null
@@ -77,8 +78,7 @@ class ReadingFragment : Fragment() {
             return
         }
 
-        val manifest = MyApplication.applicationInstance().manifest
-        val library = Library(manifest.getCollection() as ArrayList<WorkInfo>)
+        val library = MyApplication.applicationInstance().library
         val work = library.getWorkInfoByID(workToGetId)
         var numLines = 1
 

@@ -2,7 +2,7 @@
 
 package com.ericmschmidt.greekreader.data
 
-import com.ericmschmidt.classicsreader.data.Manifest
+import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.greekreader.R
 
@@ -13,7 +13,7 @@ import com.ericmschmidt.greekreader.R
  * @version 2.0
  * @since 0.1
  */
-class GreekReaderManifest: Manifest() {
+class GreekReaderLibrary: Library() {
     /**
      * Gets the collection of works for this app.
      * @return the collection

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.ericmschmidt.classicsreader.ui.fragments
 
 import android.os.Bundle
@@ -12,8 +14,6 @@ import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.views.R
 import com.ericmschmidt.classicsreader.activities.MainActivity
 import com.ericmschmidt.classicsreader.data.Library
-import com.ericmschmidt.classicsreader.data.Manifest
-import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.logError
 import com.ericmschmidt.classicsreader.ui.interop.setContentToLazyGrid
 import com.ericmschmidt.classicsreader.ui.interop.setContentToLazyList
@@ -32,6 +32,7 @@ import com.ericmschmidt.classicsreader.ui.interop.setContentToLazyList
  * @version 2.0
  * @since 1.0
  */
+@Suppress("DEPRECATION")
 class LibraryFragment : Fragment() {
 
     private var isTranslation = false
@@ -58,11 +59,9 @@ class LibraryFragment : Fragment() {
 
         try {
             // Retrieve the manifest from the package using config settings.
-            val manifest: Manifest = MyApplication.Factory
-                .applicationInstance().manifest
+            val library: Library = MyApplication.applicationInstance().library
 
-            val library = Library(manifest.getCollection() as ArrayList<WorkInfo>)
-            Log.i(TAG, "library length = " + library.collection?.size)
+            Log.i(TAG, "library length = " + library.getCollection()?.size)
 
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
             val displayType = sharedPreferences.getString(

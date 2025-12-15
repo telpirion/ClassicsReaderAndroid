@@ -1,5 +1,6 @@
 package com.ericmschmidt.classicsreader.data
 
+import com.ericmschmidt.classicsreader.logError
 import java.util.ArrayList
 
 /** Contains information about the texts included in the reader.
@@ -8,7 +9,21 @@ import java.util.ArrayList
  * @version 2.0
  * @since 1.0
  */
-class Library(val collection: ArrayList<WorkInfo>?) {
+open class Library {
+
+    open fun getCollection(): ArrayList<WorkInfo>? {
+        return null
+    }
+
+    open fun getDictionaryInfo(): WorkInfo? {
+        return null
+    }
+
+    open fun getDictionaryEntryResource(): Int {
+        return 0
+    }
+
+    private val collection: ArrayList<WorkInfo>? = getCollection()
 
     /**
      * Gets the WorkInfo for the specified work ID.
@@ -18,16 +33,28 @@ class Library(val collection: ArrayList<WorkInfo>?) {
     }
 
     /**
-     * Gets the list of works as a series of strings.
-     */
-    fun getWorkList(): Array<String> {
-        return collection?.map { it.title }?.toTypedArray() ?: emptyArray()
-    }
-
-    /**
      * Gets information about all of the texts in the work.
      */
     fun getWorks(): Array<WorkInfo> {
         return collection?.toTypedArray() ?: emptyArray()
+    }
+
+    companion object {
+        /**
+         * Get the library class out of the package using reflection.
+         * @param className the fully-qualified class name as a string.
+         * @return Library
+         */
+        fun getLibrary(className: String): Library? {
+            var library: Library? = null
+            try {
+                val libraryClass = Class.forName(className)
+                val constructors = libraryClass.constructors
+                library = constructors[0]!!.newInstance() as Library
+            } catch (ex: Exception) {
+                logError(Library::class.java, ex.message)
+            }
+            return library
+        }
     }
 }
