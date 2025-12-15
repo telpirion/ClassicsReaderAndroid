@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ericmschmidt.classicsreader.data.Library
-import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoLibrary
 import com.ericmschmidt.classicsreader.ui.components.LibraryPreviewProvider
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyList
 import kotlinx.coroutines.launch
@@ -82,9 +82,9 @@ fun NavigableListDetailPaneScaffoldFull(
 
 @Composable
 fun DetailsPane(item: SelectedItem) {
-    val pseudoManifest = PseudoManifest()
+    val pseudoManifest = PseudoLibrary()
     val works = pseudoManifest.getCollection()
-    val workInfo = works?.get(item.id)
+    val workInfo = works[item.id]
     Card {
         Column(
             Modifier
@@ -92,7 +92,7 @@ fun DetailsPane(item: SelectedItem) {
                 .padding(16.dp)
         ) {
             Text(
-                text = "Details page for ${workInfo?.title}",
+                text = "Details page for ${workInfo.title}",
                 fontSize = 24.sp,
             )
             Spacer(Modifier.size(16.dp))
