@@ -42,7 +42,7 @@ class LatinReaderManifest : Manifest() {
                 TOCEntry("", 7, 0)
             ),
             image = R.drawable.work_de_bello_gallico,
-            description = getCaesarDescription(),
+            description = caesarDescription,
             editor = "T. Rice Holmes",
             translator = "W. A. McDevitte, W. S. Bohn"),
         WorkInfo(
@@ -54,7 +54,10 @@ class LatinReaderManifest : Manifest() {
             location = R.raw.hor_carm_lat,
             englishLocation = R.raw.hor_carm_eng,
             workType = WorkInfo.WorkType.POEM,
-            image = R.drawable.work_carmina),
+            image = R.drawable.work_carmina,
+            description = horaceDescription,
+            editor = "Paul Shorey and Gordon J. Laing",
+            translator = "John Conington"),
         WorkInfo(
             id = "Lucretius",
             title = "De Rerum Natura",
@@ -64,7 +67,11 @@ class LatinReaderManifest : Manifest() {
             location = R.raw.lucretius_lat,
             englishLocation = R.raw.lucretius_eng,
             workType = WorkInfo.WorkType.POEM,
-            image = R.drawable.work_de_rerum_natura),
+            image = R.drawable.work_de_rerum_natura,
+            description = lucretiusDescription,
+            editor = "William Ellery Leonard",
+            translator = "William Ellery Leonard"
+        ),
         WorkInfo(
             id = "OvidM",
             title = "Metamorphoses",
@@ -74,7 +81,10 @@ class LatinReaderManifest : Manifest() {
             location = R.raw.ovid_met_lat,
             englishLocation = R.raw.ovid_met_eng,
             workType = WorkInfo.WorkType.POEM,
-            image = R.drawable.work_metamorphoses),
+            image = R.drawable.work_metamorphoses,
+            description = ovidDescription,
+            editor = "Hugo Magnus",
+            translator = "Brookes More",),
         WorkInfo(
             id = "Petronius",
             title = "Satyricon, Fragmenta, and Poems",
@@ -84,7 +94,10 @@ class LatinReaderManifest : Manifest() {
             location = R.raw.petr_lat,
             englishLocation = R.raw.petr_eng,
             workType = WorkInfo.WorkType.PROSE,
-            image = R.drawable.work_satyricon),
+            image = R.drawable.work_satyricon,
+            description = petroniusDescription,
+            editor = "Michael Heseltine",
+            translator = "Michael Heseltine",),
         WorkInfo(
             id = "SalJug",
             title = "Bellum Jugurthinum",
@@ -93,7 +106,10 @@ class LatinReaderManifest : Manifest() {
             englishAuthor = "Sallust",
             location = R.raw.sallust_jugur_eng,
             workType = WorkInfo.WorkType.PROSE,
-            image = R.drawable.work_de_bellum_jugurthinum),
+            image = R.drawable.work_de_bellum_jugurthinum,
+            description = sallustDescription,
+            editor = "John Selby Watson",
+            translator = "John Selby Watson"),
         WorkInfo(
             id = "SenApoc",
             title = "Apocolocyntosis",
@@ -103,7 +119,11 @@ class LatinReaderManifest : Manifest() {
             location = R.raw.sen_apoc_lat,
             englishLocation = R.raw.sen_apoc_eng,
             workType = WorkInfo.WorkType.PROSE,
-            image = R.drawable.work_apocolocyntosis),
+            image = R.drawable.work_apocolocyntosis,
+            description = senecaDescription,
+            editor = "W.H.D. Rouse,  M.A. Litt. D.",
+            translator = "W.H.D. Rouse"
+        ),
         WorkInfo(
             id = "VirgA",
             title = "Aeneid",
@@ -113,7 +133,11 @@ class LatinReaderManifest : Manifest() {
             location = R.raw.verg_a_lat,
             englishLocation = R.raw.verg_a_eng,
             workType = WorkInfo.WorkType.POEM,
-            image = R.drawable.work_aeneid),
+            image = R.drawable.work_aeneid,
+            description = vergilDescription,
+            editor = "J. B. Greenough",
+            translator = "Theodore C. Williams"
+        ),
         WorkInfo(
             id = "Livy1",
             author = "Titus Livius",
@@ -123,7 +147,11 @@ class LatinReaderManifest : Manifest() {
             location = R.raw.livy_01_02_lat,
             englishLocation = R.raw.livy_01_02_eng,
             workType = WorkInfo.WorkType.PROSE,
-            image = R.drawable.work_ab_urbe_condita)
+            image = R.drawable.work_ab_urbe_condita,
+            description = livyDescription,
+            editor = "Benjamin Oliver Foster, Ph.D.",
+            translator = "Benjamin Oliver Foster, Ph.D."
+        )
     )
 
     /**
