@@ -105,7 +105,8 @@ class GreekReaderLibrary: Library() {
             englishAuthor = "Henry George Liddell and Robert Scott",
             englishTitle = "An Intermediate Greek-English Lexicon",
             location = R.raw.ml,
-            englishLocation = R.raw.ml)
+            englishLocation = R.raw.ml,
+            workType = WorkInfo.WorkType.DICTIONARY)
 
     /**
      * Gets the resource ID of the dictionary entry file.
@@ -114,4 +115,15 @@ class GreekReaderLibrary: Library() {
     override fun getDictionaryEntryResource(): Int {
         return R.raw.dictionary_entries
     }
+
+    override fun getGrammar(): WorkInfo = WorkInfo(
+        id = "grammar",
+        title = "A Greek Grammar for Colleges",
+        author = "Herbert Weir Smyth",
+        englishTitle = "A Greek Grammar for Colleges",
+        englishAuthor = "Herbert Weir Smyth",
+        location = R.raw.smyth,
+        englishLocation = R.raw.smyth,
+        workType = WorkInfo.WorkType.GRAMMAR
+    )
 }

@@ -353,4 +353,15 @@ class LatinReaderLibrary : Library() {
      * @return int the dictionary entry file's ID.
      */
     override fun getDictionaryEntryResource(): Int = R.raw.dictionary_entries
+
+    override fun getGrammar(): WorkInfo = WorkInfo(
+        id = "grammar",
+        title = "ALLEN AND GREENOUGH'S NEW LATIN GRAMMAR FOR SCHOOLS AND COLLEGES FOUNDED ON COMPARATIVE GRAMMAR",
+        author = "J. B. GREENOUGH and J. H. ALLEN",
+        englishTitle = "ALLEN AND GREENOUGH'S NEW LATIN GRAMMAR FOR SCHOOLS AND COLLEGES FOUNDED ON COMPARATIVE GRAMMAR",
+        englishAuthor = "J. B. GREENOUGH and J. H. ALLEN",
+        location = R.raw.allenandgreenough,
+        englishLocation = R.raw.allenandgreenough,
+        workType = WorkInfo.WorkType.GRAMMAR
+    )
 }
