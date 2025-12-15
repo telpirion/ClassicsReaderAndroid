@@ -1,3 +1,5 @@
+@file:Suppress("KDocUnresolvedReference", "unused", "SpellCheckingInspection")
+
 package com.ericmschmidt.latin.data
 
 import com.ericmschmidt.classicsreader.data.Manifest
@@ -39,7 +41,10 @@ class LatinReaderManifest : Manifest() {
                 TOCEntry("", 6, 0),
                 TOCEntry("", 7, 0)
             ),
-            image = R.drawable.work_de_bello_gallico),
+            image = R.drawable.work_de_bello_gallico,
+            description = getCaesarDescription(),
+            editor = "T. Rice Holmes",
+            translator = "W. A. McDevitte, W. S. Bohn"),
         WorkInfo(
             id = "Horace",
             title = "Carmina",
