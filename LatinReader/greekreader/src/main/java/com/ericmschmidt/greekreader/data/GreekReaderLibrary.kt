@@ -3,6 +3,7 @@
 package com.ericmschmidt.greekreader.data
 
 import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.greekreader.R
 
@@ -31,7 +32,18 @@ class GreekReaderLibrary: Library() {
                 location = R.raw.gk_aristot_pol_gk,
                 englishLocation = R.raw.aristot_pol_eng,
                 workType = WorkInfo.WorkType.PROSE,
-                image = R.drawable.work_politics),
+                image = R.drawable.work_politics,
+                description = aristotlePoliticsDescription,
+                tocEntries = arrayListOf(
+                    TOCEntry("Book 1", 0, 0),
+                    TOCEntry("Book 2", 1, 0),
+                    TOCEntry("Book 3", 2, 0),
+                    TOCEntry("Book 4", 3, 0),
+                    TOCEntry("Book 5", 4, 0),
+                    TOCEntry("Book 6", 5, 0),
+                    TOCEntry("Book 7", 6, 0),
+                    TOCEntry("Book 8", 7, 0)
+                )),
             WorkInfo(
                 id = "HomerIliad",
                 author = "Homer",
@@ -44,7 +56,8 @@ class GreekReaderLibrary: Library() {
                 englishLocation = R.raw.hom_il_eng,
                 workType = WorkInfo.WorkType.POEM,
                 offset = 1,
-                image = R.drawable.work_iliad),
+                image = R.drawable.work_iliad,
+                description = homerIliadDescription),
             WorkInfo(
                 id = "HomerOdyssey",
                 author = "Homer",
@@ -57,7 +70,8 @@ class GreekReaderLibrary: Library() {
                 englishLocation = R.raw.hom_od_eng,
                 workType = WorkInfo.WorkType.POEM,
                 offset = 1,
-                image = R.drawable.work_odyssey),
+                image = R.drawable.work_odyssey,
+                description = homerOdysseyDescription),
             WorkInfo(
                 id = "XenophonAn",
                 author = "Xenophon",
@@ -69,7 +83,8 @@ class GreekReaderLibrary: Library() {
                 location = R.raw.gk_xen_anab_gk,
                 englishLocation = R.raw.xen_anab_eng,
                 workType = WorkInfo.WorkType.PROSE,
-                image = R.drawable.work_anabasis),
+                image = R.drawable.work_anabasis,
+                description = xenophonAnabasisDescription),
             WorkInfo(
                 id = "Lysias",
                 author = "Lysias",
@@ -81,31 +96,8 @@ class GreekReaderLibrary: Library() {
                 location = R.raw.gk_lys_gk,
                 englishLocation = R.raw.lys_eng,
                 workType = WorkInfo.WorkType.PROSE,
-                image = R.drawable.work_speeches),
-
-            WorkInfo(
-                id = "Herodotus",
-                title = "Histories",
-                author = "Herodotus",
-                editor = "A. D. Godley",
-                translator = "A. D. Godley",
-                englishTitle = "Histories",
-                englishAuthor = "Herodotus",
-                location = R.raw.gk_hdt_gk,
-                englishLocation = R.raw.hdt_eng,
-                workType = WorkInfo.WorkType.PROSE),
-
-            WorkInfo(
-                id = "PlatoRep",
-                title = "Republic",
-                author = "Plato",
-                editor = "John Burnet",
-                translator = "Paul Shorey",
-                englishTitle = "Republic",
-                englishAuthor = "Plato",
-                location = R.raw.gk_plat_rep_gk,
-                englishLocation = R.raw.plat_rep_eng,
-                workType = WorkInfo.WorkType.PROSE)
+                image = R.drawable.work_speeches,
+                description = lysiasDescription),
         )
 
 
@@ -116,7 +108,8 @@ class GreekReaderLibrary: Library() {
             englishAuthor = "Henry George Liddell and Robert Scott",
             englishTitle = "An Intermediate Greek-English Lexicon",
             location = R.raw.ml,
-            englishLocation = R.raw.ml)
+            englishLocation = R.raw.ml,
+            description = dictionaryDescription)
 
     /**
      * Gets the resource ID of the dictionary entry file.
