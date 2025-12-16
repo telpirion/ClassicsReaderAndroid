@@ -1,7 +1,9 @@
+@file:Suppress("unused")
+
 package com.telpirion.compose.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,7 +11,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -36,7 +37,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
@@ -60,9 +60,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import com.telpirion.compose.ui.theme.LatinReaderTheme
 import androidx.navigation.NavHostController
-import com.ericmschmidt.classicsreader.data.Manifest
-import com.ericmschmidt.classicsreader.data.placeholders.PseudoManifest
+import com.ericmschmidt.classicsreader.data.Library
 import androidx.compose.ui.tooling.preview.Preview
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoLibrary
 import com.telpirion.compose.viewmodels.DictionaryUiState
 
 private val bottomNavigationItems = listOf(
@@ -84,6 +84,7 @@ private val navigationItems = listOf(
 // Global declaration for user settings preferences
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
+@SuppressLint("FlowOperatorInvokedInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReaderApp(
@@ -112,7 +113,7 @@ fun ReaderApp(
         .map { preferences ->
             preferences[recentlyReadKey] ?: ""
         }
-    val currentWorkId: String? = recentlyRead.collectAsState(initial = "").value
+    val currentWorkId: String = recentlyRead.collectAsState(initial = "").value
 
     val navigationFunc : (String) -> Unit = { route ->
         when (route){
@@ -125,7 +126,7 @@ fun ReaderApp(
         }
     }
 
-    val manifest = MyApplication.applicationInstance().manifest
+    val manifest = MyApplication.applicationInstance().library
 
     ReaderAppContent(
         isCompact = isCompact,
@@ -140,7 +141,7 @@ fun ReaderApp(
         onClearSearch = dictionaryViewModel::clearSearch,
         currentWorkId = currentWorkId,
         currentRoute = currentRoute,
-        manifest = manifest,
+        library = manifest,
         onNavigate = navigationFunc,
         content = { modifier ->
             ReaderAppNavHost(
@@ -164,7 +165,7 @@ fun ReaderAppContent(
     onClearSearch: () -> Unit,
     currentWorkId: String?,
     currentRoute: String?,
-    manifest: Manifest,
+    library: Library,
     onNavigate: (String) -> Unit,
     content: @Composable (Modifier) -> Unit
 ) {
@@ -181,7 +182,7 @@ fun ReaderAppContent(
                         onNavigate(route)
                         scope.launch { drawerState.close() }
                     },
-                    manifest = manifest
+                    library = library
                 )
             }
         ) {
@@ -236,10 +237,10 @@ private fun NavDrawerContent(
     currentRoute: String?,
     onNavigate: (String) -> Unit,
     modifier: Modifier = Modifier,
-    manifest: Manifest
+    library: Library
 ) {
     ModalDrawerSheet(modifier = modifier) {
-        NavigationHeader(modifier = Modifier.padding(16.dp), manifest = manifest)
+        NavigationHeader(modifier = Modifier.padding(16.dp), library = library)
         Spacer(Modifier.height(12.dp))
         navigationItems.forEach { screen ->
             NavigationDrawerItem(
@@ -256,12 +257,12 @@ private fun NavDrawerContent(
 @Composable
 private fun NavigationHeader(
     modifier: Modifier = Modifier,
-    manifest: Manifest
+    library: Library
 ) {
     Column(modifier = modifier) {
         // A Row to neatly arrange the logo and app name side-by-side.
         Row(verticalAlignment = Alignment.CenterVertically) {
-            manifest.GetHeaderIcon()
+            library.GetHeaderIcon()
             Spacer(Modifier.width(16.dp))
             Text(
                 text = stringResource(id = R.string.app_name),
@@ -325,7 +326,7 @@ private fun ReaderNavigationRail(
 fun ReaderAppPreview() {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val manifest = PseudoManifest()
+    val library = PseudoLibrary()
     
     ReaderAppContent(
         isCompact = true,
@@ -337,7 +338,7 @@ fun ReaderAppPreview() {
         onClearSearch = {},
         currentWorkId = null,
         currentRoute = Screen.Library.route,
-        manifest = manifest,
+        library = library,
         onNavigate = {},
         content = {
             Box(Modifier.fillMaxSize()) {
@@ -353,7 +354,7 @@ fun ReaderAppPreview() {
 fun ReaderAppExpandedPreview() {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val manifest = PseudoManifest()
+    val library = PseudoLibrary()
 
     ReaderAppContent(
         isCompact = false,
@@ -365,7 +366,7 @@ fun ReaderAppExpandedPreview() {
         onClearSearch = {},
         currentWorkId = null,
         currentRoute = Screen.Library.route,
-        manifest = manifest,
+        library = library,
         onNavigate = {},
         content = {
             Box(Modifier.fillMaxSize()) {

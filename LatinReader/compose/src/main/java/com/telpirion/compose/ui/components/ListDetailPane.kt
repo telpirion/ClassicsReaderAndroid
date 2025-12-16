@@ -1,5 +1,6 @@
 package com.telpirion.compose.ui.components
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
@@ -14,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyList
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyVerticalGrid
@@ -33,6 +33,7 @@ fun NavigableListDetailPaneScaffoldFullPreview(
     ListDetailPane(navController = null)
 }
 
+@SuppressLint("FlowOperatorInvokedInComposition")
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun ListDetailPane(
@@ -43,8 +44,7 @@ fun ListDetailPane(
 ) {
 
     val context : Context = MyApplication.applicationInstance().context
-    val manifest = MyApplication.applicationInstance().manifest
-    val library = Library(manifest.getCollection() as ArrayList<WorkInfo>)
+    val library = MyApplication.applicationInstance().library
     val scaffoldNavigator = rememberListDetailPaneScaffoldNavigator<SelectedItem>()
     val scope = rememberCoroutineScope()
     val works = library.getWorks()

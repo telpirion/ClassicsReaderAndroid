@@ -5,7 +5,6 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.data.RECENTLY_READ
@@ -76,8 +75,7 @@ class ReadingViewModel(
     init {
         if (!workId.isNullOrEmpty()) {
             val application = MyApplication.applicationInstance()
-            val manifest = application.manifest
-            val library = Library(manifest.getCollection() as ArrayList<WorkInfo>)
+            val library = application.library
             workInfo = library.getWorkInfoByID(workId)
 
             // TODO(telpirion): integrate old ReaderViewModel with new one
@@ -129,10 +127,9 @@ class ReadingViewModel(
             translationContent = translationContentLines.joinToString("\n"),
             info = workInfo?.title ?: "Unknown Work",
             position = content?.getReadingPositionString() as String,
-            tocAvailable = workInfo?.getTocEntries()?.isNotEmpty() ?: false,
+            tocAvailable = workInfo?.tocEntries?.isNotEmpty() ?: false,
             isTranslation = isTranslation,
-            toc = workInfo?.getTocEntries()
-        )
+            toc = workInfo?.tocEntries?.toTypedArray())
     }
 
     @Suppress("UNCHECKED_CAST")
