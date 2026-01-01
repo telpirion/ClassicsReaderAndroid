@@ -42,8 +42,8 @@ import androidx.compose.ui.unit.dp
 import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.ui.components.LibraryPreviewProvider
-import com.telpirion.compose.ui.theme.Purple40
-import com.telpirion.compose.ui.theme.PurpleGrey80
+import com.telpirion.compose.ui.theme.TelpirionGray
+import com.telpirion.compose.ui.theme.TelpirionOrange
 
 
 @Preview(showBackground = true, device = PIXEL)
@@ -104,7 +104,7 @@ fun DetailsPane(
                 .fillMaxSize()
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             colors = CardColors(
-                containerColor = PurpleGrey80,
+                containerColor = TelpirionOrange,
                 contentColor = lightColorScheme().onSurface,
                 disabledContainerColor = lightColorScheme().onSurface.copy(alpha = 0.12f),
                 disabledContentColor = lightColorScheme().onSurface.copy(alpha = 0.38f)
@@ -122,7 +122,7 @@ fun DetailsPane(
                         horizontalArrangement = Arrangement.Start
                     ) {
                         Image(
-                            painter = painterResource(id = workInfo.image as Int),
+                            painter = painterResource(id = workInfo.image),
                             contentDescription = "${workInfo.title} cover art",
                             modifier = Modifier.size(120.dp)
                         )
@@ -131,7 +131,7 @@ fun DetailsPane(
                         ) {
                             // 2. Title
                             Text(
-                                text = workInfo.title as String,
+                                text = workInfo.title,
                                 style = MaterialTheme.typography.headlineSmall
                             )
 
@@ -139,7 +139,7 @@ fun DetailsPane(
 
                             // 3. Author
                             Text(
-                                text = workInfo.author as String,
+                                text = workInfo.author,
                                 style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -149,11 +149,11 @@ fun DetailsPane(
 
                     Spacer(Modifier.height(24.dp))
                     Button(
-                        onClick = { onReadClick(workInfo.id as String) },
+                        onClick = { onReadClick(workInfo.id) },
                         modifier = Modifier
                             .width(120.dp),
                         colors = buttonColors(
-                            containerColor = Purple40,
+                            containerColor = TelpirionGray,
                             contentColor = Color.White
                         )
                     ) {
@@ -169,11 +169,14 @@ fun DetailsPane(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         BoldedText("Translator",
-                            workInfo.translator as String)
+                            workInfo.translator
+                        )
                         BoldedText("Editor",
-                            workInfo.editor as String)
+                            workInfo.editor
+                        )
                         BoldedText("Description",
-                            workInfo.description as String)
+                            workInfo.description
+                        )
                     }
                 }
             } else {

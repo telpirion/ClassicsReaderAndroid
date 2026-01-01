@@ -32,11 +32,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ericmschmidt.classicsreader.data.TOCEntry
-import com.telpirion.compose.ui.theme.PurpleGrey80
+import com.telpirion.compose.ui.theme.TelpirionOrange
 import com.telpirion.compose.viewmodels.ReadingViewModel
 import com.telpirion.compose.R
 
-@Suppress("SpellCheckingInspection")
 class TOCEntryParameterProvider : PreviewParameterProvider<List<TOCEntry>> {
     override val values = sequenceOf(
         listOf(
@@ -161,7 +160,7 @@ fun SupportingPaneTemplate(
             modifier = Modifier
                 .fillMaxSize(),
             colors = CardColors(
-                containerColor = PurpleGrey80,
+                containerColor = TelpirionOrange,
                 contentColor = lightColorScheme().onSurface,
                 disabledContainerColor = lightColorScheme().onSurface.copy(alpha = 0.12f),
                 disabledContentColor = lightColorScheme().onSurface.copy(alpha = 0.38f)

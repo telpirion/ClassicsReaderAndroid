@@ -31,7 +31,6 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -113,7 +112,7 @@ fun ReaderApp(
         .map { preferences ->
             preferences[recentlyReadKey] ?: ""
         }
-    val currentWorkId: String = recentlyRead.collectAsState(initial = "").value
+    val currentWorkId by recentlyRead.collectAsStateWithLifecycle(initialValue = "")
 
     val navigationFunc : (String) -> Unit = { route ->
         when (route){
@@ -187,6 +186,8 @@ fun ReaderAppContent(
             }
         ) {
             Scaffold(
+                containerColor = MaterialTheme.colorScheme.background,
+                contentColor = MaterialTheme.colorScheme.onBackground,
                 topBar = {
                     ReaderTopAppBar(
                         onMenuClick = { scope.launch { drawerState.open() } },
