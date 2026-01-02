@@ -13,6 +13,9 @@ val TOrange40 = Color(0xFFF46A6B)
 val TOrange80 = Color(0xFFF46A6B)
 
 val TGray40 = Color(0xFF7E878E)
+val TGray80 = Color(0xFF191919)
+
+
 
 val DebugRed = Color(0xFFF44336)
 val DebugGreen = Color(0xFF4CAF50)

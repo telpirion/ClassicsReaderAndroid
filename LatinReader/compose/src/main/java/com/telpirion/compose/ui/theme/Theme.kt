@@ -1,17 +1,11 @@
 package com.telpirion.compose.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = TelpirionWhite,
-    secondary = TelpirionOrange,
-    tertiary = TelpirionGray
-)
 
 private val LightColorScheme = lightColorScheme(
     primary = TelpirionWhite,
@@ -19,11 +13,13 @@ private val LightColorScheme = lightColorScheme(
     tertiary = TelpirionGray,
     background = TGray40,
     onBackground = TelpirionWhite,
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onSurface = Color(0xFF1C1B1F),
+    onPrimary = TGray80,
+    onSecondary = TWhite40,
+    onTertiary = TOrange40,
+    onSurface = TGray40,
 )
+
+private val DarkColorScheme = lightColorScheme().copy()
 
 @Composable
 fun LatinReaderTheme(
@@ -40,4 +36,10 @@ fun LatinReaderTheme(
         typography = Typography,
         content = content
     )
+}
+
+object LatinReaderTheme {
+    val colorScheme: ColorScheme
+        @Composable
+        get() = MaterialTheme.colorScheme
 }

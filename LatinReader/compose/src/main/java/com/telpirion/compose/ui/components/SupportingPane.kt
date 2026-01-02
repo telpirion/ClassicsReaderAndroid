@@ -1,5 +1,8 @@
+@file:Suppress("SpellCheckingInspection")
+
 package com.telpirion.compose.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +23,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,9 +34,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ericmschmidt.classicsreader.data.TOCEntry
-import com.telpirion.compose.ui.theme.TelpirionOrange
 import com.telpirion.compose.viewmodels.ReadingViewModel
 import com.telpirion.compose.R
+import com.telpirion.compose.ui.theme.LatinReaderTheme
 
 class TOCEntryParameterProvider : PreviewParameterProvider<List<TOCEntry>> {
     override val values = sequenceOf(
@@ -82,19 +84,12 @@ fun TableOfContentsPane(
     onClose: () -> Unit,
 ) {
     SupportingPaneTemplate(
-        onClose
+        onClose,
+        paneTitle = stringResource(R.string.screen_toc)
     ) {
         Column(
             Modifier.padding(horizontal = 16.dp)
         ){
-            Spacer(modifier = Modifier.padding(top = 30.dp))
-            Text(stringResource(R.string.screen_toc),
-                style = MaterialTheme.typography.titleMedium)
-            Spacer(modifier = Modifier.padding(top = 16.dp))
-            HorizontalDivider(
-                thickness = 2.dp,
-                color = MaterialTheme.colorScheme.onBackground
-            )
             LazyColumn {
                 items(toc) { entry ->
                     Text(
@@ -128,31 +123,24 @@ fun TranslationPane(
     translationInfo: String,
 ) {
     SupportingPaneTemplate(
-        onClose
+        onClose,
+        paneTitle = translationInfo
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            Spacer(modifier = Modifier.padding(top = 30.dp))
-            Text(translationInfo)
-            Spacer(modifier = Modifier.padding(top = 16.dp))
-            HorizontalDivider(
-                thickness = 2.dp,
-                color = MaterialTheme.colorScheme.onBackground
-            )
             Spacer(modifier = Modifier.padding(top = 16.dp))
             Text(translationContent)
         }
     }
-
-
 }
 
 @Composable
 fun SupportingPaneTemplate(
     onClose: () -> Unit,
+    paneTitle: String = "",
     content: @Composable () -> Unit,
 ){
     Box(modifier = Modifier.fillMaxSize()) {
@@ -160,24 +148,34 @@ fun SupportingPaneTemplate(
             modifier = Modifier
                 .fillMaxSize(),
             colors = CardColors(
-                containerColor = TelpirionOrange,
-                contentColor = lightColorScheme().onSurface,
-                disabledContainerColor = lightColorScheme().onSurface.copy(alpha = 0.12f),
-                disabledContentColor = lightColorScheme().onSurface.copy(alpha = 0.38f)
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onSurface,
+                disabledContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.12f),
+                disabledContentColor =  MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
             )
         ) {
             Column(
                 Modifier.padding(horizontal = 16.dp)
             ){
+                Spacer(modifier = Modifier.padding(top = 30.dp))
+                Text(paneTitle)
+                Spacer(modifier = Modifier.padding(top = 16.dp))
+                HorizontalDivider(
+                    thickness = 3.dp,
+                    color = LatinReaderTheme.colorScheme.secondary
+                )
                 content()
             }
-
         }
         IconButton(
             onClick = onClose,
             modifier = Modifier.align(Alignment.TopEnd).padding(16.dp)
         ) {
-            Icon(Icons.Default.Close, contentDescription = "Close")
+            Icon(
+                Icons.Default.Close,
+                contentDescription = "Close",
+                modifier = Modifier.background(LatinReaderTheme.colorScheme.secondary)
+            )
         }
     }
 }

@@ -1,3 +1,5 @@
+@file:Suppress("AssignedValueIsNeverRead")
+
 package com.telpirion.compose.ui.screens
 
 import android.app.Application
@@ -23,6 +25,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.layout.PaneAdaptedValue
 import androidx.compose.material3.adaptive.layout.SupportingPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
 import androidx.compose.material3.adaptive.navigation.NavigableSupportingPaneScaffold
@@ -198,6 +201,7 @@ fun ReadingScreen(
     val scaffoldNavigator = rememberSupportingPaneScaffoldNavigator()
     val scope = rememberCoroutineScope()
     var supportingPaneContent by remember { mutableStateOf<SupportingPaneContent>(SupportingPaneContent.Hidden) }
+    val backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange
 
     NavigableSupportingPaneScaffold(
         navigator = scaffoldNavigator,
@@ -253,40 +257,44 @@ fun ReadingScreen(
             }
         },
         supportingPane = {
-            when (supportingPaneContent) {
-                SupportingPaneContent.Translation -> {
-                    if (currentWorkId != null) {
-                        TranslationPane(
-                            onClose = {
-                                scope.launch {
-                                    scaffoldNavigator.navigateBack(
-                                        backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
+            if (scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Supporting] == PaneAdaptedValue.Expanded) {
+                when (supportingPaneContent) {
+                    SupportingPaneContent.Translation -> {
+                        if (currentWorkId != null) {
+                            TranslationPane(
+                                onClose = {
+                                    scope.launch {
+                                        supportingPaneContent = SupportingPaneContent.Hidden
+                                        scaffoldNavigator.navigateBack(backNavigationBehavior)
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
-                }
-                SupportingPaneContent.TableOfContents -> {
-                    if (viewModel != null) {
-                        TableOfContentsPane(
-                            onTocEntryClick = { index ->
-                                viewModel.goToChapter(index)
-                                scope.launch {
-                                    scaffoldNavigator.navigateBack(
-                                        backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
+
+                    SupportingPaneContent.TableOfContents -> {
+                        if (viewModel != null) {
+                            TableOfContentsPane(
+                                onTocEntryClick = { index ->
+                                    viewModel.goToChapter(index)
+                                    scope.launch {
+                                        supportingPaneContent = SupportingPaneContent.Hidden
+                                        scaffoldNavigator.navigateBack(backNavigationBehavior)
+                                    }
+                                },
+                                onClose = {
+                                    scope.launch {
+                                        supportingPaneContent = SupportingPaneContent.Hidden
+                                        scaffoldNavigator.navigateBack(backNavigationBehavior)
+                                    }
                                 }
-                            },
-                            onClose = {
-                                scope.launch {
-                                    scaffoldNavigator.navigateBack(
-                                        backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange)
-                                }
-                            }
-                        )
+                            )
+                        }
                     }
-                }
-                SupportingPaneContent.Hidden -> {
-                    // Empty pane
+
+                    SupportingPaneContent.Hidden -> {
+                        // Empty pane
+                    }
                 }
             }
         }
@@ -305,6 +313,7 @@ private fun ReadingContent(
     lineHeight: Float = 1.2f,
 
     ) {
+    @Suppress("COMPOSE_APPLIER_CALL_MISMATCH")
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()

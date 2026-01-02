@@ -23,7 +23,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +42,6 @@ import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.ui.components.LibraryPreviewProvider
 import com.telpirion.compose.ui.theme.TelpirionGray
-import com.telpirion.compose.ui.theme.TelpirionOrange
 
 
 @Preview(showBackground = true, device = PIXEL)
@@ -104,10 +102,10 @@ fun DetailsPane(
                 .fillMaxSize()
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             colors = CardColors(
-                containerColor = TelpirionOrange,
-                contentColor = lightColorScheme().onSurface,
-                disabledContainerColor = lightColorScheme().onSurface.copy(alpha = 0.12f),
-                disabledContentColor = lightColorScheme().onSurface.copy(alpha = 0.38f)
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onSurface,
+                disabledContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.12f),
+                disabledContentColor =  MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
             )
         ) {
             if (workInfo != null) {
@@ -162,7 +160,7 @@ fun DetailsPane(
                     Spacer(Modifier.height(24.dp))
                     HorizontalDivider(
                         thickness = 2.dp,
-                        color = MaterialTheme.colorScheme.onBackground
+                        color = MaterialTheme.colorScheme.secondary
                     )
                     Spacer(Modifier.height(24.dp))
                     Column(
