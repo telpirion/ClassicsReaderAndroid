@@ -22,7 +22,7 @@ private val LightColorScheme = lightColorScheme(
 private val DarkColorScheme = lightColorScheme().copy()
 
 @Composable
-fun LatinReaderTheme(
+fun ReaderTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
