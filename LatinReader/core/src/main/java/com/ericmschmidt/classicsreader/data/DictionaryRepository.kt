@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 
 // Define the DataStore instance once in a central file.
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "dictionary_prefs")
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "dictionary_prefs")
 
 /**
  * Repository to manage dictionary data, including search history and definitions.

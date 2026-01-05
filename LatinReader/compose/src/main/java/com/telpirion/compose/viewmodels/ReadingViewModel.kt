@@ -1,14 +1,19 @@
 package com.telpirion.compose.viewmodels
 
 import android.app.Application
+import android.content.Context
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ericmschmidt.classicsreader.MyApplication
+import com.ericmschmidt.classicsreader.data.PreferencesDataStore
+import com.ericmschmidt.classicsreader.data.PreferencesState
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.data.RECENTLY_READ
-import com.telpirion.compose.utils.writeStringSetting
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -56,7 +61,8 @@ class ReadingViewModel(
     application: Application,
     workId: String?,
     private val isTranslation: Boolean,
-    poemLines: Int
+    private val poemLines: Int,
+    private val preferencesDataStore: PreferencesDataStore,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ReadingUiState())
@@ -69,8 +75,6 @@ class ReadingViewModel(
 
     private var content: RVM? = null
     private var translationContent: RVM? = null
-
-    val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
 
     init {
         if (!workId.isNullOrEmpty()) {
@@ -92,10 +96,7 @@ class ReadingViewModel(
             // Update the recently read
             runBlocking {
                 launch {
-                    writeStringSetting(
-                        context = application.context,
-                        recentlyReadKey,
-                        newValue = workId)
+                    preferencesDataStore.updateRecentlyRead(workId)
                 }
             }
         } else {
@@ -137,10 +138,11 @@ class ReadingViewModel(
         private val application: Application,
         private val workId: String?,
         private val isTranslation: Boolean,
+        private val preferencesDataStore: PreferencesDataStore,
         private val poemLines: Int
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ReadingViewModel(application, workId, isTranslation, poemLines) as T
+            return ReadingViewModel(application, workId, isTranslation, poemLines, preferencesDataStore) as T
         }
     }
 }

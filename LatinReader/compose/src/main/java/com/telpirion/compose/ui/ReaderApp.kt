@@ -31,7 +31,9 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +42,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -53,14 +54,13 @@ import kotlinx.coroutines.launch
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ericmschmidt.classicsreader.MyApplication
-import com.ericmschmidt.classicsreader.data.RECENTLY_READ
 import com.telpirion.compose.viewmodels.DictionaryViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import com.telpirion.compose.ui.theme.LatinReaderTheme
+import com.telpirion.compose.ui.theme.ReaderTheme
 import androidx.navigation.NavHostController
 import com.ericmschmidt.classicsreader.data.Library
 import androidx.compose.ui.tooling.preview.Preview
+import com.ericmschmidt.classicsreader.data.PreferencesDataStore
+import com.ericmschmidt.classicsreader.data.PreferencesState
 import com.ericmschmidt.classicsreader.data.placeholders.PseudoLibrary
 import com.telpirion.compose.viewmodels.DictionaryUiState
 
@@ -107,12 +107,12 @@ fun ReaderApp(
 
     // Get recently read from preferences
     val context = LocalContext.current
-    val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
-    val recentlyRead: Flow<String> = context.dataStore.data
-        .map { preferences ->
-            preferences[recentlyReadKey] ?: ""
-        }
-    val currentWorkId by recentlyRead.collectAsStateWithLifecycle(initialValue = "")
+    val preferencesDataStore = remember(context) { PreferencesDataStore(context) }
+
+    val preferences = preferencesDataStore.preferencesFlow().collectAsState(
+        initial = PreferencesState()
+    ).value
+    val currentWorkId = preferences.recentlyRead
 
     val navigationFunc : (String) -> Unit = { route ->
         when (route){
@@ -168,7 +168,7 @@ fun ReaderAppContent(
     onNavigate: (String) -> Unit,
     content: @Composable (Modifier) -> Unit
 ) {
-    LatinReaderTheme {
+    ReaderTheme {
         val scope = rememberCoroutineScope()
 
         ModalNavigationDrawer(

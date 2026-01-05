@@ -47,28 +47,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.ericmschmidt.classicsreader.data.RECENTLY_READ
-import com.ericmschmidt.classicsreader.data.POEM_LINES
-import com.ericmschmidt.classicsreader.data.POEM_LINES_DEFAULT
-import com.ericmschmidt.classicsreader.data.SHOW_PAGE_CONTROLS
-import com.ericmschmidt.classicsreader.data.TEXT_SIZE
-import com.ericmschmidt.classicsreader.data.TEXT_SIZE_DEFAULT
+import com.ericmschmidt.classicsreader.data.PreferencesDataStore
+import com.ericmschmidt.classicsreader.data.PreferencesState
 import com.telpirion.compose.MainActivity
 import com.telpirion.compose.ui.components.Screen
 import com.telpirion.compose.ui.components.TableOfContentsPane
 import com.telpirion.compose.ui.components.TranslationPane
-import com.telpirion.compose.ui.dataStore
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import com.telpirion.compose.viewmodels.ReadingUiState
 import com.telpirion.compose.viewmodels.ReadingViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import com.ericmschmidt.classicsreader.R as CoreResources
 
@@ -92,50 +82,32 @@ fun ReadingScreen(
     screen: Screen = Screen.Recent
 ) {
 
-    // Get recently read from preferences
-    val recentlyReadKey = stringPreferencesKey(RECENTLY_READ)
-    val recentlyRead: Flow<String> = context.dataStore.data
-        .map {
-                preferences ->
-            preferences[recentlyReadKey] ?: ""
-        }
+    val context = LocalContext.current
+    val preferencesDataStore = remember(context) { PreferencesDataStore(context) }
+
+    val preferences = preferencesDataStore.preferencesFlow().collectAsState(
+        initial = PreferencesState()
+    ).value
+
+    val recentlyRead = preferences.recentlyRead
+    val textSize = preferences.textSize
+    val poemLines = preferences.poemLines
+    val showPageControls = preferences.showPageControls
+
     var currentWorkId: String? = workId
     if (screen == Screen.Recent) {
-        val tmpRecentWorkId = recentlyRead.collectAsState(initial = "").value
-        if (tmpRecentWorkId.isNotEmpty()) {
-            currentWorkId = tmpRecentWorkId
+        if (recentlyRead.isNotEmpty()) {
+            currentWorkId = recentlyRead
         }
     }
 
-    // Get poem lines from preferences
-    val poemLinesKey = intPreferencesKey(POEM_LINES)
-    val poemLines: Flow<Int> = context.dataStore.data
-        .map { preferences ->
-            // No type safety.
-            preferences[poemLinesKey] ?: (POEM_LINES_DEFAULT).toInt()
-        }
-
-    // Get text size from preferences
-    val textSizeKey = intPreferencesKey(TEXT_SIZE)
-    val textSize: Flow<Int> = context.dataStore.data
-        .map { preferences ->
-            // No type safety.
-            preferences[textSizeKey] ?: TEXT_SIZE_DEFAULT.toInt()
-        }
-    val textSizeSp = textSize.collectAsState(
-        initial = TEXT_SIZE_DEFAULT.toInt()).value.toFloat()
-
+    val textSizeSp = textSize.toFloat()
     var lineSpacing = 30.0f
 
     // If the font size is too big, then the text gets scrunched.
     if (textSizeSp > 28.0) {
         lineSpacing = 50.0f
     }
-
-    // Get show page controls from preferences
-    val showPageControlsKey = booleanPreferencesKey(SHOW_PAGE_CONTROLS)
-    val showPageControls: Flow<Boolean> = context.dataStore.data
-        .map { preferences -> preferences[showPageControlsKey] ?: true }
 
     var uiState: ReadingUiState
     var onPageTurn: (Boolean) -> Unit
@@ -176,9 +148,8 @@ fun ReadingScreen(
                 application = context.applicationContext as Application,
                 workId = currentWorkId,
                 isTranslation = isTranslation,
-                poemLines = poemLines.collectAsState(
-                    initial = POEM_LINES_DEFAULT.toInt()
-                ).value
+                poemLines = poemLines,
+                preferencesDataStore = preferencesDataStore
             )
         )
         viewModel = readingViewModel
@@ -245,7 +216,7 @@ fun ReadingScreen(
                         .padding(top = 16.dp)
                 )
 
-                if ((showPageControls.collectAsState(initial = true).value)
+                if ((showPageControls)
                     && (screen != Screen.Vocab)
                     && (screen != Screen.Dictionary)) {
                     PageControls(
