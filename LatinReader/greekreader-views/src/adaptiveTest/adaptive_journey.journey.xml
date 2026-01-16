@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<journey name="AdaptiveJourney">
+    <description>Complete the adaptive Tier 1 quality checklist</description>
+    <actions xml:space="preserve">
+        <action>Type "poie/w" into the dictionary search bar at the top of the Library screen.</action>
+        <action>Scroll to the bottom of the list of items on the Library screen.</action>
+        <action>Change the device orientation from landscape to portrait.</action>
+        <action>Verify that the search bar says "poie/w".</action>
+        <action>Verify that the list of items is still scrolled to the bottom.</action>
+    </actions>
+</journey>

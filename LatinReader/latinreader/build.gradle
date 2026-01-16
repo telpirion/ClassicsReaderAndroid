@@ -9,9 +9,6 @@ android {
     compileSdkVersion(36)
     defaultConfig {
         minSdkVersion(24)
-        targetSdkVersion(36)
-        versionCode(21)
-        versionName("2.0.0")
     }
     buildTypes {
         release {
@@ -21,6 +18,7 @@ android {
     lint {
         abortOnError false
         checkReleaseBuilds false
+        targetSdk 36
     }
     kotlin {
         jvmToolchain {
@@ -30,15 +28,15 @@ android {
 }
 
 dependencies {
-    implementation platform("androidx.compose:compose-bom:2025.12.00")
+    implementation(platform(libs.androidx.compose.bom))
     implementation project(":views")
     implementation project(":core")
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation("androidx.core:core-ktx:1.17.0")
-    implementation("androidx.compose.foundation:foundation:1.10.0")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
 }
 java {
     toolchain {

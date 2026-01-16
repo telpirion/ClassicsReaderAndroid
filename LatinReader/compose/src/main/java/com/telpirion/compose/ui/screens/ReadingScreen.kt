@@ -9,25 +9,19 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
-import androidx.compose.material3.adaptive.layout.PaneAdaptedValue
+import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.SupportingPaneScaffoldRole
-import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
 import androidx.compose.material3.adaptive.navigation.NavigableSupportingPaneScaffold
 import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
@@ -52,20 +46,33 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.data.PreferencesDataStore
 import com.ericmschmidt.classicsreader.data.PreferencesState
+import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.telpirion.compose.MainActivity
+import com.telpirion.compose.ui.components.PageControls
+import com.telpirion.compose.ui.components.ReadingSupportingPane
 import com.telpirion.compose.ui.components.Screen
-import com.telpirion.compose.ui.components.TableOfContentsPane
-import com.telpirion.compose.ui.components.TranslationPane
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import com.telpirion.compose.viewmodels.ReadingUiState
 import com.telpirion.compose.viewmodels.ReadingViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.ericmschmidt.classicsreader.R as CoreResources
 
-private sealed class SupportingPaneContent {
-    object Hidden : SupportingPaneContent()
-    object Translation : SupportingPaneContent()
-    object TableOfContents : SupportingPaneContent()
+enum class SupportingPaneContent {
+    Hidden,
+    Translation,
+    TableOfContents,
+}
+
+private fun updateRecentlyRead(
+    preferencesDataStore: PreferencesDataStore,
+    workId: String
+) {
+
+    CoroutineScope(Dispatchers.IO).launch {
+        preferencesDataStore.updateRecentlyRead(workId)
+    }
 }
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
@@ -96,10 +103,12 @@ fun ReadingScreen(
 
     var currentWorkId: String? = workId
     if (screen == Screen.Recent) {
-        if (recentlyRead.isNotEmpty()) {
+        if (currentWorkId.isNullOrEmpty()) {
             currentWorkId = recentlyRead
         }
     }
+
+    updateRecentlyRead(preferencesDataStore, currentWorkId!!)
 
     val textSizeSp = textSize.toFloat()
     var lineSpacing = 30.0f
@@ -113,13 +122,12 @@ fun ReadingScreen(
     var onPageTurn: (Boolean) -> Unit
     var onPrev: () -> Unit
     var onNext: () -> Unit
-    val viewModel: ReadingViewModel?
+    var onGoToChapter: (TOCEntry) -> Unit
 
     Log.i("ReadingScreen", "screen: $screen")
     if (screen == Screen.Vocab || screen == Screen.Dictionary){
         val dictionaryUiState = dictionaryViewModel.readingUiState.collectAsStateWithLifecycle()
         uiState = dictionaryUiState.value
-        viewModel = null
         onPageTurn = {
             dictionaryViewModel.clearSearch()
         }
@@ -129,8 +137,9 @@ fun ReadingScreen(
         onNext = {
             dictionaryViewModel.clearSearch()
         }
+        onGoToChapter = { }
     } else {
-        if (currentWorkId.isNullOrEmpty()) {
+        if (currentWorkId.isEmpty()) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -152,27 +161,57 @@ fun ReadingScreen(
                 preferencesDataStore = preferencesDataStore
             )
         )
-        viewModel = readingViewModel
-        val readingUiState by viewModel.uiState.collectAsStateWithLifecycle()
+        val readingUiState by readingViewModel.uiState.collectAsStateWithLifecycle()
         uiState = readingUiState
 
         onPageTurn = {
-                isNext -> viewModel.goToPage(isNext)
+                isNext -> readingViewModel.goToPage(isNext)
         }
 
         onPrev = {
-            viewModel.goToPage(false)
+            readingViewModel.goToPage(false)
         }
 
         onNext = {
-            viewModel.goToPage(true)
+            readingViewModel.goToPage(true)
+        }
+
+        onGoToChapter = { entry ->
+            readingViewModel.goToChapter(entry)
         }
     }
 
+    ReadingScreenContent(
+        uiState = uiState,
+        textSizeSp = textSizeSp,
+        lineSpacing = lineSpacing,
+        showPageControls = showPageControls,
+        screen = screen,
+        currentWorkId = currentWorkId,
+        onPageTurn = onPageTurn,
+        onPrev = onPrev,
+        onNext = onNext,
+        onGoToChapter = onGoToChapter
+    )
+}
+
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
+@Composable
+fun ReadingScreenContent(
+    uiState: ReadingUiState,
+    textSizeSp: Float,
+    lineSpacing: Float,
+    showPageControls: Boolean,
+    screen: Screen,
+    currentWorkId: String?,
+    onPageTurn: (Boolean) -> Unit,
+    onPrev: () -> Unit,
+    onNext: () -> Unit,
+    onGoToChapter: (TOCEntry) -> Unit
+) {
     val scaffoldNavigator = rememberSupportingPaneScaffoldNavigator()
     val scope = rememberCoroutineScope()
-    var supportingPaneContent by remember { mutableStateOf<SupportingPaneContent>(SupportingPaneContent.Hidden) }
-    val backNavigationBehavior = BackNavigationBehavior.PopUntilScaffoldValueChange
+    var supportingPaneContent by remember { mutableStateOf(SupportingPaneContent.Hidden) }
 
     NavigableSupportingPaneScaffold(
         navigator = scaffoldNavigator,
@@ -194,13 +233,17 @@ fun ReadingScreen(
                     onSwitchView = {
                         supportingPaneContent = SupportingPaneContent.Translation
                         scope.launch {
-                            scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Supporting)
+                            scaffoldNavigator.navigateTo(
+                                SupportingPaneScaffoldRole.Supporting,
+                                contentKey = supportingPaneContent)
                         }
                     },
                     onShowToc = {
                         supportingPaneContent = SupportingPaneContent.TableOfContents
                         scope.launch {
-                            scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Supporting)
+                            scaffoldNavigator.navigateTo(
+                                SupportingPaneScaffoldRole.Supporting,
+                                contentKey = supportingPaneContent)
                         }
                     },
                     modifier = Modifier.weight(1f),
@@ -228,44 +271,31 @@ fun ReadingScreen(
             }
         },
         supportingPane = {
-            if (scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Supporting] == PaneAdaptedValue.Expanded) {
-                when (supportingPaneContent) {
-                    SupportingPaneContent.Translation -> {
-                        if (currentWorkId != null) {
-                            TranslationPane(
-                                onClose = {
-                                    scope.launch {
-                                        supportingPaneContent = SupportingPaneContent.Hidden
-                                        scaffoldNavigator.navigateBack(backNavigationBehavior)
-                                    }
-                                }
-                            )
+            AnimatedPane {
+                scaffoldNavigator.currentDestination?.contentKey?.let { paneType ->
+                    ReadingSupportingPane(
+                        scaffoldNavigator = scaffoldNavigator,
+                        supportingPaneContent = paneType as SupportingPaneContent,
+                        currentWorkId = currentWorkId ?: "",
+                        uiState = uiState,
+                        onClose = {
+                            scope.launch {
+                                supportingPaneContent = SupportingPaneContent.Hidden
+                                scaffoldNavigator.navigateTo(
+                                    SupportingPaneScaffoldRole.Supporting,
+                                    contentKey = supportingPaneContent)
+                            }
+                        },
+                        onTocEntryClick = { entry ->
+                            onGoToChapter(entry)
+                            scope.launch {
+                                supportingPaneContent = SupportingPaneContent.Hidden
+                                scaffoldNavigator.navigateTo(
+                                    SupportingPaneScaffoldRole.Supporting,
+                                    contentKey = supportingPaneContent)
+                            }
                         }
-                    }
-
-                    SupportingPaneContent.TableOfContents -> {
-                        if (viewModel != null) {
-                            TableOfContentsPane(
-                                onTocEntryClick = { index ->
-                                    viewModel.goToChapter(index)
-                                    scope.launch {
-                                        supportingPaneContent = SupportingPaneContent.Hidden
-                                        scaffoldNavigator.navigateBack(backNavigationBehavior)
-                                    }
-                                },
-                                onClose = {
-                                    scope.launch {
-                                        supportingPaneContent = SupportingPaneContent.Hidden
-                                        scaffoldNavigator.navigateBack(backNavigationBehavior)
-                                    }
-                                }
-                            )
-                        }
-                    }
-
-                    SupportingPaneContent.Hidden -> {
-                        // Empty pane
-                    }
+                    )
                 }
             }
         }
@@ -288,6 +318,7 @@ private fun ReadingContent(
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
+            .fillMaxHeight()
             .padding(top = 16.dp)
     ) {
         val viewWidth = maxWidth
@@ -343,48 +374,25 @@ private fun ReadingContent(
     }
 }
 
-
-
-
-@Composable
-private fun PageControls(
-    onPrev: () -> Unit,
-    onNext: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        IconButton(onClick = onPrev, modifier = Modifier.weight(1f)) {
-            Icon(
-                Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = stringResource(CoreResources.string.reading_btn_prev)
-
-            )
-        }
-        IconButton(onClick = onNext, modifier = Modifier.weight(1f)) {
-            Icon(
-                Icons.AutoMirrored.Filled.ArrowForward,
-                contentDescription = stringResource(CoreResources.string.reading_btn_next)
-            )
-        }
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun ReadingScreenPreview() {
     MaterialTheme {
-
-        val dictionaryViewModel: DictionaryViewModel = viewModel(
-            factory = DictionaryViewModel.Factory
-        )
-        ReadingScreen(
-            workId = null,
-            navController = NavController(LocalContext.current),
-            dictionaryViewModel = dictionaryViewModel,
-            isTranslation = false
+        ReadingScreenContent(
+            uiState = ReadingUiState(
+                content = "Lorem ipsum dolor sit amet",
+                info = "Sample Work",
+                position = "1.1"
+            ),
+            textSizeSp = 18f,
+            lineSpacing = 30f,
+            showPageControls = true,
+            screen = Screen.Recent,
+            currentWorkId = "sample",
+            onPageTurn = {},
+            onPrev = {},
+            onNext = {},
+            onGoToChapter = {}
         )
     }
 }
