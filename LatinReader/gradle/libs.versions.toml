@@ -18,6 +18,7 @@ kxml2 = "2.3.0"
 legacy-support-v4 = "1.0.0"
 lifecycle-runtime-ktx = "2.10.0"
 markdownview-android = "2.0.0"
+markdownview-android-v1110 = "1.1.1"
 material = "1.13.0"
 material-ripple = "1.10.1"
 mockito-core = "5.21.0"
@@ -80,6 +81,7 @@ espresso-core = { module = "com.android.support.test.espresso:espresso-core", ve
 junit = { group = "junit", name = "junit", version.ref = "junit-version" }
 kxml2 = { module = "net.sf.kxml:kxml2", version.ref = "kxml2" }
 markdownview-android = { module = "com.github.mukeshsolanki:MarkdownView-Android", version.ref = "markdownview-android" }
+markdownview-android-v1 = { module = "com.github.mukeshsolanki:MarkdownView-Android", version.ref =  "markdownview-android-v1110"}
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 material3 = { module = "androidx.compose.material3:material3" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito-core" }

@@ -69,7 +69,7 @@ dependencies {
 
     // Third-party MD viewer
     //noinspection GradleDependency Required for MarkdownView view
-    implementation(libs.markdownview.android)
+    implementation(libs.markdownview.android.v1)
 
     debugImplementation(libs.androidx.ui.test.manifest)
     debugImplementation(libs.ui.tooling)

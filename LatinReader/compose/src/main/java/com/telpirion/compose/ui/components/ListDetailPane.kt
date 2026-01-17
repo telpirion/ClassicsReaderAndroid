@@ -2,6 +2,7 @@ package com.telpirion.compose.ui.components
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Parcelable
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
@@ -24,6 +25,7 @@ import com.telpirion.compose.ui.dataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 
 @Preview
 @Composable
@@ -118,3 +120,5 @@ fun ListDetailPane(
         },
     )
 }
+@Parcelize
+class SelectedItem(val id: Int) : Parcelable

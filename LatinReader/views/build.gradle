@@ -54,7 +54,7 @@ dependencies {
 
     // Markdown
     //noinspection GradleDependency Required for MarkdownView view
-    implementation(libs.markdownview.android)
+    implementation(libs.markdownview.android.v1)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

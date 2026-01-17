@@ -28,7 +28,6 @@ class PreferencesDataStore(val context: Context) {
     }
 
     fun preferencesFlow(): Flow<PreferencesState> = context.dataStore.data.map { preferences ->
-        @Suppress("KotlinConstantConditions")
         return@map PreferencesState(
             textSize = preferences[PreferencesKeys.TEXT_SIZE] ?: SettingsFields.TEXT_SIZE_DEFAULT.toInt(),
             poemLines = preferences[PreferencesKeys.POEM_LINES] ?: SettingsFields.POEM_LINES_DEFAULT.toInt(),

@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.NavType
@@ -25,6 +24,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.telpirion.compose.MainActivity
+import com.telpirion.compose.ui.screens.LibraryScreen
 import com.telpirion.compose.ui.screens.MarkdownScreen
 import com.telpirion.compose.ui.screens.ReadingScreen
 import com.telpirion.compose.ui.screens.SettingsScreen
@@ -98,9 +98,6 @@ open class Screen(val route: String, val label: Int, val icon: ImageVector) {
 // NavOptions builder function
 fun navOptionsBuilder(navController: NavHostController):  NavOptionsBuilder.() -> Unit {
     return {
-        popUpTo(navController.graph.findStartDestination().id) {
-            saveState = true
-        }
         launchSingleTop = true
         restoreState = true
     }
@@ -125,14 +122,13 @@ fun ReaderAppNavHost(
             Screen.Library.route,
         ) { backStackEntry ->
             // Pass the NavController here
-            ListDetailPane(navController = navController)
+            LibraryScreen(modifier = modifier, screen = Screen.Library, navController = navController)
         }
 
         composable(
             Screen.Translation.route,
         ) { backStackEntry ->
-            // And here as well
-            ListDetailPane(navController = navController, screen = Screen.Translation)
+            LibraryScreen(modifier = modifier, navController = navController, screen = Screen.Translation)
         }
 
         composable(

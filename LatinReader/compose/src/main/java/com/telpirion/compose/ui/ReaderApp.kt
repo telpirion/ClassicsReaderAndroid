@@ -248,7 +248,9 @@ private fun NavDrawerContent(
                 icon = { Icon(screen.icon, contentDescription = null) },
                 label = { Text(stringResource(screen.label)) },
                 selected = currentRoute == screen.route,
-                onClick = { onNavigate(screen.route) },
+                onClick = {
+                    onNavigate(screen.route)
+                          },
                 modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
             )
         }
@@ -315,7 +317,9 @@ private fun ReaderNavigationRail(
                 icon = { Icon(screen.icon, contentDescription = null) },
                 label = { Text(stringResource(screen.label)) },
                 selected = currentRoute == screen.route,
-                onClick = { onNavigate(screen.route) }
+                onClick = {
+                    onNavigate(screen.route)
+                }
             )
         }
     }
