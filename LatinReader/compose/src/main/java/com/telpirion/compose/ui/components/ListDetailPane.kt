@@ -12,11 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.MyApplication
+import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoLibrary
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyList
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyVerticalGrid
 import com.ericmschmidt.classicsreader.data.DISPLAY_TYPE
@@ -45,8 +49,21 @@ fun ListDetailPane(
     onDismiss: () -> Unit = {}
 ) {
 
-    val context : Context = MyApplication.applicationInstance().context
-    val library = MyApplication.applicationInstance().library
+    // Fix for Preview: The application context is not available in previews.
+    // To work around this, we can check if we are in a preview and provide
+    // a mock library and context.
+    val inPreview = LocalInspectionMode.current
+    val context: Context = if (inPreview) {
+        LocalContext.current
+    } else {
+        MyApplication.applicationInstance().context
+    }
+    val library: Library = if (inPreview) {
+        PseudoLibrary()
+    } else {
+        MyApplication.applicationInstance().library
+    }
+
     val scaffoldNavigator = rememberListDetailPaneScaffoldNavigator<SelectedItem>()
     val scope = rememberCoroutineScope()
     val works = library.getWorks()
