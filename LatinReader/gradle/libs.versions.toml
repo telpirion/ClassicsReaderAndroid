@@ -22,6 +22,7 @@ markdownview-android = "2.0.0"
 markdownview-android-v1110 = "1.1.1"
 material = "1.13.0"
 material-ripple = "1.10.1"
+material3-z = "1.4.0"
 mockito-core = "5.21.0"
 mockito-kotlin = "6.2.0"
 mockk = "1.14.7"
@@ -37,6 +38,7 @@ runner = "1.0.2"
 truth = "1.4.5"
 material3-window-size-class1 = "1.4.0"
 ui-test-junit4 = "1.10.1"
+ui-text-google-fonts = "1.10.1"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
@@ -49,11 +51,14 @@ androidx-compose-foundation = { module = "androidx.compose.foundation:foundation
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 androidx-compose-material-ripple = { module = "androidx.compose.material:material-ripple", version.ref = "material-ripple" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-material3-material3 = { module = "androidx.compose.material3:material3" }
 androidx-compose-material3-window-size-class1 = { module = "androidx.compose.material3:material3-window-size-class" }
+androidx-compose-material3-z = { module = "androidx.compose.material3:material3-*", version.ref = "material3-z" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-compose-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "ui-text-google-fonts" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-compose-ui-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
