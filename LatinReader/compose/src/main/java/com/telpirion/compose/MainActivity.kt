@@ -11,6 +11,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.ericmschmidt.classicsreader.MyApplication
 import com.telpirion.compose.ui.ReaderApp
 import com.telpirion.compose.ui.theme.ReaderTheme
 
@@ -24,8 +25,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val colorScheme = MyApplication.instance.themeColors
         setContent {
-            ReaderTheme {
+            ReaderTheme(colorScheme) {
                 val windowSizeClass =
                     calculateWindowSizeClass(this)
                 ReaderApp(windowSizeClass = windowSizeClass)

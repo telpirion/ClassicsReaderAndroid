@@ -1,11 +1,11 @@
-package com.ericmschmidt.latin.theme
+package com.ericmschmidt.greekreader.theme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
-private val latinReaderLightScheme = lightColorScheme(
+private val greekReaderLightScheme = lightColorScheme(
     primary = primaryLight,
     onPrimary = onPrimaryLight,
     primaryContainer = primaryContainerLight,
@@ -241,7 +241,8 @@ data class ColorFamily(
     val onColorContainer: Color
 )
 
-object LatinReaderThemeObj {
+object GreekReaderThemeObj {
     val lightScheme: ColorScheme
-        get() = latinReaderLightScheme
+        get() = greekReaderLightScheme
 }
+

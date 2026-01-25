@@ -34,9 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ericmschmidt.classicsreader.data.TOCEntry
-import com.telpirion.compose.viewmodels.ReadingViewModel
 import com.telpirion.compose.R
-import com.telpirion.compose.ui.theme.LatinReaderTheme
+import com.telpirion.compose.viewmodels.ReadingViewModel
 
 class TOCEntryParameterProvider : PreviewParameterProvider<List<TOCEntry>> {
     override val values = sequenceOf(
@@ -162,7 +161,7 @@ fun SupportingPaneTemplate(
                 Spacer(modifier = Modifier.padding(top = 16.dp))
                 HorizontalDivider(
                     thickness = 3.dp,
-                    color = LatinReaderTheme.colorScheme.secondary
+                    color = MaterialTheme.colorScheme.secondary
                 )
                 content()
             }
@@ -174,7 +173,7 @@ fun SupportingPaneTemplate(
             Icon(
                 Icons.Default.Close,
                 contentDescription = "Close",
-                modifier = Modifier.background(LatinReaderTheme.colorScheme.secondary)
+                modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
             )
         }
     }

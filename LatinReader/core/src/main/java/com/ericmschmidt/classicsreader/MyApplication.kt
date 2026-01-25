@@ -3,6 +3,7 @@ package com.ericmschmidt.classicsreader
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import androidx.compose.material3.ColorScheme
 import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.utilities.ITextConverter
 
@@ -15,7 +16,10 @@ import com.ericmschmidt.classicsreader.utilities.ITextConverter
  * @version 2.0
  * @since 1.0
  */
-open class MyApplication(val libraryName: String) : Application() {
+open class MyApplication(
+    val libraryName: String,
+    val themeColors: ColorScheme
+) : Application() {
 
     data class ApplicationInstance(
         val context: Context,

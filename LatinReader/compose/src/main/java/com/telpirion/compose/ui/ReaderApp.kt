@@ -39,30 +39,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.ericmschmidt.classicsreader.MyApplication
+import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.PreferencesDataStore
+import com.ericmschmidt.classicsreader.data.PreferencesState
+import com.ericmschmidt.classicsreader.data.placeholders.PseudoLibrary
 import com.telpirion.compose.R
 import com.telpirion.compose.ui.components.ReaderAppNavHost
 import com.telpirion.compose.ui.components.ReaderTopAppBar
 import com.telpirion.compose.ui.components.Screen
 import com.telpirion.compose.ui.components.navOptionsBuilder
-import kotlinx.coroutines.launch
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ericmschmidt.classicsreader.MyApplication
-import com.telpirion.compose.viewmodels.DictionaryViewModel
-import com.telpirion.compose.ui.theme.ReaderTheme
-import androidx.navigation.NavHostController
-import com.ericmschmidt.classicsreader.data.Library
-import androidx.compose.ui.tooling.preview.Preview
-import com.ericmschmidt.classicsreader.data.PreferencesDataStore
-import com.ericmschmidt.classicsreader.data.PreferencesState
-import com.ericmschmidt.classicsreader.data.placeholders.PseudoLibrary
 import com.telpirion.compose.viewmodels.DictionaryUiState
+import com.telpirion.compose.viewmodels.DictionaryViewModel
+import kotlinx.coroutines.launch
 
 private val bottomNavigationItems = listOf(
     Screen.Library,
@@ -88,7 +87,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 @Composable
 fun ReaderApp(
     windowSizeClass: WindowSizeClass
-)  {
+) {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
@@ -114,13 +113,15 @@ fun ReaderApp(
     ).value
     val currentWorkId = preferences.recentlyRead
 
-    val navigationFunc : (String) -> Unit = { route ->
-        when (route){
+    val navigationFunc: (String) -> Unit = { route ->
+        when (route) {
             Screen.Recent.route -> {
                 navController.navigate(
                     route = Screen.Recent.createRoute(currentWorkId, false),
-                    builder = navOptionsBuilder(navController))
+                    builder = navOptionsBuilder(navController)
+                )
             }
+
             else -> navController.navigate(route, navOptionsBuilder(navController))
         }
     }
@@ -168,66 +169,63 @@ fun ReaderAppContent(
     onNavigate: (String) -> Unit,
     content: @Composable (Modifier) -> Unit
 ) {
-    ReaderTheme {
-        val scope = rememberCoroutineScope()
-
-        ModalNavigationDrawer(
-            drawerState = drawerState,
-            gesturesEnabled = isCompact,
-            drawerContent = {
-                NavDrawerContent(
-                    currentRoute = currentRoute,
-                    onNavigate = { route ->
-                        onNavigate(route)
-                        scope.launch { drawerState.close() }
-                    },
-                    library = library
-                )
-            }
-        ) {
-            Scaffold(
-                containerColor = MaterialTheme.colorScheme.background,
-                contentColor = MaterialTheme.colorScheme.onBackground,
-                topBar = {
-                    ReaderTopAppBar(
-                        onMenuClick = { scope.launch { drawerState.open() } },
-                        searchText = dictionaryUiState.searchQuery,
-                        onSearchTextChange = onQueryChange,
-                        onSearch = onSearch,
-                        onClearSearch = onClearSearch
-                    )
+    val scope = rememberCoroutineScope()
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        gesturesEnabled = isCompact,
+        drawerContent = {
+            NavDrawerContent(
+                currentRoute = currentRoute,
+                onNavigate = { route ->
+                    onNavigate(route)
+                    scope.launch { drawerState.close() }
                 },
-                bottomBar = {
-                    // Show bottom navigation bar only on compact screens
-                    if (isCompact) {
-                        ReaderBottomNavigationBar(
-                            currentRoute = currentRoute,
-                            onNavigate = { route ->
-                                if (drawerState.isClosed) {
-                                    onNavigate(route)
-                                }
+                library = library
+            )
+        }
+    ) {
+        Scaffold(
+            containerColor = MaterialTheme.colorScheme.background,
+            contentColor = MaterialTheme.colorScheme.onBackground,
+            topBar = {
+                ReaderTopAppBar(
+                    onMenuClick = { scope.launch { drawerState.open() } },
+                    searchText = dictionaryUiState.searchQuery,
+                    onSearchTextChange = onQueryChange,
+                    onSearch = onSearch,
+                    onClearSearch = onClearSearch
+                )
+            },
+            bottomBar = {
+                // Show bottom navigation bar only on compact screens
+                if (isCompact) {
+                    ReaderBottomNavigationBar(
+                        currentRoute = currentRoute,
+                        onNavigate = { route ->
+                            if (drawerState.isClosed) {
+                                onNavigate(route)
                             }
-                        )
-                    }
+                        }
+                    )
                 }
-            ) { innerPadding ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding)
-                ) {
-                    if (!isCompact) {
-                        ReaderNavigationRail(
-                            currentRoute = currentRoute,
-                            onNavigate = { route ->
-                                if (drawerState.isClosed) {
-                                    onNavigate(route)
-                                }
+            }
+        ) { innerPadding ->
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            ) {
+                if (!isCompact) {
+                    ReaderNavigationRail(
+                        currentRoute = currentRoute,
+                        onNavigate = { route ->
+                            if (drawerState.isClosed) {
+                                onNavigate(route)
                             }
-                        )
-                    }
-                    content(Modifier.weight(1f))
+                        }
+                    )
                 }
+                content(Modifier.weight(1f))
             }
         }
     }
@@ -250,7 +248,7 @@ private fun NavDrawerContent(
                 selected = currentRoute == screen.route,
                 onClick = {
                     onNavigate(screen.route)
-                          },
+                },
                 modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
             )
         }
@@ -294,6 +292,7 @@ private fun ReaderBottomNavigationBar(
                             val recentWorkId = "" // Placeholder ID
                             screen.createRoute(recentWorkId, false)
                         }
+
                         is Screen.Library -> screen.createRoute()
                         is Screen.Settings -> screen.createRoute()
                         // Add any other specific cases from bottomNavigationItems here.
@@ -332,7 +331,7 @@ fun ReaderAppPreview() {
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val library = PseudoLibrary()
-    
+
     ReaderAppContent(
         isCompact = true,
         navController = navController,
