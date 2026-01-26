@@ -277,7 +277,6 @@ fun ReadingScreenContent(
                         scaffoldNavigator = scaffoldNavigator,
                         supportingPaneContent = paneType as SupportingPaneContent,
                         currentWorkId = currentWorkId ?: "",
-                        uiState = uiState,
                         onClose = {
                             scope.launch {
                                 supportingPaneContent = SupportingPaneContent.Hidden

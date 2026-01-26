@@ -8,7 +8,6 @@ import androidx.compose.material3.adaptive.navigation.ThreePaneScaffoldNavigator
 import androidx.compose.runtime.Composable
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.telpirion.compose.ui.screens.SupportingPaneContent
-import com.telpirion.compose.viewmodels.ReadingUiState
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
@@ -16,7 +15,6 @@ fun ReadingSupportingPane(
     scaffoldNavigator: ThreePaneScaffoldNavigator<Any>,
     supportingPaneContent: SupportingPaneContent,
     currentWorkId: String,
-    uiState: ReadingUiState,
     onClose: () -> Unit,
     onTocEntryClick: (TOCEntry) -> Unit,
 ) {
@@ -29,15 +27,12 @@ fun ReadingSupportingPane(
                 if (currentWorkId.isNotEmpty()) {
                     TranslationPane(
                         onClose = onClose,
-                        translationContent = uiState.translationContent,
-                        translationInfo = uiState.info
                     )
                 }
             }
 
             SupportingPaneContent.TableOfContents -> {
                 TableOfContentsPane(
-                    toc = uiState.toc?.toList() ?: emptyList(),
                     onTocEntryClick = onTocEntryClick,
                     onClose = onClose
                 )

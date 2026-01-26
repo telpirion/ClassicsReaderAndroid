@@ -24,6 +24,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -67,12 +68,12 @@ fun TranslationPanePreview() {
 
 @Composable
 fun TableOfContentsPane(
-    viewModel: ReadingViewModel = viewModel(),
-    onTocEntryClick: (TOCEntry) -> Unit,
     onClose: () -> Unit,
+    onTocEntryClick: (TOCEntry) -> Unit,
+    viewModel: ReadingViewModel = viewModel(),
 ) {
-    val readingUiState = viewModel.uiState.collectAsStateWithLifecycle()
-    val toc = readingUiState.value.toc ?: return
+    val readingUiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val toc = readingUiState.toc ?: return
     TableOfContentsPane(toc.toList(), onTocEntryClick, onClose)
 }
 
@@ -109,7 +110,7 @@ fun TranslationPane(
     onClose: () -> Unit,
     viewModel: ReadingViewModel = viewModel(),
 ) {
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     TranslationPane(
         onClose, uiState.translationContent, uiState.info
     )

@@ -1,19 +1,12 @@
 package com.telpirion.compose.viewmodels
 
 import android.app.Application
-import android.content.Context
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
-import androidx.datastore.dataStore
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.data.PreferencesDataStore
-import com.ericmschmidt.classicsreader.data.PreferencesState
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
-import com.ericmschmidt.classicsreader.data.RECENTLY_READ
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -66,7 +59,7 @@ class ReadingViewModel(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ReadingUiState())
-    val uiState: StateFlow<ReadingUiState> = _uiState
+    val uiState: StateFlow<ReadingUiState> get() = _uiState
 
     private var workInfo: WorkInfo? = null
     private var contentLines: List<String> = emptyList()
@@ -108,6 +101,7 @@ class ReadingViewModel(
 
     fun goToPage(isNext: Boolean) {
         this.content?.goToPage(isNext)
+        this.translationContent?.goToPage(isNext)
         updateState()
     }
 
@@ -116,6 +110,8 @@ class ReadingViewModel(
         val page = entry.line
         this.content?.setCurrentBook(book)
         this.content?.setCurrentLine(page)
+        this.translationContent?.setCurrentBook(book)
+        this.translationContent?.setCurrentLine(page)
         updateState()
     }
 
