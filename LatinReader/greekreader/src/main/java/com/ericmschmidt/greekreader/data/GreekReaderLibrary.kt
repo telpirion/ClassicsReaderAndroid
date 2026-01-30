@@ -109,7 +109,9 @@ class GreekReaderLibrary: Library() {
             englishTitle = "An Intermediate Greek-English Lexicon",
             location = R.raw.ml,
             englishLocation = R.raw.ml,
-            description = dictionaryDescription)
+            description = dictionaryDescription,
+            workType = WorkInfo.WorkType.DICTIONARY
+        )
 
     /**
      * Gets the resource ID of the dictionary entry file.

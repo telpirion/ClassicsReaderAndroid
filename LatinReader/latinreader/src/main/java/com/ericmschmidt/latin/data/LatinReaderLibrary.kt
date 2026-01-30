@@ -344,7 +344,7 @@ class LatinReaderLibrary : Library() {
             author = "Charles Lewis",
             location = R.raw.lewis,
             englishLocation = R.raw.lewis,
-            workType = WorkInfo.WorkType.PROSE,
+            workType = WorkInfo.WorkType.DICTIONARY,
             image = com.ericmschmidt.classicsreader.R.drawable.work_default_1)
 
 
