@@ -20,9 +20,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.telpirion.compose.MainActivity
 import com.telpirion.compose.ui.screens.LibraryScreen
 import com.telpirion.compose.ui.screens.MarkdownScreen
@@ -185,8 +185,6 @@ fun ReaderAppNavHost(
         ) { backStackEntry ->
             MarkdownScreen(screen = Screen.Info)
         }
-
-
 
         composable(
             Screen.Settings.route,

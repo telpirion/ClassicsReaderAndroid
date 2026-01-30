@@ -60,7 +60,6 @@ import kotlinx.coroutines.launch
 import com.ericmschmidt.classicsreader.R as CoreResources
 
 enum class SupportingPaneContent {
-    Hidden,
     Translation,
     TableOfContents,
 }
@@ -211,7 +210,6 @@ fun ReadingScreenContent(
 ) {
     val scaffoldNavigator = rememberSupportingPaneScaffoldNavigator()
     val scope = rememberCoroutineScope()
-    var supportingPaneContent by remember { mutableStateOf(SupportingPaneContent.Hidden) }
 
     NavigableSupportingPaneScaffold(
         navigator = scaffoldNavigator,
@@ -231,19 +229,17 @@ fun ReadingScreenContent(
                     textSizeSp = textSizeSp,
                     onPageTurn = onPageTurn,
                     onSwitchView = {
-                        supportingPaneContent = SupportingPaneContent.Translation
                         scope.launch {
                             scaffoldNavigator.navigateTo(
                                 SupportingPaneScaffoldRole.Supporting,
-                                contentKey = supportingPaneContent)
+                                contentKey = SupportingPaneContent.Translation)
                         }
                     },
                     onShowToc = {
-                        supportingPaneContent = SupportingPaneContent.TableOfContents
                         scope.launch {
                             scaffoldNavigator.navigateTo(
                                 SupportingPaneScaffoldRole.Supporting,
-                                contentKey = supportingPaneContent)
+                                contentKey = SupportingPaneContent.TableOfContents)
                         }
                     },
                     modifier = Modifier.weight(1f),
@@ -274,24 +270,17 @@ fun ReadingScreenContent(
             AnimatedPane {
                 scaffoldNavigator.currentDestination?.contentKey?.let { paneType ->
                     ReadingSupportingPane(
-                        scaffoldNavigator = scaffoldNavigator,
                         supportingPaneContent = paneType as SupportingPaneContent,
                         currentWorkId = currentWorkId ?: "",
                         onClose = {
                             scope.launch {
-                                supportingPaneContent = SupportingPaneContent.Hidden
-                                scaffoldNavigator.navigateTo(
-                                    SupportingPaneScaffoldRole.Supporting,
-                                    contentKey = supportingPaneContent)
+                                scaffoldNavigator.navigateBack()
                             }
                         },
                         onTocEntryClick = { entry ->
                             onGoToChapter(entry)
                             scope.launch {
-                                supportingPaneContent = SupportingPaneContent.Hidden
-                                scaffoldNavigator.navigateTo(
-                                    SupportingPaneScaffoldRole.Supporting,
-                                    contentKey = supportingPaneContent)
+                                scaffoldNavigator.navigateBack()
                             }
                         }
                     )
