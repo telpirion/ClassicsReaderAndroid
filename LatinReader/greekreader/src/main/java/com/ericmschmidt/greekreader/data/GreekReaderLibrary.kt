@@ -120,4 +120,15 @@ class GreekReaderLibrary: Library() {
     override fun getDictionaryEntryResource(): Int {
         return R.raw.dictionary_entries
     }
+
+    override fun getGrammar(): WorkInfo = WorkInfo(
+        id = "grammar",
+        title = "A Greek Grammar for Colleges",
+        author = "Herbert Weir Smyth",
+        englishTitle = "A Greek Grammar for Colleges",
+        englishAuthor = "Herbert Weir Smyth",
+        location = R.raw.smyth,
+        englishLocation = R.raw.smyth,
+        workType = WorkInfo.WorkType.GRAMMAR
+    )
 }

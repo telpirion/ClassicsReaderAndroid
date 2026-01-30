@@ -69,9 +69,7 @@ data class WorkInfo(
     object WorkType {
         const val PROSE = 1
         const val POEM = 2
-
         const val DICTIONARY = 4
-
         const val GRAMMAR = 8
     }
 }

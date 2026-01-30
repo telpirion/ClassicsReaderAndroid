@@ -11,6 +11,10 @@ import java.util.ArrayList
  * @since 1.0
  */
 open class Library {
+    
+    open fun getGrammar(): WorkInfo? {
+        return null
+    }
 
     open fun getCollection(): ArrayList<WorkInfo>? {
         return null
