@@ -1,5 +1,6 @@
 package com.ericmschmidt.classicsreader.data
 
+import androidx.compose.runtime.Composable
 import com.ericmschmidt.classicsreader.logError
 import java.util.ArrayList
 
@@ -42,6 +43,9 @@ open class Library {
     fun getWorks(): Array<WorkInfo> {
         return collection?.toTypedArray() ?: emptyArray()
     }
+
+    @Composable
+    open fun GetHeaderIcon() {}
 
     companion object {
         /**

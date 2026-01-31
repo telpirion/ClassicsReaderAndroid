@@ -1,17 +1,15 @@
 plugins {
-    id("com.android.library")
-    id("androidx.navigation.safeargs")
-    id("kotlin-android")
-    id("org.jetbrains.kotlin.plugin.compose")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.safeargs)
 }
 
 android {
-    namespace("com.ericmschmidt.classicsreader")
+    namespace="com.ericmschmidt.classicsreader"
     compileSdkVersion(36)
 
     defaultConfig {
         minSdkVersion(24)
-        targetSdkVersion(36)
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -20,11 +18,7 @@ android {
         unitTests.returnDefaultValues = true
     }
     buildFeatures {
-        compose = true
         viewBinding = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
     }
     kotlin {
         jvmToolchain {
@@ -39,69 +33,62 @@ android {
             merges += "META-INF/LICENSE-notice.md"
         }
     }
+    lint {
+        targetSdk 36
+    }
 }
 
 dependencies {
-    implementation("androidx.compose.ui:ui-tooling:1.10.0")
-    def nav_version = rootProject.extensions["ext"]["nav_version"]
-    def lifecycle_version = rootProject.extensions["ext"]["lifecycle_version"]
+    implementation(libs.ui.tooling)
     implementation(fileTree(dir: "libs", include: ["*.jar"]))
 
-    implementation(platform("androidx.compose:compose-bom:2025.12.00"))
-    implementation("androidx.appcompat:appcompat:1.7.1")
-    implementation("androidx.activity:activity-compose:1.12.1")
-    implementation("androidx.compose.foundation:foundation:1.10.0")
-    implementation("androidx.compose.material:material-icons-extended")
-    implementation("androidx.compose.material:material-ripple:1.10.0")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material3:material3-window-size-class")
-    implementation("androidx.compose.material3.adaptive:adaptive:1.2.0")
-    implementation("androidx.compose.material3.adaptive:adaptive-layout:1.2.0")
-    implementation("androidx.compose.material3.adaptive:adaptive-navigation:1.2.0")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.core:core-ktx:1.17.0")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.datastore:datastore-preferences:1.2.0")
-    implementation('androidx.legacy:legacy-support-v4:1.0.0')
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-    implementation("androidx.preference:preference-ktx:1.2.1")
-    implementation("androidx.recyclerview:recyclerview:1.4.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-    implementation("androidx.preference:preference-ktx:1.2.1")
-    implementation("androidx.recyclerview:recyclerview:1.4.0")
-    implementation('androidx.preference:preference-ktx:1.2.1')
-
-    implementation('androidx.recyclerview:recyclerview:1.4.0')
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.androidx.compose.material.ripple)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material3.window.size.class1)
+    implementation(libs.androidx.compose.adaptive)
+    implementation(libs.androidx.compose.adaptive.layout)
+    implementation(libs.androidx.compose.adaptive.navigation)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.recyclerview)
 
     // Third-party MD viewer
     //noinspection GradleDependency Required for MarkdownView view
-    implementation('com.github.mukeshsolanki:MarkdownView-Android:1.1.1')
+    implementation(libs.markdownview.android.v1)
 
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation(libs.androidx.ui.test.manifest)
+    debugImplementation(libs.ui.tooling)
 
     // Test resources
-    androidTestImplementation(platform("androidx.compose:compose-bom:2025.12.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
-    androidTestImplementation("androidx.test.ext:junit:1.3.0")
-    androidTestImplementation("com.android.support.test:runner:1.0.2")
-    androidTestImplementation("io.mockk:mockk-android:1.14.6")
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("com.google.truth:truth:1.4.5")
-    testImplementation("org.mockito:mockito-core:5.20.0")
-    testImplementation("androidx.test:core:1.7.0")
-    testImplementation("org.robolectric:robolectric:4.16")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:6.1.0")
-    testImplementation("io.mockk:mockk:1.14.7")
-    testImplementation("net.sf.kxml:kxml2:2.3.0")
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.runner)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.espresso.core)
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.androidx.core)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kxml2)
 
 }
 java {

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Latin Reader</string>
   <string name="developer_site">telpirion.com</string>
   <string name="app_description">
@@ -48,7 +48,7 @@
   <string name="error_activity">Error</string>
   <string name="error_activity_title">I\'m really sorry - there was an error</string>
   <string name="error_activity_explanation">Something bad happened and the app needs to close. The information below shows the gnarly details.</string>
-  <string name="default_error_message">No details to show.</string>
+  <string tools:override="true" name="default_error_message">No details to show.</string>
 
   <string name="context_menu_translation">Show translation</string>
   <string name="context_menu_source">Show source text</string>
@@ -56,6 +56,5 @@
 
   <string name="toc_subtitle">Contents:</string>
   <string name="action_display">Library display</string>
-  <string name="action_display_row">List</string>
-    <string name="action_display_description">Switch the display of works in the library between list and grid.</string>
+  <string name="action_display_row">List</string><string name="action_display_description">Switch the display of works in the library between list and grid.</string>
 </resources>

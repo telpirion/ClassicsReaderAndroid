@@ -19,7 +19,9 @@ import com.ericmschmidt.classicsreader.data.WorkInfo
 fun PrettyCardLazyGridPreview(
     @PreviewParameter(LibraryPreviewProvider::class) library: Library
 ) {
-    PrettyCardLazyVerticalGrid(library = library)
+    PrettyCardLazyVerticalGrid(
+        library = library
+    )
 }
 
 @Composable
@@ -39,9 +41,13 @@ fun PrettyCardLazyVerticalGrid(
     ) {
         items(
             items = works,
-            key = { work -> work.id as String }
+            key = { work -> work.id}
         ) {
-            PrettyCard(workInfo = it, onCardClick = onCardClick, isTranslation = isTranslation)
+            PrettyCard(
+                modifier = modifier,
+                workInfo = it,
+                onCardClick = onCardClick,
+                isTranslation = isTranslation)
         }
     }
 }

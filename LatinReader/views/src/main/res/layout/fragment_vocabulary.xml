@@ -3,46 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ericmschmidt.latinreader.com.ericmschmidt.classicsreader.fragments.VocabularyFragment">
-
-    <LinearLayout
+    android:paddingTop="@dimen/fab_margin"
+    android:paddingLeft="@dimen/fab_margin"
+    android:paddingRight="@dimen/fab_margin"
+    tools:context="com.ericmschmidt.classicsreader.ui.fragments.VocabularyFragment">
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/fab_margin"
-        android:paddingLeft="@dimen/fab_margin"
-        android:paddingRight="@dimen/fab_margin"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="@string/nav_drawer_vocab"
+        android:textSize="28sp"/>
 
-        <TextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/vocab_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nav_drawer_vocab"
-            android:textSize="28sp"/>
+            android:layout_centerInParent="true"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ScrollView
+            android:paddingTop="0dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:fillViewport="true">
 
-            <ProgressBar
-                android:id="@+id/vocab_progress"
+            <TextView android:id="@+id/vocab_result"
+                android:paddingTop="@dimen/fab_margin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-
-            <ScrollView
-                android:paddingTop="0dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="vertical"
-                android:fillViewport="true">
-
-                <TextView android:id="@+id/vocab_result"
-                    android:paddingTop="@dimen/fab_margin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </ScrollView>
-        </RelativeLayout>
-
-    </LinearLayout>
-
+                android:layout_height="wrap_content" />
+        </ScrollView>
+    </RelativeLayout>
 </LinearLayout>

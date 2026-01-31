@@ -3,6 +3,7 @@
 package com.ericmschmidt.greekreader.data
 
 import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.greekreader.R
 
@@ -24,77 +25,79 @@ class GreekReaderLibrary: Library() {
                 id = "AristotlePol",
                 title = "Politics",
                 author = "Aristotle",
+                editor = "W. D. Ross",
+                translator = "H. Rackham",
                 englishTitle = "Politics",
                 englishAuthor = "Aristotle",
                 location = R.raw.gk_aristot_pol_gk,
                 englishLocation = R.raw.aristot_pol_eng,
                 workType = WorkInfo.WorkType.PROSE,
-                image = R.drawable.work_politics),
+                image = R.drawable.work_politics,
+                description = aristotlePoliticsDescription,
+                tocEntries = arrayListOf(
+                    TOCEntry("Book 1", 0, 0),
+                    TOCEntry("Book 2", 1, 0),
+                    TOCEntry("Book 3", 2, 0),
+                    TOCEntry("Book 4", 3, 0),
+                    TOCEntry("Book 5", 4, 0),
+                    TOCEntry("Book 6", 5, 0),
+                    TOCEntry("Book 7", 6, 0),
+                    TOCEntry("Book 8", 7, 0)
+                )),
             WorkInfo(
                 id = "HomerIliad",
                 author = "Homer",
                 title = "Iliad",
+                translator = "A.T. Murray, Ph.D.",
+                editor = "Thomas W. Allen",
                 englishAuthor = "Homer",
                 englishTitle = "Iliad",
                 location = R.raw.gk_hom_il_gk,
                 englishLocation = R.raw.hom_il_eng,
                 workType = WorkInfo.WorkType.POEM,
                 offset = 1,
-                image = R.drawable.work_iliad),
+                image = R.drawable.work_iliad,
+                description = homerIliadDescription),
             WorkInfo(
                 id = "HomerOdyssey",
                 author = "Homer",
                 title = "Odyssey",
+                editor = "A.T. Murray",
+                translator = "A.T. Murray, Ph.D.",
                 englishAuthor = "Homer",
                 englishTitle = "Odyssey",
                 location = R.raw.gk_hom_od_gk,
                 englishLocation = R.raw.hom_od_eng,
                 workType = WorkInfo.WorkType.POEM,
                 offset = 1,
-                image = R.drawable.work_odyssey),
+                image = R.drawable.work_odyssey,
+                description = homerOdysseyDescription),
             WorkInfo(
                 id = "XenophonAn",
                 author = "Xenophon",
                 title = "Anabasis",
+                editor = "E. C. Marchant",
+                translator = "Carleton L. Brownson",
                 englishAuthor = "Xenophon",
                 englishTitle = "Anabasis",
                 location = R.raw.gk_xen_anab_gk,
                 englishLocation = R.raw.xen_anab_eng,
                 workType = WorkInfo.WorkType.PROSE,
-                image = R.drawable.work_anabasis),
+                image = R.drawable.work_anabasis,
+                description = xenophonAnabasisDescription),
             WorkInfo(
                 id = "Lysias",
                 author = "Lysias",
                 title = "Speeches",
+                editor = "W.R.M. Lamb, M.A.",
+                translator = "W.R.M. Lamb, M.A.",
                 englishTitle = "Speeches",
                 englishAuthor = "Lysias",
                 location = R.raw.gk_lys_gk,
                 englishLocation = R.raw.lys_eng,
                 workType = WorkInfo.WorkType.PROSE,
-                image = R.drawable.work_speeches),
-            // TODO: Fix Herodotus transcription.
-            // "Histories" is also a title that breaks the list ...
-            WorkInfo(
-                id = "Herodotus",
-                title = "Mysteries",
-                author = "Herodotus",
-                englishTitle = "Histories",
-                englishAuthor = "Herodotus",
-                location = R.raw.gk_hdt_gk,
-                englishLocation = R.raw.hdt_eng,
-                workType = WorkInfo.WorkType.PROSE),
-
-            // TODO: Fix Plato's Republic Transcription
-            // "Republic" is also a title that breaks the list ...
-            WorkInfo(
-                id = "PlatoRep",
-                title = "Republic",
-                author = "Plato",
-                englishTitle = "Republic",
-                englishAuthor = "Plato",
-                location = R.raw.gk_plat_rep_gk,
-                englishLocation = R.raw.plat_rep_eng,
-                workType = WorkInfo.WorkType.PROSE)
+                image = R.drawable.work_speeches,
+                description = lysiasDescription),
         )
 
 
@@ -106,7 +109,9 @@ class GreekReaderLibrary: Library() {
             englishTitle = "An Intermediate Greek-English Lexicon",
             location = R.raw.ml,
             englishLocation = R.raw.ml,
-            workType = WorkInfo.WorkType.DICTIONARY)
+            description = dictionaryDescription,
+            workType = WorkInfo.WorkType.DICTIONARY
+        )
 
     /**
      * Gets the resource ID of the dictionary entry file.

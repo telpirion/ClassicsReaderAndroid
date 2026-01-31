@@ -32,7 +32,6 @@ import com.ericmschmidt.classicsreader.ui.interop.setContentToLazyList
  * @version 2.0
  * @since 1.0
  */
-@Suppress("DEPRECATION")
 class LibraryFragment : Fragment() {
 
     private var isTranslation = false

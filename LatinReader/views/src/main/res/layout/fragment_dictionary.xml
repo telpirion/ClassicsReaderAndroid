@@ -3,46 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ericmschmidt.latinreader.com.ericmschmidt.classicsreader.fragments.DictionaryFragment">
+    android:paddingLeft="16sp"
+    android:paddingRight="16sp"
+    tools:context="com.ericmschmidt.classicsreader.ui.fragments.DictionaryFragment">
 
-    <LinearLayout
+    <EditText android:id="@+id/search_query"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="16sp"
-        android:paddingRight="16sp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textColor="#000000"
+        android:hint="@string/dictionary_query_hint"
+        android:imeActionLabel="@string/dictionary_query_submit"
+        android:imeOptions="actionSearch"/>
 
-        <EditText android:id="@+id/search_query"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/dictionary_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textColor="#000000"
-            android:hint="@string/dictionary_query_hint"
-            android:imeActionLabel="@string/dictionary_query_submit"
-            android:imeOptions="actionSearch"/>
+            android:layout_centerInParent="true"/>
 
-        <RelativeLayout
+        <ScrollView
+            android:id="@+id/dictionary_results"
+            android:paddingTop="16dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="vertical"
+            android:fillViewport="true">
+
+        <TextView android:id="@+id/dictionary_result"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ProgressBar
-                android:id="@+id/dictionary_progress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-
-            <ScrollView
-                android:id="@+id/dictionary_results"
-                android:paddingTop="16dp"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:scrollbars="vertical"
-                android:fillViewport="true">
-
-            <TextView android:id="@+id/dictionary_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            </ScrollView>
-        </RelativeLayout>
-    </LinearLayout>
+            android:layout_height="wrap_content" />
+        </ScrollView>
+    </RelativeLayout>
 </LinearLayout>

@@ -56,6 +56,7 @@ class DictionaryFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_dictionary, container, false)
     }
 
+    @Suppress("UNNECESSARY_SAFE_CALL")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

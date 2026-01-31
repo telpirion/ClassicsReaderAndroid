@@ -33,7 +33,6 @@ import com.ericmschmidt.classicsreader.data.WorkInfo.WorkType
  * @version 2.0
  * @since 1.0
  */
-@Suppress("DEPRECATION")
 class ReadingFragment : Fragment() {
 
     private var workToGetId: String? = null

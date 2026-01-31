@@ -1,5 +1,6 @@
 package com.ericmschmidt.classicsreader.ui.fragments
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,14 +24,17 @@ class InfoFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_info, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    val markdownView = view.findViewById<MarkdownView>(R.id.info_markdown_view)
+    val infoString = buildInfoString(requireContext())
+    markdownView.setMarkDownText(infoString)
+  }
 
-        val markdownView = view.findViewById<MarkdownView>(R.id.info_markdown_view)
-        val applicationInstance = MyApplication.Factory.applicationInstance()
+  companion object InfoStringBuilder {
+      fun buildInfoString(context: Context): String {
 
         // Get the app context
-        val context = applicationInstance.context
         val resources = context.resources
         val packageManager = context.packageManager
         val packageName = context.packageName
@@ -49,7 +53,8 @@ class InfoFragment : Fragment() {
         val versionNumber = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             versionInfo.longVersionCode
         } else {
-            versionInfo.versionCode
+          @Suppress("DEPRECATION")
+          versionInfo.versionCode
         }
 
         // Build the Markdown-formatted information screen
@@ -59,6 +64,7 @@ class InfoFragment : Fragment() {
         infoString = infoString.replace("{{versionName}}", versionName.toString())
         infoString = infoString.replace("{{versionCode}}", versionNumber.toString())
 
-        markdownView.setMarkDownText(infoString)
-    }
+        return infoString
+      }
+  }
 }
