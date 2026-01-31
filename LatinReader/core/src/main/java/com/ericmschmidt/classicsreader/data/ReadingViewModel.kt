@@ -51,12 +51,12 @@ class ReadingViewModel(
 
         if (isTranslation) {
             currentWork = Work(workInfo.englishLocation)
-            author = workInfo.englishAuthor as String
-            title = workInfo.englishTitle as String
+            author = workInfo.englishAuthor
+            title = workInfo.englishTitle
         } else {
             currentWork = Work(workInfo.location)
-            author = workInfo.author as String
-            title = workInfo.title as String
+            author = workInfo.author
+            title = workInfo.title
         }
 
         currentBook = currentWork.getBook(currentBookIndex)

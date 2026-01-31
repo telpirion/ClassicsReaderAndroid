@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.compose.compiler)
     alias libs.plugins.android.application
-    alias libs.plugins.jetbrains.kotlin.android
 }
 
 android {
-    namespace 'com.ericmschmidt.classicsreader.latin.compose'
+    namespace="com.ericmschmidt.classicsreader.latin.compose"
     compileSdk {
         version = release(36)
     }

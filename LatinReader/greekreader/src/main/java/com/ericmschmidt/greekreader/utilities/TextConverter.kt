@@ -168,7 +168,7 @@ class TextConverter: ITextConverter {
                 }
                 holdCapital = ""
                 holdVowelChar = ""
-            } else if (currChar.toString() == ("*")) {
+            } else if (currChar == ("*")) {
                 holdCapital += "*"
             } else if (isDiacritical(currChar)) {
                 // If this is a diacritical, build the diacritical and vowel.

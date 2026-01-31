@@ -1,13 +1,11 @@
 plugins {
-    id "com.android.library"
-    id "org.jetbrains.kotlin.android"
-    id "org.jetbrains.kotlin.plugin.compose"
-    id "androidx.navigation.safeargs.kotlin"
-    id "kotlin-kapt"
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.safeargs.kotlin)
 }
 
 android {
-    namespace "com.ericmschmidt.classicsreader.views"
+    namespace="com.ericmschmidt.classicsreader.views"
     compileSdkVersion 36
 
     dataBinding {

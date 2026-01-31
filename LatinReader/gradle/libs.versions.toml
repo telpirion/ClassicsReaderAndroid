@@ -15,6 +15,7 @@ foundation = "1.10.1"
 jetbrains-kotlin-android = "2.3.0"
 junit = "1.1.5"
 junit-version = "4.13.2"
+kotlin = "2.0.0"
 kxml2 = "2.3.0"
 legacy-support-v4 = "1.0.0"
 lifecycle-runtime-ktx = "2.10.0"
@@ -110,5 +111,7 @@ ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", versi
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "jetbrains-kotlin-android" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "jetbrains-kotlin-android" }
 androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation-safe-args-gradle-plugin" }
+kotlin-parcelize = { id = "kotlin-parcelize" }
+safeargs = { id = "androidx.navigation.safeargs"}
+safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin"}
