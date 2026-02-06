@@ -1,17 +1,18 @@
 package com.ericmschmidt.classicsreader.latin.compose
 
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.ui.test.assertHeightIsAtLeast
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onParent
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.printToLog
-import androidx.test.espresso.action.ViewActions.click
+import androidx.compose.ui.unit.height
 import androidx.test.espresso.device.action.ScreenOrientation
 import androidx.test.espresso.device.filter.RequiresDisplay
 import androidx.test.espresso.device.rules.ScreenOrientationRule
@@ -62,6 +63,9 @@ class ReadingScreenTest {
     fun compactDevicePortrait_verifySupportingPaneHeight() {
         val readingSurface = composeTestRule.onNodeWithTag(READING_SCREEN_TAG)
         readingSurface.assertIsDisplayed()
+        readingSurface.printToLog(READING_SCREEN_TAG)
+
+        readingSurface.assertHeightIsAtLeast(readingSurface.onParent().getUnclippedBoundsInRoot().height)
 
         val supportingPane = composeTestRule.onNodeWithTag(SUPPORTING_PANE_TAG)
         supportingPane.assertDoesNotExist()

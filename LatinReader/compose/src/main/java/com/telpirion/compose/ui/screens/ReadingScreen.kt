@@ -21,6 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
+import androidx.compose.material3.adaptive.layout.PaneAdaptedValue
 import androidx.compose.material3.adaptive.layout.SupportingPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.NavigableSupportingPaneScaffold
 import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaffoldNavigator
@@ -270,23 +271,30 @@ fun ReadingScreenContent(
             }
         },
         supportingPane = {
-            AnimatedPane {
-                scaffoldNavigator.currentDestination?.contentKey?.let { paneType ->
-                    ReadingSupportingPane(
-                        supportingPaneContent = paneType as SupportingPaneContent,
-                        currentWorkId = currentWorkId ?: "",
-                        onClose = {
-                            scope.launch {
-                                scaffoldNavigator.navigateBack()
+            val supportingPaneValue = scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Supporting]
+            val mainPaneValue = scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Main]
+            Log.d(READING_SCREEN_TAG, supportingPaneValue.toString())
+            Log.d(READING_SCREEN_TAG, mainPaneValue.toString())
+
+            scaffoldNavigator.currentDestination?.contentKey?.let { paneType ->
+                AnimatedPane {
+                    if (scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Supporting] != PaneAdaptedValue.Hidden) {
+                        ReadingSupportingPane(
+                            supportingPaneContent = paneType as SupportingPaneContent,
+                            currentWorkId = currentWorkId ?: "",
+                            onClose = {
+                                scope.launch {
+                                    scaffoldNavigator.navigateBack()
+                                }
+                            },
+                            onTocEntryClick = { entry ->
+                                onGoToChapter(entry)
+                                scope.launch {
+                                    scaffoldNavigator.navigateBack()
+                                }
                             }
-                        },
-                        onTocEntryClick = { entry ->
-                            onGoToChapter(entry)
-                            scope.launch {
-                                scaffoldNavigator.navigateBack()
-                            }
-                        }
-                    )
+                        )
+                    }
                 }
             }
         }
