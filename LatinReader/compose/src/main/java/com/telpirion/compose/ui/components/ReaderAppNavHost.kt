@@ -171,7 +171,6 @@ fun ReaderAppNavHost(
                 navController = navController,
                 screen = Screen.Dictionary
             )
-
         }
 
         composable (

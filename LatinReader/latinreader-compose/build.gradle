@@ -35,7 +35,10 @@ android {
             enable = true
         }
     }
-
+    packaging {
+        resources.excludes.add("META-INF/LICENSE.md")
+        resources.excludes.add("META-INF/LICENSE-notice.md")
+    }
 }
 
 dependencies {
@@ -53,6 +56,7 @@ dependencies {
     implementation libs.androidx.activity.compose
     implementation libs.material3.window.size.class1
     implementation libs.ui.test.junit4
+    androidTestImplementation libs.junit.jupiter
     debugImplementation libs.ui.tooling
     debugImplementation libs.androidx.compose.ui.test.manifest
 

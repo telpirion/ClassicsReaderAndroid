@@ -35,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,6 +60,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.ericmschmidt.classicsreader.R as CoreResources
 
+
+const val READING_SCREEN_TAG = "ReadingScreen"
 enum class SupportingPaneContent {
     Translation,
     TableOfContents,
@@ -308,6 +311,7 @@ private fun ReadingContent(
             .fillMaxWidth()
             .fillMaxHeight()
             .padding(top = 16.dp)
+            .testTag(READING_SCREEN_TAG)
     ) {
         val viewWidth = maxWidth
         val hitArea = viewWidth / 4 // Corresponds to HIT_AREA_RATIO = 4
@@ -315,29 +319,33 @@ private fun ReadingContent(
         var showContextMenu by remember { mutableStateOf(false) }
         var contextMenuOffset by remember { mutableStateOf(DpOffset.Zero) }
 
-        Text(
-            text = text,
-            fontSize = textSizeSp.sp,
-            lineHeight = lineHeight.sp,
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .pointerInput(Unit) {
-                    detectTapGestures(
-                        onTap = { offset ->
-                            when {
-                                offset.x < hitArea.toPx() -> onPageTurn(false)
-                                offset.x > (viewWidth - hitArea).toPx() -> onPageTurn(true)
-                                else -> {
-                                    // Tapping in the middle shows the context menu
-                                    contextMenuOffset = DpOffset(offset.x.toDp(), offset.y.toDp())
-                                    showContextMenu = true
+        Column(
+            modifier = Modifier.fillMaxHeight()
+        ) {
+            Text(
+                text = text,
+                fontSize = textSizeSp.sp,
+                lineHeight = lineHeight.sp,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .pointerInput(Unit) {
+                        detectTapGestures(
+                            onTap = { offset ->
+                                when {
+                                    offset.x < hitArea.toPx() -> onPageTurn(false)
+                                    offset.x > (viewWidth - hitArea).toPx() -> onPageTurn(true)
+                                    else -> {
+                                        // Tapping in the middle shows the context menu
+                                        contextMenuOffset = DpOffset(offset.x.toDp(), offset.y.toDp())
+                                        showContextMenu = true
+                                    }
                                 }
                             }
-                        }
-                    )
-                }
-        )
+                        )
+                    }
+            )
+        }
 
         DropdownMenu(
             expanded = showContextMenu,

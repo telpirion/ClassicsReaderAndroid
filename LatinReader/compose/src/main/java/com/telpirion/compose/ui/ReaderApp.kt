@@ -64,6 +64,9 @@ import com.telpirion.compose.viewmodels.DictionaryUiState
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import kotlinx.coroutines.launch
 
+const val BOTTOM_NAVIGATION_BAR_TAG = "BottomNavigationBar"
+const val MODAL_NAVIGATION_DRAWER = "ModelNavigationDrawer"
+
 private val bottomNavigationItems = listOf(
     Screen.Library,
     Screen.Recent,
@@ -280,8 +283,9 @@ private fun ReaderBottomNavigationBar(
     currentRoute: String?,
     onNavigate: (String) -> Unit
 ) {
+
     NavigationBar(
-        modifier = modifier
+        modifier = modifier.testTag(BOTTOM_NAVIGATION_BAR_TAG)
     ) {
         bottomNavigationItems.forEach { screen ->
             NavigationBarItem(
@@ -314,7 +318,9 @@ private fun ReaderNavigationRail(
     currentRoute: String?,
     onNavigate: (String) -> Unit
 ) {
-    NavigationRail {
+    NavigationRail(
+        modifier = Modifier.testTag(MODAL_NAVIGATION_DRAWER)
+    ) {
         navigationItems.forEach { screen ->
             NavigationRailItem(
                 icon = { Icon(screen.icon, contentDescription = null) },

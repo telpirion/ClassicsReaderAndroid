@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -37,6 +38,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.telpirion.compose.R
 import com.telpirion.compose.viewmodels.ReadingViewModel
+
+const val SUPPORTING_PANE_TAG = "SupportPaneTag"
 
 class TOCEntryParameterProvider : PreviewParameterProvider<List<TOCEntry>> {
     override val values = sequenceOf(
@@ -143,7 +146,8 @@ fun SupportingPaneTemplate(
     paneTitle: String = "",
     content: @Composable () -> Unit,
 ){
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize()
+        .testTag(SUPPORTING_PANE_TAG)) {
         Card(
             modifier = Modifier
                 .fillMaxSize(),
