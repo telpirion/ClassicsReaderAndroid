@@ -34,6 +34,7 @@ fun PrettyCardLazyListPreview(
 fun PrettyCardLazyList(
     library: Library,
     modifier: Modifier = Modifier,
+    selectedWork: WorkInfo? = null,
     isTranslation: Boolean = false,
     onRowClick: (WorkInfo) -> Unit = {},
 ) {
@@ -46,7 +47,11 @@ fun PrettyCardLazyList(
             items = works,
             key = { work -> work.id },
         ) {
-            PrettyRow(workInfo = it, onClick = onRowClick, isTranslation = isTranslation)
+            PrettyRow(
+                workInfo = it,
+                onClick = onRowClick,
+                isSelected = selectedWork?.id == it.id,
+                isTranslation = isTranslation)
         }
     }
 }

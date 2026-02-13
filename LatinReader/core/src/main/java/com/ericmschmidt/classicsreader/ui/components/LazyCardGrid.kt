@@ -28,6 +28,7 @@ fun PrettyCardLazyGridPreview(
 fun PrettyCardLazyVerticalGrid(
     library: Library,
     modifier: Modifier = Modifier,
+    selectedWork: WorkInfo? = null,
     isTranslation: Boolean = false,
     onCardClick : (WorkInfo) -> Unit = {}
 ) {
@@ -46,6 +47,7 @@ fun PrettyCardLazyVerticalGrid(
             PrettyCard(
                 modifier = modifier,
                 workInfo = it,
+                isSelected = selectedWork?.id == it.id,
                 onCardClick = onCardClick,
                 isTranslation = isTranslation)
         }

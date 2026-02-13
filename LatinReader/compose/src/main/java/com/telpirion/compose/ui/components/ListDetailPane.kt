@@ -93,11 +93,19 @@ fun ListDetailPane(
         navigator = scaffoldNavigator,
         listPane = {
             AnimatedPane {
+                val selectedWork = scaffoldNavigator.currentDestination?.contentKey?.id?.let {
+                    if (it >= 0) {
+                        works[scaffoldNavigator.currentDestination?.contentKey?.id as Int]
+                    } else {
+                        null
+                    }
+                }
                 if (displayTypeValue.collectAsState(
                         initial = DISPLAY_TYPE_DEFAULT).value == "Grid") {
                     PrettyCardLazyVerticalGrid(
                         library = library,
                         modifier = modifier,
+                        selectedWork = selectedWork,
                         onCardClick = onItemClick,
                         isTranslation = isTranslation
                     )
@@ -105,6 +113,7 @@ fun ListDetailPane(
                     PrettyCardLazyList(
                         library = library,
                         modifier = modifier,
+                        selectedWork = selectedWork,
                         onRowClick = onItemClick,
                         isTranslation = isTranslation
                     )
