@@ -40,7 +40,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,6 +50,7 @@ import com.ericmschmidt.classicsreader.data.PreferencesDataStore
 import com.ericmschmidt.classicsreader.data.PreferencesState
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.telpirion.compose.MainActivity
+import com.telpirion.compose.ui.DevicePreviews
 import com.telpirion.compose.ui.components.PageControls
 import com.telpirion.compose.ui.components.ReadingSupportingPane
 import com.telpirion.compose.ui.components.Screen
@@ -381,7 +381,7 @@ private fun ReadingContent(
     }
 }
 
-@Preview(showBackground = true)
+@DevicePreviews
 @Composable
 fun ReadingScreenPreview() {
     MaterialTheme {

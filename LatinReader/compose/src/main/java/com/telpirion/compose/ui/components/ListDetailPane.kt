@@ -46,7 +46,8 @@ fun ListDetailPane(
     modifier: Modifier = Modifier,
     navController: NavController? = null,
     screen: Screen = Screen.Library,
-    onDismiss: () -> Unit = {}
+    onDismiss: () -> Unit = {},
+    library: Library? = null
 ) {
 
     // Fix for Preview: The application context is not available in previews.
@@ -58,7 +59,7 @@ fun ListDetailPane(
     } else {
         MyApplication.applicationInstance().context
     }
-    val library: Library = if (inPreview) {
+    val resolvedLibrary: Library = library ?: if (inPreview) {
         PseudoLibrary()
     } else {
         MyApplication.applicationInstance().library
@@ -66,7 +67,7 @@ fun ListDetailPane(
 
     val scaffoldNavigator = rememberListDetailPaneScaffoldNavigator<SelectedItem>()
     val scope = rememberCoroutineScope()
-    val works = library.getWorks()
+    val works = resolvedLibrary.getWorks()
     val isTranslation = screen == Screen.Translation
 
     // Get display type from preferences
@@ -103,7 +104,7 @@ fun ListDetailPane(
                 if (displayTypeValue.collectAsState(
                         initial = DISPLAY_TYPE_DEFAULT).value == "Grid") {
                     PrettyCardLazyVerticalGrid(
-                        library = library,
+                        library = resolvedLibrary,
                         modifier = modifier,
                         selectedWork = selectedWork,
                         onCardClick = onItemClick,
@@ -111,7 +112,7 @@ fun ListDetailPane(
                     )
                 } else {
                     PrettyCardLazyList(
-                        library = library,
+                        library = resolvedLibrary,
                         modifier = modifier,
                         selectedWork = selectedWork,
                         onRowClick = onItemClick,
