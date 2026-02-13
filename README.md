@@ -1,6 +1,7 @@
 # Classics Reader for Android app
 
 [![Android build](https://github.com/telpirion/ClassicsReaderAndroid/actions/workflows/android.yml/badge.svg)](https://github.com/telpirion/ClassicsReaderAndroid/actions/workflows/android.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This open source code for two Android apps is available for anyone to clone, rebuild, copy, or alter for educational purposes. These apps allow users to read Ancient Greek and Latin texts, to read English translations of Ancient Greek and Latin texts, and lookup Ancient Greek and Latin words in an integrated dictionary.
 

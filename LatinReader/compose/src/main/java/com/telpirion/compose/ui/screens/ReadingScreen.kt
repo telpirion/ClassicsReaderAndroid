@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -330,29 +331,31 @@ private fun ReadingContent(
         Column(
             modifier = Modifier.fillMaxHeight()
         ) {
-            Text(
-                text = text,
-                fontSize = textSizeSp.sp,
-                lineHeight = lineHeight.sp,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .pointerInput(Unit) {
-                        detectTapGestures(
-                            onTap = { offset ->
-                                when {
-                                    offset.x < hitArea.toPx() -> onPageTurn(false)
-                                    offset.x > (viewWidth - hitArea).toPx() -> onPageTurn(true)
-                                    else -> {
-                                        // Tapping in the middle shows the context menu
-                                        contextMenuOffset = DpOffset(offset.x.toDp(), offset.y.toDp())
-                                        showContextMenu = true
+            SelectionContainer {
+                Text(
+                    text = text,
+                    fontSize = textSizeSp.sp,
+                    lineHeight = lineHeight.sp,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .pointerInput(Unit) {
+                            detectTapGestures(
+                                onTap = { offset ->
+                                    when {
+                                        offset.x < hitArea.toPx() -> onPageTurn(false)
+                                        offset.x > (viewWidth - hitArea).toPx() -> onPageTurn(true)
+                                        else -> {
+                                            // Tapping in the middle shows the context menu
+                                            contextMenuOffset = DpOffset(offset.x.toDp(), offset.y.toDp())
+                                            showContextMenu = true
+                                        }
                                     }
                                 }
-                            }
-                        )
-                    }
-            )
+                            )
+                        }
+                )
+            }
         }
 
         DropdownMenu(
