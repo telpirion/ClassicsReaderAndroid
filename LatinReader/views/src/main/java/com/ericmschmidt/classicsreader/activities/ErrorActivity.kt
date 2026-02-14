@@ -23,7 +23,7 @@ class ErrorActivity : AppCompatActivity() {
 
         val errorMessage = savedInstanceState?.getString(ERROR_KEY)
             ?: intent.extras?.getString(ERROR_KEY)
-            ?: getString(R.string.default_error_message)
+            ?: getString(R.string.greekreader_default_error_message)
 
         binding.errorActivityContent.text = errorMessage
     }
