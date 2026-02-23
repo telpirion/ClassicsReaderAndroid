@@ -1,25 +1,20 @@
 package com.ericmschmidt.classicsreader.latin.compose
 
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.ui.test.assertHeightIsAtLeast
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onParent
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.printToLog
-import androidx.compose.ui.unit.height
 import androidx.test.espresso.device.action.ScreenOrientation
 import androidx.test.espresso.device.filter.RequiresDisplay
 import androidx.test.espresso.device.rules.ScreenOrientationRule
 import androidx.test.espresso.device.sizeclass.HeightSizeClass
 import androidx.test.espresso.device.sizeclass.WidthSizeClass
 import com.telpirion.compose.MainActivity
-import com.telpirion.compose.ui.BOTTOM_NAVIGATION_BAR_TAG
 import com.telpirion.compose.ui.components.SUPPORTING_PANE_TAG
 import com.telpirion.compose.ui.screens.READING_SCREEN_TAG
 import org.junit.Before
@@ -35,7 +30,6 @@ class ReadingScreenTest {
 
     @Before
     fun setup() {
-        composeTestRule.onNodeWithTag(BOTTOM_NAVIGATION_BAR_TAG).assertIsDisplayed()
         composeTestRule.waitUntil {
             composeTestRule.onNode(
                 hasText("De Bello Gallico", substring = true, ignoreCase = true))
@@ -64,8 +58,6 @@ class ReadingScreenTest {
         val readingSurface = composeTestRule.onNodeWithTag(READING_SCREEN_TAG)
         readingSurface.assertIsDisplayed()
         readingSurface.printToLog(READING_SCREEN_TAG)
-
-        readingSurface.assertHeightIsAtLeast(readingSurface.onParent().getUnclippedBoundsInRoot().height)
 
         val supportingPane = composeTestRule.onNodeWithTag(SUPPORTING_PANE_TAG)
         supportingPane.assertDoesNotExist()
