@@ -19,8 +19,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRail
@@ -40,7 +38,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -64,14 +61,7 @@ import com.telpirion.compose.viewmodels.DictionaryUiState
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import kotlinx.coroutines.launch
 
-const val BOTTOM_NAVIGATION_BAR_TAG = "BottomNavigationBar"
 const val MODAL_NAVIGATION_DRAWER = "ModelNavigationDrawer"
-
-private val bottomNavigationItems = listOf(
-    Screen.Library,
-    Screen.Recent,
-    Screen.Settings
-)
 
 private val navigationItems = listOf(
     Screen.Library,
@@ -199,19 +189,6 @@ fun ReaderAppContent(
                     onSearch = onSearch,
                     onClearSearch = onClearSearch
                 )
-            },
-            bottomBar = {
-                // Show bottom navigation bar only on compact screens
-                if (isCompact) {
-                    ReaderBottomNavigationBar(
-                        currentRoute = currentRoute,
-                        onNavigate = { route ->
-                            if (drawerState.isClosed) {
-                                onNavigate(route)
-                            }
-                        }
-                    )
-                }
             }
         ) { innerPadding ->
             Row(
@@ -278,42 +255,6 @@ private fun NavigationHeader(
 }
 
 @Composable
-private fun ReaderBottomNavigationBar(
-    modifier: Modifier = Modifier,
-    currentRoute: String?,
-    onNavigate: (String) -> Unit
-) {
-
-    NavigationBar(
-        modifier = modifier.testTag(BOTTOM_NAVIGATION_BAR_TAG)
-    ) {
-        bottomNavigationItems.forEach { screen ->
-            NavigationBarItem(
-                icon = { Icon(screen.icon, contentDescription = null) },
-                label = { Text(stringResource(screen.label)) },
-                selected = currentRoute?.startsWith(screen.route.substringBefore("/")) ?: false,
-                onClick = {
-                    // The 'when' expression now correctly handles each navigation case.
-                    val route = when (screen) {
-                        is Screen.Recent -> {
-                            // In a real app, you would get the last-read work ID from a ViewModel.
-                            val recentWorkId = "" // Placeholder ID
-                            screen.createRoute(recentWorkId, false)
-                        }
-
-                        is Screen.Library -> screen.createRoute()
-                        is Screen.Settings -> screen.createRoute()
-                        // Add any other specific cases from bottomNavigationItems here.
-                        else -> Screen.Library.createRoute()
-                    }
-                    onNavigate(route)
-                }
-            )
-        }
-    }
-}
-
-@Composable
 private fun ReaderNavigationRail(
     currentRoute: String?,
     onNavigate: (String) -> Unit
@@ -335,35 +276,7 @@ private fun ReaderNavigationRail(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true, name = "Reader App Preview Compact")
-@Composable
-fun ReaderAppPreview() {
-    val navController = rememberNavController()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val library = PseudoLibrary()
-
-    ReaderAppContent(
-        isCompact = true,
-        navController = navController,
-        drawerState = drawerState,
-        dictionaryUiState = DictionaryUiState(),
-        onQueryChange = {},
-        onSearch = {},
-        onClearSearch = {},
-        currentWorkId = null,
-        currentRoute = Screen.Library.route,
-        library = library,
-        onNavigate = {},
-        content = {
-            Box(Modifier.fillMaxSize()) {
-                Text("NavHost Content")
-            }
-        }
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true, widthDp = 840, name = "Reader App Preview Expanded")
+@DevicePreviews
 @Composable
 fun ReaderAppExpandedPreview() {
     val navController = rememberNavController()

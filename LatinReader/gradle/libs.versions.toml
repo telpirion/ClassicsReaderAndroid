@@ -1,7 +1,7 @@
 [versions]
 activity-compose = "1.12.2"
 adaptive = "1.2.0"
-agp = "9.1.0-alpha09"
+agp = "9.2.0-alpha01"
 androidx-ui-tooling = "1.10.1"
 appcompat = "1.7.1"
 compose-bom = "2026.01.00"
