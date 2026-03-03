@@ -38,6 +38,7 @@ recyclerview = "1.4.0"
 robolectric = "4.16.1"
 runner = "1.0.2"
 truth = "1.4.5"
+material3-adaptive-navigation-suite = "1.4.0"
 material3-window-size-class1 = "1.4.0"
 ui-test-junit4 = "1.10.3"
 ui-text-google-fonts = "1.10.3"
@@ -54,6 +55,7 @@ androidx-compose-foundation = { module = "androidx.compose.foundation:foundation
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 androidx-compose-material-ripple = { module = "androidx.compose.material:material-ripple", version.ref = "material-ripple" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-material3-adaptive-navigation-suite = { module = "androidx.compose.material3:material3-adaptive-navigation-suite", version.ref = "material3-adaptive-navigation-suite" }
 androidx-compose-material3-material3 = { module = "androidx.compose.material3:material3" }
 androidx-compose-material3-window-size-class1 = { module = "androidx.compose.material3:material3-window-size-class" }
 androidx-compose-material3-z = { module = "androidx.compose.material3:material3-*", version.ref = "material3-z" }

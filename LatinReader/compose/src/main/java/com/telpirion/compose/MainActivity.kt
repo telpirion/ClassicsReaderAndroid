@@ -28,8 +28,7 @@ class MainActivity : ComponentActivity() {
         val colorScheme = MyApplication.instance.themeColors
         setContent {
             ReaderTheme(colorScheme) {
-                val windowSizeClass =
-                    calculateWindowSizeClass(this)
+                val windowSizeClass = calculateWindowSizeClass(this)
                 ReaderApp(windowSizeClass = windowSizeClass)
             }
         }
