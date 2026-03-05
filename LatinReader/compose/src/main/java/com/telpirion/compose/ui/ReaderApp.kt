@@ -17,6 +17,7 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffo
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldValue
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.material3.adaptive.navigationsuite.rememberNavigationSuiteScaffoldState
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -27,6 +28,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -66,8 +68,6 @@ fun ReaderApp(
     windowSizeClass: WindowSizeClass
 ) {
     val navController = rememberNavController()
-
-    val isCompact = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact
 
     // Get the current back stack entry to determine the selected route.
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -111,7 +111,7 @@ fun ReaderApp(
         onClearSearch = dictionaryViewModel::clearSearch,
         currentRoute = currentRoute,
         onNavigate = navigationFunc,
-        isCompact = isCompact,
+        windowSizeClass = windowSizeClass,
         content = { modifier ->
             ReaderAppNavHost(
                 navController = navController,
@@ -126,7 +126,7 @@ fun ReaderApp(
 @Composable
 fun ReaderAppContent(
     dictionaryUiState: DictionaryUiState,
-    isCompact: Boolean,
+    windowSizeClass: WindowSizeClass,
     onQueryChange: (String) -> Unit,
     onSearch: () -> Unit,
     onClearSearch: () -> Unit,
@@ -134,10 +134,9 @@ fun ReaderAppContent(
     onNavigate: (String) -> Unit,
     content: @Composable (Modifier) -> Unit
 ) {
-    val navSuiteType = if (isCompact) {
-        NavigationSuiteType.WideNavigationRailCollapsed
-    } else {
-        NavigationSuiteType.WideNavigationRailExpanded
+    val navSuiteType = when (windowSizeClass.widthSizeClass) {
+        WindowWidthSizeClass.Expanded -> NavigationSuiteType.WideNavigationRailExpanded
+        else -> NavigationSuiteType.WideNavigationRailCollapsed
     }
 
     val navigationScaffoldState = rememberNavigationSuiteScaffoldState()
@@ -188,7 +187,9 @@ fun ReaderAppContent(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3WindowSizeClassApi::class
+)
 @DevicePreviews
 @Composable
 fun ReaderAppExpandedPreview() {
@@ -199,7 +200,7 @@ fun ReaderAppExpandedPreview() {
         onClearSearch = {},
         currentRoute = Screen.Library.route,
         onNavigate = {},
-        isCompact = false,
+        windowSizeClass = WindowSizeClass.calculateFromSize(DpSize(400.dp, 900.dp)),
         content = {
             Box(Modifier.fillMaxSize()) {
                 Text("NavHost Content")
