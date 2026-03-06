@@ -181,7 +181,7 @@ fun ReaderAppContent(
             layoutType = navSuiteType,
             state = navigationScaffoldState
         ) {
-            Box(Modifier.padding(it)) {
+            Box(Modifier.padding(it).padding(start = 16.dp)) {
                 content(Modifier)
             }
         }

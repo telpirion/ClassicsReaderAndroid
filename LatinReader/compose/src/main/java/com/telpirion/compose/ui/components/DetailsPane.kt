@@ -32,41 +32,17 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Devices.PIXEL
-import androidx.compose.ui.tooling.preview.Devices.TABLET
-import androidx.compose.ui.tooling.preview.Devices.TV_1080p
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.ericmschmidt.classicsreader.data.Library
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.ui.components.LibraryPreviewProvider
+import com.telpirion.compose.ui.DevicePreviews
 import com.telpirion.compose.ui.theme.TelpirionGray
 
-
-@Preview(showBackground = true, device = PIXEL)
+@DevicePreviews
 @Composable
-fun DetailsPanePreviewPixel(
-    @PreviewParameter(LibraryPreviewProvider::class) library: Library
-) {
-    val works = library.getWorks()
-    val selectedItem = SelectedItem(0)
-    DetailsPane(item = selectedItem, works = works, onReadClick = {}, onDismiss = {})
-}
-
-@Preview(showBackground = true, device = TABLET)
-@Composable
-fun DetailsPanePreviewTablet(
-    @PreviewParameter(LibraryPreviewProvider::class) library: Library
-) {
-    val works = library.getWorks()
-    val selectedItem = SelectedItem(0)
-    DetailsPane(item = selectedItem, works = works, onReadClick = {}, onDismiss = {})
-}
-
-@Preview(showBackground = true, device = TV_1080p)
-@Composable
-fun DetailsPanePreviewTV(
+fun DetailsPanePreview(
     @PreviewParameter(LibraryPreviewProvider::class) library: Library
 ) {
     val works = library.getWorks()
@@ -100,7 +76,7 @@ fun DetailsPane(
         Card(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(horizontal = 16.dp, vertical = 32.dp),
             colors = CardColors(
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.onSurface,

@@ -157,7 +157,7 @@ class LatinReaderAppTest {
             )
         }
 
-        composeTestRule.waitUntil() {
+        composeTestRule.waitUntil {
             composeTestRule.onNodeWithTag("SearchField").isDisplayed()
         }
         dictionarySearchField.assertTextContains("facio")
