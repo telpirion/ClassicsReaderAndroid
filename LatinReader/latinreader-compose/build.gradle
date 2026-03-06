@@ -55,7 +55,7 @@ dependencies {
     implementation libs.androidx.material3
     implementation libs.androidx.activity.compose
     implementation libs.material3.window.size.class1
-    implementation libs.ui.test.junit4
+    androidTestImplementation libs.ui.test.junit4
     androidTestImplementation libs.junit.jupiter
     debugImplementation libs.ui.tooling
     debugImplementation libs.androidx.compose.ui.test.manifest

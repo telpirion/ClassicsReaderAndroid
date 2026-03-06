@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -66,7 +67,8 @@ fun ReaderTopAppBar(
                         )
                     },
                     modifier = Modifier.width(IntrinsicSize.Max)
-                        .align(Alignment.CenterHorizontally),
+                        .align(Alignment.CenterHorizontally)
+                        .testTag("SearchField"),
                     singleLine = true,
                     shape = RoundedCornerShape(32.dp), // Makes the TextField pill-shaped
                     colors = TextFieldDefaults.colors(
