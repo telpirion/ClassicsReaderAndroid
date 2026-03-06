@@ -149,7 +149,8 @@ fun SupportingPaneTemplate(
         .testTag(SUPPORTING_PANE_TAG)) {
         Card(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(bottom = 16.dp),
             colors = CardColors(
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.onSurface,
