@@ -43,10 +43,13 @@ import com.ericmschmidt.classicsreader.data.PreferencesState
 import com.telpirion.compose.ui.components.ReaderAppNavHost
 import com.telpirion.compose.ui.components.ReaderTopAppBar
 import com.telpirion.compose.ui.components.Screen
+import com.telpirion.compose.ui.components.TopBarAction
 import com.telpirion.compose.ui.components.navOptionsBuilder
 import com.telpirion.compose.viewmodels.DictionaryUiState
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import kotlinx.coroutines.launch
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 
 
 private val navigationItems = listOf(
@@ -89,6 +92,8 @@ fun ReaderApp(
     ).value
     val currentWorkId = preferences.recentlyRead
 
+    var topBarActions by remember { mutableStateOf<List<TopBarAction>>(emptyList()) }
+
     val navigationFunc: (String) -> Unit = { route ->
         when (route) {
             Screen.Recent.route -> {
@@ -113,11 +118,13 @@ fun ReaderApp(
         currentRoute = currentRoute,
         onNavigate = navigationFunc,
         windowSizeClass = windowSizeClass,
+        topBarActions = topBarActions,
         content = { modifier ->
             ReaderAppNavHost(
                 navController = navController,
                 modifier = modifier,
-                dictionaryViewModel = dictionaryViewModel
+                dictionaryViewModel = dictionaryViewModel,
+                setTopBarActions = { actions -> topBarActions = actions }
             )
         }
     )
@@ -133,6 +140,7 @@ fun ReaderAppContent(
     onClearSearch: () -> Unit,
     currentRoute: String?,
     onNavigate: (String) -> Unit,
+    topBarActions: List<TopBarAction>,
     content: @Composable (Modifier) -> Unit
 ) {
     val navSuiteType = when (windowSizeClass.widthSizeClass) {
@@ -162,7 +170,8 @@ fun ReaderAppContent(
                 onSearchTextChange = onQueryChange,
                 onSearch = onSearch,
                 onClearSearch = onClearSearch,
-                onMenuClick = onHamburgerClick
+                onMenuClick = onHamburgerClick,
+                actions = topBarActions
             )
         },
     ) {
@@ -201,6 +210,7 @@ fun ReaderAppExpandedPreview() {
         onClearSearch = {},
         currentRoute = Screen.Library.route,
         onNavigate = {},
+        topBarActions = emptyList(),
         windowSizeClass = WindowSizeClass.calculateFromSize(DpSize(400.dp, 900.dp)),
         content = {
             Box(Modifier.fillMaxSize()) {

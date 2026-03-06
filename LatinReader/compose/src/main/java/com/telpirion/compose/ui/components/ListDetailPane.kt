@@ -1,6 +1,5 @@
 package com.telpirion.compose.ui.components
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Parcelable
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
@@ -10,28 +9,25 @@ import androidx.compose.material3.adaptive.navigation.NavigableListDetailPaneSca
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.navigation.NavController
 import com.ericmschmidt.classicsreader.MyApplication
 import com.ericmschmidt.classicsreader.data.Library
+import com.ericmschmidt.classicsreader.data.PreferencesDataStore
+import com.ericmschmidt.classicsreader.data.PreferencesState
 import com.ericmschmidt.classicsreader.data.WorkInfo
 import com.ericmschmidt.classicsreader.data.placeholders.PseudoLibrary
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyList
 import com.ericmschmidt.classicsreader.ui.components.PrettyCardLazyVerticalGrid
-import com.ericmschmidt.classicsreader.data.DISPLAY_TYPE
-import com.ericmschmidt.classicsreader.data.DISPLAY_TYPE_DEFAULT
-import com.telpirion.compose.ui.dataStore
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import com.telpirion.compose.ui.DevicePreviews
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 
-@Preview
+@DevicePreviews
 @Composable
 fun NavigableListDetailPaneScaffoldFullPreview(
 )  {
@@ -39,7 +35,6 @@ fun NavigableListDetailPaneScaffoldFullPreview(
     ListDetailPane(navController = null)
 }
 
-@SuppressLint("FlowOperatorInvokedInComposition")
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun ListDetailPane(
@@ -71,9 +66,11 @@ fun ListDetailPane(
     val isTranslation = screen == Screen.Translation
 
     // Get display type from preferences
-    val displayTypeKey = stringPreferencesKey(DISPLAY_TYPE)
-    val displayTypeValue: Flow<String> = context.dataStore.data
-        .map { preferences -> preferences[displayTypeKey] ?: DISPLAY_TYPE_DEFAULT }
+    val preferencesDataStore = remember(context) { PreferencesDataStore(context) }
+    val preferences = preferencesDataStore.preferencesFlow().collectAsState(
+        initial = PreferencesState()
+    ).value
+    val displayTypeValue = preferences.displayType
 
     val onItemClick : (workInfo: WorkInfo) -> Unit = { workInfo ->
         // Find the index of the clicked work to maintain compatibility
@@ -101,8 +98,7 @@ fun ListDetailPane(
                         null
                     }
                 }
-                if (displayTypeValue.collectAsState(
-                        initial = DISPLAY_TYPE_DEFAULT).value == "Grid") {
+                if (displayTypeValue == "Grid") {
                     PrettyCardLazyVerticalGrid(
                         library = resolvedLibrary,
                         modifier = modifier,

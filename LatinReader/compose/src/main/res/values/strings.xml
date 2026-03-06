@@ -11,5 +11,6 @@
     <string name="screen_translation">Translations</string>
     <string name="screen_vocab">Vocabulary</string>
     <string name="screen_toc">Table of Contents</string>
-
+    <string name="action_switch_view_english">Show English</string>
+    <string name="action_switch_view_source">Show Source</string>
 </resources>

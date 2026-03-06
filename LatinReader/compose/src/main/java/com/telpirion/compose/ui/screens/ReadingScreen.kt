@@ -16,8 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
@@ -27,12 +25,11 @@ import androidx.compose.material3.adaptive.layout.SupportingPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.NavigableSupportingPaneScaffold
 import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
@@ -40,7 +37,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -50,10 +46,12 @@ import com.ericmschmidt.classicsreader.data.PreferencesDataStore
 import com.ericmschmidt.classicsreader.data.PreferencesState
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.telpirion.compose.MainActivity
+import com.telpirion.compose.R
 import com.telpirion.compose.ui.DevicePreviews
 import com.telpirion.compose.ui.components.PageControls
 import com.telpirion.compose.ui.components.ReadingSupportingPane
 import com.telpirion.compose.ui.components.Screen
+import com.telpirion.compose.ui.components.TopBarAction
 import com.telpirion.compose.viewmodels.DictionaryViewModel
 import com.telpirion.compose.viewmodels.ReadingUiState
 import com.telpirion.compose.viewmodels.ReadingViewModel
@@ -90,7 +88,8 @@ fun ReadingScreen(
     dictionaryViewModel: DictionaryViewModel = viewModel(
         viewModelStoreOwner = (context as MainActivity)
     ),
-    screen: Screen = Screen.Recent
+    screen: Screen = Screen.Recent,
+    setTopBarActions: (List<TopBarAction>) -> Unit = {}
 ) {
 
     val context = LocalContext.current
@@ -185,6 +184,7 @@ fun ReadingScreen(
     }
 
     ReadingScreenContent(
+        isTranslation = isTranslation,
         uiState = uiState,
         textSizeSp = textSizeSp,
         lineSpacing = lineSpacing,
@@ -194,13 +194,15 @@ fun ReadingScreen(
         onPageTurn = onPageTurn,
         onPrev = onPrev,
         onNext = onNext,
-        onGoToChapter = onGoToChapter
+        onGoToChapter = onGoToChapter,
+        setTopBarActions = setTopBarActions
     )
 }
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun ReadingScreenContent(
+    isTranslation: Boolean = false,
     uiState: ReadingUiState,
     textSizeSp: Float,
     lineSpacing: Float,
@@ -210,10 +212,44 @@ fun ReadingScreenContent(
     onPageTurn: (Boolean) -> Unit,
     onPrev: () -> Unit,
     onNext: () -> Unit,
-    onGoToChapter: (TOCEntry) -> Unit
+    onGoToChapter: (TOCEntry) -> Unit,
+    setTopBarActions: (List<TopBarAction>) -> Unit
 ) {
     val scaffoldNavigator = rememberSupportingPaneScaffoldNavigator()
     val scope = rememberCoroutineScope()
+
+    val onSwitchView = {
+        scope.launch {
+            scaffoldNavigator.navigateTo(
+                SupportingPaneScaffoldRole.Supporting,
+                contentKey = SupportingPaneContent.Translation)
+        }
+    }
+    val onShowToc = {
+        scope.launch {
+            scaffoldNavigator.navigateTo(
+                SupportingPaneScaffoldRole.Supporting,
+                contentKey = SupportingPaneContent.TableOfContents)
+        }
+    }
+
+    val switchViewLabel = if (isTranslation) {
+        stringResource(R.string.action_switch_view_source)
+    } else {
+        stringResource(R.string.action_switch_view_english)
+    }
+    val tocLabel = stringResource(R.string.screen_toc)
+
+    LaunchedEffect(screen) {
+        if (screen == Screen.Recent) {
+             setTopBarActions(listOf(
+                 TopBarAction(switchViewLabel) { onSwitchView() },
+                 TopBarAction(tocLabel) { onShowToc() }
+             ))
+        } else {
+            setTopBarActions(emptyList())
+        }
+    }
 
     NavigableSupportingPaneScaffold(
         navigator = scaffoldNavigator,
@@ -232,20 +268,6 @@ fun ReadingScreenContent(
                     text = uiState.content,
                     textSizeSp = textSizeSp,
                     onPageTurn = onPageTurn,
-                    onSwitchView = {
-                        scope.launch {
-                            scaffoldNavigator.navigateTo(
-                                SupportingPaneScaffoldRole.Supporting,
-                                contentKey = SupportingPaneContent.Translation)
-                        }
-                    },
-                    onShowToc = {
-                        scope.launch {
-                            scaffoldNavigator.navigateTo(
-                                SupportingPaneScaffoldRole.Supporting,
-                                contentKey = SupportingPaneContent.TableOfContents)
-                        }
-                    },
                     modifier = Modifier.weight(1f),
                     lineHeight = lineSpacing
                 )
@@ -306,10 +328,7 @@ private fun ReadingContent(
     text: String,
     textSizeSp: Float,
     onPageTurn: (isNext: Boolean) -> Unit,
-    onSwitchView: () -> Unit,
-    onShowToc: () -> Unit,
     modifier: Modifier = Modifier,
-    switchText: String = "Switch View",
     lineHeight: Float = 1.2f,
 
     ) {
@@ -323,9 +342,6 @@ private fun ReadingContent(
     ) {
         val viewWidth = maxWidth
         val hitArea = viewWidth / 4 // Corresponds to HIT_AREA_RATIO = 4
-
-        var showContextMenu by remember { mutableStateOf(false) }
-        var contextMenuOffset by remember { mutableStateOf(DpOffset.Zero) }
 
         Column(
             modifier = Modifier.fillMaxHeight()
@@ -345,9 +361,7 @@ private fun ReadingContent(
                                         offset.x < hitArea.toPx() -> onPageTurn(false)
                                         offset.x > (viewWidth - hitArea).toPx() -> onPageTurn(true)
                                         else -> {
-                                            // Tapping in the middle shows the context menu
-                                            contextMenuOffset = DpOffset(offset.x.toDp(), offset.y.toDp())
-                                            showContextMenu = true
+                                            // Tapping in the middle no longer shows context menu
                                         }
                                     }
                                 }
@@ -355,27 +369,6 @@ private fun ReadingContent(
                         }
                 )
             }
-        }
-
-        DropdownMenu(
-            expanded = showContextMenu,
-            onDismissRequest = { showContextMenu = false },
-            offset = contextMenuOffset
-        ) {
-            DropdownMenuItem(
-                text = { Text(switchText) },
-                onClick = {
-                    onSwitchView()
-                    showContextMenu = false
-                }
-            )
-            DropdownMenuItem(
-                text = { Text("Table of Contents") },
-                onClick = {
-                    onShowToc()
-                    showContextMenu = false
-                }
-            )
         }
     }
 }
@@ -398,7 +391,8 @@ fun ReadingScreenPreview() {
             onPageTurn = {},
             onPrev = {},
             onNext = {},
-            onGoToChapter = {}
+            onGoToChapter = {},
+            setTopBarActions = {}
         )
     }
 }
