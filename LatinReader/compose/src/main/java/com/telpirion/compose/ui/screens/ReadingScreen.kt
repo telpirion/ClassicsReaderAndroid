@@ -110,9 +110,8 @@ fun ReadingScreen(
         if (currentWorkId.isNullOrEmpty()) {
             currentWorkId = recentlyRead
         }
+        updateRecentlyRead(preferencesDataStore, currentWorkId)
     }
-
-    updateRecentlyRead(preferencesDataStore, currentWorkId!!)
 
     val textSizeSp = textSize.toFloat()
     var lineSpacing = 30.0f
@@ -143,7 +142,7 @@ fun ReadingScreen(
         }
         onGoToChapter = { }
     } else {
-        if (currentWorkId.isEmpty()) {
+        if (currentWorkId?.isEmpty() ?: true) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()

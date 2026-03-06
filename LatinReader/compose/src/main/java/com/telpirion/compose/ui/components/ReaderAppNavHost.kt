@@ -166,7 +166,7 @@ fun ReaderAppNavHost(
             Screen.Dictionary.route
         ) { backStackEntry ->
             ReadingScreen(
-                workId = "test",
+                workId = "",
                 isTranslation = false,
                 navController = navController,
                 screen = Screen.Dictionary
