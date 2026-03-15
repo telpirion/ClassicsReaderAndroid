@@ -112,9 +112,10 @@ fun ListDetailPane(
             }
         },
         detailPane = {
-            AnimatedPane {
+            //AnimatedPane {
                 // Show the detail pane content if an item is selected
                 scaffoldNavigator.currentDestination?.contentKey?.let { selectedItem ->
+                    AnimatedPane {
                     DetailsPane(
                         item = selectedItem,
                         works = works,
@@ -132,8 +133,9 @@ fun ListDetailPane(
                             }
                         }
                     )
+                    }
                 }
-            }
+            //}
         },
     )
 }
