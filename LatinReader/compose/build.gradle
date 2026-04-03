@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.androidx.compose.adaptive)
     implementation(libs.androidx.compose.adaptive.layout)
     implementation(libs.androidx.compose.adaptive.navigation)
+    implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
     implementation(libs.material3)
     implementation(libs.androidx.compose.ui.ui)
     implementation(libs.androidx.compose.ui.ui.graphics)
@@ -55,6 +56,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.markdownview.android)
+    implementation libs.material3.window.size.class1
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))

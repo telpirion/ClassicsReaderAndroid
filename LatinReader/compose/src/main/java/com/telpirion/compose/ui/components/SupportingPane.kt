@@ -2,7 +2,6 @@
 
 package com.telpirion.compose.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -37,6 +37,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ericmschmidt.classicsreader.data.TOCEntry
 import com.telpirion.compose.R
 import com.telpirion.compose.viewmodels.ReadingViewModel
+
+const val SUPPORTING_PANE_TAG = "SupportPaneTag"
 
 class TOCEntryParameterProvider : PreviewParameterProvider<List<TOCEntry>> {
     override val values = sequenceOf(
@@ -143,10 +145,12 @@ fun SupportingPaneTemplate(
     paneTitle: String = "",
     content: @Composable () -> Unit,
 ){
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize()
+        .testTag(SUPPORTING_PANE_TAG)) {
         Card(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(bottom = 16.dp),
             colors = CardColors(
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.onSurface,
@@ -174,7 +178,6 @@ fun SupportingPaneTemplate(
             Icon(
                 Icons.Default.Close,
                 contentDescription = "Close",
-                modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
             )
         }
     }

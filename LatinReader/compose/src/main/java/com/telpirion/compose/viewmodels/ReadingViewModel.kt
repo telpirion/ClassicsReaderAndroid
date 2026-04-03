@@ -54,7 +54,7 @@ class ReadingViewModel(
     application: Application,
     workId: String?,
     private val isTranslation: Boolean,
-    private val poemLines: Int,
+    poemLines: Int,
     private val preferencesDataStore: PreferencesDataStore,
 ) : ViewModel() {
 
@@ -75,9 +75,15 @@ class ReadingViewModel(
             val library = application.library
             workInfo = library.getWorkInfoByID(workId)
 
+            val pageOffset = if (workInfo?.workType == WorkInfo.WorkType.POEM) {
+                poemLines
+            } else {
+                1
+            }
+
             // TODO(telpirion): integrate old ReaderViewModel with new one
-            content = RVM(workInfo as WorkInfo, isTranslation, poemLines)
-            translationContent = RVM(workInfo as WorkInfo, !isTranslation, poemLines)
+            content = RVM(workInfo as WorkInfo, isTranslation, pageOffset)
+            translationContent = RVM(workInfo as WorkInfo, !isTranslation, pageOffset)
 
             @Suppress("UNCHECKED_CAST")
             contentLines = listOf(content?.getCurrentPage()) as List<*> as List<String>

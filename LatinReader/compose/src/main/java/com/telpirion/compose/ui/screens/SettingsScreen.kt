@@ -25,10 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ericmschmidt.classicsreader.data.PreferencesDataStore
 import com.ericmschmidt.classicsreader.data.PreferencesState
+import com.telpirion.compose.ui.DevicePreviews
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import com.ericmschmidt.classicsreader.R as CoreResources
@@ -57,7 +57,6 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
         "Grid"
     )
 
-    val recentlyRead = preferences.recentlyRead
     val textSize = preferences.textSize
     val poemLines = preferences.poemLines
     val showPageControls = preferences.showPageControls
@@ -106,7 +105,6 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
         }
 
         item {
-            @Suppress("KotlinConstantConditions")
             SettingsSwitchPreference(
                 title = stringResource(CoreResources.string.pref_show_page_controls),
                 summary = stringResource(CoreResources.string.pref_show_page_controls_summary),
@@ -252,7 +250,7 @@ private fun PreferenceItem(
     }
 }
 
-@Preview(showBackground = true)
+@DevicePreviews
 @Composable
 fun SettingsScreenPreview() {
     MaterialTheme {

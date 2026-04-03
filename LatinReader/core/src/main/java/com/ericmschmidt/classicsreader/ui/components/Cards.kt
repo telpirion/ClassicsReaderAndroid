@@ -41,16 +41,27 @@ fun PrettyCard(
     workInfo: WorkInfo,
     modifier: Modifier = Modifier,
     isTranslation: Boolean = false,
+    isSelected: Boolean = false,
     onCardClick: (WorkInfo) -> Unit = {}
 ) {
+
+    val cardColors = if (isSelected) {
+        CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.inverseSurface,
+            contentColor = MaterialTheme.colorScheme.inverseOnSurface
+        )
+    } else {
+        CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface
+        )
+    }
+
     Card(
         modifier = modifier.size(150.dp, 300.dp)
             .padding(4.dp)
             .clickable(onClick = { onCardClick(workInfo) }),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-        ),
+        colors = cardColors,
     ) {
         Row(
             modifier = Modifier.padding(8.dp)
@@ -84,17 +95,26 @@ fun PrettyRow(
     workInfo: WorkInfo,
     modifier: Modifier = Modifier,
     isTranslation: Boolean = false,
+    isSelected: Boolean = false,
     onClick: (WorkInfo) -> Unit = {}
 ) {
+    val cardColors = if (isSelected) {
+        CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.inverseSurface,
+            contentColor = MaterialTheme.colorScheme.inverseOnSurface
+        )
+    } else {
+        CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface
+        )
+    }
+
     Card(
         modifier = modifier.fillMaxWidth()
             .padding(4.dp)
             .clickable { onClick(workInfo) },
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-        ,
-        ),
+        colors = cardColors,
     ) {
         Row(
             modifier = Modifier.padding(8.dp)
@@ -136,8 +156,24 @@ fun PrettyRowPreview(
 
 @Preview(showBackground = true)
 @Composable
+fun PrettyRowSelectedPreview(
+    @PreviewParameter(WorkInfoPreviewProvider::class) workInfo : WorkInfo
+) {
+    PrettyRow(workInfo, isSelected = true)
+}
+
+@Preview(showBackground = true)
+@Composable
 fun PrettyCardPreview(
     @PreviewParameter(WorkInfoPreviewProvider::class) workInfo : WorkInfo
 ) {
     PrettyCard(workInfo)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PrettyCardSelectedPreview(
+    @PreviewParameter(WorkInfoPreviewProvider::class) workInfo : WorkInfo
+) {
+    PrettyCard(workInfo, isSelected = true)
 }

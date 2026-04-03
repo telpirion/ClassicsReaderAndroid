@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Greek Reader</string>
+    <string name="greekreader_app_name">Greek Reader</string>
     <string name="app_description">
         The Greek Reader provides a selection of famous classical texts in both
         Ancient Greek and English. This app includes an integrated dictionary and vocabulary
@@ -36,7 +36,7 @@
     <string name="error_activity">Error</string>
     <string name="error_activity_title">I\'m really sorry - there was an error</string>
     <string name="error_activity_explanation">Something bad happened and the app needs to close. The information below shows the gnarly details.</string>
-    <string name="default_error_message">No details to show.</string>
+    <string name="greekreader_default_error_message">No details to show.</string>
 
     <string name="context_menu_translation">Show translation</string>
     <string name="context_menu_source">Show source text</string>

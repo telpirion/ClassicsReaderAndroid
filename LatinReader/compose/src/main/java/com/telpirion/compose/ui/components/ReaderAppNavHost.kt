@@ -111,6 +111,7 @@ fun ReaderAppNavHost(
         viewModelStoreOwner = (context as MainActivity)
     ),
     navController: NavHostController,
+    setTopBarActions: (List<TopBarAction>) -> Unit = {}
 ) {
 
     NavHost(
@@ -122,12 +123,14 @@ fun ReaderAppNavHost(
             Screen.Library.route,
         ) { backStackEntry ->
             // Pass the NavController here
+            LaunchedEffect(Unit) { setTopBarActions(emptyList()) }
             LibraryScreen(modifier = modifier, screen = Screen.Library, navController = navController)
         }
 
         composable(
             Screen.Translation.route,
         ) { backStackEntry ->
+            LaunchedEffect(Unit) { setTopBarActions(emptyList()) }
             LibraryScreen(modifier = modifier, navController = navController, screen = Screen.Translation)
         }
 
@@ -145,6 +148,7 @@ fun ReaderAppNavHost(
                 workId = workId,
                 isTranslation = isTranslation ?: false,
                 navController = navController,
+                setTopBarActions = setTopBarActions
             )
         }
 
@@ -154,41 +158,47 @@ fun ReaderAppNavHost(
             LaunchedEffect(Unit) {
                 dictionaryViewModel.getVocab()
             }
+            // Handled by ReadingScreen internally
             ReadingScreen(
                 workId = "",
                 isTranslation = false,
                 navController = navController,
-                screen = Screen.Vocab
+                screen = Screen.Vocab,
+                setTopBarActions = setTopBarActions
             )
         }
 
         composable (
             Screen.Dictionary.route
         ) { backStackEntry ->
+            // Handled by ReadingScreen internally
             ReadingScreen(
-                workId = "test",
+                workId = "",
                 isTranslation = false,
                 navController = navController,
-                screen = Screen.Dictionary
+                screen = Screen.Dictionary,
+                setTopBarActions = setTopBarActions
             )
-
         }
 
         composable (
             Screen.Help.route
         ) { backStackEntry ->
+            LaunchedEffect(Unit) { setTopBarActions(emptyList()) }
             MarkdownScreen(screen = Screen.Help)
         }
 
         composable (
             Screen.Info.route
         ) { backStackEntry ->
+            LaunchedEffect(Unit) { setTopBarActions(emptyList()) }
             MarkdownScreen(screen = Screen.Info)
         }
 
         composable(
             Screen.Settings.route,
         ) { backStackEntry ->
+            LaunchedEffect(Unit) { setTopBarActions(emptyList()) }
             SettingsScreen()
         }
     }
