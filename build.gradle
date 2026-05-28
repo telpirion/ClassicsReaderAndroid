@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.androidx.navigation.safeargs) apply false
+}
+
+ext {
+    kotlin_version = "2.1.21"
+    lifecycle_version = "2.10.0"
+    nav_version = "2.9.6"
+    compose_version = "1.12.1"
+}
+
+allprojects {
+    repositories {
+        google()
+        maven {
+            url = "https://maven.google.com"
+        }
+        maven {
+            url = "https://jitpack.io"
+        }
+        mavenCentral()
+    }
+}
+
+configurations.configureEach {
+    resolutionStrategy {
+        force("org.jetbrains:annotations:13.0")
+    }
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.layout.buildDirectory
+}

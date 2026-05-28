@@ -1,44 +1,47 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-    }
-}
-
 plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.compose.compiler) apply false
-    alias(libs.plugins.androidx.navigation.safeargs) apply false
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.compiler)
 }
 
-ext {
-    kotlin_version = "2.1.21"
-    lifecycle_version = "2.10.0"
-    nav_version = "2.9.6"
-    compose_version = "1.12.1"
-}
-
-allprojects {
-    repositories {
-        google()
-        maven {
-            url = "https://maven.google.com"
+android {
+    namespace="com.ericmschmidt.latinreader"
+    compileSdkVersion(36)
+    defaultConfig {
+        minSdkVersion(24)
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
         }
-        maven {
-            url = "https://jitpack.io"
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+        targetSdk 36
+    }
+    kotlin {
+        jvmToolchain {
+            languageVersion = JavaLanguageVersion.of("24")
         }
-        mavenCentral()
     }
 }
 
-configurations.configureEach {
-    resolutionStrategy {
-        force("org.jetbrains:annotations:13.0")
-    }
+dependencies {
+    implementation(libs.androidx.compose.ui.text.google.fonts)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation project(":views")
+    implementation project(":core")
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3.material3)
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.androidx.compose.ui.text.google.fonts)
 }
-
-tasks.register("clean", Delete) {
-    delete rootProject.layout.buildDirectory
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
 }
