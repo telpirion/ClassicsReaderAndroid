@@ -76,6 +76,16 @@ fun ReaderTopAppBar(
                             contentDescription = null
                         )
                     },
+                    trailingIcon = {
+                        if (searchText.isNotEmpty()) {
+                            IconButton(onClick = onClearSearch) {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = stringResource(R.string.cd_clear_search)
+                                )
+                            }
+                        }
+                    },
                     modifier = Modifier.width(IntrinsicSize.Max)
                         .align(Alignment.CenterHorizontally)
                         .testTag("SearchField"),
@@ -108,14 +118,6 @@ fun ReaderTopAppBar(
             }
         },
         actions = {
-            if (searchText.isNotEmpty()) {
-                IconButton(onClick = onClearSearch) { // Use the new callback
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = stringResource(R.string.cd_clear_search)
-                    )
-                }
-            }
             if (actions.isNotEmpty()) {
                 var showMenu by remember { mutableStateOf(false) }
                 Box {
