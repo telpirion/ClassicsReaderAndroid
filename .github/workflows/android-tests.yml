@@ -12,17 +12,19 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
+      with:
+        submodules: 'recursive' # Or 'true' for top-level only
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
+    - name: Set up JDK 24
+      uses: actions/setup-java@v5
       with:
         distribution: 'temurin'
-        java-version: '17'
+        java-version: '24'
 
     # Cache Gradle dependencies to speed up subsequent builds
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
+      uses: gradle/actions/setup-gradle@v6
 
     - name: Make Gradlew Executable
       run: chmod +x ./gradlew

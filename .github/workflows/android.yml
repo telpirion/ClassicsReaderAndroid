@@ -2,23 +2,21 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
-
-defaults:
-  run:
-    working-directory: ./LatinReader
+    branches: [ main ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: set up JDK 23
-      uses: actions/setup-java@v4
+    - name: Checkout Code
+      uses: actions/checkout@v6
+      with:
+        submodules: 'recursive' # Or 'true' for top-level only
+    - name: Set up JDK 24
+      uses: actions/setup-java@v5
       with:
         java-version: '24'
         distribution: 'temurin'

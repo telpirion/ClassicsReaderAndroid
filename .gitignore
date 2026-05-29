@@ -1,2 +1,17 @@
-.DS_Store
+# Gradle
+.gradle/
+/build/
+
+# Local configuration
+local.properties
+
+# IntelliJ/Android Studio
+*.iml
 .idea/
+/captures/
+.externalNativeBuild/
+.cxx/
+*.hprof
+
+# macOS
+.DS_Store
