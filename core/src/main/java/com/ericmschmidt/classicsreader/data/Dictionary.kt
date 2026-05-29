@@ -66,7 +66,7 @@ class Dictionary(val converter: ITextConverter? = null) {
         val random = Random()
         val numberOfEntries: Int = entryCount()
 
-        val randomNumber = random.nextInt(numberOfEntries + 1)
+        val randomNumber = random.nextInt(numberOfEntries)
         val randomEntryKey: String = this.entryHeaders[randomNumber]
         return getEntry(randomEntryKey)
     }

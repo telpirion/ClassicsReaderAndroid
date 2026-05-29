@@ -5,28 +5,28 @@ plugins {
 }
 
 android {
-    namespace="com.ericmschmidt.classicsreader"
-    compileSdkVersion(36)
+    namespace = "com.ericmschmidt.classicsreader"
+    compileSdk = 36
 
     defaultConfig {
-        minSdkVersion(24)
+        minSdk = 24
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
 
     testOptions {
-        unitTests.includeAndroidResources = true
-        unitTests.returnDefaultValues = true
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
     }
     buildFeatures {
         viewBinding = true
     }
     kotlin {
         jvmToolchain {
-            languageVersion = JavaLanguageVersion.of("24")
+            languageVersion.set(JavaLanguageVersion.of("24"))
         }
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
             merges += "META-INF/LICENSE.md"
@@ -34,13 +34,13 @@ android {
         }
     }
     lint {
-        targetSdk 36
+        targetSdk = 36
     }
 }
 
 dependencies {
     implementation(libs.ui.tooling)
-    implementation(fileTree(dir: "libs", include: ["*.jar"]))
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.appcompat)
@@ -89,13 +89,14 @@ dependencies {
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.mockk)
     testImplementation(libs.kxml2)
-
 }
+
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
+
 repositories {
     mavenCentral()
 }

@@ -13,21 +13,19 @@ plugins {
     alias(libs.plugins.androidx.navigation.safeargs) apply false
 }
 
-ext {
-    kotlin_version = "2.1.21"
-    lifecycle_version = "2.10.0"
-    nav_version = "2.9.6"
-    compose_version = "1.12.1"
-}
+extra["kotlin_version"] = "2.1.21"
+extra["lifecycle_version"] = "2.10.0"
+extra["nav_version"] = "2.9.6"
+extra["compose_version"] = "1.12.1"
 
 allprojects {
     repositories {
         google()
         maven {
-            url = "https://maven.google.com"
+            url = uri("https://maven.google.com")
         }
         maven {
-            url = "https://jitpack.io"
+            url = uri("https://jitpack.io")
         }
         mavenCentral()
     }
@@ -39,6 +37,6 @@ configurations.configureEach {
     }
 }
 
-tasks.register("clean", Delete) {
-    delete rootProject.layout.buildDirectory
+tasks.register<Delete>("clean") {
+    delete(rootProject.layout.buildDirectory)
 }

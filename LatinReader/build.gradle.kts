@@ -4,24 +4,24 @@ plugins {
 }
 
 android {
-    namespace="com.ericmschmidt.latinreader"
-    compileSdkVersion(36)
+    namespace = "com.ericmschmidt.latinreader"
+    compileSdk = 36
     defaultConfig {
-        minSdkVersion(24)
+        minSdk = 24
     }
     buildTypes {
         release {
-            minifyEnabled false
+            isMinifyEnabled = false
         }
     }
     lint {
-        abortOnError false
-        checkReleaseBuilds false
-        targetSdk 36
+        abortOnError = false
+        checkReleaseBuilds = false
+        targetSdk = 36
     }
     kotlin {
         jvmToolchain {
-            languageVersion = JavaLanguageVersion.of("24")
+            languageVersion.set(JavaLanguageVersion.of("24"))
         }
     }
 }
@@ -29,9 +29,9 @@ android {
 dependencies {
     implementation(libs.androidx.compose.ui.text.google.fonts)
     implementation(platform(libs.androidx.compose.bom))
-    implementation project(":views")
-    implementation project(":core")
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation(project(":views"))
+    implementation(project(":core"))
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3.material3)
@@ -40,8 +40,9 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.compose.ui.text.google.fonts)
 }
+
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(24)
+        languageVersion.set(JavaLanguageVersion.of(24))
     }
 }

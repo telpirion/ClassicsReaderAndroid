@@ -5,33 +5,33 @@ plugins {
 }
 
 android {
-    namespace="com.telpirion.compose"
-    compileSdkVersion(36)
+    namespace = "com.telpirion.compose"
+    compileSdk = 36
 
     defaultConfig {
-        minSdk 24
+        minSdk = 24
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     kotlin {
         jvmToolchain {
-            languageVersion = JavaLanguageVersion.of("17")
+            languageVersion.set(JavaLanguageVersion.of("17"))
         }
     }
     lint {
-        targetSdk 36
+        targetSdk = 36
     }
 }
 
 dependencies {
-    implementation project(":core")
+    implementation(project(":core"))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -56,7 +56,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.markdownview.android)
-    implementation libs.material3.window.size.class1
+    implementation(libs.material3.window.size.class1)
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))

@@ -5,38 +5,34 @@ plugins {
 }
 
 android {
-    namespace="com.ericmschmidt.classicsreader.views"
-    compileSdkVersion 36
-
-    dataBinding {
-        enabled = true
-    }
+    namespace = "com.ericmschmidt.classicsreader.views"
+    compileSdk = 36
 
     defaultConfig {
-        minSdk 24
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+        minSdk = 24
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     kotlin {
         jvmToolchain {
-            languageVersion = JavaLanguageVersion.of("24")
+            languageVersion.set(JavaLanguageVersion.of("24"))
         }
     }
     buildFeatures {
-        viewBinding true
-        dataBinding true
+        viewBinding = true
+        dataBinding = true
     }
 }
 
 dependencies {
-    implementation project(":core")
+    implementation(project(":core"))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
