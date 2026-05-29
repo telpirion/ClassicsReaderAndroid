@@ -11,8 +11,8 @@ plugins {
 rootProject.name = "ClassicsReaderAndroid"
 include ':core', ':latinreader', ':greekreader'
 include ':views'
-include ':latinreader-views'
-include ':greekreader-views'
+include ':latinreader:views'
+include ':greekreader:views'
 include ':compose'
-include ':latinreader-compose'
-include ':greekreader-compose'
+include ':latinreader:compose'
+include ':greekreader:compose'

@@ -2,13 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
-
-defaults:
-  run:
-    working-directory: ./LatinReader
+    branches: [ main ]
 
 jobs:
   build:
