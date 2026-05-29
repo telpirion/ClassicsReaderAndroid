@@ -71,6 +71,13 @@ class Dictionary(val converter: ITextConverter? = null) {
         return getEntry(randomEntryKey)
     }
 
+    /**
+     * Gets a list of partial matches.
+     */
+    fun searchForPartialMatch(entry: String): ArrayList<String> {
+        return ArrayList<String>()
+    }
+
     // Gets the number of alphabet chapters in dictionary.
     private fun initEntries() {
         try {

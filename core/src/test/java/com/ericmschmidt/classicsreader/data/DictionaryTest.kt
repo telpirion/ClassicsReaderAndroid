@@ -8,6 +8,8 @@ import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
+import org.hamcrest.CoreMatchers.containsString
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -110,5 +112,18 @@ class DictionaryTest {
         val randomEntry = dictionary.getRandomEntry()
         assertNotNull(randomEntry)
         assertTrue(randomEntry!!.isNotEmpty())
+    }
+
+    @Test
+    fun testDictionary_searchPartial() {
+        val dictionary = Dictionary()
+        val entries = dictionary.searchForPartialMatch("abac")
+
+        assertTrue(/* condition = */ entries.size == 2)
+
+        val entry = entries.toString()
+
+        assertThat(entry, containsString("abacus"))
+        assertThat(entry, containsString("abactus"))
     }
 }
