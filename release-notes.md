@@ -1,5 +1,48 @@
 # Release notes for Latin Reader and Greek Reader apps
 
+## Release 3.0 (Version 22)
+
+_Date: 2026-05-28_
+
+* Full migration of app UI to modern Jetpack Compose and Material 3 design with Adaptive support.
+* Unified experience for both Latin and Greek Readers across multiple device sizes (phones, tablets, foldables).
+* Integrates a dedicated dual-pane / supporting-pane overlay layout for seamless translation and dictionary viewing.
+* Introduces the `NavigationSuiteScaffold` supporting adaptive navigation patterns.
+* Added `DictionaryTest` unit test suite and configured unit testing CI via GitHub Actions.
+* Refactored project structure to a flatter hierarchy, introducing `:latinreader` and `:greekreader` submodule architecture.
+* Updated dependencies, Gradle versions, and target SDK to Android 15 (targetSdk 37).
+* Added selected item indications and optimized image sizes.
+* Swapped in vectorized header icons.
+
+## Release 2.0 (Version 20)
+
+_Date: 2025-12-04_
+
+* Translated the entire codebase from Java to Kotlin.
+* Refactored layout and resource files to views-based and code-centric submodules.
+* Restructured data and business logic to modern Android patterns with Kotlin.
+* Added extensive Robolectric tests to verify reader logic and utility helpers.
+* Standardized application configurations and established GitHub Actions Android Build CI workflows.
+
+## Release 1.9 (Version 18)
+
+_Date: 2025-08-26_
+
+* Began integration of Jetpack Compose by converting library views to Composable cards and lists.
+* Switched lists to Lazy Column/Row implementations (`PrettyRowLazyList`).
+* Added awareness of parallel translation files directly to the library cards.
+* Expanded work information in `LatinReaderManifest` with editors, translators, and descriptions.
+* Added descriptive images/thumbnails for works and integrated grid/list view toggle switches.
+
+## Release 1.8 (Version 16)
+
+_Date: 2025-07-06_
+
+* Updated Latin Reader to target Android 15.
+* Cleaned up and updated gradle files and system dependencies to current SDK versions.
+* Incorporated explicit app privacy policy and LICENSE files.
+* Fixed small typos and resolved UI layout spacing issues.
+
 ## Release 1.7 (Version 14)
 
 _Date: 2021-10-31_
