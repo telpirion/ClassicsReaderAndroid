@@ -13,11 +13,11 @@ data collection and usage for the App.
 1. No Data Collection or Storage
    The App is designed to function entirely as an offline reader and educational tool.
 
-Personal Data: We do not collect, request, or store any personally identifiable information (such as
-your name, email address, phone number, or precise location).
+   + Personal Data: We do not collect, request, or store any personally identifiable information (such as
+     your name, email address, phone number, or precise location).
 
-Usage Data: We do not track, log, or store any information regarding how you use the App, your
-reading history, or your device performance.
+   + Usage Data: We do not track, log, or store any information regarding how you use the App, your
+     reading history, or your device performance.
 
 2. No Data Sharing
    Because we do not collect any data from you or your device, we do not—and cannot—share, sell,
