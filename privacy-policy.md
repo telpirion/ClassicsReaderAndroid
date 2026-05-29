@@ -1,4 +1,4 @@
-# Privacy Policy for Latin Reader
+# Privacy Policy for Latin Reader and Greek Reader
 
 Last Updated: May 29, 2026
 Latin Reader version: 22
