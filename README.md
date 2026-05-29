@@ -1,65 +1,32 @@
-# Design
+# Classics Reader for Android app
 
-The Classics Reader is an app designed for reading and translating ancient texts. It provides
-translations of texts along side the source texts alongside a dictionary.
+[![Android build](https://github.com/telpirion/ClassicsReaderAndroid/actions/workflows/android.yml/badge.svg)](https://github.com/telpirion/ClassicsReaderAndroid/actions/workflows/android.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## App Architecture
+This open source code for two Android apps is available for anyone to clone, rebuild, copy, or alter for educational purposes. These apps allow users to read Ancient Greek and Latin texts, to read English translations of Ancient Greek and Latin texts, and lookup Ancient Greek and Latin words in an integrated dictionary.
 
-This project contains three modules:
+The Latin Reader app can be downloaded from the [Google Play Store](https://play.google.com/store/apps/details?id=com.ericmschmidt.latinreader).
 
-+ The base app (the module named `app`) that provides the base functionality of the app.
-+ A module for each flavor--a Latin and Ancient Greek flavor. Each flavor is built into a
-  separate app, along with the base app, into a separate APK.
+You can see a complete list of the releases for this app
+[here](https://github.com/telpirion/ClassicsReaderAndroid/releases).
 
-## The `app` module architecture
+## Report bugs!
 
-The `app` module has six packages within it:
+The Ancient Greek and Latin Reader apps are for Classicists by a Classicist. I not only build the app, but I use it myself to keep my Latin and Greek reading skills up to par. If you encounter a problem in the app, please file an issue here on the GitHub project home page.
 
-* The `activities` package, which includes the `MainActivity` and `ErrorActivity` classes.
+To log an issue, do the following:
 
-* The `datamodel` package, which includes classes that contain the information about the texts
-  within the app.
+1. Go to the [issues page](https://github.com/telpirion/ClassicsReader/issues).
+1. Click the **New Issue** button.
+1. Enter a title for your issue. Please indicate which app you are logging a bug for.
+1. Describe your issue in the **Write** tab.
+1. When you finish writing, click **Submit new issue**.
 
-* The `exceptions` package, which includes a single class, `ForceCloseHandler`, which allows the
-  app to close gracefully from unhandled exceptions.
+## Use of licensed material
 
-* The `fragments` package, which includes all of the fragments or "pages" within the app.
+Texts in these apps are available under the the Creative Commons ShareAlike 3.0 license.
 
-* The `layouts` package, which includes the specialized adapters used for recycler views and list
-  views used within the app.
-  
-* The `utilities` package, which includes several helper classes used for opening and parsing the
-  XML resources used within the app.
++ http://www.perseus.tufts.edu/hopper/opensource/download
++ http://creativecommons.org/licenses/by-sa/3.0/us/
 
-### Data model
-
-The `datamodel` package includes the following classes:
-
-* The [`WorkInfo`][workinfo] class is the foundational data structure for the app. It coordinates
-  the user experience of a work (current page, location, offset, translation name) with the text
-  itself. It also includes the resource ID for the work along with its URI.
-  
-* The [`Work`][work] class acts as a controller between the data storage of the text
-  (XML file) and the app.
-  
-* The [`TOCEntry`][tocentry] class contains information about a table of contents entry for a work.
-  It connects a "chapter" title with a location (int) with in the book.
-
-* The [`Book`][book] class contains information for accessing lines of text within a section,
-  chapter, or "book" within a larger work. 
-  
-* The [`Library`][library] class contains the list of `WorkInfo` objects contained in the app.
-
-* The [`Manifest`][manifest] class contains the concrete list of works, stored as XML or JSON,
-  within the app. It essentially acts as an interface for each APK or app bundle.
-  
-* The [`ReadingViewModel`][readingviewmodel] class allows the app to manage the reading position
-  in the UI along with the source `Work` object.
-
-[work]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/Work.java
-[workinfo]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/WorkInfo.java
-[tocentry]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/TOCEntry.java
-[book]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/Book.java
-[library]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/Library.java
-[manifest]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/Manifest.java
-[readingviewmodel]: https://github.com/telpirion/ClassicsReaderAndroid/blob/main/LatinReader/app/src/main/java/com/ericmschmidt/latinreader/datamodel/ReadingViewModel.java
+Images in these apps are available under the Creative Commons ShareAlike 3.0 license or are new creations from AI.
