@@ -45,6 +45,11 @@ class Dictionary(val converter: ITextConverter? = null) {
     fun getEntry(searchEntry: String?): String? {
         var definition: String? = ""
 
+        // See if the user is searching for a partial match
+        if (searchEntry?.get(searchEntry.length - 1) == '-') {
+            return getPartialMatches(searchEntry)
+        }
+
         if (!isInDictionary(searchEntry)) {
             return definition
         }
@@ -58,6 +63,17 @@ class Dictionary(val converter: ITextConverter? = null) {
         }
 
         return definition
+    }
+
+    private fun getPartialMatches(searchEntry: String): String {
+        val entries = searchForPartialMatch(searchEntry)
+        val fullEntries = StringBuilder()
+
+        entries.forEachIndexed { i, e ->
+            fullEntries.append((i + 1).toString(), ".")
+            fullEntries.append(getEntry(e), "\n\n")
+        }
+        return fullEntries.toString()
     }
 
     /**
@@ -76,7 +92,7 @@ class Dictionary(val converter: ITextConverter? = null) {
      * Gets a list of partial matches.
      */
     fun searchForPartialMatch(entry: String): ArrayList<String> {
-        return searchForPartials(entry, entryCount(), 0)
+        return searchForPartials(entry.replace("-", ""), entryCount(), 0)
     }
 
     private fun searchForPartials(searchTerm: String, top: Int, bottom: Int): ArrayList<String> {

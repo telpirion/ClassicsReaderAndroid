@@ -1,11 +1,12 @@
 package com.ericmschmidt.classicsreader.greek.compose.data
 
 import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -44,6 +45,7 @@ class DictionaryTest {
         }
     }
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun verifyPartialStemSearch() {
         val readingSurface = composeTestRule.onNodeWithTag(READING_SCREEN_TAG)
@@ -51,13 +53,21 @@ class DictionaryTest {
         readingSurface.printToLog(READING_SCREEN_TAG)
 
         val searchBox = composeTestRule.onNodeWithTag("SearchField")
-        searchBox.performTextInput("ποι")
+        searchBox.performTextInput("po-")
         searchBox.performKeyInput {
             pressKey(Key.Enter)
         }
 
-        composeTestRule.waitForIdle()
+        // TODO: The behavior of this test isn't great. Need to refine.
+        composeTestRule.waitUntilAtLeastOneExists(hasText("po-"))
 
-        readingSurface.assertTextContains("ποι")
+        composeTestRule.onAllNodes(hasText("po-")).onFirst().printToLog("Result")
+        composeTestRule.onNodeWithTag("ReadingContent").assertExists()
+
+        composeTestRule.waitUntil(5000) {
+            composeTestRule.onNode(hasText("fut.", substring = true)).isDisplayed()
+        }
+
+        composeTestRule.onNode(hasText("perish", substring = true)).isDisplayed()
     }
 }

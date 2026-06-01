@@ -277,6 +277,7 @@ fun ReadingScreenContent(
                     style = MaterialTheme.typography.bodySmall,
                     textAlign = TextAlign.End,
                     modifier = Modifier
+                        .testTag("ReadingContent")
                         .fillMaxWidth()
                         .padding(top = 16.dp)
                 )

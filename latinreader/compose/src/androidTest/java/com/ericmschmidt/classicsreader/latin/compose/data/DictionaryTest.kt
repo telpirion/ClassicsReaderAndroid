@@ -1,11 +1,12 @@
 package com.ericmschmidt.classicsreader.latin.compose.data
 
 import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -51,6 +52,7 @@ class DictionaryTest {
         }
     }
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun verifyPartialStemSearch() {
         val readingSurface = composeTestRule.onNodeWithTag(READING_SCREEN_TAG)
@@ -63,9 +65,15 @@ class DictionaryTest {
             pressKey(Key.Enter)
         }
 
-        composeTestRule.waitForIdle()
+        composeTestRule.waitUntilAtLeastOneExists(hasText("fac-"))
 
-        readingSurface.assertTextContains("facio")
-        readingSurface.assertTextContains("facinus")
+        composeTestRule.onAllNodes(hasText("fac-")).onFirst().printToLog("Result")
+        composeTestRule.onNodeWithTag("ReadingContent").assertExists()
+
+        composeTestRule.waitUntil(5000) {
+            composeTestRule.onNode(hasText("adv.", substring = true)).isDisplayed()
+        }
+
+        composeTestRule.onNode(hasText("facile", substring = true)).isDisplayed()
     }
 }

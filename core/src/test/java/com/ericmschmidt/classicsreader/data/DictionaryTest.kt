@@ -117,7 +117,7 @@ class DictionaryTest {
     @Test
     fun testDictionary_searchPartial() {
         val dictionary = Dictionary()
-        val entries = dictionary.searchForPartialMatch("abac")
+        val entries = dictionary.searchForPartialMatch("abac-")
 
         assertTrue(/* condition = */ entries.size == 2)
 
