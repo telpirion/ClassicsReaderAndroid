@@ -14,6 +14,7 @@ import java.util.Random
  * @version 2.0
  * @since 1.1
  */
+
 class Dictionary(val converter: ITextConverter? = null) {
 
     val library: Library = applicationInstance().library
@@ -75,7 +76,55 @@ class Dictionary(val converter: ITextConverter? = null) {
      * Gets a list of partial matches.
      */
     fun searchForPartialMatch(entry: String): ArrayList<String> {
-        return ArrayList<String>()
+        return searchForPartials(entry, entryCount(), 0)
+    }
+
+    private fun searchForPartials(searchTerm: String, top: Int, bottom: Int): ArrayList<String> {
+        val mid = (top + bottom) / 2
+        val entryKey = this.entryHeaders[mid]
+
+        // Nothing found
+        if ((top - 1) <= bottom) {
+            return ArrayList()
+        }
+
+        if (entryKey.contains(searchTerm)) {
+            return getNeighbors(searchTerm, mid)
+        } else if (searchTerm < entryKey) {
+            return searchForPartials(searchTerm, mid, bottom)
+        } else if (searchTerm > entryKey) {
+            return searchForPartials(searchTerm, top, mid)
+        }
+        return ArrayList()
+    }
+
+    private fun getNeighbors(searchTerm: String, mid: Int): ArrayList<String> {
+        val allEntries = mutableSetOf<String>()
+        var currEntry = entryHeaders[mid]
+        var index = mid
+
+        // Go up the list of entries finding all possible matches
+        while (currEntry.contains(searchTerm)) {
+            allEntries.add(currEntry)
+            index++
+            if (index >= entryHeaders.size){
+                break
+            }
+            currEntry = entryHeaders[index]
+        }
+
+        // Reset the index and go down the list of entries.
+        index = mid
+        currEntry = entryHeaders[index]
+        while (currEntry.contains(searchTerm)) {
+            allEntries.add(currEntry)
+            index--
+            if (index <= 0) {
+                break
+            }
+            currEntry = entryHeaders[index]
+        }
+        return allEntries.toList() as ArrayList<String>
     }
 
     // Gets the number of alphabet chapters in dictionary.
